@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+.venv/
+venv/
+env/
+
+# Data Files (Do not commit large datasets)
+*.pdf
+*_normalized.txt
+*.gguf
+*.bin
+
+# System
+.DS_Store
+Thumbs.db
+
+# Environment Variables
+.env
+
+# Logs
+*.log
+
+# Project Specific
+get-pip.py

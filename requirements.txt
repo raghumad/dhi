@@ -1,0 +1,3 @@
+llama-cpp-python==0.3.16
+pymupdf==1.26.6
+aksharamukha==2.3
