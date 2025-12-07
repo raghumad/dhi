@@ -54,6 +54,9 @@ fi
 
 # 3. Install/Sync Dependencies
 echo -e "\n[+] Installing dependencies..."
+# Resolve Project Root (one level up from this script)
+PROJECT_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$PROJECT_ROOT"
 # We use the pip inside the venv directly to ensure we install there
 PIP_CMD="$VENV_DIR/bin/pip"
 

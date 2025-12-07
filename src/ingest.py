@@ -26,11 +26,13 @@ def ingest_pdf(pdf_path):
     print("Normalizing to IAST...")
     normalized_text = transliterate.process('Devanagari', 'ISO', full_text)
     
-    output_path = pdf_path.replace('.pdf', '_normalized.txt')
-    with open(output_path, 'w', encoding='utf-8') as f:
+    # Save to out/ directory
+    os.makedirs("out", exist_ok=True)
+    output_path = "out/rigveda_normalized.txt"
+    with open(output_path, "w", encoding="utf-8") as f:
         f.write(normalized_text)
-        
-    print(f"Saved normalized text to {output_path}")
+    
+    print(f"Successfully wrote {len(normalized_text)} chars to {output_path}")
     return normalized_text
 
 if __name__ == "__main__":

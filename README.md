@@ -12,16 +12,21 @@ We aim to build a search engine that runs entirely on your local device (Linux/M
 
 ## Setup
 
-### 1. One-Click Setup
-We provide an idempotent script to check your Python version, create the virtual environment, and install pinned dependencies.
-
+### 1. One-Click Setup (Recommended)
+This script is **idempotent** (safe to run multiple times). It creates the `.venv` and installs dependencies.
 ```bash
-# Run the setup script
-./setup.sh
-
-# Activate the environment
-source .venv/bin/activate
+./scripts/setup.sh
 ```
+
+### ✅ Running Tests
+Run the BDD test suite (black-box tests).
+**Note**: This script is also **idempotent**. It will auto-run setup if needed.
+```bash
+./scripts/test.sh
+```
+This will:
+1.  Run all scenarios in `features/`.
+2.  Generate a performance report at `test_report.html`.
 
 ### 2. Manual Setup (Alternative)
 If the script fails, you can do it manually:

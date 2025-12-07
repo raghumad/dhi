@@ -10,7 +10,8 @@ env/
 
 # Data Files (Do not commit large datasets)
 *.pdf
-*_normalized.txt
+# Build Artifacts
+out/
 *.gguf
 *.bin
 
