@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@theme {
+  --color-truth-black: #050505;
+  --color-truth-white: #e5e5e5;
+  --color-truth-grey: #404040;
+  
+  --font-serif: "Merriweather", serif;
+  --font-mono: "Hurmit Nerd Font", "Hermit", monospace;
+  --font-sans-sanskrit: "Tiro Devanagari Sanskrit", serif;
+  --font-sans-telugu: "Tiro Telugu", serif;
+  --font-sans-kannada: "Tiro Kannada", serif;
+  --font-sans-malayalam: "Tiro Malayalam", serif;
+}
+
+body {
+  background-color: var(--color-truth-black);
+  color: var(--color-truth-white);
+}
+
+.script-sep { 
+    color: #262626; 
+    font-weight: 100; 
+    margin: 0 0.5rem; 
+}

@@ -1,0 +1,5 @@
+fastapi
+uvicorn
+llama-cpp-python
+numpy
+pydantic

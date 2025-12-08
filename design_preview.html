@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dhi - Sacred Search</title>
+    <!-- Tailwind via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Tiro+Devanagari+Sanskrit&family=Tiro+Telugu&family=Tiro+Kannada&family=Tiro+Malayalam&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'truth-black': '#050505',
+                        'truth-white': '#e5e5e5',
+                        'truth-accent': '#3b82f6', /* Clinical Blue or just Monochrome */
+                        'truth-grey': '#404040'
+                    },
+                    fontFamily: {
+                        'serif': ['Merriweather', 'serif'],
+                        'sans-sanskrit': ['"Tiro Devanagari Sanskrit"', 'serif'],
+                        'sans-telugu': ['"Tiro Telugu"', 'serif'],
+                        'sans-kannada': ['"Tiro Kannada"', 'serif'],
+                        'sans-malayalam': ['"Tiro Malayalam"', 'serif'],
+                        'mono': ['"Hurmit Nerd Font"', 'Hermit', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #050505;
+            color: #e5e5e5;
+        }
+
+        /* No Glows. Just Sharp Contrast. */
+        .script-sep {
+            color: #262626;
+            font-weight: 100;
+            margin: 0 0.5rem;
+        }
+    </style>
+</head>
+
+<body
+    class="h-screen flex flex-col items-center justify-center font-serif antialiased selection:bg-white selection:text-black">
+
+    <!-- Top Bar -->
+    <div
+        class="absolute top-0 w-full p-6 flex justify-between opacity-40 text-xs font-mono tracking-tight uppercase border-b border-white/10">
+        <span>v0.1 // Local Kernel</span>
+        <span>Bias: 0.00%</span>
+    </div>
+
+    <!-- Main Content -->
+    <main class="w-full max-w-3xl px-6 flex flex-col gap-8 text-left">
+
+        <!-- Header -->
+        <div class="flex items-center mb-6 opacity-90 hover:opacity-100 transition-opacity cursor-default">
+            <!-- Polyglot Logo -->
+            <h1 class="text-4xl text-white tracking-widest font-light flex items-baseline">
+                <span class="font-sans-sanskrit">धी</span>
+                <span class="script-sep">/</span>
+                <span class="font-sans-telugu">ధీ</span>
+                <span class="script-sep">/</span>
+                <span class="font-sans-kannada">ಧೀ</span>
+                <span class="script-sep">/</span>
+                <span class="font-sans-malayalam">ധീ</span>
+                <span class="script-sep">/</span>
+                <span class="font-serif italic text-3xl">Dhī</span>
+            </h1>
+        </div>
+
+        <!-- Search Input - Clinical & Precise -->
+        <div class="relative group w-full">
+            <input type="text" placeholder="Query the Archive..."
+                class="w-full bg-neutral-900/50 border border-white/20 rounded-none py-4 px-6 text-lg font-light text-white focus:outline-none focus:border-white focus:ring-0 transition-all placeholder:text-neutral-600 font-mono"
+                value="Who is the translator?">
+            <!-- Search Icon -->
+            <button
+                class="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-white transition-colors">
+                <span class="font-mono text-xs">[ENTER]</span>
+            </button>
+        </div>
+
+        <!-- Result Card (Sharp, Academic) -->
+        <div class="mt-4 border-l-2 border-white pl-6 py-1 animate-[fadeIn_0.5s_ease-out]">
+
+            <!-- Metadata line -->
+            <div class="flex gap-4 font-mono text-xs text-neutral-500 mb-3 uppercase tracking-tight">
+                <span>Source: Introduction.pdf</span>
+                <span>Chunk: #420</span>
+                <span>Relevance: 0.8201</span>
+            </div>
+
+            <!-- Result Text -->
+            <div class="prose prose-invert prose-lg max-w-none">
+                <p class="leading-loose text-neutral-200">
+                    "I deeply regret that he did not live to see the translation in print."
+                </p>
+                <div class="mt-2 text-sm text-neutral-400 font-mono">
+                    — Patrick Olivelle | <span class="text-neutral-600">Introduction to the Rigveda, Oxford University
+                        Press</span>
+                </div>
+            </div>
+
+            <!-- Action Bar (Minimal) -->
+            <div class="flex gap-6 mt-6 font-mono text-xs text-neutral-500">
+                <button
+                    class="hover:text-white hover:underline decoration-1 underline-offset-4 decoration-neutral-500 transition-all">VIEW_RAW_PDF</button>
+                <button
+                    class="hover:text-white hover:underline decoration-1 underline-offset-4 decoration-neutral-500 transition-all">GENERATE_AUDIO</button>
+                <button
+                    class="hover:text-white hover:underline decoration-1 underline-offset-4 decoration-neutral-500 transition-all">INSPECT_VECTOR</button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Bottom Hash -->
+    <div class="absolute bottom-6 font-mono text-[10px] text-neutral-700 w-full px-6 flex justify-between">
+        <span>IDX: 3072_FLOAT_32</span>
+        <span>MEM: 124MB</span>
+        <span>LLM: META_LLAMA_3_8B_Q4_K_M</span>
+    </div>
+
+</body>
+
+</html>
