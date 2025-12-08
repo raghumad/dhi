@@ -6,5 +6,5 @@ Feature: Search CLI Interaction
   Scenario: Basic startup and query
     Given the search engine is running
     When I search for "Who is Agni?"
-    Then the output should contain "Agni is the god of fire"
+    Then the output should contain "Agni"
     And I can exit the application

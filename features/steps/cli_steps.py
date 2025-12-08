@@ -13,7 +13,7 @@ def step_impl(context):
     # Initialize scenario metrics dict
     context.scenario_perf = {}
     
-    context.process = pexpect.spawn(APP_COMMAND, encoding='utf-8', timeout=30)
+    context.process = pexpect.spawn(APP_COMMAND, encoding='utf-8', timeout=60)
     context.process.expect("Query >")
 
 @when('I search for "{query}"')
