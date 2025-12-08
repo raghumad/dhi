@@ -10,7 +10,7 @@ const merriweather = Merriweather({
 });
 
 export const metadata: Metadata = {
-  title: "Dhi // The Intellect",
+  title: "धी / ధీ / ಧೀ / ധീ / Dhī",
   description: "Local, Privacy-First, Scripture Research Engine",
 };
 
