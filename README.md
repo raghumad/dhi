@@ -11,7 +11,12 @@ One command to rule them all:
 ```bash
 ./scripts/start.sh
 ```
-This will ignite:
+To stop the system:
+```bash
+./scripts/stop.sh
+```
+
+This will ignite (or extinguish):
 1.  **The Spine (API)** on port 8000.
 2.  **The Face (UI)** on port 3000.
 
