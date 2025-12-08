@@ -62,6 +62,20 @@ PIP_CMD="$VENV_DIR/bin/pip"
 
 $PIP_CMD install --upgrade pip
 $PIP_CMD install -r requirements.txt
+if [ -f "src/api/requirements.txt" ]; then
+    echo -e "\n[+] Installing API dependencies..."
+    $PIP_CMD install -r src/api/requirements.txt
+fi
+
+# 4. Frontend Setup
+if [ -d "src/web" ]; then
+    echo -e "\n[+] Installing Frontend dependencies..."
+    if command -v npm &> /dev/null; then
+        cd src/web && npm install && cd ../..
+    else
+        echo -e "${RED}Error: npm not found. Install Node.js to run the frontend.${NC}"
+    fi
+fi
 
 # 4. Setup Complete
 echo -e "\n${GREEN}===========================================${NC}"

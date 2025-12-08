@@ -7,25 +7,20 @@ Dhi is a local, privacy-first, scripture research engine powered by **Llama 3** 
 
 ## 🚀 Quick Start
 
-You need two terminals to run the full stack:
-
-### 1. The Spine (API)
-This loads the persistent Llama model into RAM.
+One command to rule them all:
 ```bash
-# In Terminal 1 (Root of repo)
-source .venv/bin/activate
-uvicorn src.api.main:app --host 0.0.0.0 --port 8000
+./scripts/start.sh
 ```
-*Wait for "✅ Model Loaded" before starting the UI.*
+This will ignite:
+1.  **The Spine (API)** on port 8000.
+2.  **The Face (UI)** on port 3000.
 
-### 2. The Face (UI)
-The "Ruthless Truth" interface.
+### Setup (First Time)
+If you are pulling this for the first time:
 ```bash
-# In Terminal 2
-cd src/web
-npm run dev
+./scripts/setup.sh
 ```
-Open [http://localhost:3000](http://localhost:3000).
+This installs Python (Backend) and Node.js (Frontend) dependencies.
 
 ---
 
