@@ -5,18 +5,18 @@ from llama_cpp import Llama
 import os
 import numpy as np
 from pathlib import Path
-from src.core.retrieval import load_knowledge_base, retrieve
+from src.core.retrieval import retrieve
 
 # --- Configuration ---
 # Resolve absolute path to models/model.gguf
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
-MODEL_PATH = str(BASE_DIR / "models" / "model.gguf")
-N_CTX = 8192
-N_THREADS = 4
+MODEL_PATH = str(BASE_DIR / "models" / "llama-3.2-3b-instruct-q4km.gguf")
+N_CTX = int(os.getenv("N_CTX", "8192"))
+N_THREADS = int(os.getenv("N_THREADS", "4"))
 
 # --- Global State ---
 llm_model = None
-knowledge_base = []
+# knowledge_base = [] # REMOVED: Using StorageEngine
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -24,12 +24,12 @@ async def lifespan(app: FastAPI):
     Load the Llama model into RAM on startup.
     This prevents the 5-10 second cold boot on every request.
     """
-    global llm_model, knowledge_base
+    global llm_model
     
-    # Load Knowledge Base
-    print("📚 Loading Knowledge Base...")
-    knowledge_base = load_knowledge_base()
-    print(f"✅ KB Loaded: {len(knowledge_base)} chunks.")
+    # Storage Engine is lazy loaded in retrieval.py, or we could init it here.
+    # For now, let's keep it lazy or let the first request trigger it.
+    # But let's print a message.
+    print("📚 Storage Engine: HNSW + Mmap (Lazy Loading)")
 
     if os.path.exists(MODEL_PATH):
         print(f"🔥 Loading Agni (Llama) from {MODEL_PATH}...")
@@ -55,13 +55,18 @@ async def lifespan(app: FastAPI):
         print("❄️ Model Unloaded.")
 
 from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = FastAPI(title="Dhi API", lifespan=lifespan)
 
-# Allow localhost:3000 (Next.js)
+# Allow origins from env
+origins = os.getenv("CORS_ORIGINS", "http://localhost:3000").split(",")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -102,11 +107,11 @@ def generate_insight(req: InsightRequest):
             q_vec = token_matrix
         
         # 2. Retrieve Context (Real RAG)
-        results = retrieve(q_vec, knowledge_base, top_k=3)
+        results = retrieve(q_vec, top_k=3)
         
         context_str = ""
         if results:
-            context_str = "\n".join([f"- {r[1]['text']}" for r in results])
+            context_str = "\n".join([f"- {r['text']}" for r in results])
         else:
             context_str = "No specific verses found. Answer from general knowledge."
 

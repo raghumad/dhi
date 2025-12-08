@@ -6,7 +6,7 @@ import sys
 # This is currently Python, but can be switched to "./build/dhi" later.
 import time
 
-APP_COMMAND = f"{sys.executable} src/search.py --model models/model.gguf"
+APP_COMMAND = f"{sys.executable} -m src.search --model models/llama-3.2-3b-instruct-q4km.gguf"
 
 @given('the search engine is running')
 def step_impl(context):

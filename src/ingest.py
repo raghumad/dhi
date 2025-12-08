@@ -3,100 +3,184 @@ import sys
 import fitz  # PyMuPDF
 from aksharamukha import transliterate
 import numpy as np
+import hnswlib
+import struct
+from pathlib import Path
 
-def ingest_pdf(pdf_path, limit=None):
+def ingest_pdf(pdf_path, limit=None, force=False):
     """
-    Reads a PDF and extracts text, normalizing it to a canonical script.
+    Reads a PDF, extracts text, normalizes it, and builds:
+    1. Text Blob (.txt)
+    2. HNSW Index (.hnsw)
+    3. Metadata Map (.bin)
     """
     if not os.path.exists(pdf_path):
         print(f"Error: File not found at {pdf_path}")
         return
 
-    print(f"Ingesting {pdf_path}...")
+    # Derive Base Name (e.g., "Rigveda")
+    base_name = Path(pdf_path).stem
+    out_dir = Path("out")
+    out_dir.mkdir(exist_ok=True)
     
-    # Open PDF
+    txt_path = out_dir / f"{base_name}.txt"
+    hnsw_path = out_dir / f"{base_name}.hnsw"
+    bin_path = out_dir / f"{base_name}.bin"
+
+    # Idempotency Check
+    if not force and txt_path.exists() and hnsw_path.exists() and bin_path.exists():
+        print(f"Artifacts exist for {base_name}. Skipping ingestion use --force to overwrite.")
+        print(f"Found: {txt_path}, {hnsw_path}, {bin_path}")
+        return
+
+    print(f"Ingesting {pdf_path} -> {base_name}.* ...")
+    
+    # --- 1. Text Extraction & Normalization ---
     doc = fitz.open(pdf_path)
     full_text = ""
+    for page in doc:
+        full_text += page.get_text()
     
-    for page_num, page in enumerate(doc):
-        text = page.get_text()
-        full_text += text
     print(f"Extraction complete. Total characters: {len(full_text)}")
-    
-    # Normalize to IAST (International Alphabet of Sanskrit Transliteration)
     print("Normalizing to IAST...")
     normalized_text = transliterate.process('Devanagari', 'ISO', full_text)
-    
-    # --- RAG: Chunking & Embedding ---
-    # --- RAG: Chunking & Embedding ---
-    print("Chunking text...")
+
+    # --- 2. Chunking & Aligned Storage ---
+    print("Chunking & Writing Aligned Text Blob...")
     import re
-    # Robust splitting: Newline, optional whitespace, Newline
-    chunks = [c.strip() for c in re.split(r'\n\s*\n', normalized_text) if len(c.strip()) > 20]
+    import mmap
+    PAGESIZE = mmap.PAGESIZE
+
+    # Split logic
+    raw_chunks = [c.strip() for c in re.split(r'\n\s*\n', normalized_text) if len(c.strip()) > 20]
     
     if limit:
-        print(f"Limiting to first {limit} chunks for testing.")
-        chunks = chunks[:limit]
-    
-    print(f"Generated {len(chunks)} chunks. Loading model for embedding...")
-    
+        print(f"Limiting to first {limit} chunks.")
+        raw_chunks = raw_chunks[:limit]
+
+    test_path = out_dir / f"{base_name}.txt"
+    chunk_metadata = [] 
+    valid_chunks = []
+
+    with open(test_path, "wb") as f:
+        for i, chunk in enumerate(raw_chunks):
+            # Encode
+            chunk_bytes = chunk.encode('utf-8')
+            
+            # Calculate Padding for Alignment
+            current_pos = f.tell()
+            padding_needed = (PAGESIZE - (current_pos % PAGESIZE)) % PAGESIZE
+            
+            if padding_needed > 0:
+                f.write(b'\0' * padding_needed)
+            
+            # Start of aligned chunk
+            start_offset = f.tell()
+            assert start_offset % PAGESIZE == 0, "Offset alignment failed"
+            
+            f.write(chunk_bytes)
+            length = len(chunk_bytes)
+            
+            chunk_metadata.append({
+                "id": len(valid_chunks),
+                "offset": start_offset,
+                "length": length,
+                "text": chunk
+            })
+            valid_chunks.append(chunk)
+
+    print(f"Valid chunks written: {len(valid_chunks)}")
+
+    # --- 3. Embedding & Indexing ---
     from llama_cpp import Llama
-    import json
     
-    # Load model with embedding=True
-    model_path = "models/model.gguf" 
+    model_path = "models/llama-3.2-3b-instruct-q4km.gguf" 
     if not os.path.exists(model_path):
         raise FileNotFoundError(f"Model not found at {model_path}")
-    
-    # Resource Control: Benchmark showed 4 threads is optimal (1.01s latency).
-    # Higher threads (16/32/64) degraded performance significantly.
+
+    # Initialize Model
     n_threads = 4
-    
-    # Context Window: Set to 8192 (Default 512 is too small for chunks)
     n_ctx = 8192
-    
-    print(f"Loading model with {n_threads} threads and n_ctx={n_ctx}...")
+    print(f"Loading model ({n_threads} threads)...")
     llm = Llama(model_path=model_path, embedding=True, n_threads=n_threads, n_ctx=n_ctx, verbose=False)
+
+    # Detect Dimension
+    test_emb = llm.create_embedding("test")
+    # Handle list of lists (tokens) vs flat list (pooled)
+    emb_data = test_emb['data'][0]['embedding']
+    token_matrix = np.array(emb_data)
     
-    knowledge_base = []
-    print("Generating embeddings...")
-    for i, chunk in enumerate(chunks):
-        print(f"  Embedding chunk {i+1}/{len(chunks)}...", end="\r", flush=True)
-        # Generate embedding (Mean Pooling)
-        output = llm.create_embedding(chunk)
-        # Check if output is (N, Dim)
+    if token_matrix.ndim > 1:
+        # (Tokens, Dim)
+        dim = token_matrix.shape[1]
+    else:
+        # (Dim)
+        dim = token_matrix.shape[0]
+        
+    print(f"Detected Vector Dimension: {dim}")
+
+    # Initialize HNSW Index
+    # max_elements needs to be known or estimated. We know exact count.
+    num_elements = len(valid_chunks)
+    p = hnswlib.Index(space='cosine', dim=dim)
+    p.init_index(max_elements=num_elements, ef_construction=200, M=16)
+
+    # Embed Loop
+    print("Generating embeddings & Indexing...")
+    batch_vectors = []
+    batch_ids = []
+    
+    for i, item in enumerate(chunk_metadata):
+        print(f"  Processing {i+1}/{num_elements}...", end="\r")
+        
+        # Embed
+        output = llm.create_embedding(item['text'])
         emb_data = output['data'][0]['embedding']
         token_matrix = np.array(emb_data)
         
-        # If (N, Dim), mean pool across tokens
         if token_matrix.ndim > 1:
-            mean_vec = np.mean(token_matrix, axis=0).tolist()
+            vec = np.mean(token_matrix, axis=0) # Mean Pool
         else:
-            mean_vec = token_matrix.tolist()
-        
-        knowledge_base.append({
-            "id": f"chunk_{i}",
-            "text": chunk,
-            "vector": mean_vec,
-            "source": pdf_path
-        })
-        if i % 10 == 0: print(f".", end="", flush=True)
+            vec = token_matrix
             
-    # Save Knowledge Base
-    kb_path = "out/knowledge_base.json"
-    with open(kb_path, "w", encoding="utf-8") as f:
-        json.dump(knowledge_base, f)
+        # Verify shape
+        if len(vec) != dim:
+            # Pad or truncate? Or just skip?
+            # Creating a zero vector is safer than crashing
+            print(f"\nWarning: Vector dim mismatch {len(vec)} vs {dim}. Zeroing.")
+            vec = np.zeros(dim)
+            
+        p.add_items(vec, item['id'])
+
+    print("\nEmbeddings complete.")
+
+    # --- 4. Save Artifacts ---
+    
+    # Save HNSW
+    p.save_index(str(hnsw_path))
+    print(f"Saved Index: {hnsw_path}")
+    
+    # Save Metadata (Binary)
+    # Format: 
+    #   Header: MAGIC(4s) VERSION(I) COUNT(I)
+    #   Rows:   OFFSET(Q) LENGTH(I)  (Q=unsigned long long 8B, I=unsigned int 4B)
+    
+    print(f"Saving Binary Metadata to {bin_path}...")
+    with open(bin_path, "wb") as f:
+        # Header
+        f.write(b"DHIM") # Magic
+        f.write(struct.pack("I", 1)) # Version
+        f.write(struct.pack("I", len(chunk_metadata))) # Count
+        f.write(struct.pack("I", dim)) # DIMENSION
         
-    print(f"\nSaved {len(knowledge_base)} vectorized chunks to {kb_path}")
-    
-    # Also save the raw text for reference
-    # Save to out/ directory
-    os.makedirs("out", exist_ok=True)
-    output_path = "out/rigveda_normalized.txt"
-    with open(output_path, "w", encoding="utf-8") as f:
-        f.write(normalized_text)
-    
-    print(f"Successfully wrote {len(normalized_text)} chars to {output_path}")
+        # Rows
+        for item in chunk_metadata:
+            # Pack: Offset (8 bytes), Length (4 bytes)
+            f.write(struct.pack("Q I", item['offset'], item['length']))
+            
+    print("✅ Ingestion Complete.")
+    print(f"Artifacts: {txt_path}, {hnsw_path}, {bin_path}")
+
     return normalized_text
 
 if __name__ == "__main__":
@@ -104,6 +188,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("pdf_path", help="Path to PDF file")
     parser.add_argument("--limit", type=int, help="Limit number of chunks to process")
+    parser.add_argument("--force", action="store_true", help="Force re-ingestion even if artifacts exist")
     args = parser.parse_args()
     
-    ingest_pdf(args.pdf_path, args.limit)
+    ingest_pdf(args.pdf_path, args.limit, args.force)
