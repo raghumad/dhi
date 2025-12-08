@@ -8,7 +8,6 @@ Feature: API Integration
     When I send a POST request to "/insight" with payload:
       """
       {
-        "context": "", 
         "query": "who is sudasa"
       }
       """

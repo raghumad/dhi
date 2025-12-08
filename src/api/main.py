@@ -69,7 +69,6 @@ app.add_middleware(
 
 # --- Schemas ---
 class InsightRequest(BaseModel):
-    context: str
     query: str
 
 class InsightResponse(BaseModel):

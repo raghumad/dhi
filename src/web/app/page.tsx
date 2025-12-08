@@ -14,14 +14,11 @@ export default function Home() {
     setResult(null);
 
     try {
-      // Mock Context for now - In RAG Phase 3 this will come from Retrieval
-      const context = "Agni is the first god of the Rigveda. He is the priest, the fire, and the messenger between humans and gods.";
-
       // Use relative path - Next.js will proxy to http://127.0.0.1:8000 via next.config.mjs
       const res = await fetch("/api/insight", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query, context }),
+        body: JSON.stringify({ query }),
       });
 
       const data = await res.json();
