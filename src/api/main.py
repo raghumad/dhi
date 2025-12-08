@@ -45,7 +45,18 @@ async def lifespan(app: FastAPI):
         del llm_model
         print("❄️ Model Unloaded.")
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI(title="Dhi API", lifespan=lifespan)
+
+# Allow localhost:3000 (Next.js)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # --- Schemas ---
 class InsightRequest(BaseModel):
