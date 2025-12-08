@@ -3,8 +3,9 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from llama_cpp import Llama
 import os
-
+import numpy as np
 from pathlib import Path
+from src.core.retrieval import load_knowledge_base, retrieve
 
 # --- Configuration ---
 # Resolve absolute path to models/model.gguf
@@ -15,6 +16,7 @@ N_THREADS = 4
 
 # --- Global State ---
 llm_model = None
+knowledge_base = []
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -22,7 +24,13 @@ async def lifespan(app: FastAPI):
     Load the Llama model into RAM on startup.
     This prevents the 5-10 second cold boot on every request.
     """
-    global llm_model
+    global llm_model, knowledge_base
+    
+    # Load Knowledge Base
+    print("📚 Loading Knowledge Base...")
+    knowledge_base = load_knowledge_base()
+    print(f"✅ KB Loaded: {len(knowledge_base)} chunks.")
+
     if os.path.exists(MODEL_PATH):
         print(f"🔥 Loading Agni (Llama) from {MODEL_PATH}...")
         try:
@@ -30,6 +38,7 @@ async def lifespan(app: FastAPI):
                 model_path=MODEL_PATH,
                 n_ctx=N_CTX,
                 n_threads=N_THREADS,
+                embedding=True, # Enable embedding for retrieval
                 verbose=False
             )
             print("✅ Model Loaded. Ready to Interpret.")
@@ -82,23 +91,49 @@ def generate_insight(req: InsightRequest):
     if not llm_model:
         raise HTTPException(status_code=503, detail="Model not loaded")
     
-    # Simple Prompt Engineering
-    prompt = f"""
-    Context: {req.context}
-    
-    User Query: {req.query}
-    
-    Insight (Be a faithful yet bold interpreter):
-    """
-    
-    output = llm_model(
-        prompt,
-        max_tokens=256,
-        stop=["Context:", "User Query:"],
-        echo=False
-    )
-    
-    return {
-        "output": output["choices"][0]["text"].strip(),
-        "token_usage": output["usage"]
-    }
+    try:
+        # 1. Embed Query
+        query_embed = llm_model.create_embedding(req.query)
+        token_matrix = np.array(query_embed['data'][0]['embedding'])
+        
+        # Mean Pooling: (NumTokens, Dim) -> (Dim)
+        if token_matrix.ndim > 1:
+            q_vec = np.mean(token_matrix, axis=0)
+        else:
+            q_vec = token_matrix
+        
+        # 2. Retrieve Context (Real RAG)
+        results = retrieve(q_vec, knowledge_base, top_k=3)
+        
+        context_str = ""
+        if results:
+            context_str = "\n".join([f"- {r[1]['text']}" for r in results])
+        else:
+            context_str = "No specific verses found. Answer from general knowledge."
+
+        # 3. Construct Prompt
+        prompt = f"""Context from Rigveda:
+{context_str}
+
+User Query: {req.query}
+
+Insight (Be a faithful yet bold interpreter):
+"""
+        
+        # 4. Generate
+        output = llm_model(
+            prompt,
+            max_tokens=256,
+            stop=["User Query:", "Context:"],
+            echo=False
+        )
+        
+        return {
+            "output": output["choices"][0]["text"].strip(),
+            "token_usage": output["usage"]
+        }
+    except Exception as e:
+        import traceback
+        error_msg = f"Server Error: {str(e)}\n{traceback.format_exc()}"
+        print(error_msg)
+        raise HTTPException(status_code=500, detail=error_msg)
