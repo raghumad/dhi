@@ -10,9 +10,7 @@ NC='\033[0m'
 PROJECT_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$PROJECT_ROOT"
 
-echo -e "${GREEN}===========================================${NC}"
-echo -e "${GREEN}      Dhi (धी) // The Intellect            ${NC}"
-echo -e "${GREEN}===========================================${NC}"
+
 
 # Function to kill processes on exit
 cleanup() {
@@ -35,7 +33,7 @@ kill_port() {
 }
 
 echo -e "${GREEN}===========================================${NC}"
-echo -e "${GREEN}      Dhi (धी) // The Intellect            ${NC}"
+echo -e "${GREEN}   धी / ధీ / ಧೀ / ധീ / Dhī   ${NC}"
 echo -e "${GREEN}===========================================${NC}"
 
 # 0. Cleanup Existing
