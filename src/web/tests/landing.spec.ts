@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('The Face: Landing Page', () => {
-    test('should display the Ruthless Truth interface', async ({ page }) => {
+    test('should display the Research Interface', async ({ page }) => {
         // 1. Visit the landing page
         await page.goto('/');
 
@@ -19,7 +19,7 @@ test.describe('The Face: Landing Page', () => {
         await expect(input).toBeVisible();
         await expect(input).toHaveClass(/font-mono/); // Should use Hurmit Nerd Font (Monospace)
 
-        // 5. Interaction: Typing the Sacred Query
+        // 5. Interaction: Typing the Query
         await input.fill('Who is the translator?');
         await expect(input).toHaveValue('Who is the translator?');
 

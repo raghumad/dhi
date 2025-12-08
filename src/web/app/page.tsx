@@ -28,7 +28,7 @@ export default function Home() {
       setResult(data);
     } catch (err) {
       console.error(err);
-      setResult({ output: "Error communicating with the Intellect." });
+      setResult({ output: "Error communicating with the System." });
     } finally {
       setLoading(false);
     }

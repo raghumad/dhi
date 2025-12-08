@@ -3,7 +3,7 @@ Feature: API Integration
   I want to ensure the FastAPI backend handles queries correctly
   So that the Frontend receives valid insights
 
-  Scenario: Querying the Intellect
+  Scenario: Querying the System
     Given the API is running at "http://localhost:8000"
     When I send a POST request to "/insight" with payload:
       """

@@ -1,9 +1,9 @@
-# Dhi (धी) // The Intellect
+# Dhi (धी) // The Research Engine
 
 > "Nec verbum verbo curabis reddere, fidus Interpres"  
 > — Horace
 
-Dhi is a local, privacy-first, scripture research engine powered by **Llama 3** (The Brain) and **Next.js** (The Face).
+Dhi is a local, privacy-first, scripture research engine powered by **Llama 3** (The Brain) and **Next.js** (The Interface).
 
 ## 🚀 Quick Start
 
