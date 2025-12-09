@@ -18,50 +18,31 @@ N_THREADS = int(os.getenv("N_THREADS", "4"))
 
 # --- Global State ---
 llm_model = None
-# knowledge_base = [] # REMOVED: Using StorageEngine
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    """
-    Load the Llama model into RAM on startup.
-    This prevents the 5-10 second cold boot on every request.
-    """
-    global llm_model
-    
-    # Storage Engine is lazy loaded in retrieval.py, or we could init it here.
-    # For now, let's keep it lazy or let the first request trigger it.
-    # But let's print a message.
-    print("📚 Storage Engine: HNSW + Mmap (Lazy Loading)")
+print("📚 Storage Engine: HNSW + Mmap (Lazy Loading)")
 
-    if os.path.exists(MODEL_PATH):
-        print(f"🔥 Loading model from {MODEL_PATH}...")
-        try:
-            llm_model = Llama(
-                model_path=MODEL_PATH,
-                n_ctx=N_CTX,
-                n_threads=N_THREADS,
-                embedding=True, # Enable embedding for retrieval
-                verbose=os.getenv("VERBOSE", "False").lower() == "true"
-            )
-            print("✅ Model Loaded. Ready to Interpret.")
-        except Exception as e:
-            print(f"❌ Failed to load model: {e}")
-    else:
-        print(f"⚠️ Warning: Model not found at {MODEL_PATH}. Inference will fail.")
-    
-    yield
-    
-    # Cleanup (Optional)
-    if llm_model:
-        del llm_model
-        print("❄️ Model Unloaded.")
+if os.path.exists(MODEL_PATH):
+    print(f"🔥 Loading model from {MODEL_PATH}...")
+    try:
+        llm_model = Llama(
+            model_path=MODEL_PATH,
+            n_ctx=N_CTX,
+            n_threads=N_THREADS,
+            embedding=True, # Enable embedding for retrieval
+            verbose=os.getenv("VERBOSE", "False").lower() == "true"
+        )
+        print("✅ Model Loaded. Ready to Interpret.")
+    except Exception as e:
+        print(f"❌ Failed to load model: {e}")
+else:
+    print(f"⚠️ Warning: Model not found at {MODEL_PATH}. Inference will fail.")
 
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 
 load_dotenv()
 
-app = FastAPI(title="Dhi API", lifespan=lifespan)
+app = FastAPI(title="Dhi API")
 
 # Allow origins from env
 origins = os.getenv("CORS_ORIGINS", "http://localhost:3000").split(",")
@@ -88,8 +69,18 @@ class InsightResponse(BaseModel):
 def health():
     return {"status": "ready", "model_loaded": llm_model is not None}
 
+@app.get("/debug_gen")
+async def debug_gen():
+    """Test generation only"""
+    if not llm_model: return {"error": "no model"}
+    try:
+        output = llm_model("Hello, my name is", max_tokens=10)
+        return {"output": output}
+    except Exception as e:
+        return {"error": str(e)}
+
 @app.post("/insight", response_model=InsightResponse)
-def generate_insight(req: InsightRequest):
+async def generate_insight(req: InsightRequest):
     """
     Generate an insight (interpretation) based on context.
     This is the "Interpreter" layer.
@@ -101,6 +92,9 @@ def generate_insight(req: InsightRequest):
         # 1. Embed Query
         query_embed = llm_model.create_embedding(req.query)
         token_matrix = np.array(query_embed['data'][0]['embedding'])
+        
+        # RESET CONTEXT to prevent generation crash
+        llm_model.reset()
         
         # Mean Pooling: (NumTokens, Dim) -> (Dim)
         if token_matrix.ndim > 1:

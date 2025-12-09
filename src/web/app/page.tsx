@@ -14,8 +14,8 @@ export default function Home() {
     setResult(null);
 
     try {
-      // Use relative path - Next.js will proxy to http://127.0.0.1:8000 via next.config.mjs
-      const res = await fetch("/api/insight", {
+      // DIRECT CALL to bypass Next.js Proxy Timeout (CPU generation is slow)
+      const res = await fetch("http://localhost:8000/insight", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query }),

@@ -42,12 +42,23 @@ def ingest_pdf(pdf_path, limit=None, force=False):
         full_text += page.get_text()
     
     print(f"Extraction complete. Total characters: {len(full_text)}")
-    print("Normalizing to IAST (Auto-detect script)...")
-    try:
-        normalized_text = transliterate.process('autodetect', 'ISO', full_text)
-    except Exception as e:
-        print(f"Warning: Transliteration failed ({e}). Fallback to raw text.")
+    print("Normalizing to IAST...")
+    
+    # Check if text is mostly English/Roman (ASCII)
+    # If so, skip Aksharamukha to prevent mangling (e.g. "Patrick" -> "Pataricka")
+    ascii_chars = sum(1 for c in full_text if ord(c) < 128)
+    ascii_ratio = ascii_chars / len(full_text) if len(full_text) > 0 else 0
+    
+    if ascii_ratio > 0.9:
+        print(f"Detected English/Roman content ({ascii_ratio:.1%} ASCII). Skipping transliteration.")
         normalized_text = full_text
+    else:
+        print("Detected Indic script. Auto-detecting & Normalizing...")
+        try:
+            normalized_text = transliterate.process('autodetect', 'ISO', full_text)
+        except Exception as e:
+            print(f"Warning: Transliteration failed ({e}). Fallback to raw text.")
+            normalized_text = full_text
 
     # --- 2. Chunking & Aligned Storage ---
     print("Chunking & Writing Aligned Text Blob...")
@@ -174,8 +185,35 @@ def ingest_pdf(pdf_path, limit=None, force=False):
     batch_vectors = []
     batch_ids = []
     
+    import subprocess
+    import re
+    # Helper to get temp for display via 'sensors' command
+    def get_temp():
+        try:
+            output = subprocess.check_output(['sensors'], encoding='utf-8')
+            
+            # 1. User Preference: "CPU Socket Temperature"
+            socket = re.search(r'CPU Socket Temperature:\s+\+([0-9\.]+)', output)
+            if socket:
+                return float(socket.group(1))
+
+            # 2. AMD Tctl (Die Temp)
+            tctl = re.search(r'Tctl:\s+\+([0-9\.]+)', output)
+            if tctl:
+                return float(tctl.group(1))
+                
+            # Fallback: Extract all and take max
+            temps = re.findall(r':\s+\+([0-9\.]+)°C', output)
+            if temps:
+                return max(float(t) for t in temps)
+            return 0.0
+        except:
+            # Fallback to sysfs if sensors fails
+            return 0.0
+
     for i, item in enumerate(chunk_metadata):
-        print(f"  Processing {i+1}/{num_elements}...", end="\r")
+        temp = get_temp()
+        print(f"  Processing {i+1}/{num_elements}... ({temp:.1f}°C)", end="\r")
         
         # Embed
         output = llm.create_embedding(item['text'])

@@ -46,6 +46,10 @@ setup: ## Install all dependencies (Python + Node)
 	fi
 	@echo -e "${GREEN}[+] Setup Complete.${NC}"
 
+ingest-safe: ## Ingest with Thermal Throttling & Core Reservation
+	@echo -e "${YELLOW}[!] Running Ingest in Safe Mode (Thermal Protected)${NC}"
+	@.venv/bin/python scripts/smart_ingest.py .venv/bin/python src/ingest.py "out/rigveda.pdf" --force
+
 dev: start ## Alias for start
 start: ## Start API and Web servers concurrently
 	@echo -e "${GREEN}[+] Igniting Dhi System...${NC}"
@@ -89,10 +93,10 @@ debug: ## Run ingestion verification script
 
 ingest: ## Bulk ingest PDFs from DIR (default: out/)
 	@echo -e "${GREEN}[+] Ingesting PDFs from $(DIR)${NC}"
-	@# Default DIR to out if not specified
-	$(eval DIR ?= out)
+	@# Pass LIMIT if defined (e.g. make ingest LIMIT=50)
+	$(eval LIMIT_FLAG := $(if $(LIMIT),--limit $(LIMIT),))
 	@find $(DIR) -name "*.pdf" -print0 | xargs -0 -I {} bash -c \
-		'echo "Processing {}..."; .venv/bin/python src/ingest.py "{}"'
+		'echo "Processing {}..."; .venv/bin/python src/ingest.py "{}" $(LIMIT_FLAG)'
 
 ingest-debug: ## Ingest without systemd limits (VERBOSE=True)
 	@echo -e "${YELLOW}[!] Running Ingestion in DEBUG mode (No Limits, Verbose)${NC}"
