@@ -56,8 +56,10 @@ def ingest_pdf(pdf_path, limit=None, force=False):
     PAGESIZE = mmap.PAGESIZE
 
     # Sliding Window Chunking
-    chunk_size = 1024 # Characters (~256-300 tokens)
-    overlap = 100
+    chunk_size = int(os.getenv("CHUNK_SIZE", "1024")) # Characters
+    overlap = int(os.getenv("CHUNK_OVERLAP", "100"))
+    
+    print(f"Chunking Strategy: Window={chunk_size}, Overlap={overlap}")
     
     raw_chunks = []
     text_len = len(normalized_text)
