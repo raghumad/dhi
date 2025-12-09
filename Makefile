@@ -92,7 +92,7 @@ ingest: ## Bulk ingest PDFs from DIR (default: out/)
 	@# Default DIR to out if not specified
 	$(eval DIR ?= out)
 	@find $(DIR) -name "*.pdf" -print0 | xargs -0 -I {} bash -c \
-		'echo "Processing {}..."; systemd-run --user --scope -p CPUQuota=90% -p MemoryMax=90% .venv/bin/python src/ingest.py "{}"'
+		'echo "Processing {}..."; .venv/bin/python src/ingest.py "{}"'
 
 ingest-debug: ## Ingest without systemd limits (VERBOSE=True)
 	@echo -e "${YELLOW}[!] Running Ingestion in DEBUG mode (No Limits, Verbose)${NC}"
