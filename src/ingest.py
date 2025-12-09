@@ -55,8 +55,32 @@ def ingest_pdf(pdf_path, limit=None, force=False):
     import mmap
     PAGESIZE = mmap.PAGESIZE
 
-    # Split logic
-    raw_chunks = [c.strip() for c in re.split(r'\n\s*\n', normalized_text) if len(c.strip()) > 20]
+    # Sliding Window Chunking
+    chunk_size = 1024 # Characters (~256-300 tokens)
+    overlap = 100
+    
+    raw_chunks = []
+    text_len = len(normalized_text)
+    start = 0
+    
+    while start < text_len:
+        end = start + chunk_size
+        
+        # Don't split in the middle of a word if possible
+        if end < text_len:
+            # Look for space to break
+            while end > start and normalized_text[end] not in (' ', '\n', '\u0964'): # Space, newline, or danda
+                end -= 1
+            if end == start: # Force split if no break found
+                end = start + chunk_size
+                
+        chunk = normalized_text[start:end].strip()
+        if len(chunk) > 20:
+             raw_chunks.append(chunk)
+             
+        start = end - overlap
+        
+    print(f"Total Chunks: {len(raw_chunks)} (Size: ~{chunk_size} chars)")
     
     if limit:
         print(f"Limiting to first {limit} chunks.")

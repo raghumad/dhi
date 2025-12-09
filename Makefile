@@ -94,6 +94,11 @@ ingest: ## Bulk ingest PDFs from DIR (default: out/)
 	@find $(DIR) -name "*.pdf" -print0 | xargs -0 -I {} bash -c \
 		'echo "Processing {}..."; systemd-run --user --scope -p CPUQuota=90% -p MemoryMax=90% .venv/bin/python src/ingest.py "{}"'
 
+ingest-debug: ## Ingest without systemd limits (VERBOSE=True)
+	@echo -e "${YELLOW}[!] Running Ingestion in DEBUG mode (No Limits, Verbose)${NC}"
+	@$(eval DIR ?= out)
+	@export VERBOSE=True; find $(DIR) -name "*.pdf" -print0 | xargs -0 -I {} .venv/bin/python src/ingest.py "{}"
+
 clean: ## Remove artifacts and temp files
 	@echo -e "${YELLOW}[!] Cleaning Artifacts...${NC}"
 	@# Wipe out/ but keep the source PDF so we can re-ingest
