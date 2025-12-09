@@ -42,8 +42,12 @@ def ingest_pdf(pdf_path, limit=None, force=False):
         full_text += page.get_text()
     
     print(f"Extraction complete. Total characters: {len(full_text)}")
-    print("Normalizing to IAST...")
-    normalized_text = transliterate.process('Devanagari', 'ISO', full_text)
+    print("Normalizing to IAST (Auto-detect script)...")
+    try:
+        normalized_text = transliterate.process('autodetect', 'ISO', full_text)
+    except Exception as e:
+        print(f"Warning: Transliteration failed ({e}). Fallback to raw text.")
+        normalized_text = full_text
 
     # --- 2. Chunking & Aligned Storage ---
     print("Chunking & Writing Aligned Text Blob...")
@@ -94,15 +98,29 @@ def ingest_pdf(pdf_path, limit=None, force=False):
     # --- 3. Embedding & Indexing ---
     from llama_cpp import Llama
     
-    model_path = "models/llama-3.2-3b-instruct-q4km.gguf" 
+    model_path = os.getenv("MODEL_PATH", "models/llama-3.2-3b-instruct-q4km.gguf")
     if not os.path.exists(model_path):
         raise FileNotFoundError(f"Model not found at {model_path}")
 
     # Initialize Model
-    n_threads = 4
-    n_ctx = 8192
-    print(f"Loading model ({n_threads} threads)...")
-    llm = Llama(model_path=model_path, embedding=True, n_threads=n_threads, n_ctx=n_ctx, verbose=False)
+    from dotenv import load_dotenv
+    load_dotenv()
+    
+    n_threads = int(os.getenv("N_THREADS", "4"))
+    n_ctx = int(os.getenv("N_CTX", "8192"))
+    verbose = os.getenv("VERBOSE", "False").lower() == "true"
+    print(f"Loading model ({n_threads} threads, {n_ctx} ctx, verbose={verbose})...")
+    # n_gpu_layers=-1 offloads all layers to GPU if available.
+    # n_batch=512 speeds up prompt processing.
+    llm = Llama(
+        model_path=model_path, 
+        embedding=True, 
+        n_threads=n_threads, 
+        n_ctx=n_ctx, 
+        n_gpu_layers=-1,
+        n_batch=512,
+        verbose=verbose
+    )
 
     # Detect Dimension
     test_emb = llm.create_embedding("test")

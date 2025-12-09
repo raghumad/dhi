@@ -22,9 +22,10 @@ setup: ## Install all dependencies (Python + Node)
 	@echo -e "${GREEN}[+] Setting up Environment...${NC}"
 	@# 1. Check Python
 	@if ! command -v python3.12 &> /dev/null; then echo -e "${RED}Error: Python 3.12 required.${NC}"; exit 1; fi
-	@# 2. Create Venv
-	@if [ ! -d ".venv" ]; then \
+	@# 2. Create Venv (Check for bin/pip to ensure valid env)
+	@if [ ! -f ".venv/bin/pip" ]; then \
 		echo "    Creating .venv..."; \
+		rm -rf .venv; \
 		python3.12 -m venv .venv; \
 	fi
 	@# 3. Pip Install (Idempotent by default)
@@ -86,6 +87,13 @@ debug: ## Run ingestion verification script
 	@echo -e "${BLUE}[?] Querying...${NC}"
 	@.venv/bin/python src/search.py --model models/llama-3.2-3b-instruct-q4km.gguf --verify-retrieval "Who is Agni?"
 
+ingest: ## Bulk ingest PDFs from DIR (default: out/)
+	@echo -e "${GREEN}[+] Ingesting PDFs from $(DIR)${NC}"
+	@# Default DIR to out if not specified
+	$(eval DIR ?= out)
+	@find $(DIR) -name "*.pdf" -print0 | xargs -0 -I {} bash -c \
+		'echo "Processing {}..."; systemd-run --user --scope -p CPUQuota=90% -p MemoryMax=90% .venv/bin/python src/ingest.py "{}"'
+
 clean: ## Remove artifacts and temp files
 	@echo -e "${YELLOW}[!] Cleaning Artifacts...${NC}"
 	@# Wipe out/ but keep the source PDF so we can re-ingest
@@ -93,6 +101,16 @@ clean: ## Remove artifacts and temp files
 	@rm -rf __pycache__ .pytest_cache
 	@find . -name "*.pyc" -delete
 	@echo -e "${GREEN}[+] Clean.${NC}"
+
+
+gpu: ## Re-install with ROCm (Vega 64 Support)
+	@echo -e "${YELLOW}[!] Re-compiling for ROCm (Vega 64/GFX900)...${NC}"
+	@# Force reinstall with HIP support and GFX900 targeting
+	@CMAKE_ARGS="-DGGML_HIPBLAS=on -DAMDGPU_TARGETS=gfx900" \
+	HSA_OVERRIDE_GFX_VERSION=9.0.0 \
+	.venv/bin/pip install llama-cpp-python \
+	--upgrade --force-reinstall --no-cache-dir
+	@echo -e "${GREEN}[+] GPU Support Enabled.${NC}"
 
 lint: ## Lint codebase (Optional)
 	@.venv/bin/pip install pylint >/dev/null

@@ -104,9 +104,13 @@ class StorageEngine:
             
             # Prefetch Text (Offset is now page-aligned by ingestion)
             try:
+                # Debugging SIGSEGV
+                # print(f"DEBUG: madvise offset={offset}, length={length}")
                 self.text_map.madvise(mmap.MADV_WILLNEED, offset, length)
-            except Exception:
-                pass
+            except Exception as e:
+                print(f"Warning: madvise failed for {chunk_id}: {e}")
+            except BaseException:
+                 pass # Catch SystemError/etc if possible (though segfault is hard)
             
         # 2. Read Data
         results = []

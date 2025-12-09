@@ -14,7 +14,8 @@ def search_loop(model_path, verify_query=None):
     try:
         n_threads = int(os.getenv("N_THREADS", "4"))
         n_ctx = int(os.getenv("N_CTX", "8192"))
-        llm = Llama(model_path=model_path, embedding=True, n_threads=n_threads, n_ctx=n_ctx, verbose=False)
+        verbose = os.getenv("VERBOSE", "False").lower() == "true"
+        llm = Llama(model_path=model_path, embedding=True, n_threads=n_threads, n_ctx=n_ctx, verbose=verbose)
         print(f"Model loaded successfully.")
     except Exception as e:
         print(f"Failed to load model: {e}")
@@ -75,7 +76,9 @@ Answer: """
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Dhi Search CLI")
-    parser.add_argument("--model", type=str, default="models/llama-3.2-3b-instruct-q4km.gguf", help="Path to .gguf model file")
+    
+    default_model = os.getenv("MODEL_PATH", "models/llama-3.2-3b-instruct-q4km.gguf")
+    parser.add_argument("--model", type=str, default=default_model, help="Path to .gguf model file")
     parser.add_argument("--query", type=str, help="Run single query and exit")
     
     args = parser.parse_args()

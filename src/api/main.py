@@ -10,7 +10,9 @@ from src.core.retrieval import retrieve
 # --- Configuration ---
 # Resolve absolute path to models/model.gguf
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
-MODEL_PATH = str(BASE_DIR / "models" / "llama-3.2-3b-instruct-q4km.gguf")
+# Allow override from env, but default to relative path resolved
+DEFAULT_MODEL = str(BASE_DIR / "models" / "llama-3.2-3b-instruct-q4km.gguf")
+MODEL_PATH = os.getenv("MODEL_PATH", DEFAULT_MODEL)
 N_CTX = int(os.getenv("N_CTX", "8192"))
 N_THREADS = int(os.getenv("N_THREADS", "4"))
 
@@ -32,14 +34,14 @@ async def lifespan(app: FastAPI):
     print("📚 Storage Engine: HNSW + Mmap (Lazy Loading)")
 
     if os.path.exists(MODEL_PATH):
-        print(f"🔥 Loading Agni (Llama) from {MODEL_PATH}...")
+        print(f"🔥 Loading model from {MODEL_PATH}...")
         try:
             llm_model = Llama(
                 model_path=MODEL_PATH,
                 n_ctx=N_CTX,
                 n_threads=N_THREADS,
                 embedding=True, # Enable embedding for retrieval
-                verbose=False
+                verbose=os.getenv("VERBOSE", "False").lower() == "true"
             )
             print("✅ Model Loaded. Ready to Interpret.")
         except Exception as e:
