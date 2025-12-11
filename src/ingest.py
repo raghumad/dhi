@@ -133,57 +133,79 @@ def ingest_pdf(pdf_path, limit=None, force=False):
     print(f"Valid chunks written: {len(valid_chunks)}")
 
     # --- 3. Embedding & Indexing ---
-    from llama_cpp import Llama
-    
-    model_path = os.getenv("MODEL_PATH", "models/llama-3.2-3b-instruct-q4km.gguf")
-    if not os.path.exists(model_path):
-        raise FileNotFoundError(f"Model not found at {model_path}")
-
-    # Initialize Model
     from dotenv import load_dotenv
     load_dotenv()
     
-    n_threads = int(os.getenv("N_THREADS", "4"))
-    n_ctx = int(os.getenv("N_CTX", "8192"))
-    verbose = os.getenv("VERBOSE", "False").lower() == "true"
-    print(f"Loading model ({n_threads} threads, {n_ctx} ctx, verbose={verbose})...")
-    # n_gpu_layers=-1 offloads all layers to GPU if available.
-    # n_batch=512 speeds up prompt processing.
-    llm = Llama(
-        model_path=model_path, 
-        embedding=True, 
-        n_threads=n_threads, 
-        n_ctx=n_ctx, 
-        n_gpu_layers=-1,
-        n_batch=512,
-        verbose=verbose
-    )
-
-    # Detect Dimension
-    test_emb = llm.create_embedding("test")
-    # Handle list of lists (tokens) vs flat list (pooled)
-    emb_data = test_emb['data'][0]['embedding']
-    token_matrix = np.array(emb_data)
+    provider = os.getenv("EMBEDDING_PROVIDER", "llama").lower()
+    print(f"Embedding Provider: {provider.upper()}")
     
-    if token_matrix.ndim > 1:
-        # (Tokens, Dim)
-        dim = token_matrix.shape[1]
-    else:
-        # (Dim)
-        dim = token_matrix.shape[0]
+    llm = None
+    st_model = None
+    dim = 0
+    
+    if provider == "netra" or provider == "sentence-transformers":
+        from transformers import AutoModel, AutoTokenizer
+        import torch
+        # NetraEmbed is hosted on HF
+        model_name = "Cognitive-Lab/NetraEmbed"
+        print(f"Loading Transformers Model: {model_name}...")
         
-    print(f"Detected Vector Dimension: {dim}")
+        tokenizer = AutoTokenizer.from_pretrained(model_name)
+        st_model = AutoModel.from_pretrained(model_name, trust_remote_code=True)
+        
+        # Helper for embedding
+        def embed_text(text):
+            inputs = tokenizer(text, return_tensors="pt", padding=True, truncation=True, max_length=8192)
+            with torch.no_grad():
+                outputs = st_model(**inputs)
+                # Mean Pooling
+                # (Batch, Seq, Dim) -> (Batch, Dim)
+                embeddings = outputs.last_hidden_state.mean(dim=1)
+                return embeddings[0].numpy()
+
+        # Detect Dimension
+        test_vec = embed_text("test")
+        dim = len(test_vec)
+        print(f"Detected Vector Dimension: {dim}")
+        
+    else:
+        # Default: Llama.cpp
+        from llama_cpp import Llama
+        model_path = os.getenv("MODEL_PATH", "models/llama-3.2-3b-instruct-q4km.gguf")
+        if not os.path.exists(model_path):
+            raise FileNotFoundError(f"Model not found at {model_path}")
+
+        n_threads = int(os.getenv("N_THREADS", "4"))
+        n_ctx = int(os.getenv("N_CTX", "8192"))
+        verbose = os.getenv("VERBOSE", "False").lower() == "true"
+        print(f"Loading Llama model ({n_threads} threads)...")
+        
+        llm = Llama(
+            model_path=model_path, 
+            embedding=True, 
+            n_threads=n_threads, 
+            n_ctx=n_ctx, 
+            n_gpu_layers=-1, 
+            n_batch=512,
+            verbose=verbose
+        )
+        
+        # Detect Dimension
+        test_emb = llm.create_embedding("test")
+        token_matrix = np.array(test_emb['data'][0]['embedding'])
+        if token_matrix.ndim > 1:
+            dim = token_matrix.shape[1]
+        else:
+            dim = token_matrix.shape[0]
+        print(f"Detected Vector Dimension: {dim}")
 
     # Initialize HNSW Index
-    # max_elements needs to be known or estimated. We know exact count.
     num_elements = len(valid_chunks)
     p = hnswlib.Index(space='cosine', dim=dim)
     p.init_index(max_elements=num_elements, ef_construction=200, M=16)
 
     # Embed Loop
     print("Generating embeddings & Indexing...")
-    batch_vectors = []
-    batch_ids = []
     
     import subprocess
     import re
@@ -191,44 +213,45 @@ def ingest_pdf(pdf_path, limit=None, force=False):
     def get_temp():
         try:
             output = subprocess.check_output(['sensors'], encoding='utf-8')
-            
             # 1. User Preference: "CPU Socket Temperature"
             socket = re.search(r'CPU Socket Temperature:\s+\+([0-9\.]+)', output)
-            if socket:
-                return float(socket.group(1))
-
+            if socket: return float(socket.group(1))
             # 2. AMD Tctl (Die Temp)
             tctl = re.search(r'Tctl:\s+\+([0-9\.]+)', output)
-            if tctl:
-                return float(tctl.group(1))
-                
-            # Fallback: Extract all and take max
+            if tctl: return float(tctl.group(1))
+            # Fallback
             temps = re.findall(r':\s+\+([0-9\.]+)°C', output)
-            if temps:
-                return max(float(t) for t in temps)
+            if temps: return max(float(t) for t in temps)
             return 0.0
-        except:
-            # Fallback to sysfs if sensors fails
-            return 0.0
+        except: return 0.0
 
     for i, item in enumerate(chunk_metadata):
         temp = get_temp()
         print(f"  Processing {i+1}/{num_elements}... ({temp:.1f}°C)", end="\r")
         
-        # Embed
-        output = llm.create_embedding(item['text'])
-        emb_data = output['data'][0]['embedding']
-        token_matrix = np.array(emb_data)
-        
-        if token_matrix.ndim > 1:
-            vec = np.mean(token_matrix, axis=0) # Mean Pool
+        vec = None
+        if st_model:
+            # Transformers Manual Pooling
+            # We defined embed_text in the provider block, but we need to ensure it's accessible.
+            # Python scoping allows this if defined in the same function.
+            # But let's be safe.
+            try:
+                vec = embed_text(item['text'])
+            except NameError:
+                # Fallback if embed_text not in scope (should not happen if flow is correct)
+                raise RuntimeError("embed_text function not defined")
         else:
-            vec = token_matrix
+            # Llama.cpp
+            output = llm.create_embedding(item['text'])
+            emb_data = output['data'][0]['embedding']
+            token_matrix = np.array(emb_data)
+            if token_matrix.ndim > 1:
+                vec = np.mean(token_matrix, axis=0) # Mean Pool
+            else:
+                vec = token_matrix
             
         # Verify shape
         if len(vec) != dim:
-            # Pad or truncate? Or just skip?
-            # Creating a zero vector is safer than crashing
             print(f"\nWarning: Vector dim mismatch {len(vec)} vs {dim}. Zeroing.")
             vec = np.zeros(dim)
             

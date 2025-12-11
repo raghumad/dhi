@@ -103,6 +103,13 @@ ingest-debug: ## Ingest without systemd limits (VERBOSE=True)
 	@$(eval DIR ?= out)
 	@export VERBOSE=True; find $(DIR) -name "*.pdf" -print0 | xargs -0 -I {} .venv/bin/python src/ingest.py "{}"
 
+ingest-netra: ## Ingest using NetraEmbed (Dataset: rigveda_netra)
+	@echo -e "${BLUE}[+] Switching to NetraEmbed (Sanskrit Optimized)...${NC}"
+	@# We export vars so both smart_ingest.py and ingest.py inherit them
+	@export EMBEDDING_PROVIDER=netra; \
+	export DATASET_NAME=rigveda_netra; \
+	$(MAKE) ingest-safe
+
 clean: ## Remove artifacts and temp files
 	@echo -e "${YELLOW}[!] Cleaning Artifacts...${NC}"
 	@# Wipe out/ but keep the source PDF so we can re-ingest

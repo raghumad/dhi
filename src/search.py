@@ -9,20 +9,59 @@ from dotenv import load_dotenv
 load_dotenv()
 
 def search_loop(model_path, verify_query=None):
-    # Load Model
-    print(f"Loading Llama model from {model_path}...")
+    # Load Model (Generation)
+    print(f"Loading Llama model (Generation) from {model_path}...")
     try:
         n_threads = int(os.getenv("N_THREADS", "4"))
         n_ctx = int(os.getenv("N_CTX", "8192"))
         verbose = os.getenv("VERBOSE", "False").lower() == "true"
-        llm = Llama(model_path=model_path, embedding=True, n_threads=n_threads, n_ctx=n_ctx, verbose=verbose)
-        print(f"Model loaded successfully.")
+        # Load Llama WITHOUT embedding (saves RAM, prevents crash)
+        llm = Llama(model_path=model_path, embedding=False, n_threads=n_threads, n_ctx=n_ctx, verbose=verbose)
+        print(f"Generation Model loaded.")
     except Exception as e:
-        print(f"Failed to load model: {e}")
+        print(f"Failed to load generation model: {e}")
         return
 
+    # Load Embedder
+    provider = os.getenv("EMBEDDING_PROVIDER", "llama").lower()
+    print(f"Embedding Provider: {provider.upper()}")
+    embed_fn = None
+    
+    if provider == "netra" or provider == "sentence-transformers":
+        try:
+            from transformers import AutoModel, AutoTokenizer
+            import torch
+            print("Loading NetraEmbed (Transformers)...")
+            model_name = "Cognitive-Lab/NetraEmbed"
+            tokenizer = AutoTokenizer.from_pretrained(model_name)
+            embed_model = AutoModel.from_pretrained(model_name, trust_remote_code=True)
+            
+            def netra_embed(text):
+                inputs = tokenizer(text, return_tensors="pt", padding=True, truncation=True, max_length=8192)
+                with torch.no_grad():
+                    outputs = embed_model(**inputs)
+                    return outputs.last_hidden_state.mean(dim=1)[0].numpy()
+            embed_fn = netra_embed
+        except Exception as e:
+            print(f"Failed to load NetraEmbed: {e}")
+            return
+    else:
+        # Legacy Llama Embedding
+        # We need a separate Llama instance with embedding=True? 
+        # Or re-use 'llm' if initialized with embedding=True?
+        # To avoid crash, let's keep them separate or handle carefully.
+        # For CLI, let's use a separate instance to be safe.
+        print("Loading Llama (Embedding Mode)...")
+        llm_embed = Llama(model_path=model_path, embedding=True, verbose=False)
+        
+        def llama_embed(text):
+            out = llm_embed.create_embedding(text)
+            mat = np.array(out['data'][0]['embedding'])
+            return np.mean(mat, axis=0) if mat.ndim > 1 else mat
+        embed_fn = llama_embed
+
     # -- Interactive Mode --
-    print("\n--- Dhi Search (HNSW Index from 'out/rigveda') ---")
+    print("\n--- Dhi Search (HNSW Index) ---")
     print("Type 'exit' to quit.")
     
     while True:
@@ -37,10 +76,7 @@ def search_loop(model_path, verify_query=None):
         print(f"Processing: {query}", flush=True)
         
         # 1. Embed
-        out = llm.create_embedding(query)
-        emb = out['data'][0]['embedding']
-        vec = np.array(emb)
-        if vec.ndim > 1: vec = np.mean(vec, axis=0) # Mean pool
+        vec = embed_fn(query)
         
         # 2. Retrieve
         results = retrieve(vec, top_k=3)

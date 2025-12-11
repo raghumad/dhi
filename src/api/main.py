@@ -18,24 +18,73 @@ N_THREADS = int(os.getenv("N_THREADS", "4"))
 
 # --- Global State ---
 llm_model = None
+embed_model = None # For Netra (AutoModel)
+tokenizer = None   # For Netra (AutoTokenizer)
+embed_fn = None    # Helper function
 
+provider = os.getenv("EMBEDDING_PROVIDER", "llama").lower()
+print(f"Embedding Provider: {provider.upper()}")
 print("📚 Storage Engine: HNSW + Mmap (Lazy Loading)")
 
-if os.path.exists(MODEL_PATH):
-    print(f"🔥 Loading model from {MODEL_PATH}...")
+if provider == "netra" or provider == "sentence-transformers":
     try:
-        llm_model = Llama(
-            model_path=MODEL_PATH,
-            n_ctx=N_CTX,
-            n_threads=N_THREADS,
-            embedding=True, # Enable embedding for retrieval
-            verbose=os.getenv("VERBOSE", "False").lower() == "true"
-        )
-        print("✅ Model Loaded. Ready to Interpret.")
+        from transformers import AutoModel, AutoTokenizer
+        import torch
+        print(f"🔥 Loading NetraEmbed (Transformers)...")
+        model_name = "Cognitive-Lab/NetraEmbed"
+        tokenizer = AutoTokenizer.from_pretrained(model_name)
+        embed_model = AutoModel.from_pretrained(model_name, trust_remote_code=True)
+        
+        def netra_embed(text):
+            inputs = tokenizer(text, return_tensors="pt", padding=True, truncation=True, max_length=8192)
+            with torch.no_grad():
+                outputs = embed_model(**inputs)
+                return outputs.last_hidden_state.mean(dim=1)[0].numpy()
+                
+        embed_fn = netra_embed
+        
     except Exception as e:
-        print(f"❌ Failed to load model: {e}")
+        print(f"❌ Failed to load NetraEmbed: {e}")
+
+    # 2. Load Llama for Generation ONLY
+    if os.path.exists(MODEL_PATH):
+        print(f"🔥 Loading Llama (Generation Only)...")
+        try:
+            llm_model = Llama(
+                model_path=MODEL_PATH,
+                n_ctx=N_CTX,
+                n_threads=N_THREADS,
+                embedding=False, 
+                verbose=os.getenv("VERBOSE", "False").lower() == "true"
+            )
+            print("✅ Models Loaded (Hybrid Mode).")
+        except Exception as e:
+            print(f"❌ Failed to load Llama: {e}")
+
 else:
-    print(f"⚠️ Warning: Model not found at {MODEL_PATH}. Inference will fail.")
+    # Legacy Llama Mode
+    if os.path.exists(MODEL_PATH):
+        print(f"🔥 Loading Llama (Hybrid Embed+Gen)...")
+        try:
+            llm_model = Llama(
+                model_path=MODEL_PATH,
+                n_ctx=N_CTX,
+                n_threads=N_THREADS,
+                embedding=True, 
+                verbose=os.getenv("VERBOSE", "False").lower() == "true"
+            )
+            embed_model = llm_model 
+            
+            def llama_embed(text):
+                out = llm_model.create_embedding(text)
+                mat = np.array(out['data'][0]['embedding'])
+                if hasattr(llm_model, 'reset'): llm_model.reset()
+                return np.mean(mat, axis=0) if mat.ndim > 1 else mat
+                
+            embed_fn = llama_embed
+            print("✅ Model Loaded (Single Mode).")
+        except Exception as e:
+            print(f"❌ Failed to load model: {e}")
 
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
@@ -67,7 +116,12 @@ class InsightResponse(BaseModel):
 
 @app.get("/health")
 def health():
-    return {"status": "ready", "model_loaded": llm_model is not None}
+    return {
+        "status": "ready", 
+        "provider": provider,
+        "gen_loaded": llm_model is not None,
+        "embed_loaded": embed_model is not None
+    }
 
 @app.get("/debug_gen")
 async def debug_gen():
@@ -86,21 +140,15 @@ async def generate_insight(req: InsightRequest):
     This is the "Interpreter" layer.
     """
     if not llm_model:
-        raise HTTPException(status_code=503, detail="Model not loaded")
+        raise HTTPException(status_code=503, detail="Models not loaded")
     
     try:
         # 1. Embed Query
-        query_embed = llm_model.create_embedding(req.query)
-        token_matrix = np.array(query_embed['data'][0]['embedding'])
-        
-        # RESET CONTEXT to prevent generation crash
-        llm_model.reset()
-        
-        # Mean Pooling: (NumTokens, Dim) -> (Dim)
-        if token_matrix.ndim > 1:
-            q_vec = np.mean(token_matrix, axis=0)
+        q_vec = None
+        if embed_fn:
+            q_vec = embed_fn(req.query)
         else:
-            q_vec = token_matrix
+            raise HTTPException(status_code=500, detail="Embedding function not initialized")
         
         # 2. Retrieve Context (Real RAG)
         results = retrieve(q_vec, top_k=3)
