@@ -36,10 +36,15 @@ def ingest_pdf(pdf_path, limit=None, force=False):
     print(f"Ingesting {pdf_path} -> {base_name}.* ...")
     
     # --- 1. Text Extraction & Normalization ---
-    doc = fitz.open(pdf_path)
     full_text = ""
-    for page in doc:
-        full_text += page.get_text()
+    if str(pdf_path).lower().endswith(".pdf"):
+        doc = fitz.open(pdf_path)
+        for page in doc:
+            full_text += page.get_text()
+    else:
+        # Assume text file
+        with open(pdf_path, "r", encoding="utf-8") as f:
+            full_text = f.read()
     
     print(f"Extraction complete. Total characters: {len(full_text)}")
     print("Normalizing to IAST...")
