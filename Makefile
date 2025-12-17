@@ -31,7 +31,16 @@ setup: ## Install all dependencies (Python + Node)
 	@# 3. Pip Install (Idempotent by default)
 	@echo "    Installing Python Deps..."
 	@.venv/bin/pip install --upgrade pip > /dev/null
-	@.venv/bin/pip install -r requirements.txt
+	@# macOS Fix: Ensure C++ compilers find system headers
+	@if [ "$$(uname)" = "Darwin" ]; then \
+		SDK_PATH=$$(xcrun --show-sdk-path); \
+		export CFLAGS="-isysroot $$SDK_PATH -I$$SDK_PATH/usr/include -I$$SDK_PATH/usr/include/c++/v1"; \
+		export CXXFLAGS="-isysroot $$SDK_PATH -I$$SDK_PATH/usr/include -I$$SDK_PATH/usr/include/c++/v1"; \
+		export LDFLAGS="-isysroot $$SDK_PATH"; \
+		.venv/bin/pip install -r requirements.txt; \
+	else \
+		.venv/bin/pip install -r requirements.txt; \
+	fi
 	@[ -f "src/api/requirements.txt" ] && .venv/bin/pip install -r src/api/requirements.txt || true
 	@# 4. Node Install (Check for node_modules)
 	@echo "    Installing Node Deps..."
