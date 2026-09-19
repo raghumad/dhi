@@ -89,3 +89,5 @@ def test_export_csv_has_header():
     assert "text/csv" in r.headers["content-type"]
     header = r.text.splitlines()[0]
     assert header.startswith("id,seal_no,site,")
+    # R-A2: full source citation per record, not truncated
+    assert "Public domain." in r.text

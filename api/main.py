@@ -23,6 +23,10 @@ from fastapi.responses import StreamingResponse
 
 app = FastAPI(title="Dhi PoC", version="0.1.0")
 
+# Resolve data paths from this file's location, not the process CWD, so
+# `uvicorn api.main:app` works wherever it is started from.
+ROOT = Path(__file__).resolve().parent.parent
+
 RECORDS: dict[str, dict] = {}
 # dimension -> value -> [record ids]
 DIM_INDEX: dict[str, dict[str, list[str]]] = {}
@@ -44,7 +48,7 @@ def record_text(r: dict) -> str:
 
 
 def load() -> None:
-    for path in sorted(Path("data/records").glob("*.jsonl")):
+    for path in sorted((ROOT / "data" / "records").glob("*.jsonl")):
         for line in path.read_text(encoding="utf-8").splitlines():
             if not line.strip():
                 continue
@@ -83,10 +87,10 @@ def list_seals(
     material: str | None = None,
     colour: str | None = None,
     mound: str | None = None,
-    type: str | None = Query(None, alias="type"),
+    type_: str | None = Query(None, alias="type"),
     site: str | None = None,
 ):
-    ids = apply_filters(material, colour, mound, type, site)
+    ids = apply_filters(material, colour, mound, type_, site)
     page = ids[offset:offset + limit]
     return {"total": len(ids), "limit": limit, "offset": offset,
             "records": [RECORDS[i] for i in page]}
@@ -148,7 +152,7 @@ def export(format: str = Query("json", pattern="^(json|csv)$")):
         w.writerow([r["id"], r["seal_no"], r["site"], r["size_raw"],
                     r["depth_raw"], r["type_raw"], r["material"], r["colour"],
                     r["mound"], r["field_no"],
-                    r["provenance"]["source"][:60]])
+                    r["provenance"]["source"]])
     buf.seek(0)
     return StreamingResponse(iter([buf.read()]), media_type="text/csv",
                              headers={"Content-Disposition":

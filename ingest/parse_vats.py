@@ -24,8 +24,11 @@ import re
 import sys
 from pathlib import Path
 
-ARTIFACT = Path("data/artifacts/vats1940_djvu.txt")
-OUT = Path("data/records/vats1940_seals.jsonl")
+# Paths resolve from this file, not the process CWD: `python ingest/parse_vats.py`
+# works wherever it is started from (R-I1: a repeatable command).
+ROOT = Path(__file__).resolve().parent.parent
+ARTIFACT = ROOT / "data/artifacts/vats1940_djvu.txt"
+OUT = ROOT / "data/records/vats1940_seals.jsonl"
 
 COLOURS = re.compile(
     r"white|greenish|bluish|green|yellow|red|grey|gray|black|blue|brown|pink|buff",

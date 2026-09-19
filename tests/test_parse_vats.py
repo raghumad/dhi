@@ -152,6 +152,15 @@ def test_ingest_is_deterministic():
     assert once == committed  # matches the snapshot in the repo
 
 
+def test_parser_is_cwd_independent(tmp_path):
+    """R-I1: the ingest command works wherever it is started from."""
+    committed = RECORDS.read_bytes()
+    subprocess.run([sys.executable, str(ROOT / "ingest/parse_vats.py")],
+                   cwd=tmp_path, check=True,
+                   capture_output=True, text=True)
+    assert RECORDS.read_bytes() == committed
+
+
 def test_artifact_stored_byte_identical():
     """The committed OCR artifact is what the records cite."""
     recs = [json.loads(line) for line in
