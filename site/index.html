@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harappan Seals — Open Catalog</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <h1>Harappan Seals — Open Catalog</h1>
+  <p class="tagline">First-hand excavation data. Public domain. For everyone.</p>
+  <div class="searchbar">
+    <input id="q" type="search" placeholder="Search seals: unicorn, faience, Mound F…" autocomplete="off">
+    <select id="motif">
+      <option value="">All motifs</option>
+      <option value="unicorn">unicorn</option>
+      <option value="geometric">geometric</option>
+      <option value="inscription only">inscription only</option>
+    </select>
+    <select id="material">
+      <option value="">All materials</option>
+      <option value="Steatite">Steatite</option>
+      <option value="Faience">Faience</option>
+    </select>
+  </div>
+  <p id="count"></p>
+</header>
+<main id="results"></main>
+<footer>
+  <p>Data from public-domain ASI excavation reports (Sahni 1926, Vats 1940). No interpretations — just the dig records.<br>
+  Contribute: add entries to <code>data/seals.json</code> and open a PR.</p>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>
