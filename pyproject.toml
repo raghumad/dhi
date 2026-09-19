@@ -1,0 +1,22 @@
+[project]
+name = "dhi"
+version = "0.1.0"
+description = "Open, structured evidence for the Harappan world — starting with seals"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.141.1",
+    "uvicorn>=0.53.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest",
+    "httpx",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.uv]
+# Exact resolved versions live in uv.lock; this file only declares floors.

@@ -1,42 +1,60 @@
-# Dhi (धी) - Scripture Search Engine
+# Dhi — Vats 1940 seal tabulation, end to end
 
-**Dhi** ("Intellect" or "Understanding" in Sanskrit) is a privacy-first, on-device semantic search engine for ancient scriptures.
+Vertical slice proving the architecture: fetch once → parse → immutable
+records → dimension indexes → query API.
 
-## The Goal: "Unified Runtime"
-We aim to build a search engine that runs entirely on your local device (Linux/Mac/Android) with minimal dependencies.
+## Layout
 
-### Architecture
-*   **The Brain**: `llama.cpp` (Llama-3) for understanding context, debating, and answering questions.
-*   **The Tongue**: `IndicXlit` (via `aksharamukha` / Python) for accurate transliteration of Indic scripts.
-*   **The Glue**: Python bindings effectively creating a hybrid runtime.
+- `data/artifacts/vats1940_djvu.txt` — raw OCR from archive.org
+  (`in.ernet.dli.2015.210462`), stored byte-identical, never edited.
+- `ingest/parse_vats.py` — tabulation parser → `data/records/vats1940_seals.jsonl`
+  (one JSON record per line, each with sha256 provenance of the artifact).
+  The committed JSONL is a snapshot: re-running the parser over the unchanged
+  artifact must reproduce it byte-identically (enforced by
+  `tests/test_parse_vats.py::test_ingest_is_deterministic`).
+- `api/main.py` — FastAPI: `/seals`, `/seals/{id}`, `/search`, `/stats`, `/export`.
+- `tests/` — parser unit tests, ingestion determinism and record-integrity
+  tests, API contract smoke tests.
 
-## Setup
+## Rerun
 
-### 1. One-Click Setup
-We provide an idempotent script to check your Python version, create the virtual environment, and install pinned dependencies.
-
-```bash
-# Run the setup script
-./setup.sh
-
-# Activate the environment
-source .venv/bin/activate
+```sh
+uv sync --group dev      # one command: picks Python 3.12, builds .venv,
+                         # installs the exact locked dependencies
+uv run pytest            # 27 tests: parser rules, determinism, API contract
+uv run python ingest/parse_vats.py   # re-parse (deterministic)
+uv run uvicorn api.main:app --port 8765
+curl "localhost:8765/seals?material=faience&mound=F"
+curl "localhost:8765/search?q=16"
+curl "localhost:8765/export?format=csv"
 ```
 
-### 2. Manual Setup (Alternative)
-If the script fails, you can do it manually:
-```bash
-python3.12 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-```
+Python: requires 3.11+, pinned to 3.12 via `.python-version` (uv fetches the
+interpreter automatically if you don't have it). Exact dependency versions
+are locked in `uv.lock`; `pyproject.toml` declares only the floors.
 
-### 3. Run Ingestion (Prototype)
-    ```bash
-    python src/ingest.py
-    ```
+## Result (2026-09-19)
 
-## Hardware Support
-*   **Mac**: Native Metal (GPU) support via `llama.cpp`.
-*   **Linux**: CUDA support.
-*   **Android**: Future execution via Gemini Nano or llama.cpp (UserLAnd).
+371 records, seal figures 60–687. 98 carry `parse_flags` (quarantine for
+human review: `merged-row-suspect`, `field-no-suspect`, `duplicate-seal-no`);
+the rest parsed clean. Spot-checked against the print table.
+
+Why 371 and not 974: Vats states 974 seals and sealings were recovered, but
+duplicates "have been omitted from the illustrations" — the tabulation covers
+the illustrated seals only, and this parse recovers the rows the OCR kept
+readable.
+
+## Known limitations (all quarantined, none silent)
+
+- 1930s OCR noise: dropped lines, mangled numbers, split cells.
+- Figure numbers occasionally lose a leading digit ("368" → "68"). The
+  sequence-chain anchoring skips such anchors; the row is then either
+  recovered by the split heuristic or swallowed into a neighbour, which gets
+  `merged-row-suspect`. Dropped digits are *not* silently repaired.
+- A trailing cell that looks like a field number but contains no digit
+  ("Afiie", "Pottery") is kept in `unmapped` and flagged `field-no-suspect`;
+  bare material words ("Pottery") are classified as material, never as a
+  field number.
+- Stray header lines can land in `unmapped` (preserved, never discarded).
+- Motifs (unicorn, bull) live in the book's prose and plates, not in this
+  tabulation — `/search?q=unicorn` honestly returns zero.
