@@ -168,7 +168,10 @@ $("randomBtn").addEventListener("click", () => {
   const recs = filtered();
   if (!recs.length) return;
   const pick = recs[Math.floor(Math.random() * recs.length)];
-  location.hash = "#/seals/" + encodeURIComponent(pick.id);
+  const h = "#/seals/" + encodeURIComponent(pick.id);
+  // Setting an unchanged hash fires no event, so render explicitly then.
+  if (location.hash === h) renderDetail(pick.id);
+  else location.hash = h;
 });
 ["q", "fMaterial", "fMound", "fFlag"].forEach(id =>
   $("q") === $(id)
@@ -180,7 +183,8 @@ Promise.all([
   fetch("/stats").then(r => r.json()),
   fetch("/seals?limit=1000").then(r => r.json())
 ]).then(([stats, seals]) => {
-  ALL = seals;
+  // /seals returns an envelope {total, limit, offset, records}; the UI needs the array.
+  ALL = Array.isArray(seals) ? seals : (seals.records || []);
   const pct = stats.total ? Math.round(stats.flagged / stats.total * 100) : 0;
   $("chips").innerHTML =
     `<span class="chip">${stats.total} records</span>` +
