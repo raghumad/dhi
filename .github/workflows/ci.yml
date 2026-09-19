@@ -1,0 +1,48 @@
+# Validates the basics on every push and pull request, so nothing
+# obviously broken reaches master. See .github/pull_request_template.md
+# for the manual checklist that complements this automation.
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - name: Install exact locked dependencies
+        # --frozen fails if uv.lock is out of sync with pyproject.toml,
+        # so a stale lockfile breaks the build instead of slipping through.
+        run: uv sync --frozen --group dev
+      - name: Run test suite
+        run: uv run pytest
+
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - name: Install exact locked dependencies
+        run: uv sync --frozen
+      - name: Boot the server and hit the key endpoints
+        run: |
+          set -e
+          uv run uvicorn api.main:app --port 8765 &
+          SRV=$!
+          trap 'kill $SRV' EXIT
+          for i in $(seq 1 30); do
+            curl -sf http://127.0.0.1:8765/stats >/dev/null && break
+            sleep 1
+          done
+          # / redirects humans to the API explorer
+          code=$(curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:8765/)
+          test "$code" = "307" || { echo "expected 307 from /, got $code"; exit 1; }
+          curl -sf http://127.0.0.1:8765/docs >/dev/null
+          curl -sf "http://127.0.0.1:8765/seals?limit=1" >/dev/null
+          curl -sf "http://127.0.0.1:8765/seals/vats1940-251" >/dev/null
+          curl -sf "http://127.0.0.1:8765/search?q=steatite" >/dev/null
+          curl -sf "http://127.0.0.1:8765/export?format=csv" >/dev/null
+          echo "smoke OK"
