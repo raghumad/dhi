@@ -14,6 +14,12 @@ from api.main import app
 client = TestClient(app)
 
 
+def test_root_redirects_to_docs():
+    r = client.get("/", follow_redirects=False)
+    assert r.status_code in (302, 303, 307)
+    assert r.headers["location"] == "/docs"
+
+
 def test_list_seals_paginates():
     r = client.get("/seals", params={"limit": 5})
     assert r.status_code == 200

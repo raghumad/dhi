@@ -19,7 +19,7 @@ import re
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, Query
-from fastapi.responses import StreamingResponse
+from fastapi.responses import RedirectResponse, StreamingResponse
 
 app = FastAPI(title="Dhi PoC", version="0.1.0")
 
@@ -78,6 +78,12 @@ def apply_filters(material, colour, mound, type_, site) -> list[str]:
     if not sets:
         return sorted(RECORDS)
     return sorted(set.intersection(*sets))
+
+
+@app.get("/", include_in_schema=False)
+def root():
+    # No homepage yet (the PWA is backlog); send humans to the API explorer.
+    return RedirectResponse("/docs")
 
 
 @app.get("/seals")
