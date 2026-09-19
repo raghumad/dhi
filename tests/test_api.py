@@ -14,10 +14,25 @@ from api.main import app
 client = TestClient(app)
 
 
-def test_root_redirects_to_docs():
+def test_root_redirects_to_ui():
     r = client.get("/", follow_redirects=False)
     assert r.status_code in (302, 303, 307)
-    assert r.headers["location"] == "/docs"
+    assert r.headers["location"] == "/ui"
+
+
+def test_ui_serves_record_browser():
+    r = client.get("/ui")
+    assert r.status_code == 200
+    assert "text/html" in r.headers["content-type"]
+    assert "Harappan Seals Catalog" in r.text
+    assert "Random record" in r.text
+
+
+def test_list_seals_supports_full_catalog_fetch():
+    # The /ui browser loads the whole catalog in one request.
+    r = client.get("/seals", params={"limit": 1000})
+    assert r.status_code == 200
+    assert r.json()["total"] == len(r.json()["records"])
 
 
 def test_list_seals_paginates():
