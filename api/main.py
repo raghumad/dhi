@@ -19,9 +19,11 @@ import re
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, Query
-from fastapi.responses import RedirectResponse, StreamingResponse
+from fastapi.responses import FileResponse, RedirectResponse, StreamingResponse
 
 app = FastAPI(title="Dhi PoC", version="0.1.0")
+
+UI_DIR = Path(__file__).resolve().parent / "ui"
 
 # Resolve data paths from this file's location, not the process CWD, so
 # `uvicorn api.main:app` works wherever it is started from.
@@ -82,13 +84,18 @@ def apply_filters(material, colour, mound, type_, site) -> list[str]:
 
 @app.get("/", include_in_schema=False)
 def root():
-    # No homepage yet (the PWA is backlog); send humans to the API explorer.
-    return RedirectResponse("/docs")
+    # Humans get the record browser; developers can still reach /docs.
+    return RedirectResponse("/ui")
+
+
+@app.get("/ui", include_in_schema=False)
+def ui():
+    return FileResponse(UI_DIR / "index.html")
 
 
 @app.get("/seals")
 def list_seals(
-    limit: int = Query(20, ge=1, le=200),
+    limit: int = Query(20, ge=1, le=1000),
     offset: int = Query(0, ge=0),
     material: str | None = None,
     colour: str | None = None,

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dhi — Harappan Seals Catalog</title>
+<style>
+  :root { --ink: #1a1a1a; --muted: #666; --line: #ddd; --accent: #4a7ebb; }
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; margin: 0; color: var(--ink); line-height: 1.5; }
+  header { padding: 20px 24px 12px; border-bottom: 1px solid var(--line); }
+  header h1 { margin: 0 0 4px; font-size: 1.4em; }
+  header p { margin: 0; color: var(--muted); font-size: .92em; }
+  .chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+  .chip { background: #f0f4fa; border-radius: 20px; padding: 3px 12px; font-size: .85em; }
+  .chip.warn { background: #fff3d6; }
+  .controls { display: flex; gap: 8px; flex-wrap: wrap; padding: 14px 24px; border-bottom: 1px solid var(--line); background: #fafafa; align-items: center; }
+  .controls input[type="search"] { padding: 7px 10px; font-size: .95em; border: 1px solid var(--line); border-radius: 6px; min-width: 200px; }
+  .controls select { padding: 7px; font-size: .95em; border: 1px solid var(--line); border-radius: 6px; }
+  .btn { padding: 7px 14px; font-size: .95em; border: 1px solid var(--line); border-radius: 6px; background: #fff; cursor: pointer; }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn:hover { filter: brightness(.96); }
+  main { display: flex; min-height: calc(100vh - 220px); }
+  #list { width: 340px; min-width: 280px; border-right: 1px solid var(--line); overflow-y: auto; max-height: calc(100vh - 220px); }
+  .rec { padding: 10px 16px; border-bottom: 1px solid #eee; cursor: pointer; }
+  .rec:hover { background: #f6f9fd; }
+  .rec.active { background: #e9f1fb; }
+  .rec .rid { font-weight: 600; font-size: .95em; }
+  .rec .meta { color: var(--muted); font-size: .85em; }
+  #detail { flex: 1; padding: 20px 28px; overflow-y: auto; max-height: calc(100vh - 220px); }
+  #detail .empty { color: var(--muted); margin-top: 40px; text-align: center; }
+  .flag { background: #fde2e2; color: #a00; border-radius: 4px; padding: 1px 8px; font-size: .8em; margin-right: 4px; white-space: nowrap; }
+  .ok { background: #e2f3e2; color: #1a7a1a; border-radius: 4px; padding: 1px 8px; font-size: .8em; }
+  table.fields { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: .95em; }
+  table.fields th, table.fields td { border: 1px solid var(--line); padding: 6px 10px; text-align: left; vertical-align: top; }
+  table.fields th { background: #f5f5f5; width: 130px; }
+  code { background: #f0f0f0; padding: 1px 5px; border-radius: 3px; font-size: .88em; }
+  .prov { font-size: .85em; color: var(--muted); border-top: 1px solid var(--line); margin-top: 16px; padding-top: 10px; }
+  .flagexpl { background: #fff8e1; border-left: 3px solid #f0a500; padding: 6px 10px; margin: 6px 0; font-size: .88em; }
+  details { margin-top: 12px; } details summary { cursor: pointer; color: var(--accent); }
+  pre { background: #f5f5f5; padding: 12px; border-radius: 6px; overflow-x: auto; font-size: .82em; }
+  footer { padding: 14px 24px; border-top: 1px solid var(--line); color: var(--muted); font-size: .85em; }
+  footer a { color: var(--accent); }
+  @media (max-width: 760px) {
+    main { flex-direction: column; }
+    #list { width: 100%; border-right: none; border-bottom: 1px solid var(--line); max-height: 40vh; }
+    #detail { max-height: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Dhi — Harappan Seals Catalog</h1>
+  <p>Structured, queryable records from Vats 1940, <i>Excavations at Harappa</i>. Every record carries its source citation and extraction provenance.</p>
+  <div class="chips" id="chips"><span class="chip">loading…</span></div>
+</header>
+
+<div class="controls">
+  <input type="search" id="q" placeholder="Search id, material, mound, field no…" aria-label="Search">
+  <select id="fMaterial" aria-label="Material"><option value="">All materials</option></select>
+  <select id="fMound" aria-label="Mound"><option value="">All mounds</option></select>
+  <select id="fFlag" aria-label="Flag filter">
+    <option value="">All records</option>
+    <option value="flagged">Flagged for review</option>
+    <option value="clean">No flags</option>
+  </select>
+  <button class="btn primary" id="randomBtn" title="Open a random record">Random record</button>
+  <span id="count" style="color:var(--muted);font-size:.9em"></span>
+</div>
+
+<main>
+  <div id="list" role="listbox" aria-label="Records"></div>
+  <div id="detail"><div class="empty">Pick a record from the list — or hit <b>Random record</b> — to inspect it field by field.</div></div>
+</main>
+
+<footer>
+  Data: Vats 1940, Tabulation of Seals (public domain). Coverage is partial — illustrated, OCR-readable entries only.
+  Machine interface: <a href="/docs">API explorer</a> · <a href="/export?format=csv">CSV export</a>
+</footer>
+
+<script>
+"use strict";
+const FLAG_EXPLANATIONS = {
+  "merged-row-suspect": "The OCR may have fused two table rows here; some fields could belong to a neighboring seal.",
+  "field-no-suspect": "A trailing cell had text but no digits, so it was kept in raw unmapped cells instead of being guessed as a field number.",
+  "duplicate-seal-no": "This seal number appears more than once in the tabulation."
+};
+
+let ALL = [];
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c =>
+  ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+function flagsHtml(r) {
+  if (!r.parse_flags.length) return '<span class="ok">no flags</span>';
+  return r.parse_flags.map(f => `<span class="flag">${esc(f)}</span>`).join("");
+}
+
+function filtered() {
+  const q = $("q").value.trim().toLowerCase();
+  const mat = $("fMaterial").value, mound = $("fMound").value, flag = $("fFlag").value;
+  return ALL.filter(r => {
+    if (mat && r.material !== mat) return false;
+    if (mound && r.mound !== mound) return false;
+    if (flag === "flagged" && !r.parse_flags.length) return false;
+    if (flag === "clean" && r.parse_flags.length) return false;
+    if (q) {
+      const hay = [r.id, r.material, r.mound, r.field_no, r.colour, String(r.seal_no)]
+        .join(" ").toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
+    return true;
+  });
+}
+
+function renderList() {
+  const recs = filtered();
+  $("count").textContent = recs.length + " of " + ALL.length;
+  const cur = location.hash.match(/^#\/seals\/(.+)$/);
+  const curId = cur && decodeURIComponent(cur[1]);
+  $("list").innerHTML = recs.map(r =>
+    `<div class="rec${r.id === curId ? " active" : ""}" data-id="${esc(r.id)}" role="option" tabindex="0">
+       <div class="rid">${esc(r.id)}</div>
+       <div class="meta">seal ${esc(r.seal_no)} · ${esc(r.material)} · mound ${esc(r.mound)}${r.parse_flags.length ? " · ⚠ flagged" : ""}</div>
+     </div>`).join("") || '<div class="rec">No records match.</div>';
+  document.querySelectorAll(".rec[data-id]").forEach(el => {
+    const go = () => { location.hash = "#/seals/" + encodeURIComponent(el.dataset.id); };
+    el.addEventListener("click", go);
+    el.addEventListener("keydown", e => { if (e.key === "Enter") go(); });
+  });
+}
+
+function renderDetail(id) {
+  const r = ALL.find(x => x.id === id);
+  const d = $("detail");
+  if (!r) { d.innerHTML = '<div class="empty">Record not found.</div>'; return; }
+  const flagExpl = r.parse_flags.map(f =>
+    `<div class="flagexpl"><b>${esc(f)}</b> — ${esc(FLAG_EXPLANATIONS[f] || "See parser documentation.")}</div>`).join("");
+  d.innerHTML = `
+    <h2 style="margin-top:0"><code>${esc(r.id)}</code> ${flagsHtml(r)}</h2>
+    ${flagExpl}
+    <table class="fields">
+      <tr><th>Seal no.</th><td>${esc(r.seal_no)}</td><th>Material</th><td>${esc(r.material)}</td></tr>
+      <tr><th>Mound</th><td>${esc(r.mound)}</td><th>Field no.</th><td>${esc(r.field_no)}</td></tr>
+      <tr><th>Colour</th><td>${esc(r.colour)}</td><th>Type</th><td>${esc(r.type_raw)}</td></tr>
+      <tr><th>Size</th><td>${esc(r.size_raw)}</td><th>Depth</th><td>${esc(r.depth_raw)}</td></tr>
+      <tr><th>Site</th><td>${esc(r.site)}</td><th>Raw unmapped cells</th><td>${r.unmapped.length ? "<code>" + esc(JSON.stringify(r.unmapped)) + "</code>" : "—"}</td></tr>
+    </table>
+    <div class="prov">
+      <b>Provenance.</b> ${esc(r.provenance.source)}<br>
+      Artifact: ${esc(r.provenance.artifact)} · sha256 <code>${esc(r.provenance.artifact_sha256.slice(0, 16))}…</code><br>
+      Extraction: ${esc(r.provenance.extraction)}<br>
+      Machine-readable: <a href="/seals/${esc(r.id)}">JSON for this record</a>
+    </div>
+    <details><summary>Raw JSON</summary><pre>${esc(JSON.stringify(r, null, 2))}</pre></details>`;
+  renderList(); // refresh active highlight
+}
+
+function route() {
+  const m = location.hash.match(/^#\/seals\/(.+)$/);
+  if (m) renderDetail(decodeURIComponent(m[1]));
+  else renderList();
+}
+
+$("randomBtn").addEventListener("click", () => {
+  const recs = filtered();
+  if (!recs.length) return;
+  const pick = recs[Math.floor(Math.random() * recs.length)];
+  location.hash = "#/seals/" + encodeURIComponent(pick.id);
+});
+["q", "fMaterial", "fMound", "fFlag"].forEach(id =>
+  $("q") === $(id)
+    ? $("q").addEventListener("input", renderList)
+    : $(id).addEventListener("change", renderList));
+window.addEventListener("hashchange", route);
+
+Promise.all([
+  fetch("/stats").then(r => r.json()),
+  fetch("/seals?limit=1000").then(r => r.json())
+]).then(([stats, seals]) => {
+  ALL = seals;
+  const pct = stats.total ? Math.round(stats.flagged / stats.total * 100) : 0;
+  $("chips").innerHTML =
+    `<span class="chip">${stats.total} records</span>` +
+    `<span class="chip warn">${stats.flagged} flagged for review (${pct}%)</span>`;
+  const mats = stats.by_material || {}, mounds = stats.by_mound || {};
+  Object.keys(mats).sort().forEach(m => {
+    const o = document.createElement("option"); o.value = o.textContent = m; $("fMaterial").appendChild(o);
+  });
+  Object.keys(mounds).sort().forEach(m => {
+    const o = document.createElement("option"); o.value = o.textContent = m; $("fMound").appendChild(o);
+  });
+  route();
+}).catch(err => {
+  $("chips").innerHTML = '<span class="chip">Failed to load data: ' + esc(err.message) + "</span>";
+});
+</script>
+</body>
+</html>
