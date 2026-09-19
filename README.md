@@ -19,14 +19,19 @@ records → dimension indexes → query API.
 ## Rerun
 
 ```sh
-python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
-.venv/bin/python -m pytest tests/
-python3 ingest/parse_vats.py          # re-parse (deterministic)
-.venv/bin/uvicorn api.main:app --port 8765
+uv sync --group dev      # one command: picks Python 3.12, builds .venv,
+                         # installs the exact locked dependencies
+uv run pytest            # 27 tests: parser rules, determinism, API contract
+uv run python ingest/parse_vats.py   # re-parse (deterministic)
+uv run uvicorn api.main:app --port 8765
 curl "localhost:8765/seals?material=faience&mound=F"
 curl "localhost:8765/search?q=16"
 curl "localhost:8765/export?format=csv"
 ```
+
+Python: requires 3.11+, pinned to 3.12 via `.python-version` (uv fetches the
+interpreter automatically if you don't have it). Exact dependency versions
+are locked in `uv.lock`; `pyproject.toml` declares only the floors.
 
 ## Result (2026-09-19)
 
