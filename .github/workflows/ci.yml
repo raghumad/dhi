@@ -17,6 +17,13 @@ jobs:
         # --frozen fails if uv.lock is out of sync with pyproject.toml,
         # so a stale lockfile breaks the build instead of slipping through.
         run: uv sync --frozen --group dev
+      - name: Install poppler-utils (pdftoppm, needed for plate extraction)
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
+      - name: Build the dataset via the ingestion pipeline
+        # data/ is gitignored by design, so CI reproduces it from the pinned
+        # sources exactly as a fresh clone would. This also exercises the
+        # pipeline itself on every run.
+        run: uv run python ingest/build.py
       - name: Run test suite
         run: uv run pytest
 
@@ -27,6 +34,12 @@ jobs:
       - uses: astral-sh/setup-uv@v5
       - name: Install exact locked dependencies
         run: uv sync --frozen
+      - name: Install poppler-utils (pdftoppm, needed for plate extraction)
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
+      - name: Build the dataset via the ingestion pipeline
+        # data/ is gitignored by design, so CI reproduces it from the pinned
+        # sources exactly as a fresh clone would.
+        run: uv run python ingest/build.py
       - name: Boot the server and hit the key endpoints
         run: |
           set -e
