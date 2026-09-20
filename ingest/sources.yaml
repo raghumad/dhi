@@ -123,3 +123,17 @@ sources:
         211: CXVIII
       output_dir: data/artifacts/plates-marshall
       filename_pattern: "plate_{plate}.jpg"
+  - id: met
+    citation: >-
+      Metropolitan Museum of Art, New York. Open Access collection.
+      Object records and images via the public Collection API
+      (https://collectionapi.metmuseum.org). Every object ingested here
+      is flagged isPublicDomain by the Met.
+    license: public-domain
+    parser: parse_met
+    # API source: no static artifacts for fetch.py (it would be a no-op).
+    # ingest/fetch_met.py queries the API, saves the object JSON, downloads
+    # images, and writes a hash manifest; see that module for the contract.
+    api_query: "indus seal"
+    search_url: https://collectionapi.metmuseum.org/public/collection/v1/search?q=indus%20seal
+    artifacts: []

@@ -35,6 +35,7 @@ sys.path.insert(0, str(INGEST))
 SOURCE_STEPS: dict[str, list[str]] = {
     "vats1940": ["extract_plates:vats1940", "crop_figures", "parse_vats"],
     "marshall1931": ["extract_plates:marshall1931", "crop_marshall"],
+    "met": ["fetch_met", "parse_met"],
 }
 
 
