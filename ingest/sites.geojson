@@ -1,1 +1,282 @@
-{"features":[{"geometry":{"coordinates":[72.8739,30.6357],"type":"Point"},"properties":{"affiliation":"harappan","excavation_status":"excavated","harappan_connection":null,"name":"Harappa","notes":"Type site. Detailed mound gazetteer in mound_areas.geojson.","periods":["early","mature","late"],"site_id":"harappa","size_class":"major_city","sources":["Vats 1940"],"uncertainty_m":500},"type":"Feature"},{"geometry":{"coordinates":[67.1386,27.3292],"type":"Point"},"properties":{"affiliation":"harappan","excavation_status":"excavated","harappan_connection":null,"name":"Mohenjo-daro","notes":"Largest known Indus city. Seal tabulation parser pending.","periods":["mature","late"],"site_id":"mohenjo-daro","size_class":"major_city","sources":["Marshall 1931"],"uncertainty_m":500},"type":"Feature"},{"geometry":{"coordinates":[76.1146,29.3901],"type":"Point"},"properties":{"affiliation":"harappan","excavation_status":"excavated","harappan_connection":null,"name":"Rakhigarhi","notes":"Possibly the largest Indus site by area; excavations ongoing.","periods":["early","mature","late"],"site_id":"rakhigarhi","size_class":"major_city","sources":["ASI reports"],"uncertainty_m":1000},"type":"Feature"},{"geometry":{"coordinates":[74.13,29.4619],"type":"Point"},"properties":{"affiliation":"harappan","excavation_status":"excavated","harappan_connection":null,"name":"Kalibangan","notes":"Ghaggar-Hakra (Saraswati) belt; pre-Harappan and Harappan phases.","periods":["early","mature"],"site_id":"kalibangan","size_class":"major_city","sources":["Lal & Thapar"],"uncertainty_m":500},"type":"Feature"},{"geometry":{"coordinates":[70.2137,23.8862],"type":"Point"},"properties":{"affiliation":"harappan","excavation_status":"excavated","harappan_connection":null,"name":"Dholavira","notes":"Kachchh; famous water management systems and signboard inscription.","periods":["early","mature","late"],"site_id":"dholavira","size_class":"major_city","sources":["Bisht, ASI"],"uncertainty_m":500},"type":"Feature"},{"geometry":{"coordinates":[72.2498,22.5259],"type":"Point"},"properties":{"affiliation":"harappan","excavation_status":"excavated","harappan_connection":null,"name":"Lothal","notes":"Port town with dockyard; bead-making center.","periods":["mature","late"],"site_id":"lothal","size_class":"town","sources":["Rao, ASI"],"uncertainty_m":500},"type":"Feature"},{"geometry":{"coordinates":[62.03,38.19],"type":"Point"},"properties":{"affiliation":"related","excavation_status":"excavated","harappan_connection":"Indus seals, ivory objects, and carnelian beads excavated; BMAC-Harappan trade contact (Sarianidi).","name":"Gonur Tepe","notes":"BMAC (Oxus civilization) capital in Margiana, Turkmenistan. Key evidence for Indus-Central Asia contact.","periods":["mature"],"site_id":"gonur-tepe","size_class":"major_city","sources":["Sarianidi"],"uncertainty_m":2000},"type":"Feature"},{"geometry":{"coordinates":[46.1031,30.9625],"type":"Point"},"properties":{"affiliation":"related","excavation_status":"excavated","harappan_connection":"Indus seals and sealings found in Mesopotamian context; Meluhha trade (Woolley excavations).","name":"Ur","notes":"Sumerian city; Indus (Meluhha) merchant presence attested.","periods":["mature"],"site_id":"ur","size_class":"major_city","sources":["Woolley"],"uncertainty_m":1000},"type":"Feature"},{"geometry":{"coordinates":[50.55,26.03],"type":"Point"},"properties":{"affiliation":"related","excavation_status":"excavated","harappan_connection":"Entrepot for Indus-Mesopotamia Gulf trade; Indus-related weights and seals.","name":"Dilmun (Bahrain)","notes":"Persian Gulf trade hub linking Meluhha (Indus) and Mesopotamia.","periods":["mature"],"site_id":"dilmun-bahrain","size_class":"town","sources":["Bibby; Hojlund"],"uncertainty_m":5000},"type":"Feature"},{"geometry":{"coordinates":[69.53,37.33],"type":"Point"},"properties":{"affiliation":"harappan","excavation_status":"excavated","harappan_connection":null,"name":"Shortugai","notes":"Northernmost Harappan outpost (Afghanistan); lapis lazuli trade.","periods":["mature"],"site_id":"shortugai","size_class":"town","sources":["Francfort"],"uncertainty_m":2000},"type":"Feature"}],"metadata":{"coordinate_note":"Representative site centers; uncertainty_m reflects location pinning quality.","description":"Site-level places: Harappan settlements and related sites with documented Harappan contacts.","sources":"See ingest/SITES_GAZETTEER.md","title":"Indus World Site Gazetteer"},"type":"FeatureCollection"}
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          72.8739,
+          30.6357
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "affiliation": "harappan",
+        "excavation_status": "excavated",
+        "harappan_connection": null,
+        "name": "Harappa",
+        "notes": "Type site. Detailed mound gazetteer in mound_areas.geojson.",
+        "periods": [
+          "early",
+          "mature",
+          "late"
+        ],
+        "site_id": "harappa",
+        "size_class": "major_city",
+        "sources": [
+          "Vats 1940"
+        ],
+        "uncertainty_m": 500
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          67.1386,
+          27.3292
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "affiliation": "harappan",
+        "excavation_status": "excavated",
+        "harappan_connection": null,
+        "name": "Mohenjo-daro",
+        "notes": "Largest known Indus city. Seal tabulation parser pending.",
+        "periods": [
+          "mature",
+          "late"
+        ],
+        "site_id": "mohenjo-daro",
+        "size_class": "major_city",
+        "sources": [
+          "Marshall 1931"
+        ],
+        "uncertainty_m": 500
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          76.1146,
+          29.3901
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "affiliation": "harappan",
+        "excavation_status": "excavated",
+        "harappan_connection": null,
+        "name": "Rakhigarhi",
+        "notes": "Possibly the largest Indus site by area; excavations ongoing.",
+        "periods": [
+          "early",
+          "mature",
+          "late"
+        ],
+        "site_id": "rakhigarhi",
+        "size_class": "major_city",
+        "sources": [
+          "ASI reports"
+        ],
+        "uncertainty_m": 1000
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          74.13,
+          29.4619
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "affiliation": "harappan",
+        "excavation_status": "excavated",
+        "harappan_connection": null,
+        "name": "Kalibangan",
+        "notes": "Ghaggar-Hakra (Saraswati) belt; pre-Harappan and Harappan phases.",
+        "periods": [
+          "early",
+          "mature"
+        ],
+        "site_id": "kalibangan",
+        "size_class": "major_city",
+        "sources": [
+          "Lal & Thapar"
+        ],
+        "uncertainty_m": 500
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          70.2137,
+          23.8862
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "affiliation": "harappan",
+        "excavation_status": "excavated",
+        "harappan_connection": null,
+        "name": "Dholavira",
+        "notes": "Kachchh; famous water management systems and signboard inscription.",
+        "periods": [
+          "early",
+          "mature",
+          "late"
+        ],
+        "site_id": "dholavira",
+        "size_class": "major_city",
+        "sources": [
+          "Bisht, ASI"
+        ],
+        "uncertainty_m": 500
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          72.2498,
+          22.5259
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "affiliation": "harappan",
+        "excavation_status": "excavated",
+        "harappan_connection": null,
+        "name": "Lothal",
+        "notes": "Port town with dockyard; bead-making center.",
+        "periods": [
+          "mature",
+          "late"
+        ],
+        "site_id": "lothal",
+        "size_class": "town",
+        "sources": [
+          "Rao, ASI"
+        ],
+        "uncertainty_m": 500
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          62.035,
+          38.21
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "affiliation": "related",
+        "excavation_status": "excavated",
+        "harappan_connection": "One Indus stamp seal with elephant (probably made in Indus region, traded to Gonur); abundant ivory; artifacts with Indus stylistic traits (Sarianidi excavations, per Penn Museum Expedition Magazine).",
+        "name": "Gonur Tepe",
+        "notes": "BMAC (Oxus civilization) capital in Margiana, Turkmenistan. Key evidence for Indus-Central Asia contact.",
+        "periods": [
+          "mature"
+        ],
+        "site_id": "gonur-tepe",
+        "size_class": "major_city",
+        "sources": [
+          "Wikipedia: Gonur Depe (coords 38.21N 62.035E; Sarianidi excavations 1974-2013)",
+          "Penn Museum Expedition Magazine, 'The Middle Asian Interaction Sphere': 'one very fine Indus stamp seal with an elephant... probably made in the Indus region and brought or traded to Gonur' (Sarianidi excavations)",
+          "Discover Magazine: Indus Valley stamp with etched elephant found at Gonur"
+        ],
+        "uncertainty_m": 1000
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          46.1031,
+          30.9625
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "affiliation": "related",
+        "excavation_status": "excavated",
+        "harappan_connection": "Indus seals and sealings found in Mesopotamian context; Meluhha trade (Woolley excavations).",
+        "name": "Ur",
+        "notes": "Sumerian city; Indus (Meluhha) merchant presence attested.",
+        "periods": [
+          "mature"
+        ],
+        "site_id": "ur",
+        "size_class": "major_city",
+        "sources": [
+          "Woolley"
+        ],
+        "uncertainty_m": 1000
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          50.55,
+          26.03
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "affiliation": "related",
+        "excavation_status": "excavated",
+        "harappan_connection": "Entrepot for Indus-Mesopotamia Gulf trade; Indus-related weights and seals.",
+        "name": "Dilmun (Bahrain)",
+        "notes": "Persian Gulf trade hub linking Meluhha (Indus) and Mesopotamia.",
+        "periods": [
+          "mature"
+        ],
+        "site_id": "dilmun-bahrain",
+        "size_class": "town",
+        "sources": [
+          "Bibby; Hojlund"
+        ],
+        "uncertainty_m": 5000
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          69.53,
+          37.33
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "affiliation": "harappan",
+        "excavation_status": "excavated",
+        "harappan_connection": null,
+        "name": "Shortugai",
+        "notes": "Northernmost Harappan outpost (Afghanistan); lapis lazuli trade.",
+        "periods": [
+          "mature"
+        ],
+        "site_id": "shortugai",
+        "size_class": "town",
+        "sources": [
+          "Francfort"
+        ],
+        "uncertainty_m": 2000
+      },
+      "type": "Feature"
+    }
+  ],
+  "metadata": {
+    "coordinate_note": "Representative site centers; uncertainty_m reflects location pinning quality.",
+    "description": "Site-level places: Harappan settlements and related sites with documented Harappan contacts.",
+    "sources": "See ingest/SITES_GAZETTEER.md",
+    "title": "Indus World Site Gazetteer"
+  },
+  "type": "FeatureCollection"
+}
