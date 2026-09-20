@@ -168,8 +168,8 @@
     {
       "geometry": {
         "coordinates": [
-          72.2498,
-          22.5259
+          72.25,
+          22.5167
         ],
         "type": "Point"
       },
@@ -178,7 +178,7 @@
         "excavation_status": "excavated",
         "harappan_connection": null,
         "name": "Lothal",
-        "notes": "Port town with dockyard; bead-making center.",
+        "notes": "Harappan port town in Gujarat (village Saragwala, between the Sabarmati and Bhogavo); brick-lined dock on the eastern margin; bead-making centre (carnelian bead factory, kiln); citadel + lower town within a trapezoidal mud-brick enclosure (~300 x 200 m). Discovered 1954, excavated 1954-55 to 1962-63 (ASI, S.R. Rao). UNESCO Tentative List 2014.",
         "periods": [
           "mature",
           "late"
@@ -186,11 +186,16 @@
         "site_id": "lothal",
         "size_class": "town",
         "sources": [
-          "Rao, ASI"
+          "Rao, S.R. 1979. Lothal: A Harappan Port Town (1955-62), Memoirs of the ASI No. 78, Vol. I (Vol. II, 1985) \u2014 final excavation report (title page); 'proved beyond doubt that it was a true Harappan town' (Vol. I, pp.12-14); dock embankment walls 716 ft / 705 ft 6 in (p.85)",
+          "ASI site text ('Excavations: Important \u2014 Gujarat'): 'Lothal (22\u00b031\u2032; 72\u00b015\u2032), Dt Ahmadabad, Gujarat'; '7 m thick occupational debris... two Periods, A and B, the first belonging to the mature Harappa culture' (accessed via third-party-hosted copy of ASI text \u2014 confirm on asi.nic.in when available)",
+          "Frenez, D., Tosi, M. & Fiandra, E. 2005. 'Lothal sealings' (Festschrift chapter, Zenodo): 'the small site of Lothal... enclosed within a wide mudbricks trapezelike enclosure (about 300 x 200 m)'; Period A-IV 2000-1900 BC decline; Period B ca. 1800-1600 BC",
+          "UNESCO WHC Tentative List: 'Archaeological remains of a Harappa Port-Town, Lothal', submitted 15/04/2014",
+          "IGNOU eGyankosh BHIC-101E Unit 5: Lothal among Gujarat Harappan sites; 'the important settlement of Lothal' in Saurashtra"
         ],
-        "uncertainty_m": 500,
-        "review_status": "unverified",
-        "authority_note": "Coordinates and description are provisional, drawn from general knowledge; not yet traced to an authoritative source. Do not cite."
+        "uncertainty_m": 2000,
+        "review_status": "verified",
+        "authority_note": "Fields traced to the ASI memoir, ASI site text, or peer-reviewed chapter. Coordinates minute-level (\u00b12 km); Early Harappan phase unattested in sources in hand (pre-urban Micaceous Red Ware phase reported but not as \"Early Harappan\"); \"7 ha\" figure rejected (Wikipedia trace).",
+        "coordinate_provenance": "ASI site description: Lothal (22\u00b031\u2032; 72\u00b015\u2032) \u2014 minute-level only; accessed via a third-party-hosted copy of ASI descriptive text. Seconds-level confirmation from Rao 1979 Plate XXXVIII (site plan) or asi.nic.in still needed for higher precision."
       },
       "type": "Feature"
     },
@@ -294,8 +299,8 @@
     {
       "geometry": {
         "coordinates": [
-          69.53,
-          37.33
+          69.5256,
+          37.3237
         ],
         "type": "Point"
       },
@@ -303,19 +308,24 @@
         "affiliation": "harappan",
         "excavation_status": "excavated",
         "harappan_connection": null,
-        "name": "Shortugai",
-        "notes": "Northernmost Harappan outpost (Afghanistan); lapis lazuli trade.",
+        "name": "Shortughai",
+        "notes": "Northernmost Indus site, in northeast Afghanistan on the Oxus (Amu Darya); a trading colony of the Indus cities, established to obtain lapis lazuli (Badakshan), gold, copper, and tin from Central Asia. Also rendered \"Shortugai\" (Pleiades). Discovered 1975; excavated 1976-79 under Henri-Paul Francfort (French mission); fully published 1989.",
         "periods": [
           "mature"
         ],
         "site_id": "shortugai",
         "size_class": "town",
         "sources": [
-          "Francfort"
+          "Francfort, H.-P. 1989. Fouilles de Shortughai: Recherches sur l'Asie Centrale Protohistorique, 2 vols., Paris: Diffusion de Boccard \u2014 final excavation report (cited via Possehl summary)",
+          "Possehl, G.L. 'An Harappan Outpost on the Amu Darya: Shortughai. Why was it there?', Indologica Taurinensia 23-24 (peer-reviewed): 'From the first published report it was clear that there was Mature Harappan settlement there'; discovered 1975 by the Ai Khanoum team; four seasons 1976-79; 21 km NE of the Kokcha-Amu Darya confluence",
+          "Becker, J. & Mckee, G. 2024. 'Shortugai: a Pleiades place resource,' Pleiades 717754049 (ISAW/NYU) \u2014 representative point 37.323652, 69.5256008, accuracy \u00b120 m; 'trading colony on the Oxus... dating to ca. 2000 BC'",
+          "Kenoyer, J.M. 1998. Ancient Cities of the Indus Valley Civilization, OUP, p.96 \u2014 'trading colony of the Indus cities... to obtain gold, copper, tin and lapis lazuli'",
+          "IGNOU eGyankosh BHIC-101E Unit 5: 'The northern most site of the Indus civilization is Shortughai in northeast Afghanistan... access could be gained to lapis lazuli of Badakshan, and to tin and gold resources of Central Asia'"
         ],
-        "uncertainty_m": 2000,
-        "review_status": "unverified",
-        "authority_note": "Coordinates and description are provisional, drawn from general knowledge; not yet traced to an authoritative source. Do not cite."
+        "uncertainty_m": 20,
+        "review_status": "verified",
+        "authority_note": "Fields traced to the excavation report (via peer-reviewed summary), Pleiades, OUP, or IGNOU. Spelling follows the excavation report (Shortughai); Pleiades renders \"Shortugai\". Francfort 1989 not directly consulted in this pass; area figure and early/late phases unverified.",
+        "coordinate_provenance": "Pleiades place 717754049 (Becker & Mckee 2024, ISAW/NYU peer-reviewed gazetteer): representative point, OSM-derived, stated accuracy \u00b120 m. Corroborated by Possehl's location description."
       },
       "type": "Feature"
     }
