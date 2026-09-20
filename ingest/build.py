@@ -29,15 +29,28 @@ ROOT = INGEST.parent
 sys.path.insert(0, str(INGEST))
 
 # source id -> ordered build steps after fetch.
-# Each step is a module under ingest/ run as __main__.
+# Each step is "module" or "module:arg" (arg appended to sys.argv, so
+# e.g. "extract_plates:marshall1931" runs that source's extraction).
+# Modules live under ingest/ and are run as __main__.
 SOURCE_STEPS: dict[str, list[str]] = {
-    "vats1940": ["extract_plates", "crop_figures", "parse_vats"],
+    "vats1940": ["extract_plates:vats1940", "crop_figures", "parse_vats"],
+    "marshall1931": ["extract_plates:marshall1931", "crop_marshall"],
 }
 
 
-def run_step(module: str) -> None:
-    print(f"--- step: {module} ---")
-    runpy.run_module(module, run_name="__main__")
+def run_step(spec: str) -> None:
+    print(f"--- step: {spec} ---")
+    saved_argv = sys.argv
+    try:
+        if ":" in spec:
+            module, arg = spec.split(":", 1)
+            sys.argv = [module, arg]
+        else:
+            module = spec
+            sys.argv = [module]
+        runpy.run_module(module, run_name="__main__")
+    finally:
+        sys.argv = saved_argv
 
 
 def build_source(source_id: str, skip_fetch: bool) -> None:

@@ -10,6 +10,9 @@ vats1940_djvu.xml
 data/artifacts/vats1940_djvu.txt
 data/artifacts/plates-source.pdf
 data/artifacts/plates/
+data/artifacts/marshall1931_jp2.zip
+data/artifacts/marshall1931_djvu.txt
+data/artifacts/plates-marshall/
 # Derived: figure crops, review sheets, detection manifest.
 data/figures/
 # Derived: parsed catalog records.

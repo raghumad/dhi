@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Crop individual seal figures from Volume II plates.
+"""Crop individual seal figures from the Vol. II plates (1999 ASI reprint).
 
-Reads the 17 plate scans (data/artifacts/plates/plate_n{91..107}.jpg),
+Reads the 17 plate scans (data/artifacts/plates/plate_n{94..110}.jpg),
 detects figure bounding boxes (connected components for sparse plates,
 grid projection for dense plates), assigns figure numbers by reading order,
 and writes:
@@ -10,132 +10,53 @@ and writes:
   - data/figures/boxes.json : box coordinates + provenance per figure
 
 Figure ranges per plate are from PLATE_FIGURES (verified against scans).
-Known numbering gaps (e.g. 568 skipped on Plate XCVII) are listed in GAPS.
+GAPS lists figure numbers with no illustration on their plate (visually
+confirmed; currently empty -- 568 was removed 2026-09-20 after the reprint
+plate showed it does exist).
 A plate is only cropped if the detected count matches the expected count;
 mismatches are reported for human review, never silently accepted.
+
+Detection itself lives in ingest/detect.py (shared with crop_marshall.py).
 """
 import json
 import sys
 from pathlib import Path
 
-import numpy as np
 from PIL import Image, ImageDraw
-from scipy import ndimage
+
+from detect import detect_components, detect_grid
 
 ROOT = Path(__file__).resolve().parent.parent
 PLATES = ROOT / "data/artifacts/plates"
 OUT = ROOT / "data/figures"
 REVIEW = OUT / "_review"
 
-# (archive page, plate roman, first figure, last figure, method, closing_ksize)
-# Method/ksize tuned per plate at half resolution; verified detected == expected.
+# (reprint scan leaf, plate roman, first figure, last figure, method, closing_ksize)
+# Scan leaves 94-110 = plates LXXXV-CI (verified against the reprint's
+# djvu.xml plate labels). Method/ksize retuned for the reprint's native
+# 1500x2174 px plates; verified detected == expected.
 PLATES_MAP = [
-    (91, "LXXXV", 1, 15, "components", 6),
-    (92, "LXXXVI", 16, 37, "components", 6),
-    (93, "LXXXVII", 38, 67, "components", 8),
-    (94, "LXXXVIII", 68, 105, "components", 6),
-    (97, "XCI", 226, 260, "components", 8),
-    (99, "XCIII", 303, 328, "components", 10),
-    (100, "XCIV", 329, 367, "components", 10),
-    (103, "XCVII", 497, 580, "grid", None),
+    (94, "LXXXV", 1, 15, "components", 6),
+    (95, "LXXXVI", 16, 37, "components", 6),
+    (96, "LXXXVII", 38, 67, "components", 8),
+    (97, "LXXXVIII", 68, 105, "components", 6),
+    (100, "XCI", 226, 260, "components", 8),
+    (102, "XCIII", 303, 328, "components", 10),
+    (103, "XCIV", 329, 367, "components", 10),
+    (106, "XCVII", 497, 580, "grid", None),
 ]
 # Remaining plates (LXXXIX, XC, XCII, XCV, XCVI, XCVIII, XCIX, C, CI)
 # need manual box review; crops pending. Full plates are served regardless.
 # Figure numbers with no illustration on their plate (verified visually).
-GAPS = {568}
+# NOTE (2026-09-20): 568 was treated as a gap on Plate XCVII, but the 1999
+# reprint plate clearly shows "568" printed with a figure -- the gap was an
+# OCR/parsing artifact, not a real omission. GAPS stays empty until a gap
+# is VISUALLY confirmed on the plate.
+GAPS = set()
 
-PAD = 18
-
-
-def detect_components(plate_path: Path, ksize: int = 25) -> list[list[int]]:
-    """Sparse plates: connected components of dark regions."""
-    im = Image.open(plate_path).convert("L")
-    # work at half resolution for speed; scale boxes back up
-    small = im.resize((im.size[0] // 2, im.size[1] // 2))
-    a = np.array(small)
-    binary = a < 128
-    closed = ndimage.binary_closing(binary,
-                                    structure=np.ones((ksize, ksize)))
-    labeled, _ = ndimage.label(closed)
-    boxes = []
-    for i, sl in enumerate(ndimage.find_objects(labeled)):
-        if sl is None:
-            continue
-        y_sl, x_sl = sl
-        h, w = y_sl.stop - y_sl.start, x_sl.stop - x_sl.start
-        area = (labeled[y_sl, x_sl] == (i + 1)).sum()
-        # thresholds for half-res (≈1/4 area)
-        if w > 40 and h > 40 and area > 7500:
-            boxes.append([x_sl.start * 2, y_sl.start * 2,
-                          x_sl.stop * 2, y_sl.stop * 2])
-    return _reading_order(boxes)
-
-
-def detect_grid(plate_path: Path) -> list[list[int]]:
-    """Dense plates: figure rows via horizontal projection, columns via vertical."""
-    im = Image.open(plate_path).convert("L")
-    a = np.array(im)
-    binary = a < 128
-    H, W = binary.shape
-    hproj = binary.sum(axis=1)
-    row_mask = hproj > (W * 0.03)
-    bands, start = [], None
-    for i, v in enumerate(row_mask):
-        if v and start is None:
-            start = i
-        elif not v and start is not None:
-            if i - start > 15:
-                bands.append((start, i, "FIG" if i - start > 50 else "NUM"))
-            start = None
-    fig_rows, cur = [], []
-    for s, e, typ in bands:
-        if typ == "FIG":
-            cur.append((s, e))
-        elif cur:
-            fig_rows.append((cur[0][0], cur[-1][1]))
-            cur = []
-    if cur:
-        fig_rows.append((cur[0][0], cur[-1][1]))
-    figs = []
-    for (y0, y1) in fig_rows:
-        vproj = binary[y0:y1, :].sum(axis=0)
-        col_mask = vproj > ((y1 - y0) * 0.05)
-        cols, cs = [], None
-        for i, v in enumerate(col_mask):
-            if v and cs is None:
-                cs = i
-            elif not v and cs is not None:
-                if i - cs > 20:
-                    cols.append((cs, i))
-                cs = None
-        for (x0, x1) in cols:
-            cell = binary[y0:y1, x0:x1]
-            ys, xs = np.where(cell)
-            if len(xs) == 0:
-                continue
-            figs.append([int(x0 + xs.min()), int(y0 + ys.min()),
-                         int(x0 + xs.max()), int(y0 + ys.max())])
-    return _reading_order(figs)
-
-
-def _reading_order(boxes: list[list[int]]) -> list[list[int]]:
-    boxes.sort(key=lambda b: (b[1] + b[3]) / 2)
-    rows: list[list[list[int]]] = []
-    for b in boxes:
-        yc = (b[1] + b[3]) / 2
-        for row in rows:
-            ryc = sum((x[1] + x[3]) / 2 for x in row) / len(row)
-            if abs(yc - ryc) < 250:
-                row.append(b)
-                break
-        else:
-            rows.append([b])
-    rows.sort(key=lambda r: sum((x[1] + x[3]) / 2 for x in r) / len(r))
-    out = []
-    for row in rows:
-        row.sort(key=lambda b: b[0])
-        out.extend(row)
-    return out
+# Padding around each crop, scaled for the 1500-px-wide reprint plates
+# (was 18 px on the 2788-px-wide 1940 DLI scan).
+PAD = 10
 
 
 def main() -> None:
