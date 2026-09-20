@@ -101,6 +101,23 @@ and prioritized.
   ("show me all female figurines") — that needs subject tagging, a later layer.
   Adjacent to SEAL-3 (multi-view UX) and SEAL-4 (`figure_no` stable IDs);
   positional auto-indexes are not citable, printed numbers are.
+- **FIG-2 — Comparable sets for motifs ("show me all unicorn seals")** · P0 · in progress (2026-09-20)
+  From discussion: the enthusiast's loop is notice → pull every specimen of
+  that kind → compare side by side (e.g. testing whether unicorn horn/face/neck
+  patterns are decorations rather than biological features). Browsing alone
+  (FIG-1) adds no value if the catalog can't assemble the set.
+  Design constraints from the same discussion: human tagging is out (human
+  interpretation + bias); a motif tag exists only as the excavator's own
+  classification, quoted verbatim with page locator, or stays null; machine
+  classification stays out of v1 — visual similarity asserts nothing and needs
+  no labels. Big-data ingestion, small-data truth: assemble candidates at
+  scale, but set membership is excavator text or flagged machine output, never
+  silent.
+  v1 scope: (1) pin + parse Marshall 1931 Vol I text (already pinned under
+  SITE-5) and Mackay 1937-38 texts for their seal motif classifications;
+  (2) embeddings for every detected figure (Vats 721, Met 41, Marshall Vol III
+  591) for label-free "visually similar"; (3) API: motif query from excavator
+  text + similar-to from embeddings; (4) compare grid of native-res crops.
 
 ## Georeferencing
 
