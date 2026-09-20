@@ -31,13 +31,15 @@ ROOT = Path(__file__).resolve().parent.parent
 FIGURES_DIR = ROOT / "data" / "figures"
 PLATES_DIR = ROOT / "data" / "artifacts" / "plates"
 
-# Plate scan file per Roman numeral (archive.org Vol II page -> plate).
+# Plate scan file per Roman numeral (1999 ASI reprint leaf -> plate).
+# Leaves 94-110 = plates LXXXV-CI (plate labels verified in the reprint's
+# djvu.xml; PDF page = leaf + 1).
 PLATE_SCANS = {
-    "LXXXV": "n91", "LXXXVI": "n92", "LXXXVII": "n93", "LXXXVIII": "n94",
-    "LXXXIX": "n95", "XC": "n96", "XCI": "n97", "XCII": "n98",
-    "XCIII": "n99", "XCIV": "n100", "XCV": "n101", "XCVI": "n102",
-    "XCVII": "n103", "XCVIII": "n104", "XCIX": "n105", "C": "n106",
-    "CI": "n107",
+    "LXXXV": "n94", "LXXXVI": "n95", "LXXXVII": "n96", "LXXXVIII": "n97",
+    "LXXXIX": "n98", "XC": "n99", "XCI": "n100", "XCII": "n101",
+    "XCIII": "n102", "XCIV": "n103", "XCV": "n104", "XCVI": "n105",
+    "XCVII": "n106", "XCVIII": "n107", "XCIX": "n108", "C": "n109",
+    "CI": "n110",
 }
 
 RECORDS: dict[str, dict] = {}

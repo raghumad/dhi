@@ -22,7 +22,11 @@ def test_sources_yaml_manifest_valid():
     ids = [s["id"] for s in sources]
     assert len(ids) == len(set(ids)), "duplicate source ids"
     for s in sources:
-        assert s.get("parser"), f"{s['id']}: no parser declared"
+        # parser may be null for a source whose plates are ingested but
+        # whose catalog records are not yet parsed (e.g. Marshall 1931:
+        # plates done, Vol. II tabulation parser pending). Such sources
+        # must not be served as catalog records until a parser exists.
+        assert "parser" in s, f"{s['id']}: no parser key"
         for a in s.get("artifacts", []):
             assert a.get("url", "").startswith("https://"), f"{a.get('name')}: bad url"
             assert re.fullmatch(r"[0-9a-f]{64}", a.get("sha256", "").lower()), \

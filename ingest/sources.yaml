@@ -11,6 +11,10 @@
 #
 # All paths are relative to the repo root. Nothing under data/ is committed;
 # run `python ingest/build.py` to materialize the dataset from these manifests.
+#
+# superseded_artifacts: former artifacts kept for provenance only.
+# fetch.py ignores them (they are not re-downloaded); their hashes stay
+# pinned so the history of what a build used remains checkable.
 
 sources:
   - id: vats1940
@@ -18,7 +22,8 @@ sources:
       Vats, M.S. 1940. Excavations at Harappa: Being an Account of
       Archaeological Excavations at Harappa Carried Out Between the Years
       1920-21 and 1933-34. Vol. I (text), Vol. II (139 plates). Delhi:
-      Government of India Press.
+      Government of India Press. Plates ingested from the 1999 Archaeological
+      Survey of India reprint scan (see plates-pdf artifact).
     license: public-domain
     parser: parse_vats
     artifacts:
@@ -31,18 +36,90 @@ sources:
         path: data/artifacts/vats1940_djvu.txt
       - name: plates-pdf
         description: >-
-          Scanned Vol. II (139 plates). Source of the seal illustrations.
+          1999 ASI reprint scan of Vol. II (149 leaves). Source of the seal
+          illustrations. The reprint's continuous-tone reproduction preserves
+          carved detail the 1940 DLI scan destroyed (see superseded_artifacts).
           Individual plate pages are extracted by ingest/extract_plates.py.
+        url: https://archive.org/download/dli.jZY9lup2kZl6TuXGlZQdjZM9k0Iy.TVA_BOK_0009128/TVA_BOK_0009128_Excavations_at_Harappa.pdf
+        sha256: a0a2aad6e03fb015291b6a11a6b35ed5e93f72d8e5d47a0933ffac1dddcc4aea
+        path: data/artifacts/plates-source.pdf
+    superseded_artifacts:
+      - name: plates-pdf-1940-dli
+        description: >-
+          Original 1940 DLI scan of Vol. II (137 pages). Superseded 2026-09-20:
+          its harsh halftone rendition destroyed continuous tones (e.g. figure
+          330 cropped to a detail-free black blob; no processing recovered
+          carved detail). Kept for provenance; not fetched.
         url: https://archive.org/download/in.ernet.dli.2015.358923/2015.358923.ExcavationsAtHarappaVol21940AC3845.pdf
         sha256: e4e9b88f89ca5c86b590086a490bad6cd1e0f4a011f603c69f6c6fa8f9a7682e
-        path: data/artifacts/plates-source.pdf
-    # Seal plates LXXXV-CI live on scan pages n91-n107, which are PDF pages
-    # 92-108 (the PDF has one extra front-matter page). Extracted at 300 DPI,
-    # grayscale -> 2788x3993 px, matching the archive.org scan resolution.
+    # Seal plates LXXXV-CI live on reprint leaves 94-110, which are PDF pages
+    # 95-111 (PDF page = leaf + 1; verified by rendering). Extracted at the
+    # native 386 DPI (embedded JPEGs are 1500x2174 @386ppi); rendering below
+    # native would discard detail, above it would invent none.
     plate_extraction:
-      scan_start: 91
-      scan_end: 107
+      kind: pdf
+      scan_start: 94
+      scan_end: 110
       pdf_page_offset: 1
-      dpi: 300
+      dpi: 386
       output_dir: data/artifacts/plates
       filename_pattern: "plate_n{scan}.jpg"
+
+  - id: marshall1931
+    citation: >-
+      Marshall, John (ed.). 1931. Mohenjo-daro and the Indus Civilization:
+      Being an Official Account of Archaeological Excavations at Mohenjo-daro
+      Carried Out by the Government of India Between the Years 1922 and 1927.
+      Vol. III (plates). London: Arthur Probsthain.
+    license: public-domain
+    parser: null
+    artifacts:
+      - name: plates-jp2
+        description: >-
+          IGNCA scan of Vol. III (310 leaves), from the ASI Central
+          Archaeological Library. Full-resolution JPEG 2000s; the derived
+          48270.pdf is downsampled to 827x1155 @100ppi and unusable for
+          figure crops. Seal plates: CII (types of seals), CIII-CXVII (seals),
+          CXVIII (copper tablets, sealings). Leaves extracted by
+          ingest/extract_plates.py (kind: jp2zip).
+        url: https://archive.org/download/in.gov.ignca.48270/48270_jp2.zip
+        sha256: 8af238e77610812358bd380c745f555b7a0683964ca19436fcba2f9104092a70
+        path: data/artifacts/marshall1931_jp2.zip
+      - name: plate-list-ocr
+        description: >-
+          OCR text of Vol. III; the List of Plates and caption leaves were
+          used to map plate numerals to scan leaves (see scan_plates below).
+        url: https://archive.org/download/in.gov.ignca.48270/48270_djvu.txt
+        sha256: 0dbefe190923df157654c701478657dc8595c67b38c063f0c506b635d77c37eb
+        path: data/artifacts/marshall1931_djvu.txt
+    # Photo plates are the ODD scan leaves (even leaves are blank versos;
+    # the caption text seen in OCR is the title printed on the photo itself).
+    # Leaf 179 = Pl. CII "Types of seals" (printed numeral verified);
+    # leaves 181-209 = CIII-CXVII (seals); 211 = CXVIII (copper tablets,
+    # sealings). Leaf 177 = CI (faience vessels, not seals); 213 = CXIX
+    # (sign manual). Numerals read off the plates, not trusted from OCR.
+    plate_extraction:
+      kind: jp2zip
+      artifact: plates-jp2
+      scans: [179, 181, 183, 185, 187, 189, 191, 193, 195, 197, 199, 201,
+              203, 205, 207, 209, 211]
+      scan_plates:
+        179: CII
+        181: CIII
+        183: CIV
+        185: CV
+        187: CVI
+        189: CVII
+        191: CVIII
+        193: CIX
+        195: CX
+        197: CXI
+        199: CXII
+        201: CXIII
+        203: CXIV
+        205: CXV
+        207: CXVI
+        209: CXVII
+        211: CXVIII
+      output_dir: data/artifacts/plates-marshall
+      filename_pattern: "plate_{plate}.jpg"
