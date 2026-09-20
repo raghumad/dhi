@@ -1,0 +1,262 @@
+sources:
+  asi-lothal-text:
+    artifacts: []
+    category: official_record
+    citation: 'Archaeological Survey of India, site description text: ''Excavations: Important - Gujarat''
+      (Lothal entry).'
+  bisht2013-lecture:
+    artifacts: []
+    category: expert_statement
+    citation: 'Bisht, R.S. 2013. Lecture ''Dholavira: A Unique Harappan City'', IIT Gandhinagar, 18 Oct
+      2013.'
+  bisht2015:
+    artifacts: []
+    category: excavation_report
+    citation: Bisht, R.S. 2015. Excavations at Dholavira (1989-2005). Archaeological Survey of India.
+  cdli-ur:
+    artifacts: []
+    category: gazetteer
+    citation: 'Cuneiform Digital Library Initiative (CDLI) Wiki: ''Ur (modern Tell Muqayyar)'' (Oxford
+      / UCLA / MPIWG).'
+  crawford2001:
+    artifacts: []
+    category: peer_reviewed
+    citation: Crawford, H. 2001. 'Early Dilmun Seals From Saar.' Archaeology International (UCL).
+  francfort1989:
+    artifacts: []
+    category: excavation_report
+    citation: 'Francfort, H.-P. 1989. Fouilles de Shortughai: Recherches sur l''Asie Centrale Protohistorique,
+      2 vols. Paris: Diffusion de Boccard.'
+  frenez2005:
+    artifacts: []
+    category: peer_reviewed
+    citation: Frenez, D., Tosi, M. & Fiandra, E. 2005. 'Lothal sealings' (Festschrift chapter).
+  frenez2018:
+    artifacts: []
+    category: peer_reviewed
+    citation: 'Frenez, D. 2018. ''Manufacturing and trade of Asian elephant ivory in Bronze Age Middle
+      Asia: Evidence from Gonur Depe (Margiana, Turkmenistan).'' Archaeological Research in Asia 15.'
+  gadd1932:
+    artifacts:
+    - bytes: 3169016
+      description: "IGNCA scan of Gadd 1932 (3.1MB orig PDF) from the ASI Central Archaeological
+        Library via in.gov.ignca.33779. Title page verified: 'Seals of ancient Indian style
+        found at Ur. By C.J. Gadd. From the Proceedings of the British Academy, Vol. XVIII.
+        Communicated October 19, 1932.' Found by the SITE-5 IGNCA/IA inventory (IA metadata
+        misspells creator as 'Gadd, G.J.' and dates it 1958)."
+      media_type: application/pdf
+      name: gadd1932-pdf
+      path: data/artifacts/sites/gadd1932.pdf
+      pinned_on: '2026-09-20'
+      sha256: 49cb73beca63fd62314316b015a613877726e89949640ce9f26ff08557ce2b81
+      url: https://archive.org/download/in.gov.ignca.33779/33779.pdf
+    category: peer_reviewed
+    citation: Gadd, C.J. 1932. 'Seals of ancient Indian style found at Ur.' Proceedings of the British
+      Academy, vol. XVIII.
+  harp:
+    artifacts: []
+    category: excavation_project
+    citation: Harappa Archaeological Research Project (HARP), 1986-2001; period summary at harappa.com/indus4/e1.html.
+  hojlund-andersen1994:
+    artifacts: []
+    category: excavation_report
+    citation: 'Hojlund, F. & Andersen, H.H. 1994. Qala''at al-Bahrain Vol. 1: The Northern City Wall and
+      the Islamic Fortress. Jutland Archaeological Society / Moesgaard Museum.'
+  ignou-unit5:
+    artifacts: []
+    category: course_material
+    citation: 'IGNOU eGyankosh BHIC-101E, Unit 5: Harappan Civilization-I (Dr. Avantika Sharma, Indraprastha
+      College for Women, University of Delhi).'
+  kaniuth-shaydullaev2022:
+    artifacts: []
+    category: peer_reviewed
+    citation: Kaniuth, M. & Shaydullaev, Sh. 2022. 'The Sapalli culture seal corpus.' CISI 3.3.
+  kenoyer1998:
+    artifacts: []
+    category: peer_reviewed
+    citation: Kenoyer, J.M. 1998. Ancient Cities of the Indus Valley Civilization. Oxford University Press,
+      p. 96.
+  kenoyer2008:
+    artifacts: []
+    category: peer_reviewed
+    citation: Kenoyer, J.M. 2008. Indus Cities (Sackler Colloquium paper; harappa.com PDF).
+  kufterin-dubova2013:
+    artifacts: []
+    category: peer_reviewed
+    citation: Kufterin, V. & Dubova, N.A. 2013. 'A preliminary analysis of Late Bronze Age human skeletal
+      remains from Gonur-depe, Turkmenistan.'
+  lal2003:
+    artifacts: []
+    category: excavation_report
+    citation: 'Lal, B.B., Joshi, J.P., Thapar, B.K. & Bala, M. 2003. Excavations at Kalibangan: The Early
+      Harappans (1960-1969). Memoirs of the ASI No. 98.'
+  laursen-steinkeller2017:
+    artifacts: []
+    category: peer_reviewed
+    citation: Laursen, S. & Steinkeller, P. 2017. Babylonia, the Gulf Region, and the Indus. Mesopotamian
+      Civilizations 20. Eisenbrauns.
+  legrain1951:
+    artifacts: []
+    category: excavation_report
+    citation: Legrain, L. 1951. Seal Cylinders. Ur Excavations Vol. 10. British Museum / University Museum,
+      Philadelphia; Oxford University Press.
+  lok-sabha-4977:
+    artifacts: []
+    category: official_record
+    citation: Government of India, Ministry of Culture. Lok Sabha Unstarred Question No. 4977, answered
+      26.03.2018.
+  marshall1931:
+    artifacts:
+    - bytes: null
+      description: IGNCA scan of Marshall 1931 Vol. III (310 leaves), from the ASI Central Archaeological
+        Library via in.gov.ignca.48270. Shared with the seal pipeline (ingest/sources.yaml).
+      media_type: application/zip
+      name: vol3-jp2
+      path: data/artifacts/marshall1931_jp2.zip
+      pinned_on: '2026-09-20'
+      sha256: 8af238e77610812358bd380c745f555b7a0683964ca19436fcba2f9104092a70
+      url: https://archive.org/download/in.gov.ignca.48270/48270_jp2.zip
+    - bytes: null
+      description: OCR text of Marshall 1931 Vol. III. Shared with the seal pipeline.
+      media_type: text/plain
+      name: vol3-ocr
+      path: data/artifacts/marshall1931_djvu.txt
+      pinned_on: '2026-09-20'
+      sha256: 0dbefe190923df157654c701478657dc8595c67b38c063f0c506b635d77c37eb
+      url: https://archive.org/download/in.gov.ignca.48270/48270_djvu.txt
+    - bytes: 38393044
+      description: "IGNCA scan of Marshall 1931 Vol. I (text, 38MB orig PDF) from the ASI Central
+        Archaeological Library via in.gov.ignca.14985. Title page verified: 'Mohenjo-Daro and
+        the Indus Civilization... Edited by Sir John Marshall... Volume I: Text. Chapters
+        I-XIX and Plates I-XIV. Arthur Probsthain, London, 1931.' Found by the SITE-5
+        IGNCA/IA inventory."
+      media_type: application/pdf
+      name: vol1-pdf
+      path: data/artifacts/sites/marshall1931_vol1.pdf
+      pinned_on: '2026-09-20'
+      sha256: 163dd20937256470e3e652c5dcc0c8061c28d57bf75d0c0ae7ee1d42ef5d4600
+      url: https://archive.org/download/in.gov.ignca.14985/14985.pdf
+    category: excavation_report
+    citation: Marshall, John (ed.) 1931. Mohenjo-daro and the Indus Civilization, Vols. I
+      (text) and III (plates). Arthur Probsthain, London.
+  nath-rakhigarhi:
+    artifacts: []
+    category: excavation_report
+    citation: Nath, Amarendra. Excavations at Rakhigarhi [1997-98 to 1999-2000], Archaeological Survey
+      of India (draft report submitted 31.12.2014).
+  parpola2018:
+    artifacts: []
+    category: peer_reviewed
+    citation: 'Parpola, A. 2018. ''Indus Seals and Glyptic Studies: An Overview.'' University of Helsinki
+      open repository.'
+  pleiades-gonur:
+    artifacts:
+    - bytes: 34276
+      description: Pleiades place 391537222 JSON (fetched 2026-09-20). Corroborates Gonur Tepe representative
+        point.
+      media_type: application/json
+      name: pleiades-391537222-json
+      path: data/artifacts/sites/pleiades-gonur/391537222.json
+      pinned_on: '2026-09-20'
+      sha256: bd1ae69c47939546a676f7b1751bb1e98399296671e36c1cece87fd453145b2d
+      url: https://pleiades.stoa.org/places/391537222/json
+    category: gazetteer
+    citation: 'McKee, J., Becker, J., Johansson & Rattenborg. 2025. ''Gonur Tepe: a Pleiades place resource.''
+      Pleiades 391537222.'
+  pleiades-shortughai:
+    artifacts:
+    - bytes: 10174
+      description: Pleiades place 717754049 JSON (fetched 2026-09-20). Backs Shortughai representative
+        point 37.323652, 69.5256008.
+      media_type: application/json
+      name: pleiades-717754049-json
+      path: data/artifacts/sites/pleiades-shortughai/717754049.json
+      pinned_on: '2026-09-20'
+      sha256: 86d76dd929a336fea63c3445233ffd0f35e586fd4808f9605ad4cc627e1f504a
+      url: https://pleiades.stoa.org/places/717754049/json
+    category: gazetteer
+    citation: 'Becker, J. & Mckee, G. 2024. ''Shortugai: a Pleiades place resource.'' Pleiades 717754049
+      (ISAW/NYU).'
+  possehl-shortughai:
+    artifacts: []
+    category: peer_reviewed
+    citation: 'Possehl, G.L. ''An Harappan Outpost on the Amu Darya: Shortughai. Why was it there?'' Indologica
+      Taurinensia 23-24.'
+  rao1979:
+    artifacts: []
+    category: excavation_report
+    citation: 'Rao, S.R. 1979. Lothal: A Harappan Port Town (1955-62). Memoirs of the ASI No. 78, Vol.
+      I (Vol. II, 1985).'
+  shinde2018:
+    artifacts:
+    - bytes: 68990936
+      description: 'Publisher PDF of Shinde et al. 2018, PLoS ONE 13(2): e0192299. Backs Rakhigarhi coordinates
+        (RGR-07), excavation status, site description.'
+      media_type: application/pdf
+      name: plos-one-e0192299
+      path: data/artifacts/sites/shinde2018/plos-one-e0192299.pdf
+      pinned_on: '2026-09-20'
+      sha256: 7f341bef726fe6b9508d73295c5bcbb18685f722f925ceaa9c958155f1d762c2
+      url: https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0192299&type=printable
+    category: peer_reviewed
+    citation: 'Shinde, V.S. et al. 2018. ''Archaeological and anthropological studies on the Harappan
+      cemetery of Rakhigarhi, India.'' PLoS ONE 13(2): e0192299.'
+  thapar1975:
+    artifacts: []
+    category: peer_reviewed
+    citation: 'Thapar, B.K. 1975. ''Kalibangan: A Harappan Metropolis Beyond the Indus Valley.'' Expedition
+      17(2): 19-32.'
+  unesco-whc:
+    artifacts:
+    - bytes: 436630
+      description: 'Second-cycle periodic report, Section II: Archaeological Ruins at Moenjodaro (property
+        138). Backs Mohenjo-daro coordinates, size, excavation history.'
+      media_type: application/pdf
+      name: periodic-report-138
+      path: data/artifacts/sites/unesco-whc/whc-164707.pdf
+      pinned_on: '2026-09-20'
+      sha256: 1321fa93599fcf8779a2ea7a05038204c536afc1b3d2b3df86b4f60b9badb92a
+      url: https://whc.unesco.org/document/164707
+    - bytes: 3418756
+      description: 'WHC 44 COM document 8B (2021): Dholavira nomination/evaluation record. Backs Dholavira
+        name, coordinates, size.'
+      media_type: application/pdf
+      name: dholavira-44com-8b
+      path: data/artifacts/sites/unesco-whc/whc-187795.pdf
+      pinned_on: '2026-09-20'
+      sha256: 8b639dedc8869c9915210447ac59cd1433dd4e183fe79abe0521dac86cc456b3
+      url: https://whc.unesco.org/document/187795
+    - bytes: 863924
+      description: 'Nomination dossier: Qal''at al-Bahrain - Ancient Harbour and Capital of Dilmun (ref
+        1192ter). Backs coordinates, size, periods, excavation history.'
+      media_type: application/pdf
+      name: qal-at-al-bahrain-dossier
+      path: data/artifacts/sites/unesco-whc/whc-168878.pdf
+      pinned_on: '2026-09-20'
+      sha256: 9c8c5f53e153aa794351680dfdee30159232f4c9bc2a8b883b398bc9385c04f8
+      url: https://whc.unesco.org/document/168878
+    category: unesco
+    citation: 'UNESCO World Heritage Centre: World Heritage List and nomination / periodic-reporting documents
+      (whc.unesco.org).'
+  vats1940:
+    artifacts:
+    - bytes: null
+      description: OCR text of Vats 1940 Vol. I (Tabulation of Seals). Shared with the seal pipeline (ingest/sources.yaml).
+      media_type: text/plain
+      name: tabulation-ocr
+      path: data/artifacts/vats1940_djvu.txt
+      pinned_on: '2026-09-20'
+      sha256: b53574e45b24cf582cc3683ca4ffbf6e3af51fafa4f8d79af91533daa772c60f
+      url: https://archive.org/download/in.ernet.dli.2015.210462/2015.210462.Excavations-At_djvu.txt
+    - bytes: null
+      description: 1999 ASI reprint scan of Vats 1940 Vol. II (149 leaves). Source of Plate I (site plan)
+        used for Harappa georeferencing. Shared with the seal pipeline.
+      media_type: application/pdf
+      name: plates-pdf-1999-reprint
+      path: data/artifacts/plates-source.pdf
+      pinned_on: '2026-09-20'
+      sha256: a0a2aad6e03fb015291b6a11a6b35ed5e93f72d8e5d47a0933ffac1dddcc4aea
+      url: https://archive.org/download/dli.jZY9lup2kZl6TuXGlZQdjZM9k0Iy.TVA_BOK_0009128/TVA_BOK_0009128_Excavations_at_Harappa.pdf
+    category: excavation_report
+    citation: 'Vats, M.S. 1940. Excavations at Harappa: Being an Account of Archaeological Excavations
+      at Harappa Carried Out Between the Years 1920-21 and 1933-34, Vols. I-II. Government of India Press.'

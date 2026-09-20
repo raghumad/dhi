@@ -1,0 +1,75 @@
+site_id: gonur-tepe
+affiliation: related
+fields:
+  name:
+    value: Gonur Tepe
+    kind: normalized
+    state: verified
+    evidence:
+    - source: pleiades-gonur
+      locator: canonical form
+    note: 'Variants in scholarly literature: Gonur Depe, Gonur depe (Turkmen), Gonurdepe.'
+  coordinates:
+    value:
+    - 62.0375
+    - 38.2139
+    kind: derived
+    state: verified
+    evidence:
+    - source: kufterin-dubova2013
+      locator: 'Introduction: 38 deg 12''50"N 62 deg 02''15"E'
+    - source: pleiades-gonur
+      locator: representative point 38.21284, 62.03730
+    uncertainty_m: 100
+    method: Expedition-published site center (Kufterin & Dubova 2013, Introduction); corroborated by Pleiades
+      representative point.
+  periods:
+    value:
+    - mature (BMAC Bronze Age, 2300-1500 cal BCE)
+    kind: normalized
+    state: verified
+    evidence:
+    - source: kufterin-dubova2013
+      locator: 'p. 34: sixty C14 dates, 2300-1500 cal BCE'
+  size_class:
+    value: major_city
+    kind: normalized
+    state: verified
+    evidence:
+    - source: kufterin-dubova2013
+      locator: 'p. 34: central part ~25 ha, necropolis ~12 ha; ''probably the capital city of the ancient
+        state of Margush'''
+  excavation_status:
+    value: excavated
+    kind: normalized
+    state: verified
+    evidence:
+    - source: kufterin-dubova2013
+      locator: 'p. 34: Margiana archaeological expedition under V.I. Sarianidi; ''special publications
+        (Sarianidi 2001, 2002, 2005, 2007, 2008)'''
+  notes:
+    value: BMAC (Oxus civilization) center in the Murghab delta, Margiana, Turkmenistan; probable capital
+      of ancient Margush. 60 radiocarbon dates place occupation at 2300-1500 cal BCE.
+    kind: normalized
+    state: verified
+    evidence:
+    - source: kufterin-dubova2013
+      locator: p. 34
+  harappan_connection:
+    value: A square Indus stamp seal with an elephant and an eight-sign Indus inscription was excavated
+      at Gonur by V.I. Sarianidi in 2004 (Sarianidi 2005, fig. 114); its sign sequences are paralleled
+      in the Indus valley (Parpola 2006, via Kaniuth & Shaydullaev 2022). Elephant-ivory working at Gonur
+      independently attests Indus contact (Frenez 2018).
+    kind: normalized
+    state: verified
+    evidence:
+    - source: kaniuth-shaydullaev2022
+      locator: Indus seal excavated by Sarianidi 2004; elephant + eight-sign inscription paralleled in
+        the Indus valley (Parpola 2006)
+    - source: parpola2018
+      locator: '''In 2004, a square Indus seal with elephant and a line of Indus script with native Harappan
+        sequences was excavated at Gonur in Turkmenistan'''
+    - source: frenez2018
+      locator: elephant-ivory working at Gonur Depe
+    note: Full bibliographic title of 'Sarianidi 2005' not verified in this pass; Temple of Water/Area
+      9/Room 19 findspot via secondary citation.

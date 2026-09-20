@@ -1,0 +1,72 @@
+site_id: kalibangan
+affiliation: harappan
+fields:
+  name:
+    value: Kalibangan
+    kind: source
+    state: verified
+    evidence:
+    - source: lal2003
+      locator: title page (MASI No. 98)
+    - source: thapar1975
+      locator: spelling used throughout
+  coordinates:
+    value:
+    - 74.13
+    - 29.4619
+    kind: provisional
+    state: unverified
+    evidence: []
+    uncertainty_m: 5000
+    method: PROVISIONAL - unverified. No digitized copy of the 2003 ASI report found; no coordinate figure
+      in accessible ASI Indian Archaeology-A Review volumes or peer-reviewed papers. Placeholder pending
+      the report's location plan or a GPS-verified survey figure.
+  periods:
+    value:
+    - early
+    - mature
+    kind: normalized
+    state: verified
+    evidence:
+    - source: thapar1975
+      locator: Kalibangan I (pre-Harappan) and Kalibangan II (Harappan); Period II radiocarbon bracket
+        2300-1750 BCE
+    - source: ignou-unit5
+      locator: 'chronology table: Mature Harappan row (2600-1800 BCE)'
+  size_class:
+    value: town
+    kind: normalized
+    state: verified
+    evidence:
+    - source: thapar1975
+      locator: 'mound dimensions: Period I settlement ~250x160 m; citadel ~240x120 m; lower city ~240x360
+        m'
+  excavation_status:
+    value: excavated
+    kind: normalized
+    state: verified
+    evidence:
+    - source: thapar1975
+      locator: nine field seasons 1961-1969 (Indian Archaeology 1961-69 - A Review)
+    - source: ignou-unit5
+      locator: 'Section 5.5: begun 1960s, continued a decade'
+    - source: lal2003
+      locator: final report (Early Harappan Period I); Mature Harappan Period II in the follow-up volume
+  notes:
+    value: 'Fortified pre-Harappan settlement (Kalibangan I) below the Harappan citadel and lower town
+      (Kalibangan II), in Rajasthan on the Ghaggar. Outstanding discoveries: a ploughed field southeast
+      of the Period I settlement, and rows of fire altars (KLB-1 citadel, KLB-3). Excavated 1960-61 to
+      1969-70 (ASI, B.B. Lal & B.K. Thapar).'
+    kind: normalized
+    state: verified
+    evidence:
+    - source: thapar1975
+      locator: twofold sequence; ploughed field; fire altars
+    - source: ignou-unit5
+      locator: 'Section 5.3: Rajasthan, on the Ghaggar'
+    note: The absolute date 'c. 2800 BCE' for the ploughed field is unverified in sources in hand.
+  harappan_connection:
+    value: null
+    kind: na
+    state: verified
+    evidence: []

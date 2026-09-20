@@ -1,0 +1,80 @@
+site_id: dilmun-bahrain
+affiliation: related
+fields:
+  name:
+    value: Qal'at al-Bahrain
+    kind: source
+    state: verified
+    evidence:
+    - source: unesco-whc
+      locator: official name 'Qal`at al-Bahrain - Ancient Harbour and Capital of Dilmun', ref 1192ter,
+        inscribed 2005
+    note: '''Dilmun'' is the Bronze-Age polity; Qal''at al-Bahrain is the excavated site identified as
+      its capital.'
+  coordinates:
+    value:
+    - 50.5206
+    - 26.2336
+    kind: derived
+    state: verified
+    evidence:
+    - source: unesco-whc
+      locator: 'nomination dossier, doc. 168878, Section 2.4: core zone spans 26 deg 14''04"N-26 deg 13''53"N,
+        50 deg 31''06"E-50 deg 31''28"E'
+    uncertainty_m: 500
+    method: UNESCO nomination dossier (doc. 168878) core-zone coordinates; representative center of the
+      16.3 ha core zone. Supersedes the old gazetteer value, which was ~25 km off (in the sea).
+  periods:
+    value:
+    - occupied 2300 BCE - 16th c. CE; Indus-contact horizon c. 2050 BCE (Early Dilmun)
+    kind: normalized
+    state: verified
+    evidence:
+    - source: unesco-whc
+      locator: 'WH list ref 1192ter: ''occupied since at least 2300 BCE''; tell with seven stratified
+        layers 2300 BC-18th century'
+    - source: laursen-steinkeller2017
+      locator: Gulf-type seals appear concurrent with the city-wall construction ca. 2050 BC
+  size_class:
+    value: town
+    kind: normalized
+    state: verified
+    evidence:
+    - source: unesco-whc
+      locator: 'dossier doc. 168878, Section 2.6: core zone 16.3 ha'
+  excavation_status:
+    value: excavated
+    kind: normalized
+    state: verified
+    evidence:
+    - source: unesco-whc
+      locator: 'WH listing: excavations ''carried out since 1954'' (Danish expedition, Geoffrey Bibby)'
+    - source: hojlund-andersen1994
+      locator: excavation report, vol. 1
+    note: Full Danish/French/local campaign chronology not verified in this pass.
+  notes:
+    value: 'Tell on Bahrain''s north coast, capital of the Dilmun polity; entrepot in the Mesopotamia-Indus
+      Gulf trade (UNESCO: ''traded with the Indus Valley and Mesopotamia''). Danish excavations since
+      1954.'
+    kind: normalized
+    state: verified
+    evidence:
+    - source: unesco-whc
+      locator: WH list ref 1192ter description
+  harappan_connection:
+    value: At Qal'at al-Bahrain, the first Indus-inspired circular 'Gulf-type' stamp seals appear in layers
+      contemporary with the city-wall construction c. 2050 BCE, some bearing short inscriptions in Indus
+      script; simultaneously a formal weight system was adopted - cubical and spherical stone weights
+      matching Harappan standard units, the system known in Babylonia as the 'Tilmun norm' (na Tilmun,
+      UET 5 796). Square polished weights of Indus origin are also reported from the site.
+    kind: normalized
+    state: verified
+    evidence:
+    - source: laursen-steinkeller2017
+      locator: 'p. 50: Gulf-type seals c. 2050 BCE; Harappan-standard weights; Tilmun norm (UET 5 796)'
+    - source: crawford2001
+      locator: '''items like the square polished weights which also originate in the Indus Valley (Hojlund
+        & Andersen 1994, p. 118)'''
+    note: Laursen & Steinkeller p. 50 via published excerpt of the volume; a direct page-check against
+      a copy would strengthen this. Crawford is appropriately cautious that Gulf seals may reflect a local
+      tradition adapting foreign traits.

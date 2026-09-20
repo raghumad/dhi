@@ -1,341 +1,1416 @@
 {
+  "type": "FeatureCollection",
   "features": [
     {
+      "type": "Feature",
       "geometry": {
-        "coordinates": [
-          72.86444,
-          30.62919
-        ],
-        "type": "Point"
-      },
-      "properties": {
-        "affiliation": "harappan",
-        "excavation_status": "excavated",
-        "harappan_connection": null,
-        "name": "Harappa",
-        "notes": "Eponymous type site of the Harappan civilization; on the Ravi. Excavated 1920-21 to 1933-34 (Vats) and 1986-2001 (HARP).",
-        "periods": [
-          "early",
-          "mature",
-          "late"
-        ],
-        "site_id": "harappa",
-        "size_class": "major_city",
-        "sources": [
-          "Vats, M.S. 1940. Excavations at Harappa, Vol. I (text), Vol. II (139 plates). Govt. of India Press. \u2014 title page (site name); Plate I (site plan; georeferenced for coordinates and mound polygons)",
-          "IGNOU eGyankosh BHIC-101E Unit 5 (Dr. Avantika Sharma): 'Harappa was excavated in 1920 by Daya Ram Sahni'; 'following the archaeological convention of naming a culture where it was first discovered'; chronology table lists Harappa under Early (3300-2600 BCE), Mature (2600-1800 BCE), Late ('Cemetery H at Harappa')",
-          "Harappa Archaeological Research Project (HARP), harappa.com/indus4/e1.html: Period 1 Ravi/Hakra (>3500-2800 BC), Period 2 Kot Diji (2800-2600 BC), Period 3 Harappa phase (2600-1900 BC), Period 5 Late Harappa (c.1800-<1300 BC)",
-          "Kenoyer 2008 (Sackler Colloquium, harappa.com PDF): city grew to 150 ha in the Harappa phase; Dales & Kenoyer 1990: areal extent ~150 ha; Vats 1940:3: site ~3.5 miles 'in circuit'"
-        ],
-        "uncertainty_m": 1500,
-        "review_status": "verified",
-        "authority_note": "All fields traced to excavation report, excavation project, or national university course material.",
-        "coordinate_provenance": "Derived: Vats 1940 Plate I georeferenced (1000-ft grid scale + north-arrow rotation 2.96 deg + OSM Harappa Museum anchor); site centroid = mean of mound-area centroids. Method documented in mound_areas.geojson properties."
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          68.139,
-          27.329
-        ],
-        "type": "Point"
-      },
-      "properties": {
-        "affiliation": "harappan",
-        "excavation_status": "excavated",
-        "harappan_connection": null,
-        "name": "Mohenjo-daro",
-        "notes": "UNESCO World Heritage Site no. 138 (inscribed 1980; State Party Pakistan). Western citadel sector with eastern lower city on the Indus; streets at right angles with sanitation and drainage. Located in Larkana district, Sindh. Spelling follows the excavation report; UNESCO renders \"Moenjodaro\".",
-        "periods": [
-          "mature"
-        ],
-        "site_id": "mohenjo-daro",
-        "size_class": "major_city",
-        "sources": [
-          "Marshall, John (ed.) 1931. Mohenjo-daro and the Indus Civilization, Vol. III (plates). Arthur Probsthain, London \u2014 title page: 'official account of Archaeological Excavations at Mohenjo-daro carried out by the Government of India between the years 1922 and 1927' (artifact in hand: data/artifacts/marshall1931_djvu.txt)",
-          "UNESCO World Heritage Centre periodic-reporting document, Geographic Information Table for property 138 (whc.unesco.org/document/164707): coordinates 27.329N 68.139E; property 240 ha; UNESCO International Safeguarding Campaign 1974-1997",
-          "IGNOU eGyankosh BHIC-101E Unit 5: 'Mohenjodaro [excavated] by Rakhaldas Banerjee in 1921'; chronology table lists Mohenjodaro under Mature Harappan (2600-1800 BCE) only; Larkana district, Sindh"
-        ],
-        "uncertainty_m": 1000,
-        "review_status": "verified",
-        "authority_note": "All fields traced to the excavation report, UNESCO listing, or national university course material. Early/late occupation unverified (Marshall's scheme predates the modern framework); \"largest city\" claim dropped as uncited; 240 ha is the WH property boundary, not the archaeological footprint.",
-        "coordinate_provenance": "Official UNESCO property coordinates (periodic-reporting Geographic Information Table, property 138); property-centroid, not a field-survey pin."
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          76.1139,
-          29.2917
-        ],
-        "type": "Point"
-      },
-      "properties": {
-        "affiliation": "harappan",
-        "excavation_status": "excavated",
-        "harappan_connection": null,
-        "name": "Rakhigarhi",
-        "notes": "One of the largest cities of the Harappan Civilization (Hisar district, Haryana); seven mounds over ~300 ha. ASI 1997-2000 fieldwork found planned mud/burnt-brick townships, drainage, fortification, and a bead-manufacturing industry. No decline-phase evidence.",
-        "periods": [
-          "early",
-          "mature"
-        ],
-        "site_id": "rakhigarhi",
-        "size_class": "major_city",
-        "sources": [
-          "Nath, Amarendra. Excavations at Rakhigarhi [1997-98 to 1999-2000], ASI (draft report submitted 31.12.2014) \u2014 Ch. 6: site at 29\u00b017\u203230\u2033N 76\u00b006\u203250\u2033E; habitation deposit of two cultural periods, early Harappan (Period I: preformative IA, formative IB) and mature Harappan (Period II); 'no evidence of the decline phase'; archaeological residue 'spreads over in area of 3 Km radius (300 hectare)' over seven mounds",
-          "Shinde, V.S. et al. 2018. 'Archaeological and anthropological studies on the Harappan cemetery of Rakhigarhi, India,' PLoS ONE 13(2): e0192299 \u2014 RGR-07 necropolis N29\u00b017\u203252.9\u2033 E76\u00b006\u203251\u2033; 'one of the largest cities of the Harappan Civilization'",
-          "Govt. of India, Ministry of Culture, Lok Sabha Unstarred Q. 4977 (26.03.2018): excavation at Rakhigarhi, District Hissar, Haryana, 1997-98 to 1999-2000",
-          "IGNOU eGyankosh BHIC-101E Unit 5: 'Rakhigarhi (as large as Harappa)'; Banawali and Rakhigarhi in Haryana"
-        ],
-        "uncertainty_m": 1000,
-        "review_status": "verified",
-        "authority_note": "All fields traced to ASI report, peer-reviewed paper, or parliamentary record. The widely repeated ~350 ha figure is unverified (media attribution, not ASI/peer-reviewed); PIB 22.06.2026 says ~550 ha \u2014 conflicting figures; ASI report's own 300 ha cited as primary.",
-        "coordinate_provenance": "ASI Rakhigarhi report Ch. 6, \"Archaeological residue at Rakhigarhi\": 29\u00b017\u203230\u2033N 76\u00b006\u203250\u2033E from the 1997-2000 survey; corroborated by Shinde et al. 2018 (RGR-07 necropolis). The 1915 Survey of India toposheet figure (29\u00b016\u2032N 76\u00b010\u2032E) is ~7 km off and not used."
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          74.13,
-          29.4619
-        ],
-        "type": "Point"
-      },
-      "properties": {
-        "affiliation": "harappan",
-        "excavation_status": "excavated",
-        "harappan_connection": null,
-        "name": "Kalibangan",
-        "notes": "Fortified pre-Harappan settlement (Kalibangan I) below the Harappan citadel and lower town (Kalibangan II), in Rajasthan on the Ghaggar. Outstanding discoveries: a ploughed field southeast of the Period I settlement, and rows of fire altars (KLB-1 citadel, KLB-3). Excavated 1960-61 to 1969-70 (ASI, B.B. Lal & B.K. Thapar).",
-        "periods": [
-          "early",
-          "mature"
-        ],
-        "site_id": "kalibangan",
-        "size_class": "town",
-        "sources": [
-          "Thapar, B.K. 1975. 'Kalibangan: A Harappan Metropolis Beyond the Indus Valley,' Expedition 17(2): 19-32 (co-excavator's account) \u2014 Kalibangan I (pre-Harappan) and Kalibangan II (Harappan); Period II radiocarbon bracket 2300-1750 BCE; mound dimensions (Period I ~250x160 m; citadel ~240x120 m; lower city ~240x360 m); ploughed field; fire altars",
-          "Lal, B.B. et al. 2003. Excavations at Kalibangan: The Early Harappans (1960-1969), MASI No. 98, ASI \u2014 final report (Early Harappan Period I); Mature Harappan Period II in the follow-up volume",
-          "IGNOU eGyankosh BHIC-101E Unit 5: Kalibangan in Rajasthan; listed under Mature Harappan; 'Excavations began at Kalibangan in 1960s and continued for a decade'"
-        ],
-        "uncertainty_m": 5000,
-        "review_status": "unverified",
-        "authority_note": "Periods, size, excavation status, and description verified (Thapar 1975; ASI 2003; IGNOU Unit 5). COORDINATES UNVERIFIED \u2014 shown as provisional dot only. The absolute date \"c. 2800 BCE\" for the ploughed field is unverified.",
-        "coordinate_provenance": "PROVISIONAL \u2014 unverified. No digitized copy of the 2003 ASI report found; no coordinate figure in accessible ASI Indian Archaeology\u2014A Review volumes or peer-reviewed papers. Placeholder pending the 2003 report's location plan or a GPS-verified survey figure."
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
+        "type": "Point",
         "coordinates": [
           70.2133,
           23.8884
-        ],
-        "type": "Point"
+        ]
       },
       "properties": {
-        "affiliation": "harappan",
-        "excavation_status": "excavated",
-        "harappan_connection": null,
+        "site_id": "dholavira",
         "name": "Dholavira",
-        "notes": "Tripartite fortified Harappan city (citadel, middle town, lower town) with elaborate reservoir-based water harvesting; ten large Indus-script gypsum inlays (\"signboard\") at the North Gate. Excavated 1989-90 to 2004-05 (ASI, R.S. Bisht).",
+        "affiliation": "harappan",
+        "review_status": "verified",
+        "uncertainty_m": 500,
+        "coordinate_provenance": "Centre point of the inscribed UNESCO property as filed in India's January 2020 nomination dossier (table doc. 187795); not a surveyed city centre but property-scale, adequate for a site dot.",
+        "authority_note": "Per-field review:\n- name: verified [source] (unesco-whc: official property name 'Dholavira: A Harappan City', ref 1645, inscribed 2021)\n- coordinates: verified [derived, ±500m] (unesco-whc: nomination table, doc. 187795: centre point N23 53 18.27 E70 12 47.89)\n- periods: verified [normalized] (ignou-unit5: chronology table: Mature Harappan row; Transitional Phase row; bisht2013-lecture: seven cultural stages; occupation through the 3rd millennium into the mid-2nd millennium BCE)\n- size_class: verified [normalized] (unesco-whc: doc. 187795: inscribed property 103 ha; bisht2013-lecture: 'one amongst five largest urban centers of Harappan civilization' (with Mohenjodaro, Harappa, Ganweriwala, Rakhigarhi))\n- excavation_status: verified [normalized] (bisht2013-lecture: 13 field seasons 1989-90 to 2004-05, ASI under R.S. Bisht)\n  note: Discovery (1968, J.P. Joshi) unverified from authoritative sources - omitted.\n- notes: verified [normalized] (bisht2013-lecture: tripartite plan; 'amazing water harvesting system'; bisht2015: reservoirs (pp. 148, 164 per public copy); signboard, Section 8.1.1 (pp. 228-231 per public copy))\n  note: Bisht 2015 page numbers via publicly posted copy of the ASI report; confirm against the ASI-held original for page-level precision.\n- harappan_connection: verified [na] (no evidence)\nAll fields verified.",
+        "sources": [
+          "UNESCO World Heritage Centre: World Heritage List and nomination / periodic-reporting documents (whc.unesco.org). - official property name 'Dholavira: A Harappan City', ref 1645, inscribed 2021",
+          "UNESCO World Heritage Centre: World Heritage List and nomination / periodic-reporting documents (whc.unesco.org). - nomination table, doc. 187795: centre point N23 53 18.27 E70 12 47.89",
+          "IGNOU eGyankosh BHIC-101E, Unit 5: Harappan Civilization-I (Dr. Avantika Sharma, Indraprastha College for Women, University of Delhi). - chronology table: Mature Harappan row; Transitional Phase row",
+          "Bisht, R.S. 2013. Lecture 'Dholavira: A Unique Harappan City', IIT Gandhinagar, 18 Oct 2013. - seven cultural stages; occupation through the 3rd millennium into the mid-2nd millennium BCE",
+          "UNESCO World Heritage Centre: World Heritage List and nomination / periodic-reporting documents (whc.unesco.org). - doc. 187795: inscribed property 103 ha",
+          "Bisht, R.S. 2013. Lecture 'Dholavira: A Unique Harappan City', IIT Gandhinagar, 18 Oct 2013. - 'one amongst five largest urban centers of Harappan civilization' (with Mohenjodaro, Harappa, Ganweriwala, Rakhigarhi)",
+          "Bisht, R.S. 2013. Lecture 'Dholavira: A Unique Harappan City', IIT Gandhinagar, 18 Oct 2013. - 13 field seasons 1989-90 to 2004-05, ASI under R.S. Bisht",
+          "Bisht, R.S. 2013. Lecture 'Dholavira: A Unique Harappan City', IIT Gandhinagar, 18 Oct 2013. - tripartite plan; 'amazing water harvesting system'",
+          "Bisht, R.S. 2015. Excavations at Dholavira (1989-2005). Archaeological Survey of India. - reservoirs (pp. 148, 164 per public copy); signboard, Section 8.1.1 (pp. 228-231 per public copy)"
+        ],
+        "field_evidence": {
+          "name": {
+            "value": "Dholavira",
+            "kind": "source",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "unesco-whc",
+                "locator": "official property name 'Dholavira: A Harappan City', ref 1645, inscribed 2021"
+              }
+            ]
+          },
+          "coordinates": {
+            "value": [
+              70.2133,
+              23.8884
+            ],
+            "kind": "derived",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "unesco-whc",
+                "locator": "nomination table, doc. 187795: centre point N23 53 18.27 E70 12 47.89"
+              }
+            ],
+            "uncertainty_m": 500,
+            "method": "Centre point of the inscribed UNESCO property as filed in India's January 2020 nomination dossier (table doc. 187795); not a surveyed city centre but property-scale, adequate for a site dot."
+          },
+          "periods": {
+            "value": [
+              "early",
+              "mature",
+              "late"
+            ],
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "ignou-unit5",
+                "locator": "chronology table: Mature Harappan row; Transitional Phase row"
+              },
+              {
+                "source": "bisht2013-lecture",
+                "locator": "seven cultural stages; occupation through the 3rd millennium into the mid-2nd millennium BCE"
+              }
+            ]
+          },
+          "size_class": {
+            "value": "major_city",
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "unesco-whc",
+                "locator": "doc. 187795: inscribed property 103 ha"
+              },
+              {
+                "source": "bisht2013-lecture",
+                "locator": "'one amongst five largest urban centers of Harappan civilization' (with Mohenjodaro, Harappa, Ganweriwala, Rakhigarhi)"
+              }
+            ]
+          },
+          "excavation_status": {
+            "value": "excavated",
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "bisht2013-lecture",
+                "locator": "13 field seasons 1989-90 to 2004-05, ASI under R.S. Bisht"
+              }
+            ],
+            "note": "Discovery (1968, J.P. Joshi) unverified from authoritative sources - omitted."
+          },
+          "notes": {
+            "value": "Tripartite fortified Harappan city (citadel, middle town, lower town) with elaborate reservoir-based water harvesting; ten large Indus-script gypsum inlays ('signboard') at the North Gate. Excavated 1989-90 to 2004-05 (ASI, R.S. Bisht).",
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "bisht2013-lecture",
+                "locator": "tripartite plan; 'amazing water harvesting system'"
+              },
+              {
+                "source": "bisht2015",
+                "locator": "reservoirs (pp. 148, 164 per public copy); signboard, Section 8.1.1 (pp. 228-231 per public copy)"
+              }
+            ],
+            "note": "Bisht 2015 page numbers via publicly posted copy of the ASI report; confirm against the ASI-held original for page-level precision."
+          },
+          "harappan_connection": {
+            "value": null,
+            "kind": "na",
+            "state": "verified",
+            "evidence": []
+          }
+        },
         "periods": [
           "early",
           "mature",
           "late"
         ],
-        "site_id": "dholavira",
         "size_class": "major_city",
-        "sources": [
-          "UNESCO World Heritage Centre: 'Dholavira: A Harappan City', inscribed 2021, 44COM 8B.35, ref. 1645 \u2014 official property name",
-          "UNESCO nomination table, doc 187795 (properties examined 2021): centre point N23 53 18.27 E70 12 47.89 (= 23.8884, 70.2133); inscribed area 103 ha",
-          "Bisht, R.S. 2015. Excavations at Dholavira (1989-2005). ASI \u2014 reservoirs (\u00a7pp.148,164 per public copy); signboard (\u00a78.1.1, pp.228-231 per public copy); seven cultural stages, occupation through 3rd millennium into mid-2nd millennium BCE",
-          "Bisht lecture, IIT Gandhinagar, 18 Oct 2013 ('Dholavira: A Unique Harappan City'): 13 field seasons 1989-90 to 2004-05; 'one amongst five largest urban centers of Harappan civilization' (with Mohenjodaro, Harappa, Ganweriwala, Rakhigarhi)",
-          "IGNOU eGyankosh BHIC-101E Unit 5: Dholavira among Gujarat Harappan sites; listed under Mature Harappan and in Transitional Phase row"
-        ],
-        "uncertainty_m": 500,
-        "review_status": "verified",
-        "authority_note": "All fields traced to UNESCO listing/dossier, ASI excavation report, or excavator's lecture. Discovery (1968, J.P. Joshi) unverified \u2014 omitted.",
-        "coordinate_provenance": "Centre point of the inscribed UNESCO property as filed in India's January 2020 nomination dossier (table doc 187795); not a surveyed city centre but property-scale, adequate for a site dot."
-      },
-      "type": "Feature"
+        "excavation_status": "excavated",
+        "notes": "Tripartite fortified Harappan city (citadel, middle town, lower town) with elaborate reservoir-based water harvesting; ten large Indus-script gypsum inlays ('signboard') at the North Gate. Excavated 1989-90 to 2004-05 (ASI, R.S. Bisht).",
+        "harappan_connection": null
+      }
     },
     {
+      "type": "Feature",
       "geometry": {
+        "type": "Point",
+        "coordinates": [
+          50.5206,
+          26.2336
+        ]
+      },
+      "properties": {
+        "site_id": "dilmun-bahrain",
+        "name": "Qal'at al-Bahrain",
+        "affiliation": "related",
+        "review_status": "verified",
+        "uncertainty_m": 500,
+        "coordinate_provenance": "UNESCO nomination dossier (doc. 168878) core-zone coordinates; representative center of the 16.3 ha core zone. Supersedes the old gazetteer value, which was ~25 km off (in the sea).",
+        "authority_note": "Per-field review:\n- name: verified [source] (unesco-whc: official name 'Qal`at al-Bahrain - Ancient Harbour and Capital of Dilmun', ref 1192ter, inscribed 2005)\n  note: 'Dilmun' is the Bronze-Age polity; Qal'at al-Bahrain is the excavated site identified as its capital.\n- coordinates: verified [derived, ±500m] (unesco-whc: nomination dossier, doc. 168878, Section 2.4: core zone spans 26 deg 14'04\"N-26 deg 13'53\"N, 50 deg 31'06\"E-50 deg 31'28\"E)\n- periods: verified [normalized] (unesco-whc: WH list ref 1192ter: 'occupied since at least 2300 BCE'; tell with seven stratified layers 2300 BC-18th century; laursen-steinkeller2017: Gulf-type seals appear concurrent with the city-wall construction ca. 2050 BC)\n- size_class: verified [normalized] (unesco-whc: dossier doc. 168878, Section 2.6: core zone 16.3 ha)\n- excavation_status: verified [normalized] (unesco-whc: WH listing: excavations 'carried out since 1954' (Danish expedition, Geoffrey Bibby); hojlund-andersen1994: excavation report, vol. 1)\n  note: Full Danish/French/local campaign chronology not verified in this pass.\n- notes: verified [normalized] (unesco-whc: WH list ref 1192ter description)\n- harappan_connection: verified [normalized] (laursen-steinkeller2017: p. 50: Gulf-type seals c. 2050 BCE; Harappan-standard weights; Tilmun norm (UET 5 796); crawford2001: 'items like the square polished weights which also originate in the Indus Valley (Hojlund & Andersen 1994, p. 118)')\n  note: Laursen & Steinkeller p. 50 via published excerpt of the volume; a direct page-check against a copy would strengthen this. Crawford is appropriately cautious that Gulf seals may reflect a local tradition adapting foreign traits.\nAll fields verified.",
+        "sources": [
+          "UNESCO World Heritage Centre: World Heritage List and nomination / periodic-reporting documents (whc.unesco.org). - official name 'Qal`at al-Bahrain - Ancient Harbour and Capital of Dilmun', ref 1192ter, inscribed 2005",
+          "UNESCO World Heritage Centre: World Heritage List and nomination / periodic-reporting documents (whc.unesco.org). - nomination dossier, doc. 168878, Section 2.4: core zone spans 26 deg 14'04\"N-26 deg 13'53\"N, 50 deg 31'06\"E-50 deg 31'28\"E",
+          "UNESCO World Heritage Centre: World Heritage List and nomination / periodic-reporting documents (whc.unesco.org). - WH list ref 1192ter: 'occupied since at least 2300 BCE'; tell with seven stratified layers 2300 BC-18th century",
+          "Laursen, S. & Steinkeller, P. 2017. Babylonia, the Gulf Region, and the Indus. Mesopotamian Civilizations 20. Eisenbrauns. - Gulf-type seals appear concurrent with the city-wall construction ca. 2050 BC",
+          "UNESCO World Heritage Centre: World Heritage List and nomination / periodic-reporting documents (whc.unesco.org). - dossier doc. 168878, Section 2.6: core zone 16.3 ha",
+          "UNESCO World Heritage Centre: World Heritage List and nomination / periodic-reporting documents (whc.unesco.org). - WH listing: excavations 'carried out since 1954' (Danish expedition, Geoffrey Bibby)",
+          "Hojlund, F. & Andersen, H.H. 1994. Qala'at al-Bahrain Vol. 1: The Northern City Wall and the Islamic Fortress. Jutland Archaeological Society / Moesgaard Museum. - excavation report, vol. 1",
+          "UNESCO World Heritage Centre: World Heritage List and nomination / periodic-reporting documents (whc.unesco.org). - WH list ref 1192ter description",
+          "Laursen, S. & Steinkeller, P. 2017. Babylonia, the Gulf Region, and the Indus. Mesopotamian Civilizations 20. Eisenbrauns. - p. 50: Gulf-type seals c. 2050 BCE; Harappan-standard weights; Tilmun norm (UET 5 796)",
+          "Crawford, H. 2001. 'Early Dilmun Seals From Saar.' Archaeology International (UCL). - 'items like the square polished weights which also originate in the Indus Valley (Hojlund & Andersen 1994, p. 118)'"
+        ],
+        "field_evidence": {
+          "name": {
+            "value": "Qal'at al-Bahrain",
+            "kind": "source",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "unesco-whc",
+                "locator": "official name 'Qal`at al-Bahrain - Ancient Harbour and Capital of Dilmun', ref 1192ter, inscribed 2005"
+              }
+            ],
+            "note": "'Dilmun' is the Bronze-Age polity; Qal'at al-Bahrain is the excavated site identified as its capital."
+          },
+          "coordinates": {
+            "value": [
+              50.5206,
+              26.2336
+            ],
+            "kind": "derived",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "unesco-whc",
+                "locator": "nomination dossier, doc. 168878, Section 2.4: core zone spans 26 deg 14'04\"N-26 deg 13'53\"N, 50 deg 31'06\"E-50 deg 31'28\"E"
+              }
+            ],
+            "uncertainty_m": 500,
+            "method": "UNESCO nomination dossier (doc. 168878) core-zone coordinates; representative center of the 16.3 ha core zone. Supersedes the old gazetteer value, which was ~25 km off (in the sea)."
+          },
+          "periods": {
+            "value": [
+              "occupied 2300 BCE - 16th c. CE; Indus-contact horizon c. 2050 BCE (Early Dilmun)"
+            ],
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "unesco-whc",
+                "locator": "WH list ref 1192ter: 'occupied since at least 2300 BCE'; tell with seven stratified layers 2300 BC-18th century"
+              },
+              {
+                "source": "laursen-steinkeller2017",
+                "locator": "Gulf-type seals appear concurrent with the city-wall construction ca. 2050 BC"
+              }
+            ]
+          },
+          "size_class": {
+            "value": "town",
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "unesco-whc",
+                "locator": "dossier doc. 168878, Section 2.6: core zone 16.3 ha"
+              }
+            ]
+          },
+          "excavation_status": {
+            "value": "excavated",
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "unesco-whc",
+                "locator": "WH listing: excavations 'carried out since 1954' (Danish expedition, Geoffrey Bibby)"
+              },
+              {
+                "source": "hojlund-andersen1994",
+                "locator": "excavation report, vol. 1"
+              }
+            ],
+            "note": "Full Danish/French/local campaign chronology not verified in this pass."
+          },
+          "notes": {
+            "value": "Tell on Bahrain's north coast, capital of the Dilmun polity; entrepot in the Mesopotamia-Indus Gulf trade (UNESCO: 'traded with the Indus Valley and Mesopotamia'). Danish excavations since 1954.",
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "unesco-whc",
+                "locator": "WH list ref 1192ter description"
+              }
+            ]
+          },
+          "harappan_connection": {
+            "value": "At Qal'at al-Bahrain, the first Indus-inspired circular 'Gulf-type' stamp seals appear in layers contemporary with the city-wall construction c. 2050 BCE, some bearing short inscriptions in Indus script; simultaneously a formal weight system was adopted - cubical and spherical stone weights matching Harappan standard units, the system known in Babylonia as the 'Tilmun norm' (na Tilmun, UET 5 796). Square polished weights of Indus origin are also reported from the site.",
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "laursen-steinkeller2017",
+                "locator": "p. 50: Gulf-type seals c. 2050 BCE; Harappan-standard weights; Tilmun norm (UET 5 796)"
+              },
+              {
+                "source": "crawford2001",
+                "locator": "'items like the square polished weights which also originate in the Indus Valley (Hojlund & Andersen 1994, p. 118)'"
+              }
+            ],
+            "note": "Laursen & Steinkeller p. 50 via published excerpt of the volume; a direct page-check against a copy would strengthen this. Crawford is appropriately cautious that Gulf seals may reflect a local tradition adapting foreign traits."
+          }
+        },
+        "periods": [
+          "occupied 2300 BCE - 16th c. CE; Indus-contact horizon c. 2050 BCE (Early Dilmun)"
+        ],
+        "size_class": "town",
+        "excavation_status": "excavated",
+        "notes": "Tell on Bahrain's north coast, capital of the Dilmun polity; entrepot in the Mesopotamia-Indus Gulf trade (UNESCO: 'traded with the Indus Valley and Mesopotamia'). Danish excavations since 1954.",
+        "harappan_connection": "At Qal'at al-Bahrain, the first Indus-inspired circular 'Gulf-type' stamp seals appear in layers contemporary with the city-wall construction c. 2050 BCE, some bearing short inscriptions in Indus script; simultaneously a formal weight system was adopted - cubical and spherical stone weights matching Harappan standard units, the system known in Babylonia as the 'Tilmun norm' (na Tilmun, UET 5 796). Square polished weights of Indus origin are also reported from the site."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          62.0375,
+          38.2139
+        ]
+      },
+      "properties": {
+        "site_id": "gonur-tepe",
+        "name": "Gonur Tepe",
+        "affiliation": "related",
+        "review_status": "verified",
+        "uncertainty_m": 100,
+        "coordinate_provenance": "Expedition-published site center (Kufterin & Dubova 2013, Introduction); corroborated by Pleiades representative point.",
+        "authority_note": "Per-field review:\n- name: verified [normalized] (pleiades-gonur: canonical form)\n  note: Variants in scholarly literature: Gonur Depe, Gonur depe (Turkmen), Gonurdepe.\n- coordinates: verified [derived, ±100m] (kufterin-dubova2013: Introduction: 38 deg 12'50\"N 62 deg 02'15\"E; pleiades-gonur: representative point 38.21284, 62.03730)\n- periods: verified [normalized] (kufterin-dubova2013: p. 34: sixty C14 dates, 2300-1500 cal BCE)\n- size_class: verified [normalized] (kufterin-dubova2013: p. 34: central part ~25 ha, necropolis ~12 ha; 'probably the capital city of the ancient state of Margush')\n- excavation_status: verified [normalized] (kufterin-dubova2013: p. 34: Margiana archaeological expedition under V.I. Sarianidi; 'special publications (Sarianidi 2001, 2002, 2005, 2007, 2008)')\n- notes: verified [normalized] (kufterin-dubova2013: p. 34)\n- harappan_connection: verified [normalized] (kaniuth-shaydullaev2022: Indus seal excavated by Sarianidi 2004; elephant + eight-sign inscription paralleled in the Indus valley (Parpola 2006); parpola2018: 'In 2004, a square Indus seal with elephant and a line of Indus script with native Harappan sequences was excavated at Gonur in Turkmenistan'; frenez2018: elephant-ivory working at Gonur Depe)\n  note: Full bibliographic title of 'Sarianidi 2005' not verified in this pass; Temple of Water/Area 9/Room 19 findspot via secondary citation.\nAll fields verified.",
+        "sources": [
+          "McKee, J., Becker, J., Johansson & Rattenborg. 2025. 'Gonur Tepe: a Pleiades place resource.' Pleiades 391537222. - canonical form",
+          "Kufterin, V. & Dubova, N.A. 2013. 'A preliminary analysis of Late Bronze Age human skeletal remains from Gonur-depe, Turkmenistan.' - Introduction: 38 deg 12'50\"N 62 deg 02'15\"E",
+          "McKee, J., Becker, J., Johansson & Rattenborg. 2025. 'Gonur Tepe: a Pleiades place resource.' Pleiades 391537222. - representative point 38.21284, 62.03730",
+          "Kufterin, V. & Dubova, N.A. 2013. 'A preliminary analysis of Late Bronze Age human skeletal remains from Gonur-depe, Turkmenistan.' - p. 34: sixty C14 dates, 2300-1500 cal BCE",
+          "Kufterin, V. & Dubova, N.A. 2013. 'A preliminary analysis of Late Bronze Age human skeletal remains from Gonur-depe, Turkmenistan.' - p. 34: central part ~25 ha, necropolis ~12 ha; 'probably the capital city of the ancient state of Margush'",
+          "Kufterin, V. & Dubova, N.A. 2013. 'A preliminary analysis of Late Bronze Age human skeletal remains from Gonur-depe, Turkmenistan.' - p. 34: Margiana archaeological expedition under V.I. Sarianidi; 'special publications (Sarianidi 2001, 2002, 2005, 2007, 2008)'",
+          "Kufterin, V. & Dubova, N.A. 2013. 'A preliminary analysis of Late Bronze Age human skeletal remains from Gonur-depe, Turkmenistan.' - p. 34",
+          "Kaniuth, M. & Shaydullaev, Sh. 2022. 'The Sapalli culture seal corpus.' CISI 3.3. - Indus seal excavated by Sarianidi 2004; elephant + eight-sign inscription paralleled in the Indus valley (Parpola 2006)",
+          "Parpola, A. 2018. 'Indus Seals and Glyptic Studies: An Overview.' University of Helsinki open repository. - 'In 2004, a square Indus seal with elephant and a line of Indus script with native Harappan sequences was excavated at Gonur in Turkmenistan'",
+          "Frenez, D. 2018. 'Manufacturing and trade of Asian elephant ivory in Bronze Age Middle Asia: Evidence from Gonur Depe (Margiana, Turkmenistan).' Archaeological Research in Asia 15. - elephant-ivory working at Gonur Depe"
+        ],
+        "field_evidence": {
+          "name": {
+            "value": "Gonur Tepe",
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "pleiades-gonur",
+                "locator": "canonical form"
+              }
+            ],
+            "note": "Variants in scholarly literature: Gonur Depe, Gonur depe (Turkmen), Gonurdepe."
+          },
+          "coordinates": {
+            "value": [
+              62.0375,
+              38.2139
+            ],
+            "kind": "derived",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "kufterin-dubova2013",
+                "locator": "Introduction: 38 deg 12'50\"N 62 deg 02'15\"E"
+              },
+              {
+                "source": "pleiades-gonur",
+                "locator": "representative point 38.21284, 62.03730"
+              }
+            ],
+            "uncertainty_m": 100,
+            "method": "Expedition-published site center (Kufterin & Dubova 2013, Introduction); corroborated by Pleiades representative point."
+          },
+          "periods": {
+            "value": [
+              "mature (BMAC Bronze Age, 2300-1500 cal BCE)"
+            ],
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "kufterin-dubova2013",
+                "locator": "p. 34: sixty C14 dates, 2300-1500 cal BCE"
+              }
+            ]
+          },
+          "size_class": {
+            "value": "major_city",
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "kufterin-dubova2013",
+                "locator": "p. 34: central part ~25 ha, necropolis ~12 ha; 'probably the capital city of the ancient state of Margush'"
+              }
+            ]
+          },
+          "excavation_status": {
+            "value": "excavated",
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "kufterin-dubova2013",
+                "locator": "p. 34: Margiana archaeological expedition under V.I. Sarianidi; 'special publications (Sarianidi 2001, 2002, 2005, 2007, 2008)'"
+              }
+            ]
+          },
+          "notes": {
+            "value": "BMAC (Oxus civilization) center in the Murghab delta, Margiana, Turkmenistan; probable capital of ancient Margush. 60 radiocarbon dates place occupation at 2300-1500 cal BCE.",
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "kufterin-dubova2013",
+                "locator": "p. 34"
+              }
+            ]
+          },
+          "harappan_connection": {
+            "value": "A square Indus stamp seal with an elephant and an eight-sign Indus inscription was excavated at Gonur by V.I. Sarianidi in 2004 (Sarianidi 2005, fig. 114); its sign sequences are paralleled in the Indus valley (Parpola 2006, via Kaniuth & Shaydullaev 2022). Elephant-ivory working at Gonur independently attests Indus contact (Frenez 2018).",
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "kaniuth-shaydullaev2022",
+                "locator": "Indus seal excavated by Sarianidi 2004; elephant + eight-sign inscription paralleled in the Indus valley (Parpola 2006)"
+              },
+              {
+                "source": "parpola2018",
+                "locator": "'In 2004, a square Indus seal with elephant and a line of Indus script with native Harappan sequences was excavated at Gonur in Turkmenistan'"
+              },
+              {
+                "source": "frenez2018",
+                "locator": "elephant-ivory working at Gonur Depe"
+              }
+            ],
+            "note": "Full bibliographic title of 'Sarianidi 2005' not verified in this pass; Temple of Water/Area 9/Room 19 findspot via secondary citation."
+          }
+        },
+        "periods": [
+          "mature (BMAC Bronze Age, 2300-1500 cal BCE)"
+        ],
+        "size_class": "major_city",
+        "excavation_status": "excavated",
+        "notes": "BMAC (Oxus civilization) center in the Murghab delta, Margiana, Turkmenistan; probable capital of ancient Margush. 60 radiocarbon dates place occupation at 2300-1500 cal BCE.",
+        "harappan_connection": "A square Indus stamp seal with an elephant and an eight-sign Indus inscription was excavated at Gonur by V.I. Sarianidi in 2004 (Sarianidi 2005, fig. 114); its sign sequences are paralleled in the Indus valley (Parpola 2006, via Kaniuth & Shaydullaev 2022). Elephant-ivory working at Gonur independently attests Indus contact (Frenez 2018)."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          72.86444,
+          30.62919
+        ]
+      },
+      "properties": {
+        "site_id": "harappa",
+        "name": "Harappa",
+        "affiliation": "harappan",
+        "review_status": "verified",
+        "uncertainty_m": 1500,
+        "coordinate_provenance": "Vats 1940 Plate I georeferenced (1000-ft grid scale + north-arrow rotation 2.96 deg + OSM Harappa Museum anchor); site centroid = mean of mound-area centroids.",
+        "authority_note": "Per-field review:\n- name: verified [source] (vats1940: title page)\n- coordinates: verified [derived, ±1500m] (vats1940: Plate I (site plan))\n- periods: verified [normalized] (ignou-unit5: chronology table (Section 5.4); harp: period sequence: Periods 1-3 and 5)\n- size_class: verified [normalized] (kenoyer2008: 150 ha in the Harappa phase; vats1940: p. 3: site ~3.5 miles 'in circuit')\n- excavation_status: verified [normalized] (vats1940: title page: campaigns 1920-21 to 1933-34; ignou-unit5: Section 5.2: excavated in 1920 by Daya Ram Sahni; harp: 1986-2001 field seasons)\n- notes: verified [normalized] (ignou-unit5: Section 5.3: archaeological convention of naming a culture where it was first discovered; Harappa on the Ravi; vats1940: title page (campaign dates); harp: project dates)\n- harappan_connection: verified [na] (no evidence)\nAll fields verified.",
+        "sources": [
+          "Vats, M.S. 1940. Excavations at Harappa: Being an Account of Archaeological Excavations at Harappa Carried Out Between the Years 1920-21 and 1933-34, Vols. I-II. Government of India Press. - title page",
+          "Vats, M.S. 1940. Excavations at Harappa: Being an Account of Archaeological Excavations at Harappa Carried Out Between the Years 1920-21 and 1933-34, Vols. I-II. Government of India Press. - Plate I (site plan)",
+          "IGNOU eGyankosh BHIC-101E, Unit 5: Harappan Civilization-I (Dr. Avantika Sharma, Indraprastha College for Women, University of Delhi). - chronology table (Section 5.4)",
+          "Harappa Archaeological Research Project (HARP), 1986-2001; period summary at harappa.com/indus4/e1.html. - period sequence: Periods 1-3 and 5",
+          "Kenoyer, J.M. 2008. Indus Cities (Sackler Colloquium paper; harappa.com PDF). - 150 ha in the Harappa phase",
+          "Vats, M.S. 1940. Excavations at Harappa: Being an Account of Archaeological Excavations at Harappa Carried Out Between the Years 1920-21 and 1933-34, Vols. I-II. Government of India Press. - p. 3: site ~3.5 miles 'in circuit'",
+          "Vats, M.S. 1940. Excavations at Harappa: Being an Account of Archaeological Excavations at Harappa Carried Out Between the Years 1920-21 and 1933-34, Vols. I-II. Government of India Press. - title page: campaigns 1920-21 to 1933-34",
+          "IGNOU eGyankosh BHIC-101E, Unit 5: Harappan Civilization-I (Dr. Avantika Sharma, Indraprastha College for Women, University of Delhi). - Section 5.2: excavated in 1920 by Daya Ram Sahni",
+          "Harappa Archaeological Research Project (HARP), 1986-2001; period summary at harappa.com/indus4/e1.html. - 1986-2001 field seasons",
+          "IGNOU eGyankosh BHIC-101E, Unit 5: Harappan Civilization-I (Dr. Avantika Sharma, Indraprastha College for Women, University of Delhi). - Section 5.3: archaeological convention of naming a culture where it was first discovered; Harappa on the Ravi",
+          "Vats, M.S. 1940. Excavations at Harappa: Being an Account of Archaeological Excavations at Harappa Carried Out Between the Years 1920-21 and 1933-34, Vols. I-II. Government of India Press. - title page (campaign dates)",
+          "Harappa Archaeological Research Project (HARP), 1986-2001; period summary at harappa.com/indus4/e1.html. - project dates"
+        ],
+        "field_evidence": {
+          "name": {
+            "value": "Harappa",
+            "kind": "source",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "vats1940",
+                "locator": "title page"
+              }
+            ]
+          },
+          "coordinates": {
+            "value": [
+              72.86444,
+              30.62919
+            ],
+            "kind": "derived",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "vats1940",
+                "locator": "Plate I (site plan)"
+              }
+            ],
+            "uncertainty_m": 1500,
+            "method": "Vats 1940 Plate I georeferenced (1000-ft grid scale + north-arrow rotation 2.96 deg + OSM Harappa Museum anchor); site centroid = mean of mound-area centroids."
+          },
+          "periods": {
+            "value": [
+              "early",
+              "mature",
+              "late"
+            ],
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "ignou-unit5",
+                "locator": "chronology table (Section 5.4)"
+              },
+              {
+                "source": "harp",
+                "locator": "period sequence: Periods 1-3 and 5"
+              }
+            ]
+          },
+          "size_class": {
+            "value": "major_city",
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "kenoyer2008",
+                "locator": "150 ha in the Harappa phase"
+              },
+              {
+                "source": "vats1940",
+                "locator": "p. 3: site ~3.5 miles 'in circuit'"
+              }
+            ]
+          },
+          "excavation_status": {
+            "value": "excavated",
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "vats1940",
+                "locator": "title page: campaigns 1920-21 to 1933-34"
+              },
+              {
+                "source": "ignou-unit5",
+                "locator": "Section 5.2: excavated in 1920 by Daya Ram Sahni"
+              },
+              {
+                "source": "harp",
+                "locator": "1986-2001 field seasons"
+              }
+            ]
+          },
+          "notes": {
+            "value": "Eponymous type site of the Harappan civilization; on the Ravi. Excavated 1920-21 to 1933-34 (Vats) and 1986-2001 (HARP).",
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "ignou-unit5",
+                "locator": "Section 5.3: archaeological convention of naming a culture where it was first discovered; Harappa on the Ravi"
+              },
+              {
+                "source": "vats1940",
+                "locator": "title page (campaign dates)"
+              },
+              {
+                "source": "harp",
+                "locator": "project dates"
+              }
+            ]
+          },
+          "harappan_connection": {
+            "value": null,
+            "kind": "na",
+            "state": "verified",
+            "evidence": []
+          }
+        },
+        "periods": [
+          "early",
+          "mature",
+          "late"
+        ],
+        "size_class": "major_city",
+        "excavation_status": "excavated",
+        "notes": "Eponymous type site of the Harappan civilization; on the Ravi. Excavated 1920-21 to 1933-34 (Vats) and 1986-2001 (HARP).",
+        "harappan_connection": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.13,
+          29.4619
+        ]
+      },
+      "properties": {
+        "site_id": "kalibangan",
+        "name": "Kalibangan",
+        "affiliation": "harappan",
+        "review_status": "partial",
+        "uncertainty_m": 5000,
+        "coordinate_provenance": "PROVISIONAL - unverified. No digitized copy of the 2003 ASI report found; no coordinate figure in accessible ASI Indian Archaeology-A Review volumes or peer-reviewed papers. Placeholder pending the report's location plan or a GPS-verified survey figure.",
+        "authority_note": "Per-field review:\n- name: verified [source] (lal2003: title page (MASI No. 98); thapar1975: spelling used throughout)\n- coordinates: unverified [provisional, ±5000m] (no evidence)\n- periods: verified [normalized] (thapar1975: Kalibangan I (pre-Harappan) and Kalibangan II (Harappan); Period II radiocarbon bracket 2300-1750 BCE; ignou-unit5: chronology table: Mature Harappan row (2600-1800 BCE))\n- size_class: verified [normalized] (thapar1975: mound dimensions: Period I settlement ~250x160 m; citadel ~240x120 m; lower city ~240x360 m)\n- excavation_status: verified [normalized] (thapar1975: nine field seasons 1961-1969 (Indian Archaeology 1961-69 - A Review); ignou-unit5: Section 5.5: begun 1960s, continued a decade; lal2003: final report (Early Harappan Period I); Mature Harappan Period II in the follow-up volume)\n- notes: verified [normalized] (thapar1975: twofold sequence; ploughed field; fire altars; ignou-unit5: Section 5.3: Rajasthan, on the Ghaggar)\n  note: The absolute date 'c. 2800 BCE' for the ploughed field is unverified in sources in hand.\n- harappan_connection: verified [na] (no evidence)\nUNVERIFIED FIELDS: coordinates - values shown are provisional or absent.",
+        "sources": [
+          "Lal, B.B., Joshi, J.P., Thapar, B.K. & Bala, M. 2003. Excavations at Kalibangan: The Early Harappans (1960-1969). Memoirs of the ASI No. 98. - title page (MASI No. 98)",
+          "Thapar, B.K. 1975. 'Kalibangan: A Harappan Metropolis Beyond the Indus Valley.' Expedition 17(2): 19-32. - spelling used throughout",
+          "Thapar, B.K. 1975. 'Kalibangan: A Harappan Metropolis Beyond the Indus Valley.' Expedition 17(2): 19-32. - Kalibangan I (pre-Harappan) and Kalibangan II (Harappan); Period II radiocarbon bracket 2300-1750 BCE",
+          "IGNOU eGyankosh BHIC-101E, Unit 5: Harappan Civilization-I (Dr. Avantika Sharma, Indraprastha College for Women, University of Delhi). - chronology table: Mature Harappan row (2600-1800 BCE)",
+          "Thapar, B.K. 1975. 'Kalibangan: A Harappan Metropolis Beyond the Indus Valley.' Expedition 17(2): 19-32. - mound dimensions: Period I settlement ~250x160 m; citadel ~240x120 m; lower city ~240x360 m",
+          "Thapar, B.K. 1975. 'Kalibangan: A Harappan Metropolis Beyond the Indus Valley.' Expedition 17(2): 19-32. - nine field seasons 1961-1969 (Indian Archaeology 1961-69 - A Review)",
+          "IGNOU eGyankosh BHIC-101E, Unit 5: Harappan Civilization-I (Dr. Avantika Sharma, Indraprastha College for Women, University of Delhi). - Section 5.5: begun 1960s, continued a decade",
+          "Lal, B.B., Joshi, J.P., Thapar, B.K. & Bala, M. 2003. Excavations at Kalibangan: The Early Harappans (1960-1969). Memoirs of the ASI No. 98. - final report (Early Harappan Period I); Mature Harappan Period II in the follow-up volume",
+          "Thapar, B.K. 1975. 'Kalibangan: A Harappan Metropolis Beyond the Indus Valley.' Expedition 17(2): 19-32. - twofold sequence; ploughed field; fire altars",
+          "IGNOU eGyankosh BHIC-101E, Unit 5: Harappan Civilization-I (Dr. Avantika Sharma, Indraprastha College for Women, University of Delhi). - Section 5.3: Rajasthan, on the Ghaggar"
+        ],
+        "field_evidence": {
+          "name": {
+            "value": "Kalibangan",
+            "kind": "source",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "lal2003",
+                "locator": "title page (MASI No. 98)"
+              },
+              {
+                "source": "thapar1975",
+                "locator": "spelling used throughout"
+              }
+            ]
+          },
+          "coordinates": {
+            "value": [
+              74.13,
+              29.4619
+            ],
+            "kind": "provisional",
+            "state": "unverified",
+            "evidence": [],
+            "uncertainty_m": 5000,
+            "method": "PROVISIONAL - unverified. No digitized copy of the 2003 ASI report found; no coordinate figure in accessible ASI Indian Archaeology-A Review volumes or peer-reviewed papers. Placeholder pending the report's location plan or a GPS-verified survey figure."
+          },
+          "periods": {
+            "value": [
+              "early",
+              "mature"
+            ],
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "thapar1975",
+                "locator": "Kalibangan I (pre-Harappan) and Kalibangan II (Harappan); Period II radiocarbon bracket 2300-1750 BCE"
+              },
+              {
+                "source": "ignou-unit5",
+                "locator": "chronology table: Mature Harappan row (2600-1800 BCE)"
+              }
+            ]
+          },
+          "size_class": {
+            "value": "town",
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "thapar1975",
+                "locator": "mound dimensions: Period I settlement ~250x160 m; citadel ~240x120 m; lower city ~240x360 m"
+              }
+            ]
+          },
+          "excavation_status": {
+            "value": "excavated",
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "thapar1975",
+                "locator": "nine field seasons 1961-1969 (Indian Archaeology 1961-69 - A Review)"
+              },
+              {
+                "source": "ignou-unit5",
+                "locator": "Section 5.5: begun 1960s, continued a decade"
+              },
+              {
+                "source": "lal2003",
+                "locator": "final report (Early Harappan Period I); Mature Harappan Period II in the follow-up volume"
+              }
+            ]
+          },
+          "notes": {
+            "value": "Fortified pre-Harappan settlement (Kalibangan I) below the Harappan citadel and lower town (Kalibangan II), in Rajasthan on the Ghaggar. Outstanding discoveries: a ploughed field southeast of the Period I settlement, and rows of fire altars (KLB-1 citadel, KLB-3). Excavated 1960-61 to 1969-70 (ASI, B.B. Lal & B.K. Thapar).",
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "thapar1975",
+                "locator": "twofold sequence; ploughed field; fire altars"
+              },
+              {
+                "source": "ignou-unit5",
+                "locator": "Section 5.3: Rajasthan, on the Ghaggar"
+              }
+            ],
+            "note": "The absolute date 'c. 2800 BCE' for the ploughed field is unverified in sources in hand."
+          },
+          "harappan_connection": {
+            "value": null,
+            "kind": "na",
+            "state": "verified",
+            "evidence": []
+          }
+        },
+        "periods": [
+          "early",
+          "mature"
+        ],
+        "size_class": "town",
+        "excavation_status": "excavated",
+        "notes": "Fortified pre-Harappan settlement (Kalibangan I) below the Harappan citadel and lower town (Kalibangan II), in Rajasthan on the Ghaggar. Outstanding discoveries: a ploughed field southeast of the Period I settlement, and rows of fire altars (KLB-1 citadel, KLB-3). Excavated 1960-61 to 1969-70 (ASI, B.B. Lal & B.K. Thapar).",
+        "harappan_connection": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
         "coordinates": [
           72.25,
           22.5167
-        ],
-        "type": "Point"
+        ]
       },
       "properties": {
-        "affiliation": "harappan",
-        "excavation_status": "excavated",
-        "harappan_connection": null,
+        "site_id": "lothal",
         "name": "Lothal",
-        "notes": "Harappan port town in Gujarat (village Saragwala, between the Sabarmati and Bhogavo); brick-lined dock on the eastern margin; bead-making centre (carnelian bead factory, kiln); citadel + lower town within a trapezoidal mud-brick enclosure (~300 x 200 m). Discovered 1954, excavated 1954-55 to 1962-63 (ASI, S.R. Rao). UNESCO Tentative List 2014.",
+        "affiliation": "harappan",
+        "review_status": "verified",
+        "uncertainty_m": 2000,
+        "coordinate_provenance": "ASI site description: Lothal (22 deg 31'; 72 deg 15') - minute-level only; accessed via a third-party-hosted copy of ASI descriptive text. Seconds-level confirmation from Rao 1979 Plate XXXVIII (site plan) or asi.nic.in still needed for higher precision.",
+        "authority_note": "Per-field review:\n- name: verified [source] (rao1979: title page (MASI No. 78))\n- coordinates: verified [derived, ±2000m] (asi-lothal-text: 'Lothal (22 deg 31'; 72 deg 15'), Dt Ahmadabad, Gujarat')\n- periods: verified [normalized] (asi-lothal-text: Period A 'belonging to the mature Harappa culture'; Period B 'a decadent stage thereof'; frenez2005: Period A-IV 2000-1900 BC (decline); Period B ca. 1800-1600 BC)\n  note: Mapping of Rao's Period A/B onto the gazetteer's mature/late labels is interpretive; the phase facts are cited. An Early Harappan phase is unattested in sources in hand.\n- size_class: verified [normalized] (frenez2005: 'the small site of Lothal... enclosed within a wide mudbricks trapezelike enclosure (about 300 x 200 m)')\n  note: The frequently repeated '7 ha' figure traces to Wikipedia and is not used.\n- excavation_status: verified [normalized] (rao1979: title page: 1955-62; asi-lothal-text: 1954-55 to 1962-63)\n  note: Field-season dates vary slightly between sources (1955-60 per secondary summaries; 1955-62 per memoir title; 1954-55-1962-63 per ASI site text).\n- notes: verified [normalized] (rao1979: Vol. I, pp. 12-14: 'proved beyond doubt that it was a true Harappan town'; p. 85: dock embankment walls 716 ft / 705 ft 6 in; frenez2005: dock built along the eastern margin of the town; asi-lothal-text: bead factory with carnelian beads and kiln; lower town housed coppersmiths, goldsmiths, shell-workers, bead-makers; unesco-whc: Tentative List: 'Archaeological remains of a Harappa Port-Town, Lothal', submitted 15/04/2014; ignou-unit5: Section 5.3: Gujarat; 'the important settlement of Lothal' in Saurashtra)\n- harappan_connection: verified [na] (no evidence)\nAll fields verified.",
+        "sources": [
+          "Rao, S.R. 1979. Lothal: A Harappan Port Town (1955-62). Memoirs of the ASI No. 78, Vol. I (Vol. II, 1985). - title page (MASI No. 78)",
+          "Archaeological Survey of India, site description text: 'Excavations: Important - Gujarat' (Lothal entry). - 'Lothal (22 deg 31'; 72 deg 15'), Dt Ahmadabad, Gujarat'",
+          "Archaeological Survey of India, site description text: 'Excavations: Important - Gujarat' (Lothal entry). - Period A 'belonging to the mature Harappa culture'; Period B 'a decadent stage thereof'",
+          "Frenez, D., Tosi, M. & Fiandra, E. 2005. 'Lothal sealings' (Festschrift chapter). - Period A-IV 2000-1900 BC (decline); Period B ca. 1800-1600 BC",
+          "Frenez, D., Tosi, M. & Fiandra, E. 2005. 'Lothal sealings' (Festschrift chapter). - 'the small site of Lothal... enclosed within a wide mudbricks trapezelike enclosure (about 300 x 200 m)'",
+          "Rao, S.R. 1979. Lothal: A Harappan Port Town (1955-62). Memoirs of the ASI No. 78, Vol. I (Vol. II, 1985). - title page: 1955-62",
+          "Archaeological Survey of India, site description text: 'Excavations: Important - Gujarat' (Lothal entry). - 1954-55 to 1962-63",
+          "Rao, S.R. 1979. Lothal: A Harappan Port Town (1955-62). Memoirs of the ASI No. 78, Vol. I (Vol. II, 1985). - Vol. I, pp. 12-14: 'proved beyond doubt that it was a true Harappan town'; p. 85: dock embankment walls 716 ft / 705 ft 6 in",
+          "Frenez, D., Tosi, M. & Fiandra, E. 2005. 'Lothal sealings' (Festschrift chapter). - dock built along the eastern margin of the town",
+          "Archaeological Survey of India, site description text: 'Excavations: Important - Gujarat' (Lothal entry). - bead factory with carnelian beads and kiln; lower town housed coppersmiths, goldsmiths, shell-workers, bead-makers",
+          "UNESCO World Heritage Centre: World Heritage List and nomination / periodic-reporting documents (whc.unesco.org). - Tentative List: 'Archaeological remains of a Harappa Port-Town, Lothal', submitted 15/04/2014",
+          "IGNOU eGyankosh BHIC-101E, Unit 5: Harappan Civilization-I (Dr. Avantika Sharma, Indraprastha College for Women, University of Delhi). - Section 5.3: Gujarat; 'the important settlement of Lothal' in Saurashtra"
+        ],
+        "field_evidence": {
+          "name": {
+            "value": "Lothal",
+            "kind": "source",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "rao1979",
+                "locator": "title page (MASI No. 78)"
+              }
+            ]
+          },
+          "coordinates": {
+            "value": [
+              72.25,
+              22.5167
+            ],
+            "kind": "derived",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "asi-lothal-text",
+                "locator": "'Lothal (22 deg 31'; 72 deg 15'), Dt Ahmadabad, Gujarat'"
+              }
+            ],
+            "uncertainty_m": 2000,
+            "method": "ASI site description: Lothal (22 deg 31'; 72 deg 15') - minute-level only; accessed via a third-party-hosted copy of ASI descriptive text. Seconds-level confirmation from Rao 1979 Plate XXXVIII (site plan) or asi.nic.in still needed for higher precision."
+          },
+          "periods": {
+            "value": [
+              "mature",
+              "late"
+            ],
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "asi-lothal-text",
+                "locator": "Period A 'belonging to the mature Harappa culture'; Period B 'a decadent stage thereof'"
+              },
+              {
+                "source": "frenez2005",
+                "locator": "Period A-IV 2000-1900 BC (decline); Period B ca. 1800-1600 BC"
+              }
+            ],
+            "note": "Mapping of Rao's Period A/B onto the gazetteer's mature/late labels is interpretive; the phase facts are cited. An Early Harappan phase is unattested in sources in hand."
+          },
+          "size_class": {
+            "value": "town",
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "frenez2005",
+                "locator": "'the small site of Lothal... enclosed within a wide mudbricks trapezelike enclosure (about 300 x 200 m)'"
+              }
+            ],
+            "note": "The frequently repeated '7 ha' figure traces to Wikipedia and is not used."
+          },
+          "excavation_status": {
+            "value": "excavated",
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "rao1979",
+                "locator": "title page: 1955-62"
+              },
+              {
+                "source": "asi-lothal-text",
+                "locator": "1954-55 to 1962-63"
+              }
+            ],
+            "note": "Field-season dates vary slightly between sources (1955-60 per secondary summaries; 1955-62 per memoir title; 1954-55-1962-63 per ASI site text)."
+          },
+          "notes": {
+            "value": "Harappan port town in Gujarat (village Saragwala, between the Sabarmati and Bhogavo); brick-lined dock on the eastern margin; bead-making centre (carnelian bead factory, kiln); citadel + lower town within a trapezoidal mud-brick enclosure (~300 x 200 m). Discovered 1954, excavated 1954-55 to 1962-63 (ASI, S.R. Rao). UNESCO Tentative List 2014.",
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "rao1979",
+                "locator": "Vol. I, pp. 12-14: 'proved beyond doubt that it was a true Harappan town'; p. 85: dock embankment walls 716 ft / 705 ft 6 in"
+              },
+              {
+                "source": "frenez2005",
+                "locator": "dock built along the eastern margin of the town"
+              },
+              {
+                "source": "asi-lothal-text",
+                "locator": "bead factory with carnelian beads and kiln; lower town housed coppersmiths, goldsmiths, shell-workers, bead-makers"
+              },
+              {
+                "source": "unesco-whc",
+                "locator": "Tentative List: 'Archaeological remains of a Harappa Port-Town, Lothal', submitted 15/04/2014"
+              },
+              {
+                "source": "ignou-unit5",
+                "locator": "Section 5.3: Gujarat; 'the important settlement of Lothal' in Saurashtra"
+              }
+            ]
+          },
+          "harappan_connection": {
+            "value": null,
+            "kind": "na",
+            "state": "verified",
+            "evidence": []
+          }
+        },
         "periods": [
           "mature",
           "late"
         ],
-        "site_id": "lothal",
         "size_class": "town",
-        "sources": [
-          "Rao, S.R. 1979. Lothal: A Harappan Port Town (1955-62), Memoirs of the ASI No. 78, Vol. I (Vol. II, 1985) \u2014 final excavation report (title page); 'proved beyond doubt that it was a true Harappan town' (Vol. I, pp.12-14); dock embankment walls 716 ft / 705 ft 6 in (p.85)",
-          "ASI site text ('Excavations: Important \u2014 Gujarat'): 'Lothal (22\u00b031\u2032; 72\u00b015\u2032), Dt Ahmadabad, Gujarat'; '7 m thick occupational debris... two Periods, A and B, the first belonging to the mature Harappa culture' (accessed via third-party-hosted copy of ASI text \u2014 confirm on asi.nic.in when available)",
-          "Frenez, D., Tosi, M. & Fiandra, E. 2005. 'Lothal sealings' (Festschrift chapter, Zenodo): 'the small site of Lothal... enclosed within a wide mudbricks trapezelike enclosure (about 300 x 200 m)'; Period A-IV 2000-1900 BC decline; Period B ca. 1800-1600 BC",
-          "UNESCO WHC Tentative List: 'Archaeological remains of a Harappa Port-Town, Lothal', submitted 15/04/2014",
-          "IGNOU eGyankosh BHIC-101E Unit 5: Lothal among Gujarat Harappan sites; 'the important settlement of Lothal' in Saurashtra"
-        ],
-        "uncertainty_m": 2000,
-        "review_status": "verified",
-        "authority_note": "Fields traced to the ASI memoir, ASI site text, or peer-reviewed chapter. Coordinates minute-level (\u00b12 km); Early Harappan phase unattested in sources in hand (pre-urban Micaceous Red Ware phase reported but not as \"Early Harappan\"); \"7 ha\" figure rejected (Wikipedia trace).",
-        "coordinate_provenance": "ASI site description: Lothal (22\u00b031\u2032; 72\u00b015\u2032) \u2014 minute-level only; accessed via a third-party-hosted copy of ASI descriptive text. Seconds-level confirmation from Rao 1979 Plate XXXVIII (site plan) or asi.nic.in still needed for higher precision."
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          62.0375,
-          38.2139
-        ],
-        "type": "Point"
-      },
-      "properties": {
-        "affiliation": "related",
         "excavation_status": "excavated",
-        "harappan_connection": "A square Indus stamp seal with an elephant and an eight-sign Indus inscription was excavated at Gonur by V.I. Sarianidi in 2004 (Sarianidi 2005, fig. 114); its sign sequences are paralleled in the Indus valley (Parpola 2006, via Kaniuth & Shaydullaev 2022). Elephant-ivory working at Gonur independently attests Indus contact (Frenez 2018).",
-        "name": "Gonur Tepe",
-        "notes": "BMAC (Oxus civilization) center in the Murghab delta, Margiana, Turkmenistan; probable capital of ancient Margush. 60 radiocarbon dates place occupation at 2300-1500 cal BCE.",
-        "periods": [
-          "mature (BMAC Bronze Age, 2300-1500 cal BCE)"
-        ],
-        "site_id": "gonur-tepe",
-        "size_class": "major_city",
-        "sources": [
-          "Kufterin, V. & Dubova, N.A. 2013. 'A preliminary analysis of Late Bronze Age human skeletal remains from Gonur-depe, Turkmenistan' (peer-reviewed): site at 38\u00b012\u203250\u2033N 62\u00b002\u203215\u2033E; 2300-1500 cal BCE (60 C14 dates); central part ~25 ha, necropolis ~12 ha; 'probably the capital city of the ancient state of Margush'; excavated by the Margiana expedition under V.I. Sarianidi",
-          "Pleiades Gazetteer: 'Gonur Tepe: a Pleiades place resource' (McKee et al. 2025), pleiades.stoa.org/places/391537222 \u2014 canonical name form",
-          "Kaniuth, M. & Shaydullaev, Sh. 2022. 'The Sapalli culture seal corpus,' CISI 3.3 (peer-reviewed corpus): Indus seal excavated by Sarianidi 2004, elephant + eight-sign inscription paralleled in the Indus valley (Parpola 2006)",
-          "Parpola, A. 2018. 'Indus Seals and Glyptic Studies: An Overview' (Univ. of Helsinki): 'In 2004, a square Indus seal with elephant and a line of Indus script with native Harappan sequences was excavated at Gonur'",
-          "Frenez, D. 2018. 'Manufacturing and trade of Asian elephant ivory in Bronze Age Middle Asia: Evidence from Gonur Depe,' Archaeological Research in Asia 15 (peer-reviewed)"
-        ],
-        "uncertainty_m": 100,
-        "review_status": "verified",
-        "authority_note": "All fields traced to peer-reviewed publications or the Pleiades gazetteer. Full title of \"Sarianidi 2005\" not verified in this pass; Temple of Water findspot via secondary citation.",
-        "coordinate_provenance": "Expedition-published site center (Kufterin & Dubova 2013, Introduction); corroborated by Pleiades representative point."
-      },
-      "type": "Feature"
+        "notes": "Harappan port town in Gujarat (village Saragwala, between the Sabarmati and Bhogavo); brick-lined dock on the eastern margin; bead-making centre (carnelian bead factory, kiln); citadel + lower town within a trapezoidal mud-brick enclosure (~300 x 200 m). Discovered 1954, excavated 1954-55 to 1962-63 (ASI, S.R. Rao). UNESCO Tentative List 2014.",
+        "harappan_connection": null
+      }
     },
     {
+      "type": "Feature",
       "geometry": {
+        "type": "Point",
         "coordinates": [
-          46.10306,
-          30.96265
-        ],
-        "type": "Point"
+          68.139,
+          27.329
+        ]
       },
       "properties": {
-        "affiliation": "related",
-        "excavation_status": "excavated",
-        "harappan_connection": "Sixteen Indus-style seals excavated at Ur: published by C.J. Gadd 1932 (\"Seals of ancient Indian style found at Ur,\" Proc. British Academy XVIII); four from the Royal Cemetery (UE 2, Woolley 1934); nine catalogued UE 10 (Legrain 1951, Cat. 624-632). UE 10 Introductory Note: they \"prove the existence of early trade relations between the Indus valley and lower Mesopotamia.\"",
-        "name": "Ur",
-        "notes": "Sumerian city-state at modern Tell el-Muqayyar, Dhi Qar, Iraq; Ur III ziggurat of Nanna still stands. First excavated 1850s (Taylor); 1922-1934 joint UPenn/British Museum expedition (Woolley). Inscribed within UNESCO WH ref 1481 (Ahwar of Southern Iraq, 2016) as \"Ur Archaeological City\".",
-        "periods": [
-          "Ubaid to Neo-Babylonian (5th mill. BCE - 539 BCE); floruit Early Dynastic III / Ur III (2100-2000 BCE)"
-        ],
-        "site_id": "ur",
-        "size_class": "major_city",
-        "sources": [
-          "CDLI Wiki (Cuneiform Digital Library Initiative, Oxford/UCLA/MPIWG): 'Ur (modern Tell Muqayyar)' \u2014 coords 30\u00b057\u203245.55\u2033N 46\u00b06\u203211.03\u2033E; occupied Ubaid to Neo-Babylonian; city ~50 ha in Ur III; excavation history (Taylor 1850s; Woolley 1922-1934)",
-          "Gadd, C.J. 1932. 'Seals of ancient Indian style found at Ur,' Proceedings of the British Academy, vol. XVIII (22 pp., 3 pls.) \u2014 16 Indus-style seals at Ur",
-          "Legrain, L. 1951. Seal Cylinders, Ur Excavations vol. 10 (British Museum / Univ. Museum Philadelphia; OUP) \u2014 Cat. 624-632; Introductory Note on Indus-Mesopotamia trade"
-        ],
-        "uncertainty_m": 100,
-        "review_status": "verified",
-        "authority_note": "All fields traced to CDLI or the Ur Excavations volumes. Gadd 1932 paper cited via UE 10's own footnote (not read in full); individual seal U.7683/BM 120573 claims left out (non-authoritative sources only).",
-        "coordinate_provenance": "CDLI (Oxford/UCLA/MPIWG consortium) gazetteer coordinates for Tell Muqayyar."
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          50.5206,
-          26.2336
-        ],
-        "type": "Point"
-      },
-      "properties": {
-        "affiliation": "related",
-        "excavation_status": "excavated",
-        "harappan_connection": "First Indus-inspired circular 'Gulf-type' stamp seals appear in layers contemporary with the city-wall construction c. 2050 BCE, some with short Indus-script inscriptions; simultaneous adoption of a formal weight system \u2014 cubical/spherical stone weights matching Harappan standard units (the 'Tilmun norm', na Tilmun, UET 5 796); square polished weights of Indus origin also reported (Laursen & Steinkeller 2017; Crawford 2001).",
-        "name": "Qal'at al-Bahrain",
-        "notes": "Tell on Bahrain's north coast, capital of the Dilmun polity and entrep\u00f4t in Mesopotamia-Indus Gulf trade (UNESCO: 'traded with the Indus Valley and Mesopotamia'). Danish excavations since 1954 (Bibby); published H\u00f8jlund & Andersen 1994. UNESCO WH ref 1192ter, inscribed 2005. 'Dilmun' is the Bronze-Age polity; Qal'at al-Bahrain is the excavated site.",
-        "periods": [
-          "occupied 2300 BCE - 16th c. CE; Indus-contact horizon c. 2050 BCE (Early Dilmun)"
-        ],
-        "site_id": "dilmun-bahrain",
-        "size_class": "town",
-        "sources": [
-          "UNESCO World Heritage List ref 1192ter: 'Qal`at al-Bahrain \u2013 Ancient Harbour and Capital of Dilmun', inscribed 2005 \u2014 official name; 'occupied since at least 2300 BCE'; 'traded with the Indus Valley and Mesopotamia'",
-          "UNESCO nomination dossier, doc. 168878, \u00a72.4: core zone spans 26\u00b014\u203204\u2033N\u201326\u00b013\u203253\u2033N, 50\u00b031\u203206\u2033E\u201350\u00b031\u203228\u2033E (center \u2248 26\u00b014\u203201\u2033N 50\u00b031\u203214\u2033E); \u00a72.6: core zone 16.3 ha",
-          "Laursen, S. & Steinkeller, P. 2017. Babylonia, the Gulf Region, and the Indus (Mesopotamian Civilizations 20, Eisenbrauns) \u2014 Gulf-type seals c. 2050 BCE; Harappan-standard weights; Tilmun norm (UET 5 796)",
-          "H\u00f8jlund, F. & Andersen, H.H. 1994. Qala'at al-Bahrain vol. 1 (Jutland Archaeological Society / Moesgaard Museum) \u2014 excavation report; square polished Indus weights p. 118",
-          "Crawford, H. 2001. 'Early Dilmun Seals From Saar,' Archaeology International (UCL, peer-reviewed)"
-        ],
-        "uncertainty_m": 500,
-        "review_status": "verified",
-        "authority_note": "All fields traced to UNESCO listing/dossier or peer-reviewed monographs. Full Danish/French/local campaign chronology not verified in this pass; Laursen & Steinkeller p. 50 via published excerpt.",
-        "coordinate_provenance": "UNESCO nomination dossier (doc. 168878) core-zone coordinates; representative center of the 16.3 ha core zone. Supersedes the old gazetteer value, which was ~25 km off (in the sea)."
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          69.5256,
-          37.3237
-        ],
-        "type": "Point"
-      },
-      "properties": {
+        "site_id": "mohenjo-daro",
+        "name": "Mohenjo-daro",
         "affiliation": "harappan",
-        "excavation_status": "excavated",
-        "harappan_connection": null,
-        "name": "Shortughai",
-        "notes": "Northernmost Indus site, in northeast Afghanistan on the Oxus (Amu Darya); a trading colony of the Indus cities, established to obtain lapis lazuli (Badakshan), gold, copper, and tin from Central Asia. Also rendered \"Shortugai\" (Pleiades). Discovered 1975; excavated 1976-79 under Henri-Paul Francfort (French mission); fully published 1989.",
+        "review_status": "verified",
+        "uncertainty_m": 1000,
+        "coordinate_provenance": "Official UNESCO property coordinates (periodic-reporting Geographic Information Table, property 138); property-centroid, not a field-survey pin.",
+        "authority_note": "Per-field review:\n- name: verified [normalized] (marshall1931: title page)\n  note: Spelling follows the excavation report; UNESCO renders 'Moenjodaro'.\n- coordinates: verified [derived, ±1000m] (unesco-whc: property 138, periodic-reporting doc. 164707: 27.329N 68.139E)\n- periods: verified [normalized] (ignou-unit5: chronology table (Section 5.4): listed under Mature Harappan (2600-1800 BCE) only)\n  note: Marshall 1931's Early/Middle/Late scheme predates the modern framework; early/late occupation unverified in sources in hand.\n- size_class: verified [normalized] (unesco-whc: property 138, doc. 164707: WH property 240 ha)\n  note: 240 ha is the WH property boundary, not the archaeological footprint.\n- excavation_status: verified [normalized] (marshall1931: title page: official ASI excavations 1922-1927; ignou-unit5: Section 5.2: excavated by Rakhaldas Banerjee in 1921; unesco-whc: doc. 164707: UNESCO International Safeguarding Campaign 1974-1997)\n- notes: verified [normalized] (unesco-whc: WH list ref 138 (inscribed 1980, criteria ii, iii); doc. 164707 (site description); ignou-unit5: Section 5.3: Larkana district, Sindh)\n- harappan_connection: verified [na] (no evidence)\nAll fields verified.",
+        "sources": [
+          "Marshall, John (ed.) 1931. Mohenjo-daro and the Indus Civilization, Vols. I (text) and III (plates). Arthur Probsthain, London. - title page",
+          "UNESCO World Heritage Centre: World Heritage List and nomination / periodic-reporting documents (whc.unesco.org). - property 138, periodic-reporting doc. 164707: 27.329N 68.139E",
+          "IGNOU eGyankosh BHIC-101E, Unit 5: Harappan Civilization-I (Dr. Avantika Sharma, Indraprastha College for Women, University of Delhi). - chronology table (Section 5.4): listed under Mature Harappan (2600-1800 BCE) only",
+          "UNESCO World Heritage Centre: World Heritage List and nomination / periodic-reporting documents (whc.unesco.org). - property 138, doc. 164707: WH property 240 ha",
+          "Marshall, John (ed.) 1931. Mohenjo-daro and the Indus Civilization, Vols. I (text) and III (plates). Arthur Probsthain, London. - title page: official ASI excavations 1922-1927",
+          "IGNOU eGyankosh BHIC-101E, Unit 5: Harappan Civilization-I (Dr. Avantika Sharma, Indraprastha College for Women, University of Delhi). - Section 5.2: excavated by Rakhaldas Banerjee in 1921",
+          "UNESCO World Heritage Centre: World Heritage List and nomination / periodic-reporting documents (whc.unesco.org). - doc. 164707: UNESCO International Safeguarding Campaign 1974-1997",
+          "UNESCO World Heritage Centre: World Heritage List and nomination / periodic-reporting documents (whc.unesco.org). - WH list ref 138 (inscribed 1980, criteria ii, iii); doc. 164707 (site description)",
+          "IGNOU eGyankosh BHIC-101E, Unit 5: Harappan Civilization-I (Dr. Avantika Sharma, Indraprastha College for Women, University of Delhi). - Section 5.3: Larkana district, Sindh"
+        ],
+        "field_evidence": {
+          "name": {
+            "value": "Mohenjo-daro",
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "marshall1931",
+                "locator": "title page"
+              }
+            ],
+            "note": "Spelling follows the excavation report; UNESCO renders 'Moenjodaro'."
+          },
+          "coordinates": {
+            "value": [
+              68.139,
+              27.329
+            ],
+            "kind": "derived",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "unesco-whc",
+                "locator": "property 138, periodic-reporting doc. 164707: 27.329N 68.139E"
+              }
+            ],
+            "uncertainty_m": 1000,
+            "method": "Official UNESCO property coordinates (periodic-reporting Geographic Information Table, property 138); property-centroid, not a field-survey pin."
+          },
+          "periods": {
+            "value": [
+              "mature"
+            ],
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "ignou-unit5",
+                "locator": "chronology table (Section 5.4): listed under Mature Harappan (2600-1800 BCE) only"
+              }
+            ],
+            "note": "Marshall 1931's Early/Middle/Late scheme predates the modern framework; early/late occupation unverified in sources in hand."
+          },
+          "size_class": {
+            "value": "major_city",
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "unesco-whc",
+                "locator": "property 138, doc. 164707: WH property 240 ha"
+              }
+            ],
+            "note": "240 ha is the WH property boundary, not the archaeological footprint."
+          },
+          "excavation_status": {
+            "value": "excavated",
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "marshall1931",
+                "locator": "title page: official ASI excavations 1922-1927"
+              },
+              {
+                "source": "ignou-unit5",
+                "locator": "Section 5.2: excavated by Rakhaldas Banerjee in 1921"
+              },
+              {
+                "source": "unesco-whc",
+                "locator": "doc. 164707: UNESCO International Safeguarding Campaign 1974-1997"
+              }
+            ]
+          },
+          "notes": {
+            "value": "UNESCO World Heritage Site no. 138 (inscribed 1980; State Party Pakistan). Western citadel sector with eastern lower city on the Indus; streets at right angles with sanitation and drainage. Located in Larkana district, Sindh.",
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "unesco-whc",
+                "locator": "WH list ref 138 (inscribed 1980, criteria ii, iii); doc. 164707 (site description)"
+              },
+              {
+                "source": "ignou-unit5",
+                "locator": "Section 5.3: Larkana district, Sindh"
+              }
+            ]
+          },
+          "harappan_connection": {
+            "value": null,
+            "kind": "na",
+            "state": "verified",
+            "evidence": []
+          }
+        },
         "periods": [
           "mature"
         ],
-        "site_id": "shortugai",
-        "size_class": "town",
-        "sources": [
-          "Francfort, H.-P. 1989. Fouilles de Shortughai: Recherches sur l'Asie Centrale Protohistorique, 2 vols., Paris: Diffusion de Boccard \u2014 final excavation report (cited via Possehl summary)",
-          "Possehl, G.L. 'An Harappan Outpost on the Amu Darya: Shortughai. Why was it there?', Indologica Taurinensia 23-24 (peer-reviewed): 'From the first published report it was clear that there was Mature Harappan settlement there'; discovered 1975 by the Ai Khanoum team; four seasons 1976-79; 21 km NE of the Kokcha-Amu Darya confluence",
-          "Becker, J. & Mckee, G. 2024. 'Shortugai: a Pleiades place resource,' Pleiades 717754049 (ISAW/NYU) \u2014 representative point 37.323652, 69.5256008, accuracy \u00b120 m; 'trading colony on the Oxus... dating to ca. 2000 BC'",
-          "Kenoyer, J.M. 1998. Ancient Cities of the Indus Valley Civilization, OUP, p.96 \u2014 'trading colony of the Indus cities... to obtain gold, copper, tin and lapis lazuli'",
-          "IGNOU eGyankosh BHIC-101E Unit 5: 'The northern most site of the Indus civilization is Shortughai in northeast Afghanistan... access could be gained to lapis lazuli of Badakshan, and to tin and gold resources of Central Asia'"
-        ],
-        "uncertainty_m": 20,
-        "review_status": "verified",
-        "authority_note": "Fields traced to the excavation report (via peer-reviewed summary), Pleiades, OUP, or IGNOU. Spelling follows the excavation report (Shortughai); Pleiades renders \"Shortugai\". Francfort 1989 not directly consulted in this pass; area figure and early/late phases unverified.",
-        "coordinate_provenance": "Pleiades place 717754049 (Becker & Mckee 2024, ISAW/NYU peer-reviewed gazetteer): representative point, OSM-derived, stated accuracy \u00b120 m. Corroborated by Possehl's location description."
+        "size_class": "major_city",
+        "excavation_status": "excavated",
+        "notes": "UNESCO World Heritage Site no. 138 (inscribed 1980; State Party Pakistan). Western citadel sector with eastern lower city on the Indus; streets at right angles with sanitation and drainage. Located in Larkana district, Sindh.",
+        "harappan_connection": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.1139,
+          29.2917
+        ]
       },
-      "type": "Feature"
+      "properties": {
+        "site_id": "rakhigarhi",
+        "name": "Rakhigarhi",
+        "affiliation": "harappan",
+        "review_status": "verified",
+        "uncertainty_m": 1000,
+        "coordinate_provenance": "ASI Rakhigarhi report Ch. 6 ('Archaeological residue at Rakhigarhi'): 29 deg 17'30\"N 76 deg 06'50\"E from the 1997-2000 survey; corroborated by Shinde et al. 2018. The 1915 Survey of India toposheet figure (29 deg 16'N 76 deg 10'E) is ~7 km off and not used.",
+        "authority_note": "Per-field review:\n- name: verified [source] (nath-rakhigarhi: title page: 'EXCAVATIONS AT RAKHIGARHI')\n- coordinates: verified [derived, ±1000m] (nath-rakhigarhi: Ch. 6: 29 deg 17'30\"N 76 deg 06'50\"E; shinde2018: Materials and methods: RGR-07 necropolis at N29 deg 17'52.9\" E76 deg 06'51\")\n- periods: verified [normalized] (nath-rakhigarhi: Ch. 6: Period I (early Harappan: IA preformative, IB formative), Period II (mature Harappan); 'no evidence of the decline phase')\n- size_class: verified [normalized] (nath-rakhigarhi: Ch. 6: archaeological residue 'spreads over in area of 3 Km radius (300 hectare)' over seven mounds)\n  note: The widely repeated ~350 ha figure is unverified (media attribution, not ASI/peer-reviewed); PIB 22.06.2026 says ~550 ha. ASI report's own 300 ha cited as primary.\n- excavation_status: verified [normalized] (nath-rakhigarhi: report title: 1997-98 to 1999-2000; lok-sabha-4977: excavation at Rakhigarhi, District Hissar, Haryana, 1997-98 to 1999-2000; shinde2018: 2013-2016: RGR-07 cemetery (Deccan College / Seoul National University))\n- notes: verified [normalized] (shinde2018: Abstract: 'one of the largest cities of the Harappan Civilization'; nath-rakhigarhi: Ch. 6: planned townships, drainage, fortification, bead industry; lok-sabha-4977: District Hissar, Haryana; ignou-unit5: Section 5.3: 'Rakhigarhi (as large as Harappa)')\n- harappan_connection: verified [na] (no evidence)\nAll fields verified.",
+        "sources": [
+          "Nath, Amarendra. Excavations at Rakhigarhi [1997-98 to 1999-2000], Archaeological Survey of India (draft report submitted 31.12.2014). - title page: 'EXCAVATIONS AT RAKHIGARHI'",
+          "Nath, Amarendra. Excavations at Rakhigarhi [1997-98 to 1999-2000], Archaeological Survey of India (draft report submitted 31.12.2014). - Ch. 6: 29 deg 17'30\"N 76 deg 06'50\"E",
+          "Shinde, V.S. et al. 2018. 'Archaeological and anthropological studies on the Harappan cemetery of Rakhigarhi, India.' PLoS ONE 13(2): e0192299. - Materials and methods: RGR-07 necropolis at N29 deg 17'52.9\" E76 deg 06'51\"",
+          "Nath, Amarendra. Excavations at Rakhigarhi [1997-98 to 1999-2000], Archaeological Survey of India (draft report submitted 31.12.2014). - Ch. 6: Period I (early Harappan: IA preformative, IB formative), Period II (mature Harappan); 'no evidence of the decline phase'",
+          "Nath, Amarendra. Excavations at Rakhigarhi [1997-98 to 1999-2000], Archaeological Survey of India (draft report submitted 31.12.2014). - Ch. 6: archaeological residue 'spreads over in area of 3 Km radius (300 hectare)' over seven mounds",
+          "Nath, Amarendra. Excavations at Rakhigarhi [1997-98 to 1999-2000], Archaeological Survey of India (draft report submitted 31.12.2014). - report title: 1997-98 to 1999-2000",
+          "Government of India, Ministry of Culture. Lok Sabha Unstarred Question No. 4977, answered 26.03.2018. - excavation at Rakhigarhi, District Hissar, Haryana, 1997-98 to 1999-2000",
+          "Shinde, V.S. et al. 2018. 'Archaeological and anthropological studies on the Harappan cemetery of Rakhigarhi, India.' PLoS ONE 13(2): e0192299. - 2013-2016: RGR-07 cemetery (Deccan College / Seoul National University)",
+          "Shinde, V.S. et al. 2018. 'Archaeological and anthropological studies on the Harappan cemetery of Rakhigarhi, India.' PLoS ONE 13(2): e0192299. - Abstract: 'one of the largest cities of the Harappan Civilization'",
+          "Nath, Amarendra. Excavations at Rakhigarhi [1997-98 to 1999-2000], Archaeological Survey of India (draft report submitted 31.12.2014). - Ch. 6: planned townships, drainage, fortification, bead industry",
+          "Government of India, Ministry of Culture. Lok Sabha Unstarred Question No. 4977, answered 26.03.2018. - District Hissar, Haryana",
+          "IGNOU eGyankosh BHIC-101E, Unit 5: Harappan Civilization-I (Dr. Avantika Sharma, Indraprastha College for Women, University of Delhi). - Section 5.3: 'Rakhigarhi (as large as Harappa)'"
+        ],
+        "field_evidence": {
+          "name": {
+            "value": "Rakhigarhi",
+            "kind": "source",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "nath-rakhigarhi",
+                "locator": "title page: 'EXCAVATIONS AT RAKHIGARHI'"
+              }
+            ]
+          },
+          "coordinates": {
+            "value": [
+              76.1139,
+              29.2917
+            ],
+            "kind": "derived",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "nath-rakhigarhi",
+                "locator": "Ch. 6: 29 deg 17'30\"N 76 deg 06'50\"E"
+              },
+              {
+                "source": "shinde2018",
+                "locator": "Materials and methods: RGR-07 necropolis at N29 deg 17'52.9\" E76 deg 06'51\""
+              }
+            ],
+            "uncertainty_m": 1000,
+            "method": "ASI Rakhigarhi report Ch. 6 ('Archaeological residue at Rakhigarhi'): 29 deg 17'30\"N 76 deg 06'50\"E from the 1997-2000 survey; corroborated by Shinde et al. 2018. The 1915 Survey of India toposheet figure (29 deg 16'N 76 deg 10'E) is ~7 km off and not used."
+          },
+          "periods": {
+            "value": [
+              "early",
+              "mature"
+            ],
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "nath-rakhigarhi",
+                "locator": "Ch. 6: Period I (early Harappan: IA preformative, IB formative), Period II (mature Harappan); 'no evidence of the decline phase'"
+              }
+            ]
+          },
+          "size_class": {
+            "value": "major_city",
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "nath-rakhigarhi",
+                "locator": "Ch. 6: archaeological residue 'spreads over in area of 3 Km radius (300 hectare)' over seven mounds"
+              }
+            ],
+            "note": "The widely repeated ~350 ha figure is unverified (media attribution, not ASI/peer-reviewed); PIB 22.06.2026 says ~550 ha. ASI report's own 300 ha cited as primary."
+          },
+          "excavation_status": {
+            "value": "excavated",
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "nath-rakhigarhi",
+                "locator": "report title: 1997-98 to 1999-2000"
+              },
+              {
+                "source": "lok-sabha-4977",
+                "locator": "excavation at Rakhigarhi, District Hissar, Haryana, 1997-98 to 1999-2000"
+              },
+              {
+                "source": "shinde2018",
+                "locator": "2013-2016: RGR-07 cemetery (Deccan College / Seoul National University)"
+              }
+            ]
+          },
+          "notes": {
+            "value": "One of the largest cities of the Harappan Civilization (Hisar district, Haryana); seven mounds over ~300 ha. ASI 1997-2000 fieldwork found planned mud/burnt-brick townships, drainage, fortification, and a bead-manufacturing industry. No decline-phase evidence.",
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "shinde2018",
+                "locator": "Abstract: 'one of the largest cities of the Harappan Civilization'"
+              },
+              {
+                "source": "nath-rakhigarhi",
+                "locator": "Ch. 6: planned townships, drainage, fortification, bead industry"
+              },
+              {
+                "source": "lok-sabha-4977",
+                "locator": "District Hissar, Haryana"
+              },
+              {
+                "source": "ignou-unit5",
+                "locator": "Section 5.3: 'Rakhigarhi (as large as Harappa)'"
+              }
+            ]
+          },
+          "harappan_connection": {
+            "value": null,
+            "kind": "na",
+            "state": "verified",
+            "evidence": []
+          }
+        },
+        "periods": [
+          "early",
+          "mature"
+        ],
+        "size_class": "major_city",
+        "excavation_status": "excavated",
+        "notes": "One of the largest cities of the Harappan Civilization (Hisar district, Haryana); seven mounds over ~300 ha. ASI 1997-2000 fieldwork found planned mud/burnt-brick townships, drainage, fortification, and a bead-manufacturing industry. No decline-phase evidence.",
+        "harappan_connection": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          69.5256,
+          37.3237
+        ]
+      },
+      "properties": {
+        "site_id": "shortugai",
+        "name": "Shortughai",
+        "affiliation": "harappan",
+        "review_status": "verified",
+        "uncertainty_m": 20,
+        "coordinate_provenance": "Pleiades place 717754049 (Becker & Mckee 2024, ISAW/NYU peer-reviewed gazetteer): representative point, OSM-derived, stated accuracy +/- 20 m. Corroborated by Possehl's location description (21 km NE of the Kokcha-Amu Darya confluence).",
+        "authority_note": "Per-field review:\n- name: verified [source] (francfort1989: title: Fouilles de Shortughai; ignou-unit5: Section 5.3 uses 'Shortughai')\n  note: Also rendered 'Shortugai' (Pleiades). Spelling follows the excavation report.\n- coordinates: verified [derived, ±20m] (pleiades-shortughai: representative point 37.323652, 69.5256008; stated accuracy +/- 20 m)\n- periods: verified [normalized] (possehl-shortughai: 'From the first published report it was clear that there was Mature Harappan settlement there'; kenoyer1998: p. 96: 'trading colony of the Indus cities')\n  note: Early/late phases: no source in hand.\n- size_class: verified [normalized] (kenoyer1998: p. 96: 'a trading colony of the Indus cities'; possehl-shortughai: 'Mature Harappan settlement... far from the plains of the Indus Valley')\n  note: No authoritative area figure in hand (Francfort 1989 would carry it); size inferred from 'trading colony' descriptions.\n- excavation_status: verified [normalized] (possehl-shortughai: discovered 1975 by the Ai Khanoum team; four consecutive seasons 1976-79 under Henri-Paul Francfort; 'fully published'; francfort1989: final report, 2 vols.)\n  note: Francfort 1989 not directly consulted in this pass; cited via Possehl's peer-reviewed summary.\n- notes: verified [normalized] (ignou-unit5: Section 5.3: 'The northern most site of the Indus civilization is Shortughai in northeast Afghanistan... access could be gained to lapis lazuli of Badakshan, and to tin and gold resources of Central Asia'; kenoyer1998: p. 96: established 'to obtain gold, copper, tin and lapis lazuli, as well as other exotic goods from Central Asia'; pleiades-shortughai: 'An ancient trading colony on the Oxus river in the vicinity of the lapis lazuli mines of northern Afghanistan dating to ca. 2000 BC')\n- harappan_connection: verified [na] (no evidence)\nAll fields verified.",
+        "sources": [
+          "Francfort, H.-P. 1989. Fouilles de Shortughai: Recherches sur l'Asie Centrale Protohistorique, 2 vols. Paris: Diffusion de Boccard. - title: Fouilles de Shortughai",
+          "IGNOU eGyankosh BHIC-101E, Unit 5: Harappan Civilization-I (Dr. Avantika Sharma, Indraprastha College for Women, University of Delhi). - Section 5.3 uses 'Shortughai'",
+          "Becker, J. & Mckee, G. 2024. 'Shortugai: a Pleiades place resource.' Pleiades 717754049 (ISAW/NYU). - representative point 37.323652, 69.5256008; stated accuracy +/- 20 m",
+          "Possehl, G.L. 'An Harappan Outpost on the Amu Darya: Shortughai. Why was it there?' Indologica Taurinensia 23-24. - 'From the first published report it was clear that there was Mature Harappan settlement there'",
+          "Kenoyer, J.M. 1998. Ancient Cities of the Indus Valley Civilization. Oxford University Press, p. 96. - p. 96: 'trading colony of the Indus cities'",
+          "Kenoyer, J.M. 1998. Ancient Cities of the Indus Valley Civilization. Oxford University Press, p. 96. - p. 96: 'a trading colony of the Indus cities'",
+          "Possehl, G.L. 'An Harappan Outpost on the Amu Darya: Shortughai. Why was it there?' Indologica Taurinensia 23-24. - 'Mature Harappan settlement... far from the plains of the Indus Valley'",
+          "Possehl, G.L. 'An Harappan Outpost on the Amu Darya: Shortughai. Why was it there?' Indologica Taurinensia 23-24. - discovered 1975 by the Ai Khanoum team; four consecutive seasons 1976-79 under Henri-Paul Francfort; 'fully published'",
+          "Francfort, H.-P. 1989. Fouilles de Shortughai: Recherches sur l'Asie Centrale Protohistorique, 2 vols. Paris: Diffusion de Boccard. - final report, 2 vols.",
+          "IGNOU eGyankosh BHIC-101E, Unit 5: Harappan Civilization-I (Dr. Avantika Sharma, Indraprastha College for Women, University of Delhi). - Section 5.3: 'The northern most site of the Indus civilization is Shortughai in northeast Afghanistan... access could be gained to lapis lazuli of Badakshan, and to tin and gold resources of Central Asia'",
+          "Kenoyer, J.M. 1998. Ancient Cities of the Indus Valley Civilization. Oxford University Press, p. 96. - p. 96: established 'to obtain gold, copper, tin and lapis lazuli, as well as other exotic goods from Central Asia'",
+          "Becker, J. & Mckee, G. 2024. 'Shortugai: a Pleiades place resource.' Pleiades 717754049 (ISAW/NYU). - 'An ancient trading colony on the Oxus river in the vicinity of the lapis lazuli mines of northern Afghanistan dating to ca. 2000 BC'"
+        ],
+        "field_evidence": {
+          "name": {
+            "value": "Shortughai",
+            "kind": "source",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "francfort1989",
+                "locator": "title: Fouilles de Shortughai"
+              },
+              {
+                "source": "ignou-unit5",
+                "locator": "Section 5.3 uses 'Shortughai'"
+              }
+            ],
+            "note": "Also rendered 'Shortugai' (Pleiades). Spelling follows the excavation report."
+          },
+          "coordinates": {
+            "value": [
+              69.5256,
+              37.3237
+            ],
+            "kind": "derived",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "pleiades-shortughai",
+                "locator": "representative point 37.323652, 69.5256008; stated accuracy +/- 20 m"
+              }
+            ],
+            "uncertainty_m": 20,
+            "method": "Pleiades place 717754049 (Becker & Mckee 2024, ISAW/NYU peer-reviewed gazetteer): representative point, OSM-derived, stated accuracy +/- 20 m. Corroborated by Possehl's location description (21 km NE of the Kokcha-Amu Darya confluence)."
+          },
+          "periods": {
+            "value": [
+              "mature"
+            ],
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "possehl-shortughai",
+                "locator": "'From the first published report it was clear that there was Mature Harappan settlement there'"
+              },
+              {
+                "source": "kenoyer1998",
+                "locator": "p. 96: 'trading colony of the Indus cities'"
+              }
+            ],
+            "note": "Early/late phases: no source in hand."
+          },
+          "size_class": {
+            "value": "town",
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "kenoyer1998",
+                "locator": "p. 96: 'a trading colony of the Indus cities'"
+              },
+              {
+                "source": "possehl-shortughai",
+                "locator": "'Mature Harappan settlement... far from the plains of the Indus Valley'"
+              }
+            ],
+            "note": "No authoritative area figure in hand (Francfort 1989 would carry it); size inferred from 'trading colony' descriptions."
+          },
+          "excavation_status": {
+            "value": "excavated",
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "possehl-shortughai",
+                "locator": "discovered 1975 by the Ai Khanoum team; four consecutive seasons 1976-79 under Henri-Paul Francfort; 'fully published'"
+              },
+              {
+                "source": "francfort1989",
+                "locator": "final report, 2 vols."
+              }
+            ],
+            "note": "Francfort 1989 not directly consulted in this pass; cited via Possehl's peer-reviewed summary."
+          },
+          "notes": {
+            "value": "Northernmost Indus site, in northeast Afghanistan on the Oxus (Amu Darya); a trading colony of the Indus cities, established to obtain lapis lazuli (Badakshan), gold, copper, and tin from Central Asia. Discovered 1975; excavated 1976-79 under Henri-Paul Francfort (French mission); fully published 1989.",
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "ignou-unit5",
+                "locator": "Section 5.3: 'The northern most site of the Indus civilization is Shortughai in northeast Afghanistan... access could be gained to lapis lazuli of Badakshan, and to tin and gold resources of Central Asia'"
+              },
+              {
+                "source": "kenoyer1998",
+                "locator": "p. 96: established 'to obtain gold, copper, tin and lapis lazuli, as well as other exotic goods from Central Asia'"
+              },
+              {
+                "source": "pleiades-shortughai",
+                "locator": "'An ancient trading colony on the Oxus river in the vicinity of the lapis lazuli mines of northern Afghanistan dating to ca. 2000 BC'"
+              }
+            ]
+          },
+          "harappan_connection": {
+            "value": null,
+            "kind": "na",
+            "state": "verified",
+            "evidence": []
+          }
+        },
+        "periods": [
+          "mature"
+        ],
+        "size_class": "town",
+        "excavation_status": "excavated",
+        "notes": "Northernmost Indus site, in northeast Afghanistan on the Oxus (Amu Darya); a trading colony of the Indus cities, established to obtain lapis lazuli (Badakshan), gold, copper, and tin from Central Asia. Discovered 1975; excavated 1976-79 under Henri-Paul Francfort (French mission); fully published 1989.",
+        "harappan_connection": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          46.10306,
+          30.96265
+        ]
+      },
+      "properties": {
+        "site_id": "ur",
+        "name": "Ur",
+        "affiliation": "related",
+        "review_status": "verified",
+        "uncertainty_m": 100,
+        "coordinate_provenance": "CDLI (Oxford/UCLA/MPIWG consortium) gazetteer coordinates for Tell Muqayyar.",
+        "authority_note": "Per-field review:\n- name: verified [source] (cdli-ur: 'Ur (modern Tell Muqayyar)')\n- coordinates: verified [derived, ±100m] (cdli-ur: Introduction: 30 deg 57'45.55\"N 46 deg 6'11.03\"E)\n- periods: verified [normalized] (cdli-ur: occupied Ubaid to Neo-Babylonian; 'the most impressive remains come from the Early Dynastic III period Royal Cemetery, and the Ur III period'; Ur III kingdom 2100-2000 BC)\n- size_class: verified [normalized] (cdli-ur: Ur III section: 'the city of Ur occupied around 50 hectares (124 acres)')\n- excavation_status: verified [normalized] (cdli-ur: History of Excavations: J.E. Taylor 1850s; joint UPenn/British Museum expedition under Woolley 1922-1934; limited Iraqi excavations since)\n- notes: verified [normalized] (cdli-ur: Tell el-Muqayyar; ziggurat of Ur-Nammu; unesco-whc: WH ref 1481 (2016): 'Ur Archaeological City')\n- harappan_connection: verified [normalized] (gadd1932: 16 Indus-style seals at Ur (cited via UE 10's own footnote: PBA vol. XVIII, 19 Oct 1932, 22 pp., 3 pls.); legrain1951: Cat. 624-632; Introductory Note on Indus-Mesopotamia trade)\n  note: Gadd 1932 paper cited via UE 10's footnote (not read in full); individual seal U.7683/BM 120573 claims left out (non-authoritative sources only).\nAll fields verified.",
+        "sources": [
+          "Cuneiform Digital Library Initiative (CDLI) Wiki: 'Ur (modern Tell Muqayyar)' (Oxford / UCLA / MPIWG). - 'Ur (modern Tell Muqayyar)'",
+          "Cuneiform Digital Library Initiative (CDLI) Wiki: 'Ur (modern Tell Muqayyar)' (Oxford / UCLA / MPIWG). - Introduction: 30 deg 57'45.55\"N 46 deg 6'11.03\"E",
+          "Cuneiform Digital Library Initiative (CDLI) Wiki: 'Ur (modern Tell Muqayyar)' (Oxford / UCLA / MPIWG). - occupied Ubaid to Neo-Babylonian; 'the most impressive remains come from the Early Dynastic III period Royal Cemetery, and the Ur III period'; Ur III kingdom 2100-2000 BC",
+          "Cuneiform Digital Library Initiative (CDLI) Wiki: 'Ur (modern Tell Muqayyar)' (Oxford / UCLA / MPIWG). - Ur III section: 'the city of Ur occupied around 50 hectares (124 acres)'",
+          "Cuneiform Digital Library Initiative (CDLI) Wiki: 'Ur (modern Tell Muqayyar)' (Oxford / UCLA / MPIWG). - History of Excavations: J.E. Taylor 1850s; joint UPenn/British Museum expedition under Woolley 1922-1934; limited Iraqi excavations since",
+          "Cuneiform Digital Library Initiative (CDLI) Wiki: 'Ur (modern Tell Muqayyar)' (Oxford / UCLA / MPIWG). - Tell el-Muqayyar; ziggurat of Ur-Nammu",
+          "UNESCO World Heritage Centre: World Heritage List and nomination / periodic-reporting documents (whc.unesco.org). - WH ref 1481 (2016): 'Ur Archaeological City'",
+          "Gadd, C.J. 1932. 'Seals of ancient Indian style found at Ur.' Proceedings of the British Academy, vol. XVIII. - 16 Indus-style seals at Ur (cited via UE 10's own footnote: PBA vol. XVIII, 19 Oct 1932, 22 pp., 3 pls.)",
+          "Legrain, L. 1951. Seal Cylinders. Ur Excavations Vol. 10. British Museum / University Museum, Philadelphia; Oxford University Press. - Cat. 624-632; Introductory Note on Indus-Mesopotamia trade"
+        ],
+        "field_evidence": {
+          "name": {
+            "value": "Ur",
+            "kind": "source",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "cdli-ur",
+                "locator": "'Ur (modern Tell Muqayyar)'"
+              }
+            ]
+          },
+          "coordinates": {
+            "value": [
+              46.10306,
+              30.96265
+            ],
+            "kind": "derived",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "cdli-ur",
+                "locator": "Introduction: 30 deg 57'45.55\"N 46 deg 6'11.03\"E"
+              }
+            ],
+            "uncertainty_m": 100,
+            "method": "CDLI (Oxford/UCLA/MPIWG consortium) gazetteer coordinates for Tell Muqayyar."
+          },
+          "periods": {
+            "value": [
+              "Ubaid to Neo-Babylonian (5th mill. BCE - 539 BCE); floruit Early Dynastic III / Ur III (2100-2000 BCE)"
+            ],
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "cdli-ur",
+                "locator": "occupied Ubaid to Neo-Babylonian; 'the most impressive remains come from the Early Dynastic III period Royal Cemetery, and the Ur III period'; Ur III kingdom 2100-2000 BC"
+              }
+            ]
+          },
+          "size_class": {
+            "value": "major_city",
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "cdli-ur",
+                "locator": "Ur III section: 'the city of Ur occupied around 50 hectares (124 acres)'"
+              }
+            ]
+          },
+          "excavation_status": {
+            "value": "excavated",
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "cdli-ur",
+                "locator": "History of Excavations: J.E. Taylor 1850s; joint UPenn/British Museum expedition under Woolley 1922-1934; limited Iraqi excavations since"
+              }
+            ]
+          },
+          "notes": {
+            "value": "Sumerian city-state at modern Tell el-Muqayyar, Dhi Qar, Iraq; the Ur III ziggurat of Nanna (built by Ur-Nammu) still stands. Inscribed within UNESCO WH ref 1481 (Ahwar of Southern Iraq, 2016) as 'Ur Archaeological City'.",
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "cdli-ur",
+                "locator": "Tell el-Muqayyar; ziggurat of Ur-Nammu"
+              },
+              {
+                "source": "unesco-whc",
+                "locator": "WH ref 1481 (2016): 'Ur Archaeological City'"
+              }
+            ]
+          },
+          "harappan_connection": {
+            "value": "Sixteen Indus-style seals excavated at Ur: published by C.J. Gadd 1932 ('Seals of ancient Indian style found at Ur,' Proc. British Academy XVIII); four from the Royal Cemetery (UE 2, Woolley 1934); nine catalogued UE 10 (Legrain 1951, Cat. 624-632). UE 10's Introductory Note states they 'prove the existence of early trade relations between the Indus valley and lower Mesopotamia.'",
+            "kind": "normalized",
+            "state": "verified",
+            "evidence": [
+              {
+                "source": "gadd1932",
+                "locator": "16 Indus-style seals at Ur (cited via UE 10's own footnote: PBA vol. XVIII, 19 Oct 1932, 22 pp., 3 pls.)"
+              },
+              {
+                "source": "legrain1951",
+                "locator": "Cat. 624-632; Introductory Note on Indus-Mesopotamia trade"
+              }
+            ],
+            "note": "Gadd 1932 paper cited via UE 10's footnote (not read in full); individual seal U.7683/BM 120573 claims left out (non-authoritative sources only)."
+          }
+        },
+        "periods": [
+          "Ubaid to Neo-Babylonian (5th mill. BCE - 539 BCE); floruit Early Dynastic III / Ur III (2100-2000 BCE)"
+        ],
+        "size_class": "major_city",
+        "excavation_status": "excavated",
+        "notes": "Sumerian city-state at modern Tell el-Muqayyar, Dhi Qar, Iraq; the Ur III ziggurat of Nanna (built by Ur-Nammu) still stands. Inscribed within UNESCO WH ref 1481 (Ahwar of Southern Iraq, 2016) as 'Ur Archaeological City'.",
+        "harappan_connection": "Sixteen Indus-style seals excavated at Ur: published by C.J. Gadd 1932 ('Seals of ancient Indian style found at Ur,' Proc. British Academy XVIII); four from the Royal Cemetery (UE 2, Woolley 1934); nine catalogued UE 10 (Legrain 1951, Cat. 624-632). UE 10's Introductory Note states they 'prove the existence of early trade relations between the Indus valley and lower Mesopotamia.'"
+      }
     }
-  ],
-  "metadata": {
-    "coordinate_note": "Representative site centers; uncertainty_m reflects location pinning quality.",
-    "description": "Site-level places: Harappan settlements and related sites with documented Harappan contacts.",
-    "sources": "See ingest/SITES_GAZETTEER.md",
-    "title": "Indus World Site Gazetteer",
-    "verification_policy": "Authoritative sources only: excavation reports, national archaeological surveys, UNESCO listings, national heritage registries, peer-reviewed gazetteers. Wikipedia, journalism, and model training data do not qualify. Entries are 'unverified' until every field traces to such a source."
-  },
-  "type": "FeatureCollection"
+  ]
 }
