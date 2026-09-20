@@ -118,6 +118,23 @@ and prioritized.
   (2) embeddings for every detected figure (Vats 721, Met 41, Marshall Vol III
   591) for label-free "visually similar"; (3) API: motif query from excavator
   text + similar-to from embeddings; (4) compare grid of native-res crops.
+- **FIG-3 — Community notes layer (X-style, citation-gated)** · — · proposed
+  From discussion: interpretations (e.g. "dancing-girl", "Banjara bangles")
+  pile up as unattributed assumptions; the catalog's answer is claim layering.
+  A community-notes layer lets enthusiasts/archaeologists annotate records with
+  sourced claims, in a layer strictly separate from the project-verified core:
+  notes never edit core fields, must cite primary sources with page locators
+  (the authority rule applies to the community too), and are quarantined by
+  default — shown in their own section, never merged into the record. Notes
+  gain prominence only through independent "helpful" ratings from distinct
+  contributors (X's cross-viewpoint bridging is the model; at our scale the
+  gates are simpler: citations required, N distinct raters, no brigading).
+  All notes exportable as open data. Motivated by the Dancing Girl case: the
+  note "the 1931 text calls her a dancing-girl, but the only evidence is a
+  hand-on-hip pose and one speculative sentence — Mackay 1931, p. 345" is
+  exactly the kind of claim that belongs in this layer, not in the catalog.
+  Explicitly after FIG-2 (core must exist first) and after the trust model is
+  proven; a visible junk-notes section would taint "small-data truth".
 
 ## Georeferencing
 
