@@ -1,0 +1,150 @@
+sources:
+  asi-lothal-text:
+    artifacts: []
+    category: official_record
+    citation: 'Archaeological Survey of India, site description text: ''Excavations: Important - Gujarat''
+      (Lothal entry).'
+  bisht2013-lecture:
+    artifacts: []
+    category: expert_statement
+    citation: 'Bisht, R.S. 2013. Lecture ''Dholavira: A Unique Harappan City'', IIT Gandhinagar, 18 Oct
+      2013.'
+  bisht2015:
+    artifacts: []
+    category: excavation_report
+    citation: Bisht, R.S. 2015. Excavations at Dholavira (1989-2005). Archaeological Survey of India.
+  cdli-ur:
+    artifacts: []
+    category: gazetteer
+    citation: 'Cuneiform Digital Library Initiative (CDLI) Wiki: ''Ur (modern Tell Muqayyar)'' (Oxford
+      / UCLA / MPIWG).'
+  crawford2001:
+    artifacts: []
+    category: peer_reviewed
+    citation: Crawford, H. 2001. 'Early Dilmun Seals From Saar.' Archaeology International (UCL).
+  francfort1989:
+    artifacts: []
+    category: excavation_report
+    citation: 'Francfort, H.-P. 1989. Fouilles de Shortughai: Recherches sur l''Asie Centrale Protohistorique,
+      2 vols. Paris: Diffusion de Boccard.'
+  frenez2005:
+    artifacts: []
+    category: peer_reviewed
+    citation: Frenez, D., Tosi, M. & Fiandra, E. 2005. 'Lothal sealings' (Festschrift chapter).
+  frenez2018:
+    artifacts: []
+    category: peer_reviewed
+    citation: 'Frenez, D. 2018. ''Manufacturing and trade of Asian elephant ivory in Bronze Age Middle
+      Asia: Evidence from Gonur Depe (Margiana, Turkmenistan).'' Archaeological Research in Asia 15.'
+  gadd1932:
+    artifacts: []
+    category: peer_reviewed
+    citation: Gadd, C.J. 1932. 'Seals of ancient Indian style found at Ur.' Proceedings of the British
+      Academy, vol. XVIII.
+  harp:
+    artifacts: []
+    category: excavation_project
+    citation: Harappa Archaeological Research Project (HARP), 1986-2001; period summary at harappa.com/indus4/e1.html.
+  hojlund-andersen1994:
+    artifacts: []
+    category: excavation_report
+    citation: 'Hojlund, F. & Andersen, H.H. 1994. Qala''at al-Bahrain Vol. 1: The Northern City Wall and
+      the Islamic Fortress. Jutland Archaeological Society / Moesgaard Museum.'
+  ignou-unit5:
+    artifacts: []
+    category: course_material
+    citation: 'IGNOU eGyankosh BHIC-101E, Unit 5: Harappan Civilization-I (Dr. Avantika Sharma, Indraprastha
+      College for Women, University of Delhi).'
+  kaniuth-shaydullaev2022:
+    artifacts: []
+    category: peer_reviewed
+    citation: Kaniuth, M. & Shaydullaev, Sh. 2022. 'The Sapalli culture seal corpus.' CISI 3.3.
+  kenoyer1998:
+    artifacts: []
+    category: peer_reviewed
+    citation: Kenoyer, J.M. 1998. Ancient Cities of the Indus Valley Civilization. Oxford University Press,
+      p. 96.
+  kenoyer2008:
+    artifacts: []
+    category: peer_reviewed
+    citation: Kenoyer, J.M. 2008. Indus Cities (Sackler Colloquium paper; harappa.com PDF).
+  kufterin-dubova2013:
+    artifacts: []
+    category: peer_reviewed
+    citation: Kufterin, V. & Dubova, N.A. 2013. 'A preliminary analysis of Late Bronze Age human skeletal
+      remains from Gonur-depe, Turkmenistan.'
+  lal2003:
+    artifacts: []
+    category: excavation_report
+    citation: 'Lal, B.B., Joshi, J.P., Thapar, B.K. & Bala, M. 2003. Excavations at Kalibangan: The Early
+      Harappans (1960-1969). Memoirs of the ASI No. 98.'
+  laursen-steinkeller2017:
+    artifacts: []
+    category: peer_reviewed
+    citation: Laursen, S. & Steinkeller, P. 2017. Babylonia, the Gulf Region, and the Indus. Mesopotamian
+      Civilizations 20. Eisenbrauns.
+  legrain1951:
+    artifacts: []
+    category: excavation_report
+    citation: Legrain, L. 1951. Seal Cylinders. Ur Excavations Vol. 10. British Museum / University Museum,
+      Philadelphia; Oxford University Press.
+  lok-sabha-4977:
+    artifacts: []
+    category: official_record
+    citation: Government of India, Ministry of Culture. Lok Sabha Unstarred Question No. 4977, answered
+      26.03.2018.
+  marshall1931:
+    artifacts: []
+    category: excavation_report
+    citation: Marshall, John (ed.) 1931. Mohenjo-daro and the Indus Civilization, Vol. III (plates). Arthur
+      Probsthain, London.
+  nath-rakhigarhi:
+    artifacts: []
+    category: excavation_report
+    citation: Nath, Amarendra. Excavations at Rakhigarhi [1997-98 to 1999-2000], Archaeological Survey
+      of India (draft report submitted 31.12.2014).
+  parpola2018:
+    artifacts: []
+    category: peer_reviewed
+    citation: 'Parpola, A. 2018. ''Indus Seals and Glyptic Studies: An Overview.'' University of Helsinki
+      open repository.'
+  pleiades-gonur:
+    artifacts: []
+    category: gazetteer
+    citation: 'McKee, J., Becker, J., Johansson & Rattenborg. 2025. ''Gonur Tepe: a Pleiades place resource.''
+      Pleiades 391537222.'
+  pleiades-shortughai:
+    artifacts: []
+    category: gazetteer
+    citation: 'Becker, J. & Mckee, G. 2024. ''Shortugai: a Pleiades place resource.'' Pleiades 717754049
+      (ISAW/NYU).'
+  possehl-shortughai:
+    artifacts: []
+    category: peer_reviewed
+    citation: 'Possehl, G.L. ''An Harappan Outpost on the Amu Darya: Shortughai. Why was it there?'' Indologica
+      Taurinensia 23-24.'
+  rao1979:
+    artifacts: []
+    category: excavation_report
+    citation: 'Rao, S.R. 1979. Lothal: A Harappan Port Town (1955-62). Memoirs of the ASI No. 78, Vol.
+      I (Vol. II, 1985).'
+  shinde2018:
+    artifacts: []
+    category: peer_reviewed
+    citation: 'Shinde, V.S. et al. 2018. ''Archaeological and anthropological studies on the Harappan
+      cemetery of Rakhigarhi, India.'' PLoS ONE 13(2): e0192299.'
+  thapar1975:
+    artifacts: []
+    category: peer_reviewed
+    citation: 'Thapar, B.K. 1975. ''Kalibangan: A Harappan Metropolis Beyond the Indus Valley.'' Expedition
+      17(2): 19-32.'
+  unesco-whc:
+    artifacts: []
+    category: unesco
+    citation: 'UNESCO World Heritage Centre: World Heritage List and nomination / periodic-reporting documents
+      (whc.unesco.org).'
+  vats1940:
+    artifacts: []
+    category: excavation_report
+    citation: 'Vats, M.S. 1940. Excavations at Harappa: Being an Account of Archaeological Excavations
+      at Harappa Carried Out Between the Years 1920-21 and 1933-34, Vols. I-II. Government of India Press.'

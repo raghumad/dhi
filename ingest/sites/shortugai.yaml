@@ -1,0 +1,83 @@
+site_id: shortugai
+affiliation: harappan
+fields:
+  name:
+    value: Shortughai
+    kind: source
+    state: verified
+    evidence:
+    - source: francfort1989
+      locator: 'title: Fouilles de Shortughai'
+    - source: ignou-unit5
+      locator: Section 5.3 uses 'Shortughai'
+    note: Also rendered 'Shortugai' (Pleiades). Spelling follows the excavation report.
+  coordinates:
+    value:
+    - 69.5256
+    - 37.3237
+    kind: derived
+    state: verified
+    evidence:
+    - source: pleiades-shortughai
+      locator: representative point 37.323652, 69.5256008; stated accuracy +/- 20 m
+    uncertainty_m: 20
+    method: 'Pleiades place 717754049 (Becker & Mckee 2024, ISAW/NYU peer-reviewed gazetteer): representative
+      point, OSM-derived, stated accuracy +/- 20 m. Corroborated by Possehl''s location description (21
+      km NE of the Kokcha-Amu Darya confluence).'
+  periods:
+    value:
+    - mature
+    kind: normalized
+    state: verified
+    evidence:
+    - source: possehl-shortughai
+      locator: '''From the first published report it was clear that there was Mature Harappan settlement
+        there'''
+    - source: kenoyer1998
+      locator: 'p. 96: ''trading colony of the Indus cities'''
+    note: 'Early/late phases: no source in hand.'
+  size_class:
+    value: town
+    kind: normalized
+    state: verified
+    evidence:
+    - source: kenoyer1998
+      locator: 'p. 96: ''a trading colony of the Indus cities'''
+    - source: possehl-shortughai
+      locator: '''Mature Harappan settlement... far from the plains of the Indus Valley'''
+    note: No authoritative area figure in hand (Francfort 1989 would carry it); size inferred from 'trading
+      colony' descriptions.
+  excavation_status:
+    value: excavated
+    kind: normalized
+    state: verified
+    evidence:
+    - source: possehl-shortughai
+      locator: discovered 1975 by the Ai Khanoum team; four consecutive seasons 1976-79 under Henri-Paul
+        Francfort; 'fully published'
+    - source: francfort1989
+      locator: final report, 2 vols.
+    note: Francfort 1989 not directly consulted in this pass; cited via Possehl's peer-reviewed summary.
+  notes:
+    value: Northernmost Indus site, in northeast Afghanistan on the Oxus (Amu Darya); a trading colony
+      of the Indus cities, established to obtain lapis lazuli (Badakshan), gold, copper, and tin from
+      Central Asia. Discovered 1975; excavated 1976-79 under Henri-Paul Francfort (French mission); fully
+      published 1989.
+    kind: normalized
+    state: verified
+    evidence:
+    - source: ignou-unit5
+      locator: 'Section 5.3: ''The northern most site of the Indus civilization is Shortughai in northeast
+        Afghanistan... access could be gained to lapis lazuli of Badakshan, and to tin and gold resources
+        of Central Asia'''
+    - source: kenoyer1998
+      locator: 'p. 96: established ''to obtain gold, copper, tin and lapis lazuli, as well as other exotic
+        goods from Central Asia'''
+    - source: pleiades-shortughai
+      locator: '''An ancient trading colony on the Oxus river in the vicinity of the lapis lazuli mines
+        of northern Afghanistan dating to ca. 2000 BC'''
+  harappan_connection:
+    value: null
+    kind: na
+    state: verified
+    evidence: []

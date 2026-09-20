@@ -1,0 +1,68 @@
+site_id: mohenjo-daro
+affiliation: harappan
+fields:
+  name:
+    value: Mohenjo-daro
+    kind: normalized
+    state: verified
+    evidence:
+    - source: marshall1931
+      locator: title page
+    note: Spelling follows the excavation report; UNESCO renders 'Moenjodaro'.
+  coordinates:
+    value:
+    - 68.139
+    - 27.329
+    kind: derived
+    state: verified
+    evidence:
+    - source: unesco-whc
+      locator: 'property 138, periodic-reporting doc. 164707: 27.329N 68.139E'
+    uncertainty_m: 1000
+    method: Official UNESCO property coordinates (periodic-reporting Geographic Information Table, property
+      138); property-centroid, not a field-survey pin.
+  periods:
+    value:
+    - mature
+    kind: normalized
+    state: verified
+    evidence:
+    - source: ignou-unit5
+      locator: 'chronology table (Section 5.4): listed under Mature Harappan (2600-1800 BCE) only'
+    note: Marshall 1931's Early/Middle/Late scheme predates the modern framework; early/late occupation
+      unverified in sources in hand.
+  size_class:
+    value: major_city
+    kind: normalized
+    state: verified
+    evidence:
+    - source: unesco-whc
+      locator: 'property 138, doc. 164707: WH property 240 ha'
+    note: 240 ha is the WH property boundary, not the archaeological footprint.
+  excavation_status:
+    value: excavated
+    kind: normalized
+    state: verified
+    evidence:
+    - source: marshall1931
+      locator: 'title page: official ASI excavations 1922-1927'
+    - source: ignou-unit5
+      locator: 'Section 5.2: excavated by Rakhaldas Banerjee in 1921'
+    - source: unesco-whc
+      locator: 'doc. 164707: UNESCO International Safeguarding Campaign 1974-1997'
+  notes:
+    value: UNESCO World Heritage Site no. 138 (inscribed 1980; State Party Pakistan). Western citadel
+      sector with eastern lower city on the Indus; streets at right angles with sanitation and drainage.
+      Located in Larkana district, Sindh.
+    kind: normalized
+    state: verified
+    evidence:
+    - source: unesco-whc
+      locator: WH list ref 138 (inscribed 1980, criteria ii, iii); doc. 164707 (site description)
+    - source: ignou-unit5
+      locator: 'Section 5.3: Larkana district, Sindh'
+  harappan_connection:
+    value: null
+    kind: na
+    state: verified
+    evidence: []

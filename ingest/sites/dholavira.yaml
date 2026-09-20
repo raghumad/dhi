@@ -1,0 +1,73 @@
+site_id: dholavira
+affiliation: harappan
+fields:
+  name:
+    value: Dholavira
+    kind: source
+    state: verified
+    evidence:
+    - source: unesco-whc
+      locator: 'official property name ''Dholavira: A Harappan City'', ref 1645, inscribed 2021'
+  coordinates:
+    value:
+    - 70.2133
+    - 23.8884
+    kind: derived
+    state: verified
+    evidence:
+    - source: unesco-whc
+      locator: 'nomination table, doc. 187795: centre point N23 53 18.27 E70 12 47.89'
+    uncertainty_m: 500
+    method: Centre point of the inscribed UNESCO property as filed in India's January 2020 nomination
+      dossier (table doc. 187795); not a surveyed city centre but property-scale, adequate for a site
+      dot.
+  periods:
+    value:
+    - early
+    - mature
+    - late
+    kind: normalized
+    state: verified
+    evidence:
+    - source: ignou-unit5
+      locator: 'chronology table: Mature Harappan row; Transitional Phase row'
+    - source: bisht2013-lecture
+      locator: seven cultural stages; occupation through the 3rd millennium into the mid-2nd millennium
+        BCE
+  size_class:
+    value: major_city
+    kind: normalized
+    state: verified
+    evidence:
+    - source: unesco-whc
+      locator: 'doc. 187795: inscribed property 103 ha'
+    - source: bisht2013-lecture
+      locator: '''one amongst five largest urban centers of Harappan civilization'' (with Mohenjodaro,
+        Harappa, Ganweriwala, Rakhigarhi)'
+  excavation_status:
+    value: excavated
+    kind: normalized
+    state: verified
+    evidence:
+    - source: bisht2013-lecture
+      locator: 13 field seasons 1989-90 to 2004-05, ASI under R.S. Bisht
+    note: Discovery (1968, J.P. Joshi) unverified from authoritative sources - omitted.
+  notes:
+    value: Tripartite fortified Harappan city (citadel, middle town, lower town) with elaborate reservoir-based
+      water harvesting; ten large Indus-script gypsum inlays ('signboard') at the North Gate. Excavated
+      1989-90 to 2004-05 (ASI, R.S. Bisht).
+    kind: normalized
+    state: verified
+    evidence:
+    - source: bisht2013-lecture
+      locator: tripartite plan; 'amazing water harvesting system'
+    - source: bisht2015
+      locator: reservoirs (pp. 148, 164 per public copy); signboard, Section 8.1.1 (pp. 228-231 per public
+        copy)
+    note: Bisht 2015 page numbers via publicly posted copy of the ASI report; confirm against the ASI-held
+      original for page-level precision.
+  harappan_connection:
+    value: null
+    kind: na
+    state: verified
+    evidence: []

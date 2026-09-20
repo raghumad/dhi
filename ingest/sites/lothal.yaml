@@ -1,0 +1,81 @@
+site_id: lothal
+affiliation: harappan
+fields:
+  name:
+    value: Lothal
+    kind: source
+    state: verified
+    evidence:
+    - source: rao1979
+      locator: title page (MASI No. 78)
+  coordinates:
+    value:
+    - 72.25
+    - 22.5167
+    kind: derived
+    state: verified
+    evidence:
+    - source: asi-lothal-text
+      locator: '''Lothal (22 deg 31''; 72 deg 15''), Dt Ahmadabad, Gujarat'''
+    uncertainty_m: 2000
+    method: 'ASI site description: Lothal (22 deg 31''; 72 deg 15'') - minute-level only; accessed via
+      a third-party-hosted copy of ASI descriptive text. Seconds-level confirmation from Rao 1979 Plate
+      XXXVIII (site plan) or asi.nic.in still needed for higher precision.'
+  periods:
+    value:
+    - mature
+    - late
+    kind: normalized
+    state: verified
+    evidence:
+    - source: asi-lothal-text
+      locator: Period A 'belonging to the mature Harappa culture'; Period B 'a decadent stage thereof'
+    - source: frenez2005
+      locator: Period A-IV 2000-1900 BC (decline); Period B ca. 1800-1600 BC
+    note: Mapping of Rao's Period A/B onto the gazetteer's mature/late labels is interpretive; the phase
+      facts are cited. An Early Harappan phase is unattested in sources in hand.
+  size_class:
+    value: town
+    kind: normalized
+    state: verified
+    evidence:
+    - source: frenez2005
+      locator: '''the small site of Lothal... enclosed within a wide mudbricks trapezelike enclosure (about
+        300 x 200 m)'''
+    note: The frequently repeated '7 ha' figure traces to Wikipedia and is not used.
+  excavation_status:
+    value: excavated
+    kind: normalized
+    state: verified
+    evidence:
+    - source: rao1979
+      locator: 'title page: 1955-62'
+    - source: asi-lothal-text
+      locator: 1954-55 to 1962-63
+    note: Field-season dates vary slightly between sources (1955-60 per secondary summaries; 1955-62 per
+      memoir title; 1954-55-1962-63 per ASI site text).
+  notes:
+    value: Harappan port town in Gujarat (village Saragwala, between the Sabarmati and Bhogavo); brick-lined
+      dock on the eastern margin; bead-making centre (carnelian bead factory, kiln); citadel + lower town
+      within a trapezoidal mud-brick enclosure (~300 x 200 m). Discovered 1954, excavated 1954-55 to 1962-63
+      (ASI, S.R. Rao). UNESCO Tentative List 2014.
+    kind: normalized
+    state: verified
+    evidence:
+    - source: rao1979
+      locator: 'Vol. I, pp. 12-14: ''proved beyond doubt that it was a true Harappan town''; p. 85: dock
+        embankment walls 716 ft / 705 ft 6 in'
+    - source: frenez2005
+      locator: dock built along the eastern margin of the town
+    - source: asi-lothal-text
+      locator: bead factory with carnelian beads and kiln; lower town housed coppersmiths, goldsmiths,
+        shell-workers, bead-makers
+    - source: unesco-whc
+      locator: 'Tentative List: ''Archaeological remains of a Harappa Port-Town, Lothal'', submitted 15/04/2014'
+    - source: ignou-unit5
+      locator: 'Section 5.3: Gujarat; ''the important settlement of Lothal'' in Saurashtra'
+  harappan_connection:
+    value: null
+    kind: na
+    state: verified
+    evidence: []

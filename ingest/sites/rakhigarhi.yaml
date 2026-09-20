@@ -1,0 +1,76 @@
+site_id: rakhigarhi
+affiliation: harappan
+fields:
+  name:
+    value: Rakhigarhi
+    kind: source
+    state: verified
+    evidence:
+    - source: nath-rakhigarhi
+      locator: 'title page: ''EXCAVATIONS AT RAKHIGARHI'''
+  coordinates:
+    value:
+    - 76.1139
+    - 29.2917
+    kind: derived
+    state: verified
+    evidence:
+    - source: nath-rakhigarhi
+      locator: 'Ch. 6: 29 deg 17''30"N 76 deg 06''50"E'
+    - source: shinde2018
+      locator: 'Materials and methods: RGR-07 necropolis at N29 deg 17''52.9" E76 deg 06''51"'
+    uncertainty_m: 1000
+    method: 'ASI Rakhigarhi report Ch. 6 (''Archaeological residue at Rakhigarhi''): 29 deg 17''30"N 76
+      deg 06''50"E from the 1997-2000 survey; corroborated by Shinde et al. 2018. The 1915 Survey of India
+      toposheet figure (29 deg 16''N 76 deg 10''E) is ~7 km off and not used.'
+  periods:
+    value:
+    - early
+    - mature
+    kind: normalized
+    state: verified
+    evidence:
+    - source: nath-rakhigarhi
+      locator: 'Ch. 6: Period I (early Harappan: IA preformative, IB formative), Period II (mature Harappan);
+        ''no evidence of the decline phase'''
+  size_class:
+    value: major_city
+    kind: normalized
+    state: verified
+    evidence:
+    - source: nath-rakhigarhi
+      locator: 'Ch. 6: archaeological residue ''spreads over in area of 3 Km radius (300 hectare)'' over
+        seven mounds'
+    note: The widely repeated ~350 ha figure is unverified (media attribution, not ASI/peer-reviewed);
+      PIB 22.06.2026 says ~550 ha. ASI report's own 300 ha cited as primary.
+  excavation_status:
+    value: excavated
+    kind: normalized
+    state: verified
+    evidence:
+    - source: nath-rakhigarhi
+      locator: 'report title: 1997-98 to 1999-2000'
+    - source: lok-sabha-4977
+      locator: excavation at Rakhigarhi, District Hissar, Haryana, 1997-98 to 1999-2000
+    - source: shinde2018
+      locator: '2013-2016: RGR-07 cemetery (Deccan College / Seoul National University)'
+  notes:
+    value: One of the largest cities of the Harappan Civilization (Hisar district, Haryana); seven mounds
+      over ~300 ha. ASI 1997-2000 fieldwork found planned mud/burnt-brick townships, drainage, fortification,
+      and a bead-manufacturing industry. No decline-phase evidence.
+    kind: normalized
+    state: verified
+    evidence:
+    - source: shinde2018
+      locator: 'Abstract: ''one of the largest cities of the Harappan Civilization'''
+    - source: nath-rakhigarhi
+      locator: 'Ch. 6: planned townships, drainage, fortification, bead industry'
+    - source: lok-sabha-4977
+      locator: District Hissar, Haryana
+    - source: ignou-unit5
+      locator: 'Section 5.3: ''Rakhigarhi (as large as Harappa)'''
+  harappan_connection:
+    value: null
+    kind: na
+    state: verified
+    evidence: []

@@ -1,0 +1,72 @@
+site_id: ur
+affiliation: related
+fields:
+  name:
+    value: Ur
+    kind: source
+    state: verified
+    evidence:
+    - source: cdli-ur
+      locator: '''Ur (modern Tell Muqayyar)'''
+  coordinates:
+    value:
+    - 46.10306
+    - 30.96265
+    kind: derived
+    state: verified
+    evidence:
+    - source: cdli-ur
+      locator: 'Introduction: 30 deg 57''45.55"N 46 deg 6''11.03"E'
+    uncertainty_m: 100
+    method: CDLI (Oxford/UCLA/MPIWG consortium) gazetteer coordinates for Tell Muqayyar.
+  periods:
+    value:
+    - Ubaid to Neo-Babylonian (5th mill. BCE - 539 BCE); floruit Early Dynastic III / Ur III (2100-2000
+      BCE)
+    kind: normalized
+    state: verified
+    evidence:
+    - source: cdli-ur
+      locator: occupied Ubaid to Neo-Babylonian; 'the most impressive remains come from the Early Dynastic
+        III period Royal Cemetery, and the Ur III period'; Ur III kingdom 2100-2000 BC
+  size_class:
+    value: major_city
+    kind: normalized
+    state: verified
+    evidence:
+    - source: cdli-ur
+      locator: 'Ur III section: ''the city of Ur occupied around 50 hectares (124 acres)'''
+  excavation_status:
+    value: excavated
+    kind: normalized
+    state: verified
+    evidence:
+    - source: cdli-ur
+      locator: 'History of Excavations: J.E. Taylor 1850s; joint UPenn/British Museum expedition under
+        Woolley 1922-1934; limited Iraqi excavations since'
+  notes:
+    value: Sumerian city-state at modern Tell el-Muqayyar, Dhi Qar, Iraq; the Ur III ziggurat of Nanna
+      (built by Ur-Nammu) still stands. Inscribed within UNESCO WH ref 1481 (Ahwar of Southern Iraq, 2016)
+      as 'Ur Archaeological City'.
+    kind: normalized
+    state: verified
+    evidence:
+    - source: cdli-ur
+      locator: Tell el-Muqayyar; ziggurat of Ur-Nammu
+    - source: unesco-whc
+      locator: 'WH ref 1481 (2016): ''Ur Archaeological City'''
+  harappan_connection:
+    value: 'Sixteen Indus-style seals excavated at Ur: published by C.J. Gadd 1932 (''Seals of ancient
+      Indian style found at Ur,'' Proc. British Academy XVIII); four from the Royal Cemetery (UE 2, Woolley
+      1934); nine catalogued UE 10 (Legrain 1951, Cat. 624-632). UE 10''s Introductory Note states they
+      ''prove the existence of early trade relations between the Indus valley and lower Mesopotamia.'''
+    kind: normalized
+    state: verified
+    evidence:
+    - source: gadd1932
+      locator: '16 Indus-style seals at Ur (cited via UE 10''s own footnote: PBA vol. XVIII, 19 Oct 1932,
+        22 pp., 3 pls.)'
+    - source: legrain1951
+      locator: Cat. 624-632; Introductory Note on Indus-Mesopotamia trade
+    note: Gadd 1932 paper cited via UE 10's footnote (not read in full); individual seal U.7683/BM 120573
+      claims left out (non-authoritative sources only).

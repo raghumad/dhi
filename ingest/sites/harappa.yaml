@@ -1,0 +1,72 @@
+site_id: harappa
+affiliation: harappan
+fields:
+  name:
+    value: Harappa
+    kind: source
+    state: verified
+    evidence:
+    - source: vats1940
+      locator: title page
+  coordinates:
+    value:
+    - 72.86444
+    - 30.62919
+    kind: derived
+    state: verified
+    evidence:
+    - source: vats1940
+      locator: Plate I (site plan)
+    uncertainty_m: 1500
+    method: Vats 1940 Plate I georeferenced (1000-ft grid scale + north-arrow rotation 2.96 deg + OSM
+      Harappa Museum anchor); site centroid = mean of mound-area centroids.
+  periods:
+    value:
+    - early
+    - mature
+    - late
+    kind: normalized
+    state: verified
+    evidence:
+    - source: ignou-unit5
+      locator: chronology table (Section 5.4)
+    - source: harp
+      locator: 'period sequence: Periods 1-3 and 5'
+  size_class:
+    value: major_city
+    kind: normalized
+    state: verified
+    evidence:
+    - source: kenoyer2008
+      locator: 150 ha in the Harappa phase
+    - source: vats1940
+      locator: 'p. 3: site ~3.5 miles ''in circuit'''
+  excavation_status:
+    value: excavated
+    kind: normalized
+    state: verified
+    evidence:
+    - source: vats1940
+      locator: 'title page: campaigns 1920-21 to 1933-34'
+    - source: ignou-unit5
+      locator: 'Section 5.2: excavated in 1920 by Daya Ram Sahni'
+    - source: harp
+      locator: 1986-2001 field seasons
+  notes:
+    value: Eponymous type site of the Harappan civilization; on the Ravi. Excavated 1920-21 to 1933-34
+      (Vats) and 1986-2001 (HARP).
+    kind: normalized
+    state: verified
+    evidence:
+    - source: ignou-unit5
+      locator: 'Section 5.3: archaeological convention of naming a culture where it was first discovered;
+        Harappa on the Ravi'
+    - source: vats1940
+      locator: title page (campaign dates)
+    - source: harp
+      locator: project dates
+  harappan_connection:
+    value: null
+    kind: na
+    state: verified
+    evidence: []
