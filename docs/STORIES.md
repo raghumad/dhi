@@ -12,11 +12,15 @@ and prioritized.
 
 ## Site gazetteer
 
-- **SITE-1 — Per-field evidence schema** · P0 · in progress
+- **SITE-1 — Per-field evidence schema** · P0 · done (2026-09-20)
   Each asserted site field carries its own citation (source ID, full citation,
   page/plate/table) and review state; values labeled as source / normalized /
   derived / provisional. Motivated by Kalibangan: periods verified, coordinates
   not — one record-level flag can't express that.
+  Implemented: `ingest/site_sources.yaml` (31 sources), `ingest/sites/*.yaml`
+  (one file per site), `ingest/build_sites.py` compiles to `sites.geojson` with
+  derived review_status (Kalibangan = partial), `tests/test_sites_schema.py`
+  (7 tests; 67 green total). Map/API keys preserved.
 - **SITE-2 — Source registry with pinned artifacts** · P0 · proposed
   Every site citation points to a content-addressed artifact (scan/PDF, SHA-256)
   in the sources registry, so "verified" stays falsifiable when URLs rot.
