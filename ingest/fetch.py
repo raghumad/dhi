@@ -15,6 +15,8 @@ overwrite); delete the file and re-run to re-fetch.
 """
 import hashlib
 import sys
+import time
+import urllib.error
 import urllib.request
 from pathlib import Path
 
@@ -34,14 +36,40 @@ def sha256_of(path: Path) -> str:
     return h.hexdigest()
 
 
-def download(url: str, dest_tmp: Path) -> None:
-    req = urllib.request.Request(url, headers={"User-Agent": "dhi-ingest/0.1"})
-    with urllib.request.urlopen(req, timeout=300) as resp, open(dest_tmp, "wb") as f:
-        while True:
-            chunk = resp.read(CHUNK)
-            if not chunk:
-                break
-            f.write(chunk)
+def download(url: str, dest_tmp: Path, attempts: int = 4) -> None:
+    """Fetch url to dest_tmp, retrying transient failures with backoff.
+
+    Retries HTTP 5xx and connection-level errors (archive.org fronts its
+    downloads with redirects to storage nodes that occasionally 500).
+    HTTP 4xx is not retried: the URL is wrong and retrying won't help.
+    The SHA-256 check after download still guards integrity, so a corrupt
+    retry can never slip through.
+    """
+    last_exc: BaseException | None = None
+    for attempt in range(1, attempts + 1):
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "dhi-ingest/0.1"})
+            with urllib.request.urlopen(req, timeout=300) as resp, open(dest_tmp, "wb") as f:
+                while True:
+                    chunk = resp.read(CHUNK)
+                    if not chunk:
+                        break
+                    f.write(chunk)
+            return
+        except urllib.error.HTTPError as e:
+            last_exc = e
+            if not 500 <= e.code < 600:
+                raise
+        except (urllib.error.URLError, TimeoutError, ConnectionError) as e:
+            last_exc = e
+        dest_tmp.unlink(missing_ok=True)  # drop the partial download
+        if attempt < attempts:
+            wait = 2 ** attempt
+            print(f"  transient download failure ({last_exc}); "
+                  f"retrying in {wait}s (attempt {attempt + 1}/{attempts})")
+            time.sleep(wait)
+    assert last_exc is not None
+    raise last_exc
 
 
 def fetch_artifact(spec: dict) -> Path:

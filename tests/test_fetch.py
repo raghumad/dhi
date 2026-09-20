@@ -53,3 +53,62 @@ def test_fetch_rejects_hash_mismatch(tmp_path, monkeypatch):
     with pytest.raises(SystemExit):
         fv.fetch_artifact({"name": "t", "url": "https://example.invalid/x",
                            "sha256": "0" * 64, "path": "data/a.txt"})
+
+
+def test_download_retries_transient_500_then_succeeds(tmp_path, monkeypatch):
+    import io
+    import urllib.error
+    calls = []
+
+    class FakeResp:
+        def __init__(self, data: bytes):
+            self._buf = io.BytesIO(data)
+        def read(self, n=-1):
+            return self._buf.read(n)
+        def __enter__(self):
+            return self
+        def __exit__(self, *a):
+            return False
+
+    def fake_urlopen(req, timeout=None):
+        calls.append(1)
+        if len(calls) < 3:
+            raise urllib.error.HTTPError(req.full_url, 500, "Internal Server Error", {}, None)
+        return FakeResp(b"data-bytes")
+
+    monkeypatch.setattr("urllib.request.urlopen", fake_urlopen)
+    monkeypatch.setattr("time.sleep", lambda s: None)  # no waiting in tests
+    dest = tmp_path / "out.part"
+    fv.download("https://example.invalid/x", dest)
+    assert dest.read_bytes() == b"data-bytes"
+    assert len(calls) == 3
+
+
+def test_download_does_not_retry_404(tmp_path, monkeypatch):
+    import urllib.error
+    calls = []
+
+    def fake_urlopen(req, timeout=None):
+        calls.append(1)
+        raise urllib.error.HTTPError(req.full_url, 404, "Not Found", {}, None)
+
+    monkeypatch.setattr("urllib.request.urlopen", fake_urlopen)
+    monkeypatch.setattr("time.sleep", lambda s: None)
+    with pytest.raises(urllib.error.HTTPError):
+        fv.download("https://example.invalid/x", tmp_path / "out.part")
+    assert len(calls) == 1  # no retry on client errors
+
+
+def test_download_gives_up_after_attempts(tmp_path, monkeypatch):
+    import urllib.error
+    calls = []
+
+    def fake_urlopen(req, timeout=None):
+        calls.append(1)
+        raise urllib.error.HTTPError(req.full_url, 503, "Service Unavailable", {}, None)
+
+    monkeypatch.setattr("urllib.request.urlopen", fake_urlopen)
+    monkeypatch.setattr("time.sleep", lambda s: None)
+    with pytest.raises(urllib.error.HTTPError):
+        fv.download("https://example.invalid/x", tmp_path / "out.part", attempts=2)
+    assert len(calls) == 2
