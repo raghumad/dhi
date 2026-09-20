@@ -29,8 +29,8 @@ Every feature carries `review_status`:
 |---|---|---|---|
 | harappa | verified | Vats 1940; HARP; Kenoyer 2008; IGNOU Unit 5 | 2026-09-20 |
 | mohenjo-daro | verified | Marshall 1931; UNESCO WH property 138; IGNOU Unit 5 | 2026-09-20 |
-| rakhigarhi | unverified | — | — |
-| kalibangan | unverified | — | — |
+| rakhigarhi | verified | ASI Nath report; Shinde et al. 2018; Lok Sabha Q.4977 | 2026-09-20 |
+| kalibangan | partial (coords unverified) | Thapar 1975; ASI 2003 (MASI 98); IGNOU Unit 5 | 2026-09-20 |
 | dholavira | verified | UNESCO 2021 dossier; Bisht 2015 (ASI); IGNOU Unit 5 | 2026-09-20 |
 | lothal | unverified | — | — |
 | shortugai | unverified | — | — |
