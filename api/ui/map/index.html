@@ -5,7 +5,57 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Harappa Mounds — Vats 1940 Plate I Overlay</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+const SITES = {"features": [{"geometry": {"coordinates": [72.8739, 30.6357], "type": "Point"}, "properties": {"affiliation": "harappan", "excavation_status": "excavated", "harappan_connection": null, "name": "Harappa", "notes": "Type site. Detailed mound gazetteer in mound_areas.geojson.", "periods": ["early", "mature", "late"], "site_id": "harappa", "size_class": "major_city", "sources": ["Vats 1940"], "uncertainty_m": 500}, "type": "Feature"}, {"geometry": {"coordinates": [67.1386, 27.3292], "type": "Point"}, "properties": {"affiliation": "harappan", "excavation_status": "excavated", "harappan_connection": null, "name": "Mohenjo-daro", "notes": "Largest known Indus city. Seal tabulation parser pending.", "periods": ["mature", "late"], "site_id": "mohenjo-daro", "size_class": "major_city", "sources": ["Marshall 1931"], "uncertainty_m": 500}, "type": "Feature"}, {"geometry": {"coordinates": [76.1146, 29.3901], "type": "Point"}, "properties": {"affiliation": "harappan", "excavation_status": "excavated", "harappan_connection": null, "name": "Rakhigarhi", "notes": "Possibly the largest Indus site by area; excavations ongoing.", "periods": ["early", "mature", "late"], "site_id": "rakhigarhi", "size_class": "major_city", "sources": ["ASI reports"], "uncertainty_m": 1000}, "type": "Feature"}, {"geometry": {"coordinates": [74.13, 29.4619], "type": "Point"}, "properties": {"affiliation": "harappan", "excavation_status": "excavated", "harappan_connection": null, "name": "Kalibangan", "notes": "Ghaggar-Hakra (Saraswati) belt; pre-Harappan and Harappan phases.", "periods": ["early", "mature"], "site_id": "kalibangan", "size_class": "major_city", "sources": ["Lal & Thapar"], "uncertainty_m": 500}, "type": "Feature"}, {"geometry": {"coordinates": [70.2137, 23.8862], "type": "Point"}, "properties": {"affiliation": "harappan", "excavation_status": "excavated", "harappan_connection": null, "name": "Dholavira", "notes": "Kachchh; famous water management systems and signboard inscription.", "periods": ["early", "mature", "late"], "site_id": "dholavira", "size_class": "major_city", "sources": ["Bisht, ASI"], "uncertainty_m": 500}, "type": "Feature"}, {"geometry": {"coordinates": [72.2498, 22.5259], "type": "Point"}, "properties": {"affiliation": "harappan", "excavation_status": "excavated", "harappan_connection": null, "name": "Lothal", "notes": "Port town with dockyard; bead-making center.", "periods": ["mature", "late"], "site_id": "lothal", "size_class": "town", "sources": ["Rao, ASI"], "uncertainty_m": 500}, "type": "Feature"}, {"geometry": {"coordinates": [62.03, 38.19], "type": "Point"}, "properties": {"affiliation": "related", "excavation_status": "excavated", "harappan_connection": "Indus seals, ivory objects, and carnelian beads excavated; BMAC-Harappan trade contact (Sarianidi).", "name": "Gonur Tepe", "notes": "BMAC (Oxus civilization) capital in Margiana, Turkmenistan. Key evidence for Indus-Central Asia contact.", "periods": ["mature"], "site_id": "gonur-tepe", "size_class": "major_city", "sources": ["Sarianidi"], "uncertainty_m": 2000}, "type": "Feature"}, {"geometry": {"coordinates": [46.1031, 30.9625], "type": "Point"}, "properties": {"affiliation": "related", "excavation_status": "excavated", "harappan_connection": "Indus seals and sealings found in Mesopotamian context; Meluhha trade (Woolley excavations).", "name": "Ur", "notes": "Sumerian city; Indus (Meluhha) merchant presence attested.", "periods": ["mature"], "site_id": "ur", "size_class": "major_city", "sources": ["Woolley"], "uncertainty_m": 1000}, "type": "Feature"}, {"geometry": {"coordinates": [50.55, 26.03], "type": "Point"}, "properties": {"affiliation": "related", "excavation_status": "excavated", "harappan_connection": "Entrepot for Indus-Mesopotamia Gulf trade; Indus-related weights and seals.", "name": "Dilmun (Bahrain)", "notes": "Persian Gulf trade hub linking Meluhha (Indus) and Mesopotamia.", "periods": ["mature"], "site_id": "dilmun-bahrain", "size_class": "town", "sources": ["Bibby; Hojlund"], "uncertainty_m": 5000}, "type": "Feature"}, {"geometry": {"coordinates": [69.53, 37.33], "type": "Point"}, "properties": {"affiliation": "harappan", "excavation_status": "excavated", "harappan_connection": null, "name": "Shortugai", "notes": "Northernmost Harappan outpost (Afghanistan); lapis lazuli trade.", "periods": ["mature"], "site_id": "shortugai", "size_class": "town", "sources": ["Francfort"], "uncertainty_m": 2000}, "type": "Feature"}], "metadata": {"coordinate_note": "Representative site centers; uncertainty_m reflects location pinning quality.", "description": "Site-level places: Harappan settlements and related sites with documented Harappan contacts.", "sources": "See ingest/SITES_GAZETTEER.md", "title": "Indus World Site Gazetteer"}, "type": "FeatureCollection"};
+
+// --- site markers (visible zoomed out) ---
+function siteStyle(f) {
+  return f.properties.affiliation === 'harappan'
+    ? {color: '#1a5fb4', fillColor: '#1a5fb4'}
+    : {color: '#813d9c', fillColor: '#813d9c'};
+}
+const siteLayer = L.geoJSON(SITES, {
+  pointToLayer: (f, latlng) => {
+    const s = siteStyle(f);
+    const major = f.properties.size_class === 'major_city';
+    return L.circleMarker(latlng, {
+      radius: major ? 9 : 6, color: s.color, weight: 2,
+      fillColor: s.fillColor, fillOpacity: 0.7
+    });
+  },
+  onEachFeature: (f, l) => {
+    const p = f.properties;
+    let h = `<div class="info"><h3>${p.name}</h3>` +
+      `<p><b>ID:</b> <code>${p.site_id}</code></p>` +
+      `<p><b>Affiliation:</b> ${p.affiliation}</p>` +
+      `<p><b>Size:</b> ${p.size_class} &nbsp; <b>Status:</b> ${p.excavation_status}</p>` +
+      `<p><b>Periods:</b> ${(p.periods||[]).join(', ')}</p>`;
+    if (p.harappan_connection) h += `<p><b>Harappan connection:</b> ${p.harappan_connection}</p>`;
+    if (p.notes) h += `<p>${p.notes}</p>`;
+    h += `</div>`;
+    l.bindPopup(h);
+    l.bindTooltip(p.name);
+  }
+}).addTo(map);
+
+// Zoom behavior: sites visible when zoomed out, mound detail when zoomed in
+function updateLayers() {
+  const z = map.getZoom();
+  if (z < 10) {
+    if (!map.hasLayer(siteLayer)) map.addLayer(siteLayer);
+    if (map.hasLayer(moundLayer)) map.removeLayer(moundLayer);
+    if (map.hasLayer(uncertLayer)) map.removeLayer(uncertLayer);
+  } else {
+    if (map.hasLayer(siteLayer)) map.removeLayer(siteLayer);
+    if (!map.hasLayer(moundLayer)) map.addLayer(moundLayer);
+  }
+}
+map.on('zoomend', updateLayers);
+// start zoomed out to show all sites
+map.setView([28.5, 62.0], 5);
+updateLayers();
+
+</script>
 <style>
   body { margin:0; font-family: system-ui, sans-serif; }
   #map { height: 100vh; }
@@ -99,7 +149,7 @@ refLayer.addTo(map);
 // --- layer control ---
 L.control.layers(
   {"OpenStreetMap": osm, "Satellite": sat},
-  {"Mound polygons": moundLayer, "Uncertainty circles": uncertLayer,
+  {"Site markers": siteLayer, "Mound polygons": moundLayer, "Uncertainty circles": uncertLayer,
     "Plate I (1940 plan)": plateOverlay, "Reference points": refLayer},
   {collapsed: false}
 ).addTo(map);
@@ -117,6 +167,56 @@ legend.onAdd = () => {
   return d;
 };
 legend.addTo(map);
+
+const SITES = {"features": [{"geometry": {"coordinates": [72.8739, 30.6357], "type": "Point"}, "properties": {"affiliation": "harappan", "excavation_status": "excavated", "harappan_connection": null, "name": "Harappa", "notes": "Type site. Detailed mound gazetteer in mound_areas.geojson.", "periods": ["early", "mature", "late"], "site_id": "harappa", "size_class": "major_city", "sources": ["Vats 1940"], "uncertainty_m": 500}, "type": "Feature"}, {"geometry": {"coordinates": [67.1386, 27.3292], "type": "Point"}, "properties": {"affiliation": "harappan", "excavation_status": "excavated", "harappan_connection": null, "name": "Mohenjo-daro", "notes": "Largest known Indus city. Seal tabulation parser pending.", "periods": ["mature", "late"], "site_id": "mohenjo-daro", "size_class": "major_city", "sources": ["Marshall 1931"], "uncertainty_m": 500}, "type": "Feature"}, {"geometry": {"coordinates": [76.1146, 29.3901], "type": "Point"}, "properties": {"affiliation": "harappan", "excavation_status": "excavated", "harappan_connection": null, "name": "Rakhigarhi", "notes": "Possibly the largest Indus site by area; excavations ongoing.", "periods": ["early", "mature", "late"], "site_id": "rakhigarhi", "size_class": "major_city", "sources": ["ASI reports"], "uncertainty_m": 1000}, "type": "Feature"}, {"geometry": {"coordinates": [74.13, 29.4619], "type": "Point"}, "properties": {"affiliation": "harappan", "excavation_status": "excavated", "harappan_connection": null, "name": "Kalibangan", "notes": "Ghaggar-Hakra (Saraswati) belt; pre-Harappan and Harappan phases.", "periods": ["early", "mature"], "site_id": "kalibangan", "size_class": "major_city", "sources": ["Lal & Thapar"], "uncertainty_m": 500}, "type": "Feature"}, {"geometry": {"coordinates": [70.2137, 23.8862], "type": "Point"}, "properties": {"affiliation": "harappan", "excavation_status": "excavated", "harappan_connection": null, "name": "Dholavira", "notes": "Kachchh; famous water management systems and signboard inscription.", "periods": ["early", "mature", "late"], "site_id": "dholavira", "size_class": "major_city", "sources": ["Bisht, ASI"], "uncertainty_m": 500}, "type": "Feature"}, {"geometry": {"coordinates": [72.2498, 22.5259], "type": "Point"}, "properties": {"affiliation": "harappan", "excavation_status": "excavated", "harappan_connection": null, "name": "Lothal", "notes": "Port town with dockyard; bead-making center.", "periods": ["mature", "late"], "site_id": "lothal", "size_class": "town", "sources": ["Rao, ASI"], "uncertainty_m": 500}, "type": "Feature"}, {"geometry": {"coordinates": [62.03, 38.19], "type": "Point"}, "properties": {"affiliation": "related", "excavation_status": "excavated", "harappan_connection": "Indus seals, ivory objects, and carnelian beads excavated; BMAC-Harappan trade contact (Sarianidi).", "name": "Gonur Tepe", "notes": "BMAC (Oxus civilization) capital in Margiana, Turkmenistan. Key evidence for Indus-Central Asia contact.", "periods": ["mature"], "site_id": "gonur-tepe", "size_class": "major_city", "sources": ["Sarianidi"], "uncertainty_m": 2000}, "type": "Feature"}, {"geometry": {"coordinates": [46.1031, 30.9625], "type": "Point"}, "properties": {"affiliation": "related", "excavation_status": "excavated", "harappan_connection": "Indus seals and sealings found in Mesopotamian context; Meluhha trade (Woolley excavations).", "name": "Ur", "notes": "Sumerian city; Indus (Meluhha) merchant presence attested.", "periods": ["mature"], "site_id": "ur", "size_class": "major_city", "sources": ["Woolley"], "uncertainty_m": 1000}, "type": "Feature"}, {"geometry": {"coordinates": [50.55, 26.03], "type": "Point"}, "properties": {"affiliation": "related", "excavation_status": "excavated", "harappan_connection": "Entrepot for Indus-Mesopotamia Gulf trade; Indus-related weights and seals.", "name": "Dilmun (Bahrain)", "notes": "Persian Gulf trade hub linking Meluhha (Indus) and Mesopotamia.", "periods": ["mature"], "site_id": "dilmun-bahrain", "size_class": "town", "sources": ["Bibby; Hojlund"], "uncertainty_m": 5000}, "type": "Feature"}, {"geometry": {"coordinates": [69.53, 37.33], "type": "Point"}, "properties": {"affiliation": "harappan", "excavation_status": "excavated", "harappan_connection": null, "name": "Shortugai", "notes": "Northernmost Harappan outpost (Afghanistan); lapis lazuli trade.", "periods": ["mature"], "site_id": "shortugai", "size_class": "town", "sources": ["Francfort"], "uncertainty_m": 2000}, "type": "Feature"}], "metadata": {"coordinate_note": "Representative site centers; uncertainty_m reflects location pinning quality.", "description": "Site-level places: Harappan settlements and related sites with documented Harappan contacts.", "sources": "See ingest/SITES_GAZETTEER.md", "title": "Indus World Site Gazetteer"}, "type": "FeatureCollection"};
+
+// --- site markers (visible zoomed out) ---
+function siteStyle(f) {
+  return f.properties.affiliation === 'harappan'
+    ? {color: '#1a5fb4', fillColor: '#1a5fb4'}
+    : {color: '#813d9c', fillColor: '#813d9c'};
+}
+const siteLayer = L.geoJSON(SITES, {
+  pointToLayer: (f, latlng) => {
+    const s = siteStyle(f);
+    const major = f.properties.size_class === 'major_city';
+    return L.circleMarker(latlng, {
+      radius: major ? 9 : 6, color: s.color, weight: 2,
+      fillColor: s.fillColor, fillOpacity: 0.7
+    });
+  },
+  onEachFeature: (f, l) => {
+    const p = f.properties;
+    let h = `<div class="info"><h3>${p.name}</h3>` +
+      `<p><b>ID:</b> <code>${p.site_id}</code></p>` +
+      `<p><b>Affiliation:</b> ${p.affiliation}</p>` +
+      `<p><b>Size:</b> ${p.size_class} &nbsp; <b>Status:</b> ${p.excavation_status}</p>` +
+      `<p><b>Periods:</b> ${(p.periods||[]).join(', ')}</p>`;
+    if (p.harappan_connection) h += `<p><b>Harappan connection:</b> ${p.harappan_connection}</p>`;
+    if (p.notes) h += `<p>${p.notes}</p>`;
+    h += `</div>`;
+    l.bindPopup(h);
+    l.bindTooltip(p.name);
+  }
+}).addTo(map);
+
+// Zoom behavior: sites visible when zoomed out, mound detail when zoomed in
+function updateLayers() {
+  const z = map.getZoom();
+  if (z < 10) {
+    if (!map.hasLayer(siteLayer)) map.addLayer(siteLayer);
+    if (map.hasLayer(moundLayer)) map.removeLayer(moundLayer);
+    if (map.hasLayer(uncertLayer)) map.removeLayer(uncertLayer);
+  } else {
+    if (map.hasLayer(siteLayer)) map.removeLayer(siteLayer);
+    if (!map.hasLayer(moundLayer)) map.addLayer(moundLayer);
+  }
+}
+map.on('zoomend', updateLayers);
+// start zoomed out to show all sites
+map.setView([28.5, 62.0], 5);
+updateLayers();
+
 </script>
 </body>
 </html>
