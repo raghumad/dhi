@@ -37,7 +37,19 @@ sources:
     citation: 'Frenez, D. 2018. ''Manufacturing and trade of Asian elephant ivory in Bronze Age Middle
       Asia: Evidence from Gonur Depe (Margiana, Turkmenistan).'' Archaeological Research in Asia 15.'
   gadd1932:
-    artifacts: []
+    artifacts:
+    - bytes: 3169016
+      description: "IGNCA scan of Gadd 1932 (3.1MB orig PDF) from the ASI Central Archaeological
+        Library via in.gov.ignca.33779. Title page verified: 'Seals of ancient Indian style
+        found at Ur. By C.J. Gadd. From the Proceedings of the British Academy, Vol. XVIII.
+        Communicated October 19, 1932.' Found by the SITE-5 IGNCA/IA inventory (IA metadata
+        misspells creator as 'Gadd, G.J.' and dates it 1958)."
+      media_type: application/pdf
+      name: gadd1932-pdf
+      path: data/artifacts/sites/gadd1932.pdf
+      pinned_on: '2026-09-20'
+      sha256: 49cb73beca63fd62314316b015a613877726e89949640ce9f26ff08557ce2b81
+      url: https://archive.org/download/in.gov.ignca.33779/33779.pdf
     category: peer_reviewed
     citation: Gadd, C.J. 1932. 'Seals of ancient Indian style found at Ur.' Proceedings of the British
       Academy, vol. XVIII.
@@ -112,9 +124,21 @@ sources:
       pinned_on: '2026-09-20'
       sha256: 0dbefe190923df157654c701478657dc8595c67b38c063f0c506b635d77c37eb
       url: https://archive.org/download/in.gov.ignca.48270/48270_djvu.txt
+    - bytes: 38393044
+      description: "IGNCA scan of Marshall 1931 Vol. I (text, 38MB orig PDF) from the ASI Central
+        Archaeological Library via in.gov.ignca.14985. Title page verified: 'Mohenjo-Daro and
+        the Indus Civilization... Edited by Sir John Marshall... Volume I: Text. Chapters
+        I-XIX and Plates I-XIV. Arthur Probsthain, London, 1931.' Found by the SITE-5
+        IGNCA/IA inventory."
+      media_type: application/pdf
+      name: vol1-pdf
+      path: data/artifacts/sites/marshall1931_vol1.pdf
+      pinned_on: '2026-09-20'
+      sha256: 163dd20937256470e3e652c5dcc0c8061c28d57bf75d0c0ae7ee1d42ef5d4600
+      url: https://archive.org/download/in.gov.ignca.14985/14985.pdf
     category: excavation_report
-    citation: Marshall, John (ed.) 1931. Mohenjo-daro and the Indus Civilization, Vol. III (plates). Arthur
-      Probsthain, London.
+    citation: Marshall, John (ed.) 1931. Mohenjo-daro and the Indus Civilization, Vols. I
+      (text) and III (plates). Arthur Probsthain, London.
   nath-rakhigarhi:
     artifacts: []
     category: excavation_report

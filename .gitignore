@@ -25,3 +25,5 @@ data/records/
 # Pinned site-evidence artifacts (declared in ingest/site_sources.yaml,
 # hash-verified). Rebuild with: python ingest/fetch_site_artifacts.py
 data/artifacts/sites/
+# SITE-5: raw IA inventory snapshot (regenerate with ingest/ignca_inventory.py fetch)
+data/ignca_inventory.json

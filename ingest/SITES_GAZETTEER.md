@@ -67,13 +67,34 @@ artifacts:
 - `tests/test_site_artifacts.py` enforces the entry contract and re-hashes
   every locally present artifact against the registry.
 
-Coverage as of 2026-09-20: 10 artifacts pinned across 6 of 31 sources
-(unesco-whc ×3, vats1940 ×2, marshall1931 ×2, shinde2018, pleiades ×2).
-The rest — excavation-report PDFs not yet digitized or located (Rao 1979,
-Lal 2003, Bisht 2015, Nath's Rakhigarhi report, Francfort 1989, UE 10),
-eGyankosh units, and web snapshots — are tracked for SITE-5 (IGNCA/IA
-inventory) and follow-up pinning. An empty `artifacts: []` is honest: the
-citation stands, the bytes aren't yet pinned.
+Coverage as of 2026-09-20: 12 artifacts pinned across 7 of 31 sources
+(unesco-whc ×3, vats1940 ×2, marshall1931 ×3, shinde2018, pleiades ×2, gadd1932).
+The rest — excavation-report PDFs not found in the SITE-5 IGNCA/IA snapshot
+(Rao 1979, Lal 2003, Bisht 2015, Nath's Rakhigarhi report, Francfort 1989, UE 10),
+eGyankosh units, and web snapshots — remain on the acquisition list for
+follow-up pinning. An empty `artifacts: []` is honest: the citation stands,
+the bytes aren't yet pinned.
+
+## IGNCA/IA inventory (SITE-5)
+
+The IGNCA digitized the ASI Central Archaeological Library onto the Internet
+Archive as `in.gov.ignca.*` (the old asi.nic.in/asi_books URLs are link-rotted).
+`ingest/ignca_inventory.py` turns "maybe the reports are in there" into a known
+inventory:
+
+- `fetch`: pages IA advancedsearch by identifier prefix buckets
+  (`in.gov.ignca.10*` … `in.gov.ignca.99*`) — IA's relevance ranking drifts
+  across deep pages and ignores `start` when a sort is given, so naive
+  pagination silently duplicates/misses items. Snapshot: `data/ignca_inventory.json`
+  (gitignored).
+- `match`: matches titles/creators against the registry's wanted list plus a
+  loose second pass (author not required; cataloging varies). Report:
+  `ingest/ignca_inventory.yaml`, keyed by registry source id, `hit`/`miss`.
+- `tests/test_ignca_inventory.py`: report contract + byte-identical
+  reproducibility from the snapshot.
+
+Hits become pinned artifacts (SITE-2 follow-through); misses stay on the
+acquisition list with the search recorded, so nobody re-searches blind.
 
 ## Review status
 
