@@ -12,7 +12,7 @@ and prioritized.
 
 ## Site gazetteer
 
-- **SITE-1 — Per-field evidence schema** · P0 · proposed
+- **SITE-1 — Per-field evidence schema** · P0 · in progress
   Each asserted site field carries its own citation (source ID, full citation,
   page/plate/table) and review state; values labeled as source / normalized /
   derived / provisional. Motivated by Kalibangan: periods verified, coordinates
