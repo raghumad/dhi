@@ -13,6 +13,9 @@ data/artifacts/plates/
 data/artifacts/marshall1931_jp2.zip
 data/artifacts/marshall1931_djvu.txt
 data/artifacts/plates-marshall/
+data/artifacts/met_objects.json
+data/artifacts/met_manifest.json
+data/artifacts/images-met/
 # Derived: figure crops, review sheets, detection manifest.
 data/figures/
 # Derived: parsed catalog records.

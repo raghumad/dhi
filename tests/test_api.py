@@ -80,11 +80,14 @@ def test_search_finds_material_terms():
 
 
 def test_search_motif_absent_from_tabulation():
-    # motifs (unicorn, bull) live in the book's prose, not the tabulation:
-    # honest zero, not a silent failure
+    # motifs (unicorn, bull) live in the book's prose, not the tabulation --
+    # but the museum source carries them in titles, so the catalog now
+    # honestly finds them there and only there.
     r = client.get("/search", params={"q": "unicorn"})
     assert r.status_code == 200
-    assert r.json()["total"] == 0
+    ids = [h["id"] for h in r.json()["records"]]
+    assert len(ids) > 0
+    assert all(i.startswith("met-") for i in ids)
 
 
 def test_stats_consistent_with_listing():
@@ -99,8 +102,10 @@ def test_export_json_round_trips():
     r = client.get("/export", params={"format": "json"})
     assert r.status_code == 200
     lines = [ln for ln in r.text.splitlines() if ln.strip()]
-    rec = json.loads(lines[0])
-    assert rec["id"].startswith("vats1940-")
+    ids = [json.loads(ln)["id"] for ln in lines]
+    # every record has a stable, source-prefixed id
+    assert all("-" in i for i in ids)
+    assert any(i.startswith("vats1940-") for i in ids)
     assert len(lines) == client.get("/stats").json()["total"]
 
 

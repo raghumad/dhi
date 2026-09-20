@@ -35,6 +35,7 @@ sys.path.insert(0, str(INGEST))
 SOURCE_STEPS: dict[str, list[str]] = {
     "vats1940": ["extract_plates:vats1940", "crop_figures", "parse_vats"],
     "marshall1931": ["extract_plates:marshall1931", "crop_marshall"],
+    "met": ["fetch_met", "parse_met"],
 }
 
 
@@ -48,7 +49,14 @@ def run_step(spec: str) -> None:
         else:
             module = spec
             sys.argv = [module]
-        runpy.run_module(module, run_name="__main__")
+        try:
+            runpy.run_module(module, run_name="__main__")
+        except SystemExit as e:
+            # Step modules are written as scripts (e.g. sys.exit(main())).
+            # A clean exit ends the step, not the whole multi-source build;
+            # a non-zero exit still aborts the build.
+            if e.code not in (None, 0):
+                raise
     finally:
         sys.argv = saved_argv
 

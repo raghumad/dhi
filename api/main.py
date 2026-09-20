@@ -59,7 +59,10 @@ def tokens(text: str) -> list[str]:
 def record_text(r: dict) -> str:
     return " ".join(str(r.get(k, "")) for k in (
         "figure_no", "site", "size_raw", "depth_raw", "type_raw", "material",
-        "colour", "mound", "field_no", "plate") + tuple(r.get("unmapped", [])))
+        "colour", "mound", "field_no", "plate",
+        # museum records (parse_met): title, culture, period, medium, accession
+        "title", "culture", "period", "object_date", "medium_raw",
+        "accession_number", "museum") + tuple(r.get("unmapped", [])))
 
 
 def load() -> None:
@@ -73,6 +76,13 @@ def load() -> None:
             if not line.strip():
                 continue
             r = json.loads(line)
+            # Museum records (parse_met) arrive with image_url already set;
+            # keep it and don't run the Vats crop/plate logic on them.
+            if r.get("image_url") and r.get("provenance_type") == "museum":
+                r.setdefault("image_status", "museum")
+                r.setdefault("plate_image_url", None)
+                RECORDS[r["id"]] = r
+                continue
             # Enrich with image URLs. figure_no is the plate illustration
             # number; crops exist only for plates processed so far.
             figno = r.get("figure_no")
@@ -165,6 +175,23 @@ def plate_image(plate: str):
     return FileResponse(path, media_type="image/jpeg")
 
 
+MUSEUM_IMG_DIR = ROOT / "data" / "artifacts" / "images-met"
+
+
+@app.get("/images/museum/{filename}")
+def museum_image(filename: str):
+    """Museum collection photo, e.g. /images/museum/met-324063.jpg."""
+    # Restrict to the fetch manifest's files; no path traversal.
+    if not filename.startswith("met-") or not filename.endswith(".jpg"):
+        raise HTTPException(404, "no such image")
+    if "/" in filename or ".." in filename:
+        raise HTTPException(404, "no such image")
+    path = MUSEUM_IMG_DIR / filename
+    if not path.is_file():
+        raise HTTPException(404, "no such image")
+    return FileResponse(path, media_type="image/jpeg")
+
+
 @app.get("/seals")
 def list_seals(
     limit: int = Query(20, ge=1, le=1000),
@@ -235,9 +262,10 @@ def export(format: str = Query("json", pattern="^(json|csv)$")):
                 "type_raw", "material", "colour", "mound", "field_no",
                 "image_url", "plate_image_url", "source"])
     for r in recs:
-        w.writerow([r["id"], r.get("figure_no"), r.get("plate"), r["site"],
-                    r["size_raw"], r["depth_raw"], r["type_raw"],
-                    r["material"], r["colour"], r["mound"], r["field_no"],
+        w.writerow([r["id"], r.get("figure_no"), r.get("plate"), r.get("site"),
+                    r.get("size_raw"), r.get("depth_raw"), r.get("type_raw"),
+                    r.get("material"), r.get("colour"), r.get("mound"),
+                    r.get("field_no"),
                     r.get("image_url"), r.get("plate_image_url"),
                     r["provenance"]["source"]])
     buf.seek(0)
