@@ -39,14 +39,19 @@ and prioritized.
   One file per site (`ingest/sites/<site_id>.yaml`); a build step compiles and
   validates them into `sites.geojson`; tests reject a "verified" field with no
   structured citation; new/changed entries stay quarantined until reviewed.
-- **SITE-5 — IGNCA/IA ASI-books inventory** · P1 · proposed
-  Query Internet Archive collection metadata for `in.gov.ignca.*` (the
-  IGNCA-digitized ASI Central Archaeological Library; formerly
-  asi.nic.in/asi_books, now link-rotted), match title-by-title against the corpus
-  list, and record hits/misses in the source registry. Turns "maybe the reports
-  are in there" into a known inventory; stable IA items become the pinned
-  artifacts SITE-2 needs. Immediate payoff if found: Lal's Kalibangan memoir
-  (MASI 98) would unblock its unverified coordinates.
+- **SITE-5 — IGNCA/IA ASI-books inventory** · P1 · done (2026-09-20)
+  `ingest/ignca_inventory.py` fetched all 9,735 `in.gov.ignca.*` items (identifier-
+  prefix buckets; IA's ranking drifts across deep pages) and matched them against
+  the wanted list; report in `ingest/ignca_inventory.yaml`, contract + reproducibility
+  in `tests/test_ignca_inventory.py`. Findings: Rao 1979 (Lothal), Lal 2003
+  (Kalibangan), Bisht 2015 (Dholavira), Nath (Rakhigarhi), Francfort 1989, Legrain
+  1951 are absent from the 2026-09-20 in.gov.ignca.* snapshot — not a claim they are
+  unavailable elsewhere — Kalibangan's coordinates stay provisional.
+  Two hits pinned with title-page verification: Marshall 1931 Vol. I text
+  (`in.gov.ignca.14985`, 38MB) and Gadd 1932 Ur seals (`in.gov.ignca.33779`;
+  IA metadata misdates it 1958 / misspells C.J. Gadd). Registry now 12 artifacts
+  across 7 sources. Other candidates recorded (Mackay 1937/38, Vats 1940 Vol. I
+  text) for follow-up pinning.
 
 ## Map
 
@@ -81,6 +86,21 @@ and prioritized.
 - **SEAL-5 — Investigate Vats record expansion (371 → 721)** · P4 · proposed
   Output grew from 371 to 721 records (figures 1–713) without an explained cause.
   Understand it before it corrupts downstream data.
+
+## Plate figures
+
+- **FIG-1 — Native-resolution inspection for every plate figure** · — · proposed
+  From discussion: comparing unicorn horn ribbing / neck folds across carvers,
+  the Dancing Girl's back, female figurines' distinct hairstyles. The need is
+  generic, not one-off crop sets: any detected figure on any plate viewable at
+  native scan resolution, citable by plate + printed figure number.
+  v1 scope: figure index (plate → figures → boxes → crops) across plate sources
+  (Vats reprint, Marshall Vol III, Marshall Vol I — the Dancing Girl plates are
+  in the Vol I PDF pinned under SITE-5); viewer serving native-res crops keyed
+  by stable figure ID. Explicitly out of v1: finding figures *by motif*
+  ("show me all female figurines") — that needs subject tagging, a later layer.
+  Adjacent to SEAL-3 (multi-view UX) and SEAL-4 (`figure_no` stable IDs);
+  positional auto-indexes are not citable, printed numbers are.
 
 ## Georeferencing
 
