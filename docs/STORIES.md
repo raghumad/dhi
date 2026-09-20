@@ -29,6 +29,14 @@ and prioritized.
   One file per site (`ingest/sites/<site_id>.yaml`); a build step compiles and
   validates them into `sites.geojson`; tests reject a "verified" field with no
   structured citation; new/changed entries stay quarantined until reviewed.
+- **SITE-5 — IGNCA/IA ASI-books inventory** · P1 · proposed
+  Query Internet Archive collection metadata for `in.gov.ignca.*` (the
+  IGNCA-digitized ASI Central Archaeological Library; formerly
+  asi.nic.in/asi_books, now link-rotted), match title-by-title against the corpus
+  list, and record hits/misses in the source registry. Turns "maybe the reports
+  are in there" into a known inventory; stable IA items become the pinned
+  artifacts SITE-2 needs. Immediate payoff if found: Lal's Kalibangan memoir
+  (MASI 98) would unblock its unverified coordinates.
 
 ## Map
 
