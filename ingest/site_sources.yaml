@@ -94,7 +94,24 @@ sources:
     citation: Government of India, Ministry of Culture. Lok Sabha Unstarred Question No. 4977, answered
       26.03.2018.
   marshall1931:
-    artifacts: []
+    artifacts:
+    - bytes: null
+      description: IGNCA scan of Marshall 1931 Vol. III (310 leaves), from the ASI Central Archaeological
+        Library via in.gov.ignca.48270. Shared with the seal pipeline (ingest/sources.yaml).
+      media_type: application/zip
+      name: vol3-jp2
+      path: data/artifacts/marshall1931_jp2.zip
+      pinned_on: '2026-09-20'
+      sha256: 8af238e77610812358bd380c745f555b7a0683964ca19436fcba2f9104092a70
+      url: https://archive.org/download/in.gov.ignca.48270/48270_jp2.zip
+    - bytes: null
+      description: OCR text of Marshall 1931 Vol. III. Shared with the seal pipeline.
+      media_type: text/plain
+      name: vol3-ocr
+      path: data/artifacts/marshall1931_djvu.txt
+      pinned_on: '2026-09-20'
+      sha256: 0dbefe190923df157654c701478657dc8595c67b38c063f0c506b635d77c37eb
+      url: https://archive.org/download/in.gov.ignca.48270/48270_djvu.txt
     category: excavation_report
     citation: Marshall, John (ed.) 1931. Mohenjo-daro and the Indus Civilization, Vol. III (plates). Arthur
       Probsthain, London.
@@ -109,12 +126,30 @@ sources:
     citation: 'Parpola, A. 2018. ''Indus Seals and Glyptic Studies: An Overview.'' University of Helsinki
       open repository.'
   pleiades-gonur:
-    artifacts: []
+    artifacts:
+    - bytes: 34276
+      description: Pleiades place 391537222 JSON (fetched 2026-09-20). Corroborates Gonur Tepe representative
+        point.
+      media_type: application/json
+      name: pleiades-391537222-json
+      path: data/artifacts/sites/pleiades-gonur/391537222.json
+      pinned_on: '2026-09-20'
+      sha256: bd1ae69c47939546a676f7b1751bb1e98399296671e36c1cece87fd453145b2d
+      url: https://pleiades.stoa.org/places/391537222/json
     category: gazetteer
     citation: 'McKee, J., Becker, J., Johansson & Rattenborg. 2025. ''Gonur Tepe: a Pleiades place resource.''
       Pleiades 391537222.'
   pleiades-shortughai:
-    artifacts: []
+    artifacts:
+    - bytes: 10174
+      description: Pleiades place 717754049 JSON (fetched 2026-09-20). Backs Shortughai representative
+        point 37.323652, 69.5256008.
+      media_type: application/json
+      name: pleiades-717754049-json
+      path: data/artifacts/sites/pleiades-shortughai/717754049.json
+      pinned_on: '2026-09-20'
+      sha256: 86d76dd929a336fea63c3445233ffd0f35e586fd4808f9605ad4cc627e1f504a
+      url: https://pleiades.stoa.org/places/717754049/json
     category: gazetteer
     citation: 'Becker, J. & Mckee, G. 2024. ''Shortugai: a Pleiades place resource.'' Pleiades 717754049
       (ISAW/NYU).'
@@ -129,7 +164,16 @@ sources:
     citation: 'Rao, S.R. 1979. Lothal: A Harappan Port Town (1955-62). Memoirs of the ASI No. 78, Vol.
       I (Vol. II, 1985).'
   shinde2018:
-    artifacts: []
+    artifacts:
+    - bytes: 68990936
+      description: 'Publisher PDF of Shinde et al. 2018, PLoS ONE 13(2): e0192299. Backs Rakhigarhi coordinates
+        (RGR-07), excavation status, site description.'
+      media_type: application/pdf
+      name: plos-one-e0192299
+      path: data/artifacts/sites/shinde2018/plos-one-e0192299.pdf
+      pinned_on: '2026-09-20'
+      sha256: 7f341bef726fe6b9508d73295c5bcbb18685f722f925ceaa9c958155f1d762c2
+      url: https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0192299&type=printable
     category: peer_reviewed
     citation: 'Shinde, V.S. et al. 2018. ''Archaeological and anthropological studies on the Harappan
       cemetery of Rakhigarhi, India.'' PLoS ONE 13(2): e0192299.'
@@ -139,12 +183,56 @@ sources:
     citation: 'Thapar, B.K. 1975. ''Kalibangan: A Harappan Metropolis Beyond the Indus Valley.'' Expedition
       17(2): 19-32.'
   unesco-whc:
-    artifacts: []
+    artifacts:
+    - bytes: 436630
+      description: 'Second-cycle periodic report, Section II: Archaeological Ruins at Moenjodaro (property
+        138). Backs Mohenjo-daro coordinates, size, excavation history.'
+      media_type: application/pdf
+      name: periodic-report-138
+      path: data/artifacts/sites/unesco-whc/whc-164707.pdf
+      pinned_on: '2026-09-20'
+      sha256: 1321fa93599fcf8779a2ea7a05038204c536afc1b3d2b3df86b4f60b9badb92a
+      url: https://whc.unesco.org/document/164707
+    - bytes: 3418756
+      description: 'WHC 44 COM document 8B (2021): Dholavira nomination/evaluation record. Backs Dholavira
+        name, coordinates, size.'
+      media_type: application/pdf
+      name: dholavira-44com-8b
+      path: data/artifacts/sites/unesco-whc/whc-187795.pdf
+      pinned_on: '2026-09-20'
+      sha256: 8b639dedc8869c9915210447ac59cd1433dd4e183fe79abe0521dac86cc456b3
+      url: https://whc.unesco.org/document/187795
+    - bytes: 863924
+      description: 'Nomination dossier: Qal''at al-Bahrain - Ancient Harbour and Capital of Dilmun (ref
+        1192ter). Backs coordinates, size, periods, excavation history.'
+      media_type: application/pdf
+      name: qal-at-al-bahrain-dossier
+      path: data/artifacts/sites/unesco-whc/whc-168878.pdf
+      pinned_on: '2026-09-20'
+      sha256: 9c8c5f53e153aa794351680dfdee30159232f4c9bc2a8b883b398bc9385c04f8
+      url: https://whc.unesco.org/document/168878
     category: unesco
     citation: 'UNESCO World Heritage Centre: World Heritage List and nomination / periodic-reporting documents
       (whc.unesco.org).'
   vats1940:
-    artifacts: []
+    artifacts:
+    - bytes: null
+      description: OCR text of Vats 1940 Vol. I (Tabulation of Seals). Shared with the seal pipeline (ingest/sources.yaml).
+      media_type: text/plain
+      name: tabulation-ocr
+      path: data/artifacts/vats1940_djvu.txt
+      pinned_on: '2026-09-20'
+      sha256: b53574e45b24cf582cc3683ca4ffbf6e3af51fafa4f8d79af91533daa772c60f
+      url: https://archive.org/download/in.ernet.dli.2015.210462/2015.210462.Excavations-At_djvu.txt
+    - bytes: null
+      description: 1999 ASI reprint scan of Vats 1940 Vol. II (149 leaves). Source of Plate I (site plan)
+        used for Harappa georeferencing. Shared with the seal pipeline.
+      media_type: application/pdf
+      name: plates-pdf-1999-reprint
+      path: data/artifacts/plates-source.pdf
+      pinned_on: '2026-09-20'
+      sha256: a0a2aad6e03fb015291b6a11a6b35ed5e93f72d8e5d47a0933ffac1dddcc4aea
+      url: https://archive.org/download/dli.jZY9lup2kZl6TuXGlZQdjZM9k0Iy.TVA_BOK_0009128/TVA_BOK_0009128_Excavations_at_Harappa.pdf
     category: excavation_report
     citation: 'Vats, M.S. 1940. Excavations at Harappa: Being an Account of Archaeological Excavations
       at Harappa Carried Out Between the Years 1920-21 and 1933-34, Vols. I-II. Government of India Press.'

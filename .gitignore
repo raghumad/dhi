@@ -22,3 +22,6 @@ data/figures/
 data/records/
 # Partial downloads.
 *.part
+# Pinned site-evidence artifacts (declared in ingest/site_sources.yaml,
+# hash-verified). Rebuild with: python ingest/fetch_site_artifacts.py
+data/artifacts/sites/

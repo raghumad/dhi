@@ -44,6 +44,37 @@ Rules enforced by `tests/test_sites_schema.py`:
 
 Rebuild: `.venv/bin/python ingest/build_sites.py`
 
+## Pinned artifacts (SITE-2)
+
+Every source in the registry may declare `artifacts` — immutable files fetched
+once and addressed by SHA-256, following the same contract as the seal
+pipeline's `ingest/sources.yaml` + `ingest/fetch.py`:
+
+```yaml
+artifacts:
+  - name: periodic-report-138
+    url: https://whc.unesco.org/document/164707
+    sha256: 1321fa93599fcf8...
+    path: data/artifacts/sites/unesco-whc/whc-164707.pdf
+```
+
+- `ingest/fetch_site_artifacts.py` downloads missing artifacts and verifies
+  hashes (a mismatch is a hard error, never a silent overwrite). Some hosts
+  (e.g. whc.unesco.org) require a browser User-Agent; the fetcher sets one.
+- Artifacts live under `data/artifacts/sites/` (gitignored). Sources shared with
+  the seal pipeline (Vats 1940, Marshall 1931 Vol. III) reference the same
+  already-pinned files rather than duplicating them.
+- `tests/test_site_artifacts.py` enforces the entry contract and re-hashes
+  every locally present artifact against the registry.
+
+Coverage as of 2026-09-20: 10 artifacts pinned across 6 of 31 sources
+(unesco-whc ×3, vats1940 ×2, marshall1931 ×2, shinde2018, pleiades ×2).
+The rest — excavation-report PDFs not yet digitized or located (Rao 1979,
+Lal 2003, Bisht 2015, Nath's Rakhigarhi report, Francfort 1989, UE 10),
+eGyankosh units, and web snapshots — are tracked for SITE-5 (IGNCA/IA
+inventory) and follow-up pinning. An empty `artifacts: []` is honest: the
+citation stands, the bytes aren't yet pinned.
+
 ## Review status
 
 Every feature carries the derived `review_status`:
