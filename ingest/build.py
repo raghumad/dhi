@@ -49,7 +49,14 @@ def run_step(spec: str) -> None:
         else:
             module = spec
             sys.argv = [module]
-        runpy.run_module(module, run_name="__main__")
+        try:
+            runpy.run_module(module, run_name="__main__")
+        except SystemExit as e:
+            # Step modules are written as scripts (e.g. sys.exit(main())).
+            # A clean exit ends the step, not the whole multi-source build;
+            # a non-zero exit still aborts the build.
+            if e.code not in (None, 0):
+                raise
     finally:
         sys.argv = saved_argv
 
