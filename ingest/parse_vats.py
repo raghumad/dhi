@@ -32,11 +32,14 @@ import re
 import sys
 from pathlib import Path
 
+import georef
+
 # Paths resolve from this file, not the process CWD: `python ingest/parse_vats.py`
 # works wherever it is started from (R-I1: a repeatable command).
 ROOT = Path(__file__).resolve().parent.parent
 ARTIFACT = ROOT / "data/artifacts/vats1940_djvu.txt"
 OUT = ROOT / "data/records/vats1940_seals.jsonl"
+AREAS_GEOJSON = Path(georef.__file__).resolve().parent / "mound_areas.geojson"
 
 # Figure ranges per plate, read off the Volume II plate scans
 # (archive.org in.ernet.dli.2015.358923, scan pages n91-n107). Figure numbers
@@ -57,6 +60,52 @@ def plate_for_figure(n: int) -> str:
         if lo <= n <= hi:
             return plate
     return ""
+
+
+# --- geographic provenience -----------------------------------------------
+# The tabulation's "Mound or Area" column is joined to the place hierarchy
+# built by ingest/georef.py (standard archaeological provenience levels:
+# site > area > square > locus > point; cf. CIDOC CRM E53/P89).
+# A seal's location is ALWAYS the finest place actually known from the
+# source -- "somewhere within this place", never an exact coordinate.
+
+
+def load_place_index():
+    """place lookup by tabulation mound/area value (builds GeoJSON if absent)."""
+    if not AREAS_GEOJSON.exists():
+        georef.build_areas()
+    with open(AREAS_GEOJSON, encoding="utf-8") as f:
+        fc = json.load(f)
+    by_mound = {}
+    site_place = None
+    for feat in fc["features"]:
+        p = feat["properties"]
+        if p["level"] == "site":
+            site_place = p
+        elif p["level"] == "area":
+            # place_id is "harappa:area:F" -> tabulation value "F"
+            by_mound[p["place_id"].split(":")[-1]] = p
+    return by_mound, site_place
+
+
+def locate(mound_value, place_index):
+    """Build the location block for a tabulation mound/area value."""
+    by_mound, site_place = place_index
+    key = (mound_value or "").strip()
+    place = by_mound.get(key, site_place)
+    lon, lat = place["centroid"]
+    return {
+        "place_id": place["place_id"],
+        "place_name": place["label"],
+        "level": place["level"],  # finest provenience level known
+        "latitude": round(lat, 5),
+        "longitude": round(lon, 5),
+        "uncertainty_m": place["uncertainty_m"],
+        "derivation": ("centroid of georeferenced place polygon"
+                       if place["level"] == "area"
+                       else "site centroid; tabulation value has no mapped area"),
+        "georef_source": "Vats 1940, Pl. I (1999 ASI reprint scan); see ingest/georef.py",
+    }
 
 COLOURS = re.compile(
     r"white|greenish|bluish|green|yellow|red|grey|gray|black|blue|brown|pink|buff",
@@ -267,6 +316,7 @@ HEADER_RE = re.compile(r"TABULA\w*\s+O[PF]\s+SEAL")
 def main() -> None:
     lines = ARTIFACT.read_text(encoding="utf-8", errors="replace").splitlines()
     digest = sha256(ARTIFACT)
+    place_index = load_place_index()
 
     heads = [i for i, l in enumerate(lines) if HEADER_RE.search(l.upper())]
     ch13 = next(i for i, l in enumerate(lines)
@@ -338,6 +388,7 @@ def main() -> None:
             "field_no": row["field_no"],
             "unmapped": row["unmapped"],
             "parse_flags": row["parse_flags"],
+            "location": locate(row["mound"], place_index),
             "provenance": {
                 "source": "Vats, M.S. Excavations at Harappa, Vol. I, 1940. "
                           "Tabulation of Seals (Pls. LXXXV-CI). Public domain.",
@@ -373,6 +424,7 @@ def main() -> None:
             "field_no": None,
             "unmapped": [],
             "parse_flags": ["table-row-unparsed"],
+            "location": locate(None, place_index),
             "provenance": {
                 "source": "Vats, M.S. Excavations at Harappa, Vol. I, 1940. "
                           "Tabulation of Seals (Pls. LXXXV-CI). Public domain.",
