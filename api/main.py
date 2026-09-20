@@ -26,6 +26,7 @@ from fastapi.responses import FileResponse, RedirectResponse, StreamingResponse
 app = FastAPI(title="Dhi PoC", version="0.1.0")
 
 UI_DIR = Path(__file__).resolve().parent / "ui"
+INGEST_DIR = Path(__file__).resolve().parent.parent / "ingest"
 
 # Resolve data paths from this file's location, not the process CWD, so
 # `uvicorn api.main:app` works wherever it is started from.
@@ -163,6 +164,21 @@ def map_view():
 @app.get("/map/plate-i.jpg", include_in_schema=False)
 def map_plate():
     return FileResponse(UI_DIR / "map" / "plate-i.jpg", media_type="image/jpeg")
+
+
+@app.get("/sites")
+def list_sites(affiliation: str | None = Query(default=None, description="harappan or related")):
+    """Site gazetteer: Harappan settlements and related sites with
+    documented Harappan contacts (Indus world scope)."""
+    import json
+    fc = json.loads((INGEST_DIR / "sites.geojson").read_text())
+    feats = fc["features"]
+    if affiliation:
+        if affiliation not in ("harappan", "related"):
+            raise HTTPException(400, "affiliation must be 'harappan' or 'related'")
+        feats = [f for f in feats if f["properties"]["affiliation"] == affiliation]
+    return {"type": "FeatureCollection", "features": feats,
+            "metadata": fc.get("metadata", {})}
 
 
 @app.get("/images/figures/{filename}")

@@ -3,28 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Harappa Mounds — Vats 1940 Plate I Overlay</title>
+<title>Indus World — Site Map</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
   body { margin:0; font-family: system-ui, sans-serif; }
   #map { height: 100vh; }
-  .info { background: white; padding: 8px 12px; border-radius: 6px; box-shadow: 0 1px 5px rgba(0,0,0,.3); }
+  .info { background: white; padding: 8px 12px; border-radius: 6px; }
   .info h3 { margin: 0 0 6px; font-size: 14px; }
   .info p { margin: 2px 0; font-size: 12px; color: #444; }
-  .legend { background: white; padding: 8px 12px; border-radius: 6px; box-shadow: 0 1px 5px rgba(0,0,0,.3); font-size: 12px; }
-  .legend div { margin: 3px 0; }
-  .swatch { display:inline-block; width:14px; height:14px; border-radius:3px; margin-right:6px; vertical-align:middle; }
+  .legend { background: white; padding: 8px 12px; border-radius: 6px;
+            box-shadow: 0 1px 5px rgba(0,0,0,.3); font-size: 12px; }
 </style>
 </head>
 <body>
 <div id="map"></div>
 <script>
-const GEOJSON = {"type": "FeatureCollection", "properties": {"crs": "WGS-84", "generated_by": "ingest/georef.py build_areas()", "anchor": {"label": "Harappa Museum (OSM building)", "lat": 30.6247339, "lon": 72.8646927}, "scale_m_per_px": 1.2595041322314051, "rotation_deg_east_of_up": 2.96, "validation": "village core within 155 m of OSM node; residual consistent with post-1940 eastward growth"}, "features": [{"type": "Feature", "properties": {"place_id": "harappa:area:AB", "level": "area", "parent_id": "harappa", "label": "Mound AB", "note": "North-south ridge south of F, excavation sections I-IV. 49 seals.", "centroid": [72.86281189600503, 30.629669764082948], "source": "Vats 1940, Pl. I (1999 ASI reprint scan)", "georef_method": "1000-ft grid scale + north-arrow rotation + OSM museum anchor", "uncertainty_m": 250, "seal_count": 49}, "geometry": {"type": "Polygon", "coordinates": [[[72.86175448181237, 30.631525976875057], [72.86312398096568, 30.631728933367658], [72.8640847266928, 30.63106403543437], [72.86430066356752, 30.629374634829176], [72.86381078632519, 30.627936786387252], [72.86292587294352, 30.627330774846094], [72.86208838011335, 30.627859605976287], [72.86164278907705, 30.62953871586002], [72.86157538254776, 30.630668413170632], [72.86175448181237, 30.631525976875057]]]}}, {"type": "Feature", "properties": {"place_id": "harappa:area:B", "level": "area", "parent_id": "harappa", "label": "Mound B", "note": "Small mound north of E, near modern grave yards. 16 seals. Approximate box.", "centroid": [72.86220978280573, 30.631227801877223], "source": "Vats 1940, Pl. I (1999 ASI reprint scan)", "georef_method": "1000-ft grid scale + north-arrow rotation + OSM museum anchor", "uncertainty_m": 250, "seal_count": 16}, "geometry": {"type": "Polygon", "coordinates": [[[72.8619466309578, 30.6313929972884], [72.86240593928095, 30.631413578731323], [72.86247293465367, 30.63106260646605], [72.86201362633051, 30.631042025023124], [72.8619466309578, 30.6313929972884]]]}}, {"type": "Feature", "properties": {"place_id": "harappa:area:C", "level": "area", "parent_id": "harappa", "label": "Area C", "note": "Small area north of mound E. 1 seal. Approximate box.", "centroid": [72.8644749331892, 30.631470892183525], "source": "Vats 1940, Pl. I (1999 ASI reprint scan)", "georef_method": "1000-ft grid scale + north-arrow rotation + OSM museum anchor", "uncertainty_m": 250, "seal_count": 1}, "geometry": {"type": "Polygon", "coordinates": [[[72.86421178134125, 30.6316360875947], [72.86467108966441, 30.631656669037625], [72.86473808503713, 30.631305696772348], [72.86427877671397, 30.631285115329426], [72.86421178134125, 30.6316360875947]]]}}, {"type": "Feature", "properties": {"place_id": "harappa:area:D", "level": "area", "parent_id": "harappa", "label": "Area D", "note": "Small excavation area at the south foot of Mound AB. 20 seals. Polygon is a small approximate box around the 'D' label.", "centroid": [72.86406245546505, 30.627771076440002], "source": "Vats 1940, Pl. I (1999 ASI reprint scan)", "georef_method": "1000-ft grid scale + north-arrow rotation + OSM museum anchor", "uncertainty_m": 250, "seal_count": 20}, "geometry": {"type": "Polygon", "coordinates": [[[72.86381078632519, 30.627936786387252], [72.86427009464835, 30.627957367830174], [72.86433709002105, 30.6276063955649], [72.86383185086558, 30.627583755977685], [72.86381078632519, 30.627936786387252]]]}}, {"type": "Feature", "properties": {"place_id": "harappa:area:E", "level": "area", "parent_id": "harappa", "label": "Mound E", "note": "Large east-west mound east of AB. No seals in the Vats tabulation carry mound=E; included for completeness.", "centroid": [72.86713773413953, 30.62741331456], "source": "Vats 1940, Pl. I (1999 ASI reprint scan)", "georef_method": "1000-ft grid scale + north-arrow rotation + OSM museum anchor", "uncertainty_m": 250, "seal_count": 0}, "geometry": {"type": "Polygon", "coordinates": [[[72.8644828971776, 30.62825008287929], [72.86629906592982, 30.628685439060554], [72.86859982045368, 30.62871774019326], [72.86990504742317, 30.628068278342166], [72.86963639852625, 30.62678193278553], [72.86784129431443, 30.6259935461947], [72.86577019395214, 30.625971535783457], [72.8645671553392, 30.626837961241023], [72.8644828971776, 30.62825008287929]]]}}, {"type": "Feature", "properties": {"place_id": "harappa:area:F", "level": "area", "parent_id": "harappa", "label": "Mound F", "note": "Northwest mound; Great Granary complex. 265 seals.", "centroid": [72.86139934614728, 30.632412697847535], "source": "Vats 1940, Pl. I (1999 ASI reprint scan)", "georef_method": "1000-ft grid scale + north-arrow rotation + OSM museum anchor", "uncertainty_m": 250, "seal_count": 265}, "geometry": {"type": "Polygon", "coordinates": [[[72.85979086127733, 30.633561833560766], [72.86184932291538, 30.63379566221775], [72.86303129698791, 30.633282267169754], [72.86332835767878, 30.6321628605806], [72.86268152427485, 30.63142592759708], [72.86109079677612, 30.63107146821919], [72.85991724851975, 30.63144365110336], [72.85950536074809, 30.632557912331784], [72.85979086127733, 30.633561833560766]]]}}, {"type": "Feature", "properties": {"place_id": "harappa:area:G", "level": "area", "parent_id": "harappa", "label": "Area G", "note": "Low flat area southeast of the site, near the Lahore-Multan road. 6 seals. Approximate box.", "centroid": [72.87207671829808, 30.62543998800129], "source": "Vats 1940, Pl. I (1999 ASI reprint scan)", "georef_method": "1000-ft grid scale + north-arrow rotation + OSM museum anchor", "uncertainty_m": 250, "seal_count": 6}, "geometry": {"type": "Polygon", "coordinates": [[[72.87131138418658, 30.62572427052515], [72.87268930915606, 30.625786014853922], [72.87284205240957, 30.625155705477432], [72.8714641274401, 30.625093961148657], [72.87131138418658, 30.62572427052515]]]}}, {"type": "Feature", "properties": {"place_id": "harappa:area:H", "level": "area", "parent_id": "harappa", "label": "Area H (prehistoric cemetery)", "note": "Cemetery R 37 area between AB and E. 4 seals. Approximate box.", "centroid": [72.86453080633922, 30.626482358151087], "source": "Vats 1940, Pl. I (1999 ASI reprint scan)", "georef_method": "1000-ft grid scale + north-arrow rotation + OSM museum anchor", "uncertainty_m": 250, "seal_count": 4}, "geometry": {"type": "Polygon", "coordinates": [[[72.86400144575143, 30.626671022273538], [72.86492006239773, 30.626712185159388], [72.86506016692701, 30.626293694028636], [72.86414155028069, 30.62625253114279], [72.86400144575143, 30.626671022273538]]]}}, {"type": "Feature", "properties": {"place_id": "harappa:area:J", "level": "area", "parent_id": "harappa", "label": "Area J", "note": "Small excavation area south of AB, east of D. 4 seals. Approximate box.", "centroid": [72.86454472920435, 30.627792686955072], "source": "Vats 1940, Pl. I (1999 ASI reprint scan)", "georef_method": "1000-ft grid scale + north-arrow rotation + OSM museum anchor", "uncertainty_m": 250, "seal_count": 4}, "geometry": {"type": "Polygon", "coordinates": [[[72.86431602548066, 30.627959425974467], [72.86472940297149, 30.6279779492731], [72.86479639834421, 30.627626977007825], [72.86433709002105, 30.6276063955649], [72.86431602548066, 30.627959425974467]]]}}, {"type": "Feature", "properties": {"place_id": "harappa:area:P", "level": "area", "parent_id": "harappa", "label": "Great Granary area (Mound F)", "note": "Vats' 'Mound P' = the Great Granary excavation complex (trenches I-VI); confirmed by 'Mound P, Great Granary Area, Square J 9/20' (Vol I). 82 seals. Polygon covers the hatched excavation blocks on Pl. I; it lies inside F's footprint.", "centroid": [72.86117368441583, 30.632255096732056], "source": "Vats 1940, Pl. I (1999 ASI reprint scan)", "georef_method": "1000-ft grid scale + north-arrow rotation + OSM museum anchor", "uncertainty_m": 250, "seal_count": 82}, "geometry": {"type": "Polygon", "coordinates": [[[72.859952030347, 30.632790312020447], [72.86144056948919, 30.632927807791866], [72.86226963650319, 30.6325401888255], [72.8621969385032, 30.631828982645636], [72.86106130641956, 30.631565710792586], [72.86012162523284, 30.631877578316303], [72.859952030347, 30.632790312020447]]]}}, {"type": "Feature", "properties": {"place_id": "harappa", "level": "site", "parent_id": null, "label": "Harappa", "note": "Archaeological site; fallback for records with no mapped area", "centroid": [72.86444, 30.62919], "source": "Vats 1940, Pl. I (1999 ASI reprint scan)", "georef_method": "mean of area centroids", "uncertainty_m": 1500, "seal_count": 274}, "geometry": null}]};
-const SEAL_COUNTS = {"harappa:area:AB": 49, "harappa:area:F": 265, "harappa": 274, "harappa:area:B": 16, "harappa:area:P": 82, "harappa:area:G": 6, "harappa:area:D": 20, "harappa:area:J": 4, "harappa:area:H": 4, "harappa:area:C": 1};
+const MOUNDS = {"type": "FeatureCollection", "properties": {"crs": "WGS-84", "generated_by": "ingest/georef.py build_areas()", "anchor": {"label": "Harappa Museum (OSM building)", "lat": 30.6247339, "lon": 72.8646927}, "scale_m_per_px": 1.2595041322314051, "rotation_deg_east_of_up": 2.96, "validation": "village core within 155 m of OSM node; residual consistent with post-1940 eastward growth"}, "features": [{"type": "Feature", "properties": {"place_id": "harappa:area:AB", "level": "area", "parent_id": "harappa", "label": "Mound AB", "note": "North-south ridge south of F, excavation sections I-IV. 49 seals.", "centroid": [72.86281189600503, 30.629669764082948], "source": "Vats 1940, Pl. I (1999 ASI reprint scan)", "georef_method": "1000-ft grid scale + north-arrow rotation + OSM museum anchor", "uncertainty_m": 250, "seal_count": 49}, "geometry": {"type": "Polygon", "coordinates": [[[72.86175448181237, 30.631525976875057], [72.86312398096568, 30.631728933367658], [72.8640847266928, 30.63106403543437], [72.86430066356752, 30.629374634829176], [72.86381078632519, 30.627936786387252], [72.86292587294352, 30.627330774846094], [72.86208838011335, 30.627859605976287], [72.86164278907705, 30.62953871586002], [72.86157538254776, 30.630668413170632], [72.86175448181237, 30.631525976875057]]]}}, {"type": "Feature", "properties": {"place_id": "harappa:area:B", "level": "area", "parent_id": "harappa", "label": "Mound B", "note": "Small mound north of E, near modern grave yards. 16 seals. Approximate box.", "centroid": [72.86220978280573, 30.631227801877223], "source": "Vats 1940, Pl. I (1999 ASI reprint scan)", "georef_method": "1000-ft grid scale + north-arrow rotation + OSM museum anchor", "uncertainty_m": 250, "seal_count": 16}, "geometry": {"type": "Polygon", "coordinates": [[[72.8619466309578, 30.6313929972884], [72.86240593928095, 30.631413578731323], [72.86247293465367, 30.63106260646605], [72.86201362633051, 30.631042025023124], [72.8619466309578, 30.6313929972884]]]}}, {"type": "Feature", "properties": {"place_id": "harappa:area:C", "level": "area", "parent_id": "harappa", "label": "Area C", "note": "Small area north of mound E. 1 seal. Approximate box.", "centroid": [72.8644749331892, 30.631470892183525], "source": "Vats 1940, Pl. I (1999 ASI reprint scan)", "georef_method": "1000-ft grid scale + north-arrow rotation + OSM museum anchor", "uncertainty_m": 250, "seal_count": 1}, "geometry": {"type": "Polygon", "coordinates": [[[72.86421178134125, 30.6316360875947], [72.86467108966441, 30.631656669037625], [72.86473808503713, 30.631305696772348], [72.86427877671397, 30.631285115329426], [72.86421178134125, 30.6316360875947]]]}}, {"type": "Feature", "properties": {"place_id": "harappa:area:D", "level": "area", "parent_id": "harappa", "label": "Area D", "note": "Small excavation area at the south foot of Mound AB. 20 seals. Polygon is a small approximate box around the 'D' label.", "centroid": [72.86406245546505, 30.627771076440002], "source": "Vats 1940, Pl. I (1999 ASI reprint scan)", "georef_method": "1000-ft grid scale + north-arrow rotation + OSM museum anchor", "uncertainty_m": 250, "seal_count": 20}, "geometry": {"type": "Polygon", "coordinates": [[[72.86381078632519, 30.627936786387252], [72.86427009464835, 30.627957367830174], [72.86433709002105, 30.6276063955649], [72.86383185086558, 30.627583755977685], [72.86381078632519, 30.627936786387252]]]}}, {"type": "Feature", "properties": {"place_id": "harappa:area:E", "level": "area", "parent_id": "harappa", "label": "Mound E", "note": "Large east-west mound east of AB. No seals in the Vats tabulation carry mound=E; included for completeness.", "centroid": [72.86713773413953, 30.62741331456], "source": "Vats 1940, Pl. I (1999 ASI reprint scan)", "georef_method": "1000-ft grid scale + north-arrow rotation + OSM museum anchor", "uncertainty_m": 250, "seal_count": 0}, "geometry": {"type": "Polygon", "coordinates": [[[72.8644828971776, 30.62825008287929], [72.86629906592982, 30.628685439060554], [72.86859982045368, 30.62871774019326], [72.86990504742317, 30.628068278342166], [72.86963639852625, 30.62678193278553], [72.86784129431443, 30.6259935461947], [72.86577019395214, 30.625971535783457], [72.8645671553392, 30.626837961241023], [72.8644828971776, 30.62825008287929]]]}}, {"type": "Feature", "properties": {"place_id": "harappa:area:F", "level": "area", "parent_id": "harappa", "label": "Mound F", "note": "Northwest mound; Great Granary complex. 265 seals.", "centroid": [72.86139934614728, 30.632412697847535], "source": "Vats 1940, Pl. I (1999 ASI reprint scan)", "georef_method": "1000-ft grid scale + north-arrow rotation + OSM museum anchor", "uncertainty_m": 250, "seal_count": 265}, "geometry": {"type": "Polygon", "coordinates": [[[72.85979086127733, 30.633561833560766], [72.86184932291538, 30.63379566221775], [72.86303129698791, 30.633282267169754], [72.86332835767878, 30.6321628605806], [72.86268152427485, 30.63142592759708], [72.86109079677612, 30.63107146821919], [72.85991724851975, 30.63144365110336], [72.85950536074809, 30.632557912331784], [72.85979086127733, 30.633561833560766]]]}}, {"type": "Feature", "properties": {"place_id": "harappa:area:G", "level": "area", "parent_id": "harappa", "label": "Area G", "note": "Low flat area southeast of the site, near the Lahore-Multan road. 6 seals. Approximate box.", "centroid": [72.87207671829808, 30.62543998800129], "source": "Vats 1940, Pl. I (1999 ASI reprint scan)", "georef_method": "1000-ft grid scale + north-arrow rotation + OSM museum anchor", "uncertainty_m": 250, "seal_count": 6}, "geometry": {"type": "Polygon", "coordinates": [[[72.87131138418658, 30.62572427052515], [72.87268930915606, 30.625786014853922], [72.87284205240957, 30.625155705477432], [72.8714641274401, 30.625093961148657], [72.87131138418658, 30.62572427052515]]]}}, {"type": "Feature", "properties": {"place_id": "harappa:area:H", "level": "area", "parent_id": "harappa", "label": "Area H (prehistoric cemetery)", "note": "Cemetery R 37 area between AB and E. 4 seals. Approximate box.", "centroid": [72.86453080633922, 30.626482358151087], "source": "Vats 1940, Pl. I (1999 ASI reprint scan)", "georef_method": "1000-ft grid scale + north-arrow rotation + OSM museum anchor", "uncertainty_m": 250, "seal_count": 4}, "geometry": {"type": "Polygon", "coordinates": [[[72.86400144575143, 30.626671022273538], [72.86492006239773, 30.626712185159388], [72.86506016692701, 30.626293694028636], [72.86414155028069, 30.62625253114279], [72.86400144575143, 30.626671022273538]]]}}, {"type": "Feature", "properties": {"place_id": "harappa:area:J", "level": "area", "parent_id": "harappa", "label": "Area J", "note": "Small excavation area south of AB, east of D. 4 seals. Approximate box.", "centroid": [72.86454472920435, 30.627792686955072], "source": "Vats 1940, Pl. I (1999 ASI reprint scan)", "georef_method": "1000-ft grid scale + north-arrow rotation + OSM museum anchor", "uncertainty_m": 250, "seal_count": 4}, "geometry": {"type": "Polygon", "coordinates": [[[72.86431602548066, 30.627959425974467], [72.86472940297149, 30.6279779492731], [72.86479639834421, 30.627626977007825], [72.86433709002105, 30.6276063955649], [72.86431602548066, 30.627959425974467]]]}}, {"type": "Feature", "properties": {"place_id": "harappa:area:P", "level": "area", "parent_id": "harappa", "label": "Great Granary area (Mound F)", "note": "Vats' 'Mound P' = the Great Granary excavation complex (trenches I-VI); confirmed by 'Mound P, Great Granary Area, Square J 9/20' (Vol I). 82 seals. Polygon covers the hatched excavation blocks on Pl. I; it lies inside F's footprint.", "centroid": [72.86117368441583, 30.632255096732056], "source": "Vats 1940, Pl. I (1999 ASI reprint scan)", "georef_method": "1000-ft grid scale + north-arrow rotation + OSM museum anchor", "uncertainty_m": 250, "seal_count": 82}, "geometry": {"type": "Polygon", "coordinates": [[[72.859952030347, 30.632790312020447], [72.86144056948919, 30.632927807791866], [72.86226963650319, 30.6325401888255], [72.8621969385032, 30.631828982645636], [72.86106130641956, 30.631565710792586], [72.86012162523284, 30.631877578316303], [72.859952030347, 30.632790312020447]]]}}, {"type": "Feature", "properties": {"place_id": "harappa", "level": "site", "parent_id": null, "label": "Harappa", "note": "Archaeological site; fallback for records with no mapped area", "centroid": [72.86444, 30.62919], "source": "Vats 1940, Pl. I (1999 ASI reprint scan)", "georef_method": "mean of area centroids", "uncertainty_m": 1500}, "geometry": null}]};
+const SITES = {"features": [{"geometry": {"coordinates": [72.8739, 30.6357], "type": "Point"}, "properties": {"affiliation": "harappan", "excavation_status": "excavated", "harappan_connection": null, "name": "Harappa", "notes": "Type site. Detailed mound gazetteer in mound_areas.geojson.", "periods": ["early", "mature", "late"], "site_id": "harappa", "size_class": "major_city", "sources": ["Vats 1940"], "uncertainty_m": 500}, "type": "Feature"}, {"geometry": {"coordinates": [67.1386, 27.3292], "type": "Point"}, "properties": {"affiliation": "harappan", "excavation_status": "excavated", "harappan_connection": null, "name": "Mohenjo-daro", "notes": "Largest known Indus city. Seal tabulation parser pending.", "periods": ["mature", "late"], "site_id": "mohenjo-daro", "size_class": "major_city", "sources": ["Marshall 1931"], "uncertainty_m": 500}, "type": "Feature"}, {"geometry": {"coordinates": [76.1146, 29.3901], "type": "Point"}, "properties": {"affiliation": "harappan", "excavation_status": "excavated", "harappan_connection": null, "name": "Rakhigarhi", "notes": "Possibly the largest Indus site by area; excavations ongoing.", "periods": ["early", "mature", "late"], "site_id": "rakhigarhi", "size_class": "major_city", "sources": ["ASI reports"], "uncertainty_m": 1000}, "type": "Feature"}, {"geometry": {"coordinates": [74.13, 29.4619], "type": "Point"}, "properties": {"affiliation": "harappan", "excavation_status": "excavated", "harappan_connection": null, "name": "Kalibangan", "notes": "Ghaggar-Hakra (Saraswati) belt; pre-Harappan and Harappan phases.", "periods": ["early", "mature"], "site_id": "kalibangan", "size_class": "major_city", "sources": ["Lal & Thapar"], "uncertainty_m": 500}, "type": "Feature"}, {"geometry": {"coordinates": [70.2137, 23.8862], "type": "Point"}, "properties": {"affiliation": "harappan", "excavation_status": "excavated", "harappan_connection": null, "name": "Dholavira", "notes": "Kachchh; famous water management systems and signboard inscription.", "periods": ["early", "mature", "late"], "site_id": "dholavira", "size_class": "major_city", "sources": ["Bisht, ASI"], "uncertainty_m": 500}, "type": "Feature"}, {"geometry": {"coordinates": [72.2498, 22.5259], "type": "Point"}, "properties": {"affiliation": "harappan", "excavation_status": "excavated", "harappan_connection": null, "name": "Lothal", "notes": "Port town with dockyard; bead-making center.", "periods": ["mature", "late"], "site_id": "lothal", "size_class": "town", "sources": ["Rao, ASI"], "uncertainty_m": 500}, "type": "Feature"}, {"geometry": {"coordinates": [62.03, 38.19], "type": "Point"}, "properties": {"affiliation": "related", "excavation_status": "excavated", "harappan_connection": "Indus seals, ivory objects, and carnelian beads excavated; BMAC-Harappan trade contact (Sarianidi).", "name": "Gonur Tepe", "notes": "BMAC (Oxus civilization) capital in Margiana, Turkmenistan. Key evidence for Indus-Central Asia contact.", "periods": ["mature"], "site_id": "gonur-tepe", "size_class": "major_city", "sources": ["Sarianidi"], "uncertainty_m": 2000}, "type": "Feature"}, {"geometry": {"coordinates": [46.1031, 30.9625], "type": "Point"}, "properties": {"affiliation": "related", "excavation_status": "excavated", "harappan_connection": "Indus seals and sealings found in Mesopotamian context; Meluhha trade (Woolley excavations).", "name": "Ur", "notes": "Sumerian city; Indus (Meluhha) merchant presence attested.", "periods": ["mature"], "site_id": "ur", "size_class": "major_city", "sources": ["Woolley"], "uncertainty_m": 1000}, "type": "Feature"}, {"geometry": {"coordinates": [50.55, 26.03], "type": "Point"}, "properties": {"affiliation": "related", "excavation_status": "excavated", "harappan_connection": "Entrepot for Indus-Mesopotamia Gulf trade; Indus-related weights and seals.", "name": "Dilmun (Bahrain)", "notes": "Persian Gulf trade hub linking Meluhha (Indus) and Mesopotamia.", "periods": ["mature"], "site_id": "dilmun-bahrain", "size_class": "town", "sources": ["Bibby; Hojlund"], "uncertainty_m": 5000}, "type": "Feature"}, {"geometry": {"coordinates": [69.53, 37.33], "type": "Point"}, "properties": {"affiliation": "harappan", "excavation_status": "excavated", "harappan_connection": null, "name": "Shortugai", "notes": "Northernmost Harappan outpost (Afghanistan); lapis lazuli trade.", "periods": ["mature"], "site_id": "shortugai", "size_class": "town", "sources": ["Francfort"], "uncertainty_m": 2000}, "type": "Feature"}], "metadata": {"coordinate_note": "Representative site centers; uncertainty_m reflects location pinning quality.", "description": "Site-level places: Harappan settlements and related sites with documented Harappan contacts.", "sources": "See ingest/SITES_GAZETTEER.md", "title": "Indus World Site Gazetteer"}, "type": "FeatureCollection"};
 
-// --- map ---
-const map = L.map('map').setView([30.6292, 72.8644], 14);
+const map = L.map('map').setView([28.5, 62.0], 5);
 
 const osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 19, attribution: '&copy; OpenStreetMap contributors'
@@ -34,13 +32,39 @@ const sat = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Wo
 });
 osm.addTo(map);
 
-// --- Plate I image overlay (georeferenced bounds) ---
-// corners: (0,0)->30.63595,72.85297  (1749,1241)->30.62285,72.87678
-// small rotation (2.96 deg) ignored; bounding box used
-const plateBounds = [[30.62183, 72.85297], [30.63698, 72.87678]];
-const plateOverlay = L.imageOverlay('plate-i.jpg', plateBounds, {opacity: 0.65});
+// --- site markers ---
+const siteLayer = L.geoJSON(SITES, {
+  pointToLayer: (f, latlng) => {
+    const harappan = f.properties.affiliation === 'harappan';
+    const major = f.properties.size_class === 'major_city';
+    const verified = f.properties.review_status === 'verified';
+    return L.circleMarker(latlng, {
+      radius: major ? 9 : 6,
+      color: harappan ? '#1a5fb4' : '#813d9c', weight: 2,
+      fillColor: harappan ? '#1a5fb4' : '#813d9c',
+      fillOpacity: verified ? 0.7 : 0.0,
+      dashArray: verified ? null : '4 3'
+    });
+  },
+  onEachFeature: (f, l) => {
+    const p = f.properties;
+    let h = '<div class="info"><h3>' + p.name + '</h3>' +
+      (p.review_status === 'verified'
+        ? ''
+        : '<p style="color:#a00"><b>UNVERIFIED:</b> location and details provisional, '
+          + 'not yet traced to an authoritative source.</p>') +
+      '<p><b>Affiliation:</b> ' + p.affiliation + '</p>' +
+      '<p><b>Size:</b> ' + p.size_class + ' | <b>Status:</b> ' + p.excavation_status + '</p>' +
+      '<p><b>Periods:</b> ' + (p.periods||[]).join(', ') + '</p>';
+    if (p.harappan_connection) h += '<p><b>Harappan connection:</b> ' + p.harappan_connection + '</p>';
+    if (p.notes) h += '<p>' + p.notes + '</p>';
+    h += '</div>';
+    l.bindPopup(h);
+    l.bindTooltip(p.name);
+  }
+});
 
-// --- mound polygons ---
+// --- Harappa mound polygons ---
 const COLORS = {
   'harappa:area:F': '#e41a1c', 'harappa:area:P': '#ff7f00',
   'harappa:area:AB': '#4daf4a', 'harappa:area:E': '#984ea3',
@@ -48,72 +72,54 @@ const COLORS = {
   'harappa:area:H': '#a65628', 'harappa:area:G': '#999999',
   'harappa:area:B': '#ffff33', 'harappa:area:C': '#66c2a5'
 };
-
-function style(f) {
-  const pid = f.properties.place_id;
-  return {
-    color: COLORS[pid] || '#3388ff', weight: 2.5,
-    fillColor: COLORS[pid] || '#3388ff', fillOpacity: 0.18
-  };
-}
-
-function popup(f) {
-  const p = f.properties;
-  const n = p.seal_count || 0;
-  return `<div class="info"><h3>${p.label}</h3>` +
-    `<p><b>ID:</b> <code>${p.place_id}</code></p>` +
-    `<p><b>Level:</b> ${p.level} &nbsp; <b>Seals:</b> ${n}</p>` +
-    (p.note ? `<p>${p.note}</p>` : '') +
-    `<p><b>Uncertainty:</b> ±${p.uncertainty_m} m</p>` +
-    `<p style="color:#888">${p.source}</p></div>`;
-}
-
-const moundLayer = L.geoJSON(GEOJSON, {
+const moundLayer = L.geoJSON(MOUNDS, {
   filter: f => f.properties.level === 'area' && f.geometry,
-  style: style,
-  onEachFeature: (f, l) => l.bindPopup(popup(f))
-}).addTo(map);
-
-// --- uncertainty circles (250 m around each area centroid) ---
-const uncertLayer = L.layerGroup();
-GEOJSON.features.forEach(f => {
-  if (f.properties.level !== 'area' || !f.geometry) return;
-  const [lon, lat] = f.properties.centroid;
-  L.circle([lat, lon], {
-    radius: f.properties.uncertainty_m,
-    color: COLORS[f.properties.place_id] || '#3388ff',
-    weight: 1, dashArray: '4 4', fillOpacity: 0.04
-  }).bindTooltip(f.properties.label + ' ±' + f.properties.uncertainty_m + 'm').addTo(uncertLayer);
+  style: f => {
+    const c = COLORS[f.properties.place_id] || '#3388ff';
+    return {color: c, weight: 2.5, fillColor: c, fillOpacity: 0.18};
+  },
+  onEachFeature: (f, l) => {
+    const p = f.properties;
+    l.bindPopup('<div class="info"><h3>' + p.label + '</h3>' +
+      '<p><b>ID:</b> <code>' + p.place_id + '</code></p>' +
+      '<p><b>Seals:</b> ' + (p.seal_count || 0) + ' | <b>Uncertainty:</b> &plusmn;' + p.uncertainty_m + ' m</p>' +
+      (p.note ? '<p>' + p.note + '</p>' : '') + '</div>');
+  }
 });
 
-// --- OSM reference markers ---
-const refLayer = L.layerGroup();
-[
-  [30.6247339, 72.8646927, "Harappa Museum (anchor)"],
-  [30.6330564, 72.8701682, "Harappa village (OSM)"],
-].forEach(([lat, lon, label]) => {
-  L.marker([lat, lon]).bindTooltip(label).addTo(refLayer);
-});
-refLayer.addTo(map);
+// --- Plate I overlay ---
+const plateOverlay = L.imageOverlay('plate-i.jpg',
+  [[30.62183, 72.85297], [30.63698, 72.87678]], {opacity: 0.65});
 
-// --- layer control ---
+// --- zoom-dependent visibility ---
+function updateLayers() {
+  const z = map.getZoom();
+  if (z < 10) {
+    if (!map.hasLayer(siteLayer)) map.addLayer(siteLayer);
+    if (map.hasLayer(moundLayer)) map.removeLayer(moundLayer);
+    if (map.hasLayer(plateOverlay)) map.removeLayer(plateOverlay);
+  } else {
+    if (map.hasLayer(siteLayer)) map.removeLayer(siteLayer);
+    if (!map.hasLayer(moundLayer)) map.addLayer(moundLayer);
+  }
+}
+map.on('zoomend', updateLayers);
+updateLayers();
+
 L.control.layers(
   {"OpenStreetMap": osm, "Satellite": sat},
-  {"Mound polygons": moundLayer, "Uncertainty circles": uncertLayer,
-    "Plate I (1940 plan)": plateOverlay, "Reference points": refLayer},
+  {"Sites": siteLayer, "Harappa mounds": moundLayer, "Plate I overlay": plateOverlay},
   {collapsed: false}
 ).addTo(map);
 
-// --- legend ---
 const legend = L.control({position: 'bottomright'});
 legend.onAdd = () => {
   const d = L.DomUtil.create('div', 'legend');
-  d.innerHTML = '<b>Mounds</b> (seal count)<br>' + Object.entries(COLORS)
-    .map(([pid, c]) => {
-      const label = pid.split(':').pop();
-      const n = SEAL_COUNTS[pid] || 0;
-      return `<div><span class="swatch" style="background:${c}"></span>${label} (${n})</div>`;
-    }).join('');
+  d.innerHTML = '<b>Sites</b><br>' +
+    '<span style="color:#1a5fb4">&#9679;</span> Harappan settlement<br>' +
+    '<span style="color:#813d9c">&#9679;</span> Related site (Harappan contact)<br>' +
+    '<span style="color:#a00">&#9678;</span> Unverified (provisional data)<br>' +
+    '<span style="font-size:10px">Zoom in for mound detail</span>';
   return d;
 };
 legend.addTo(map);
