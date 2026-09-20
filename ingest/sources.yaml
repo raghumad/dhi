@@ -1,0 +1,48 @@
+# Dhi source registry.
+#
+# Each source declares:
+#   - its artifacts: files fetched by ingest/fetch.py (URL + SHA-256).
+#     fetch.py is fully generic: download, verify hash, cache. No per-source code.
+#   - its parser module: parse(artifact) -> records + flags contract.
+#   - any source-specific build steps (e.g. plate extraction below).
+#
+# Adding a new source = a new entry here + its parser module.
+# No plugin machinery: fetch stays generic, source specifics stay explicit.
+#
+# All paths are relative to the repo root. Nothing under data/ is committed;
+# run `python ingest/build.py` to materialize the dataset from these manifests.
+
+sources:
+  - id: vats1940
+    citation: >-
+      Vats, M.S. 1940. Excavations at Harappa: Being an Account of
+      Archaeological Excavations at Harappa Carried Out Between the Years
+      1920-21 and 1933-34. Vol. I (text), Vol. II (139 plates). Delhi:
+      Government of India Press.
+    license: public-domain
+    parser: parse_vats
+    artifacts:
+      - name: tabulation-ocr
+        description: >-
+          OCR text of Vol. I ("Tabulation of Seals", figures 1-713).
+          Source of the catalog records.
+        url: https://archive.org/download/in.ernet.dli.2015.210462/2015.210462.Excavations-At_djvu.txt
+        sha256: b53574e45b24cf582cc3683ca4ffbf6e3af51fafa4f8d79af91533daa772c60f
+        path: data/artifacts/vats1940_djvu.txt
+      - name: plates-pdf
+        description: >-
+          Scanned Vol. II (139 plates). Source of the seal illustrations.
+          Individual plate pages are extracted by ingest/extract_plates.py.
+        url: https://archive.org/download/in.ernet.dli.2015.358923/2015.358923.ExcavationsAtHarappaVol21940AC3845.pdf
+        sha256: e4e9b88f89ca5c86b590086a490bad6cd1e0f4a011f603c69f6c6fa8f9a7682e
+        path: data/artifacts/plates-source.pdf
+    # Seal plates LXXXV-CI live on scan pages n91-n107, which are PDF pages
+    # 92-108 (the PDF has one extra front-matter page). Extracted at 300 DPI,
+    # grayscale -> 2788x3993 px, matching the archive.org scan resolution.
+    plate_extraction:
+      scan_start: 91
+      scan_end: 107
+      pdf_page_offset: 1
+      dpi: 300
+      output_dir: data/artifacts/plates
+      filename_pattern: "plate_n{scan}.jpg"

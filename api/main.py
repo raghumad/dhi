@@ -28,6 +28,17 @@ UI_DIR = Path(__file__).resolve().parent / "ui"
 # Resolve data paths from this file's location, not the process CWD, so
 # `uvicorn api.main:app` works wherever it is started from.
 ROOT = Path(__file__).resolve().parent.parent
+FIGURES_DIR = ROOT / "data" / "figures"
+PLATES_DIR = ROOT / "data" / "artifacts" / "plates"
+
+# Plate scan file per Roman numeral (archive.org Vol II page -> plate).
+PLATE_SCANS = {
+    "LXXXV": "n91", "LXXXVI": "n92", "LXXXVII": "n93", "LXXXVIII": "n94",
+    "LXXXIX": "n95", "XC": "n96", "XCI": "n97", "XCII": "n98",
+    "XCIII": "n99", "XCIV": "n100", "XCV": "n101", "XCVI": "n102",
+    "XCVII": "n103", "XCVIII": "n104", "XCIX": "n105", "C": "n106",
+    "CI": "n107",
+}
 
 RECORDS: dict[str, dict] = {}
 # dimension -> value -> [record ids]
@@ -45,16 +56,46 @@ def tokens(text: str) -> list[str]:
 
 def record_text(r: dict) -> str:
     return " ".join(str(r.get(k, "")) for k in (
-        "seal_no", "site", "size_raw", "depth_raw", "type_raw", "material",
-        "colour", "mound", "field_no") + tuple(r.get("unmapped", [])))
+        "figure_no", "site", "size_raw", "depth_raw", "type_raw", "material",
+        "colour", "mound", "field_no", "plate") + tuple(r.get("unmapped", [])))
 
 
 def load() -> None:
+    # Figure crops available (from data/figures/boxes.json manifest).
+    crops: dict[str, dict] = {}
+    boxes_path = FIGURES_DIR / "boxes.json"
+    if boxes_path.exists():
+        crops = json.loads(boxes_path.read_text(encoding="utf-8"))
     for path in sorted((ROOT / "data" / "records").glob("*.jsonl")):
         for line in path.read_text(encoding="utf-8").splitlines():
             if not line.strip():
                 continue
             r = json.loads(line)
+            # Enrich with image URLs. figure_no is the plate illustration
+            # number; crops exist only for plates processed so far.
+            figno = r.get("figure_no")
+            plate = r.get("plate")
+            crop = crops.get(str(figno)) if figno is not None else None
+            if crop:
+                r["image_url"] = f"/images/figures/{crop['crop_file']}"
+                r["image_status"] = "cropped"
+                r["image_provenance"] = {
+                    "plate": crop["plate"],
+                    "plate_scan": crop["plate_scan"],
+                    "box": crop["box"],
+                    "method": crop["method"],
+                    "review": crop["review"],
+                }
+            elif plate and plate in PLATE_SCANS:
+                r["image_url"] = None
+                r["image_status"] = "pending"
+            else:
+                r["image_url"] = None
+                r["image_status"] = "unillustrated"
+            if plate and plate in PLATE_SCANS:
+                r["plate_image_url"] = f"/images/plates/{plate}.jpg"
+            else:
+                r["plate_image_url"] = None
             RECORDS[r["id"]] = r
     for dim in DIMS:
         idx: dict[str, list[str]] = {}
@@ -69,6 +110,11 @@ def load() -> None:
 
 
 load()
+
+if not RECORDS:
+    raise RuntimeError(
+        "no records found under data/records/. The dataset is not committed "
+        "to git; build it first with: python ingest/build.py")
 
 
 def apply_filters(material, colour, mound, type_, site) -> list[str]:
@@ -91,6 +137,30 @@ def root():
 @app.get("/ui", include_in_schema=False)
 def ui():
     return FileResponse(UI_DIR / "index.html")
+
+
+@app.get("/images/figures/{filename}")
+def figure_image(filename: str):
+    """Individual seal crop, e.g. /images/figures/vats1940-fig1.jpg."""
+    # Restrict to the manifest's files; no path traversal.
+    if not filename.startswith("vats1940-fig") or not filename.endswith(".jpg"):
+        raise HTTPException(404, "no such image")
+    path = FIGURES_DIR / filename
+    if not path.is_file():
+        raise HTTPException(404, "no such image")
+    return FileResponse(path, media_type="image/jpeg")
+
+
+@app.get("/images/plates/{plate}.jpg")
+def plate_image(plate: str):
+    """Full source plate scan, e.g. /images/plates/LXXXV.jpg."""
+    scan = PLATE_SCANS.get(plate.upper())
+    if not scan:
+        raise HTTPException(404, "no such plate")
+    path = PLATES_DIR / f"plate_{scan}.jpg"
+    if not path.is_file():
+        raise HTTPException(404, "plate scan not available")
+    return FileResponse(path, media_type="image/jpeg")
 
 
 @app.get("/seals")
@@ -159,12 +229,14 @@ def export(format: str = Query("json", pattern="^(json|csv)$")):
                                           "attachment; filename=dhi-seals.jsonl"})
     buf = io.StringIO()
     w = csv.writer(buf)
-    w.writerow(["id", "seal_no", "site", "size_raw", "depth_raw", "type_raw",
-                "material", "colour", "mound", "field_no", "source"])
+    w.writerow(["id", "figure_no", "plate", "site", "size_raw", "depth_raw",
+                "type_raw", "material", "colour", "mound", "field_no",
+                "image_url", "plate_image_url", "source"])
     for r in recs:
-        w.writerow([r["id"], r["seal_no"], r["site"], r["size_raw"],
-                    r["depth_raw"], r["type_raw"], r["material"], r["colour"],
-                    r["mound"], r["field_no"],
+        w.writerow([r["id"], r.get("figure_no"), r.get("plate"), r["site"],
+                    r["size_raw"], r["depth_raw"], r["type_raw"],
+                    r["material"], r["colour"], r["mound"], r["field_no"],
+                    r.get("image_url"), r.get("plate_image_url"),
                     r["provenance"]["source"]])
     buf.seek(0)
     return StreamingResponse(iter([buf.read()]), media_type="text/csv",

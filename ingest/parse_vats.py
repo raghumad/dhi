@@ -2,18 +2,26 @@
 """PoC parser: Vats 1940 'Tabulation of Seals' -> JSONL records.
 
 Reads the OCR text of the archive.org scan (stored byte-identical under
-data/artifacts/), locates the tabulation pages, and parses one row per seal:
-seal_no, size, depth below surface, type, material cells, mound/area, field no.
+data/artifacts/), locates the tabulation pages, and parses one row per
+illustrated artifact: figure_no, size, depth below surface, type, material
+cells, mound/area, field no.
 
 Row layout in the OCR (each table cell on its own line):
-    <seal_no> <size> <depth> <type> <material x1-3> <mound> <field_no>
-Within one tabulation page the seal numbers form a near-consecutive increasing
-sequence, which anchors row boundaries. Rows whose anchors were too mangled
-are recovered by split heuristics; anything still unparseable is preserved
-raw in `unmapped`, never discarded. Records that need human review carry
-`parse_flags` (merged-row-suspect, duplicate-seal-no, field-no-suspect).
+    <figure_no> <size> <depth> <type> <material x1-3> <mound> <field_no>
+Within one tabulation page the figure numbers form a near-consecutive
+increasing sequence, which anchors row boundaries. Rows whose anchors were
+too mangled are recovered by split heuristics; anything still unparseable
+is preserved raw in `unmapped`, never discarded. Records that need human
+review carry `parse_flags` (merged-row-suspect, duplicate-seal-no,
+field-no-suspect).
 
-Caveat: the tabulation covers the illustrated seals only (figures 60-687+).
+Numbering note: the book's first column is headed "Plate No.", but its
+values are the *figure* numbers of the illustrations on Plates LXXXV-CI in
+Volume II (figures 1-713, numbered continuously across plates), not plate
+numbers. The record field is therefore `figure_no`; the plate is derived
+from the figure-range map below (verified against the plate scans).
+
+Caveat: the tabulation covers the illustrated seals and sealings only.
 Vats notes 974 seals and sealings were recovered in total, but duplicates
 were omitted from the illustrations, so the tabulation is intentionally
 smaller than 974.
@@ -30,6 +38,26 @@ ROOT = Path(__file__).resolve().parent.parent
 ARTIFACT = ROOT / "data/artifacts/vats1940_djvu.txt"
 OUT = ROOT / "data/records/vats1940_seals.jsonl"
 
+# Figure ranges per plate, read off the Volume II plate scans
+# (archive.org in.ernet.dli.2015.358923, scan pages n91-n107). Figure numbers
+# run continuously 1-713 across Plates LXXXV-CI.
+PLATE_FIGURES = [
+    ("LXXXV", 1, 15), ("LXXXVI", 16, 37), ("LXXXVII", 38, 67),
+    ("LXXXVIII", 68, 105), ("LXXXIX", 106, 167), ("XC", 168, 225),
+    ("XCI", 226, 260), ("XCII", 261, 302), ("XCIII", 303, 328),
+    ("XCIV", 329, 367), ("XCV", 368, 428), ("XCVI", 429, 496),
+    ("XCVII", 497, 580), ("XCVIII", 581, 613), ("XCIX", 614, 650),
+    ("C", 651, 692), ("CI", 693, 713),
+]
+
+
+def plate_for_figure(n: int) -> str:
+    """Roman numeral of the plate illustrating figure n ('' if unknown)."""
+    for plate, lo, hi in PLATE_FIGURES:
+        if lo <= n <= hi:
+            return plate
+    return ""
+
 COLOURS = re.compile(
     r"white|greenish|bluish|green|yellow|red|grey|gray|black|blue|brown|pink|buff",
     re.I,
@@ -38,15 +66,15 @@ COLOURS = re.compile(
 # one of these is a material cell, never a field number or unmapped junk.
 MATERIAL_NAMES = {"steatite", "faience", "pottery"}
 
-# A seal-number line is 1-4 chars, all digits or common OCR confusions.
+# A figure-number line is 1-4 chars, all digits or common OCR confusions.
 # Depth lines contain ' or ", sizes contain x/X -- both excluded here.
-SEALNO_RE = re.compile(r"^[0-9OISBlA?*^.\-]{1,4}$")
+FIGURENO_RE = re.compile(r"^[0-9OISBlA?*^.\-]{1,4}$")
 OCR_FIX = str.maketrans({"O": "0", "S": "3", "I": "1", "l": "1", "B": "8", "A": "4"})
 
 
-def norm_sealno(line: str) -> int | None:
+def norm_figureno(line: str) -> int | None:
     s = line.strip()
-    if not SEALNO_RE.fullmatch(s):
+    if not FIGURENO_RE.fullmatch(s):
         return None
     t = re.sub(r"[^0-9OISBlA]", "", s).translate(OCR_FIX)
     if not t.isdigit() or not (1 <= int(t) <= 1500):
@@ -97,11 +125,11 @@ RUNNING_HEAD_RE = re.compile(
 def parse_row(cells: list[str]) -> dict:
     """Content-based classification of a tabulation row's cells.
 
-    Print order is seal_no, size, depth, type, material(steatite, faience,
+    Print order is figure_no, size, depth, type, material(steatite, faience,
     pottery), mound, field_no -- but OCR drops lines, so classify by content.
     Anything unclassified is kept in `unmapped`, never dropped.
     """
-    body = cells[1:]  # cells[0] is the seal_no anchor
+    body = cells[1:]  # cells[0] is the figure_no anchor
     # drop running page headers that leak into the OCR mid-table
     body = [c.replace("©", "e") for c in body
             if not RUNNING_HEAD_RE.match(c)]
@@ -166,13 +194,13 @@ def parse_row(cells: list[str]) -> dict:
             "unmapped": unmapped, "parse_flags": flags}
 
 
-LOOSE_SEALNO_RE = re.compile(r"^[0-9OISBlA?*^.\-■]{1,4}$")
+LOOSE_FIGURENO_RE = re.compile(r"^[0-9OISBlA?*^.\-■]{1,4}$")
 SIZE_LIKE_RE = re.compile(r"[xX×]|diam")
 
 
-def loose_sealno(cell: str) -> int | None:
+def loose_figureno(cell: str) -> int | None:
     tok = cell.strip().split(" ")[0]
-    if not LOOSE_SEALNO_RE.fullmatch(tok):
+    if not LOOSE_FIGURENO_RE.fullmatch(tok):
         return None
     t = re.sub(r"[^0-9OISBlA]", "", tok).translate(OCR_FIX)
     if not t.isdigit() or not (1 <= int(t) <= 1500):
@@ -195,8 +223,8 @@ def _restore_hundreds(value: int, prev: int) -> int:
     return v
 
 
-def split_merged(seal_no: int, cells: list[str]) -> list[tuple[int, list[str]]]:
-    """Recover rows whose seal-no anchor was too mangled for the chain.
+def split_merged(figure_no: int, cells: list[str]) -> list[tuple[int, list[str]]]:
+    """Recover rows whose figure-no anchor was too mangled for the chain.
 
     A later row's cells got appended to this row; its number survives as an
     ordinary cell. Split there, guarded so field numbers can't false-trigger:
@@ -212,11 +240,11 @@ def split_merged(seal_no: int, cells: list[str]) -> list[tuple[int, list[str]]]:
             seen_depth = True
         elif MOUND_RE.fullmatch(c):
             seen_mound = True
-        v = loose_sealno(c)
+        v = loose_figureno(c)
         if v is None:
             continue
-        v = _restore_hundreds(v, seal_no - 3)
-        if v != seal_no and abs(v - seal_no) <= 2:
+        v = _restore_hundreds(v, figure_no - 3)
+        if v != figure_no and abs(v - figure_no) <= 2:
             follows = any(SIZE_LIKE_RE.search(x) or x.strip() == "?"
                           for x in cells[i + 1:i + 4])
             complete = seen_size and seen_depth and seen_mound
@@ -224,17 +252,23 @@ def split_merged(seal_no: int, cells: list[str]) -> list[tuple[int, list[str]]]:
             # both parts must have enough cells to be real rows; this also
             # stops field numbers (row-final codes) from false-splitting
             if (follows or complete) and len(head) >= 5 and len(tail) >= 5:
-                if v > seal_no:
-                    return [(seal_no, head)] + split_merged(v, tail)
-                return [(v, head)] + split_merged(seal_no, tail)
-    return [(seal_no, cells)]
+                if v > figure_no:
+                    return [(figure_no, head)] + split_merged(v, tail)
+                return [(v, head)] + split_merged(figure_no, tail)
+    return [(figure_no, cells)]
+
+
+# Tabulation page headers, OCR-mangled in various ways ("TABULATION OP
+# SEALS", "TABULATIOZST OF SEALS", ...). The table of contents also mentions
+# the tabulation once; heads[0] is that entry and is skipped below.
+HEADER_RE = re.compile(r"TABULA\w*\s+O[PF]\s+SEAL")
 
 
 def main() -> None:
     lines = ARTIFACT.read_text(encoding="utf-8", errors="replace").splitlines()
     digest = sha256(ARTIFACT)
 
-    heads = [i for i, l in enumerate(lines) if "TABULATION OF SEALS" in l.upper()]
+    heads = [i for i, l in enumerate(lines) if HEADER_RE.search(l.upper())]
     ch13 = next(i for i, l in enumerate(lines)
                 if l.strip() == "CHAPTER XIII." and i > heads[-1])
     pages = []
@@ -246,10 +280,10 @@ def main() -> None:
     for start, end in pages:
         chunk = [l.strip() for l in lines[start:end] if l.strip()]
         cands = [(li, v, chunk[li]) for li, l in enumerate(chunk)
-                 if (v := norm_sealno(l)) is not None]
+                 if (v := norm_figureno(l)) is not None]
         chain = longest_chain(cands)
         if not chain:
-            print("warning: no seal-number chain on page", start, file=sys.stderr)
+            print("warning: no figure-number chain on page", start, file=sys.stderr)
             continue
         for k in range(len(chain)):
             a = chain[k][0]
@@ -259,30 +293,40 @@ def main() -> None:
                 anchored.append((chain[k][1], cells))
 
     # split rows that swallowed a following row whose anchor was too
-    # mangled for the seal-number chain
+    # mangled for the figure-number chain
     rows: list[tuple[int, list[str]]] = []
-    for seal_no, cells in anchored:
-        rows.extend(split_merged(seal_no, cells))
+    for figure_no, cells in anchored:
+        rows.extend(split_merged(figure_no, cells))
 
     # dedupe byte-identical rows; disambiguate genuine duplicate numbers
     seen_cells: set[tuple[int, tuple[str, ...]]] = set()
-    seen_no: set[int] = set()
+    seen_no: dict[int, int] = {}
     records = []
-    for seal_no, cells in rows:
-        key = (seal_no, tuple(cells))
+    for figure_no, cells in rows:
+        if not 1 <= figure_no <= 713:
+            # OCR garbage (e.g. a field number chained as a figure); the
+            # cells are preserved in `unmapped` of the nearest real row only
+            # if they were merged there, otherwise dropped here and counted.
+            print(f"warning: dropping out-of-range figure_no {figure_no}",
+                  file=sys.stderr)
+            continue
+        key = (figure_no, tuple(cells))
         if key in seen_cells:
             continue
         seen_cells.add(key)
-        rec_id = f"vats1940-{seal_no}"
+        rec_id = f"vats1940-{figure_no}"
         row = parse_row(cells)
-        if seal_no in seen_no:
-            rec_id += "b"
+        n = seen_no.get(figure_no, 0)
+        if n:
+            # 2nd occurrence -> "b", 3rd -> "c", ...
+            rec_id += chr(ord("a") + n)
             row["parse_flags"].append("duplicate-seal-no")
-        seen_no.add(seal_no)
+        seen_no[figure_no] = n + 1
 
         records.append({
             "id": rec_id,
-            "seal_no": seal_no,
+            "figure_no": figure_no,
+            "plate": plate_for_figure(figure_no),
             "site": "Harappa",
             "size_raw": row["size_raw"],
             "depth_raw": row["depth_raw"],
@@ -303,14 +347,50 @@ def main() -> None:
             },
         })
 
-    records.sort(key=lambda r: r["seal_no"])
+    records.sort(key=lambda r: r["figure_no"])
+
+    # Stub records for illustrated figures whose tabulation row did not
+    # survive OCR well enough to parse. Every figure 1-713 gets a record so
+    # the seal image is always browsable; stubs carry no table data and are
+    # flagged table-row-unparsed for human review. They are honest placeholders,
+    # not parsed data.
+    have = {r["figure_no"] for r in records}
+    for n in range(1, 714):
+        if n in have:
+            continue
+        records.append({
+            "id": f"vats1940-{n}",
+            "figure_no": n,
+            "plate": plate_for_figure(n),
+            "site": "Harappa",
+            "size_raw": None,
+            "depth_raw": None,
+            "type_raw": None,
+            "material": "unknown",
+            "material_cells_raw": [],
+            "colour": None,
+            "mound": None,
+            "field_no": None,
+            "unmapped": [],
+            "parse_flags": ["table-row-unparsed"],
+            "provenance": {
+                "source": "Vats, M.S. Excavations at Harappa, Vol. I, 1940. "
+                          "Tabulation of Seals (Pls. LXXXV-CI). Public domain.",
+                "artifact": "archive.org in.ernet.dli.2015.210462",
+                "artifact_sha256": digest,
+                "extraction": "stub: tabulation row not recovered from OCR; "
+                              "figure number and plate only",
+            },
+        })
+
+    records.sort(key=lambda r: r["figure_no"])
     OUT.parent.mkdir(parents=True, exist_ok=True)
     with OUT.open("w", encoding="utf-8") as f:
         for r in records:
             f.write(json.dumps(r, ensure_ascii=False) + "\n")
     print(f"parsed {len(records)} records -> {OUT}")
     if records:
-        print(f"seal_no range: {records[0]['seal_no']}..{records[-1]['seal_no']}")
+        print(f"figure_no range: {records[0]['figure_no']}..{records[-1]['figure_no']}")
 
 
 if __name__ == "__main__":

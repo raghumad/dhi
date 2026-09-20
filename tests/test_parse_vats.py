@@ -25,22 +25,22 @@ RECORDS = ROOT / "data" / "records" / "vats1940_seals.jsonl"
 # --- seal-number helpers -------------------------------------------------
 
 
-def test_norm_sealno_plain():
-    assert pv.norm_sealno("368") == 368
-    assert pv.norm_sealno(" 60 ") == 60
+def test_norm_figureno_plain():
+    assert pv.norm_figureno("368") == 368
+    assert pv.norm_figureno(" 60 ") == 60
 
 
-def test_norm_sealno_ocr_confusions():
+def test_norm_figureno_ocr_confusions():
     # common OCR misreads of digits are repaired
-    assert pv.norm_sealno("l23") == 123  # lowercase L -> 1
-    assert pv.norm_sealno("B68") == 868  # B -> 8
+    assert pv.norm_figureno("l23") == 123  # lowercase L -> 1
+    assert pv.norm_figureno("B68") == 868  # B -> 8
 
 
-def test_norm_sealno_rejects_non_number_lines():
-    assert pv.norm_sealno("1.0 x 0.9") is None  # size
-    assert pv.norm_sealno("6' 10\"") is None  # depth
-    assert pv.norm_sealno("abcde") is None  # too long / not digits
-    assert pv.norm_sealno("") is None
+def test_norm_figureno_rejects_non_number_lines():
+    assert pv.norm_figureno("1.0 x 0.9") is None  # size
+    assert pv.norm_figureno("6' 10\"") is None  # depth
+    assert pv.norm_figureno("abcde") is None  # too long / not digits
+    assert pv.norm_figureno("") is None
 
 
 def test_longest_chain_skips_outliers():
@@ -177,8 +177,8 @@ def test_records_have_stable_ids_and_schema():
     ids = [r["id"] for r in recs]
     assert len(ids) == len(set(ids)), "duplicate record ids"
     for r in recs:
-        assert re.fullmatch(r"vats1940-\d+b?", r["id"])
-        assert isinstance(r["seal_no"], int)
+        assert re.fullmatch(r"vats1940-\d+[a-z]?", r["id"])
+        assert isinstance(r["figure_no"], int)
         assert r["site"] == "Harappa"
         assert isinstance(r["parse_flags"], list)
         assert isinstance(r["unmapped"], list)

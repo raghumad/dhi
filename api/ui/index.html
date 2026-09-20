@@ -47,6 +47,11 @@
     #detail { max-height: none; }
   }
 </style>
+  <style>
+    .sealimg { max-width: 100%; max-height: 420px; border: 1px solid var(--line); border-radius: 6px; background: #fff; }
+    .imgwrap { margin: 12px 0; }
+    .imgnote { font-size: .85em; color: var(--muted); margin-top: 6px; }
+  </style>
 </head>
 <body>
 
@@ -107,7 +112,7 @@ function filtered() {
     if (flag === "flagged" && !r.parse_flags.length) return false;
     if (flag === "clean" && r.parse_flags.length) return false;
     if (q) {
-      const hay = [r.id, r.material, r.mound, r.field_no, r.colour, String(r.seal_no)]
+      const hay = [r.id, r.material, r.mound, r.field_no, r.colour, String(r.figure_no), r.plate]
         .join(" ").toLowerCase();
       if (!hay.includes(q)) return false;
     }
@@ -123,7 +128,7 @@ function renderList() {
   $("list").innerHTML = recs.map(r =>
     `<div class="rec${r.id === curId ? " active" : ""}" data-id="${esc(r.id)}" role="option" tabindex="0">
        <div class="rid">${esc(r.id)}</div>
-       <div class="meta">seal ${esc(r.seal_no)} · ${esc(r.material)} · mound ${esc(r.mound)}${r.parse_flags.length ? " · ⚠ flagged" : ""}</div>
+       <div class="meta">fig ${esc(r.figure_no)} · Pl. ${esc(r.plate || "?")} · ${esc(r.material)} · mound ${esc(r.mound)}${r.parse_flags.length ? " · ⚠ flagged" : ""}${r.image_url ? " · 🖼" : ""}</div>
      </div>`).join("") || '<div class="rec">No records match.</div>';
   document.querySelectorAll(".rec[data-id]").forEach(el => {
     const go = () => { location.hash = "#/seals/" + encodeURIComponent(el.dataset.id); };
@@ -138,10 +143,25 @@ function renderDetail(id) {
   if (!r) { d.innerHTML = '<div class="empty">Record not found.</div>'; return; }
   const flagExpl = r.parse_flags.map(f =>
     `<div class="flagexpl"><b>${esc(f)}</b> — ${esc(FLAG_EXPLANATIONS[f] || "See parser documentation.")}</div>`).join("");
+  // Slice 1 (individual seal) + Slice 2 (full plate), per project principle.
+  let imgHtml = "";
+  if (r.image_url) {
+    imgHtml = `<div class="imgwrap">
+      <img class="sealimg" src="${esc(r.image_url)}" alt="Seal figure ${esc(r.figure_no)} from Plate ${esc(r.plate)}">
+      <div class="imgnote">Figure ${esc(r.figure_no)}, Plate ${esc(r.plate)}.
+        ${r.plate_image_url ? `<a href="${esc(r.plate_image_url)}" target="_blank" rel="noopener">View full plate ${esc(r.plate)}</a> for context.` : ""}</div>
+    </div>`;
+  } else if (r.plate_image_url) {
+    imgHtml = `<div class="imgwrap">
+      <div class="imgnote">Individual seal crop pending — <a href="${esc(r.plate_image_url)}" target="_blank" rel="noopener">view full Plate ${esc(r.plate)}</a> (figure ${esc(r.figure_no)}).</div>
+    </div>`;
+  }
   d.innerHTML = `
     <h2 style="margin-top:0"><code>${esc(r.id)}</code> ${flagsHtml(r)}</h2>
     ${flagExpl}
+    ${imgHtml}
     <table class="fields">
+      <tr><th>Figure no.</th><td>${esc(r.figure_no)}</td><th>Plate</th><td>${esc(r.plate || "—")}</td></tr>
       <tr><th>Seal no.</th><td>${esc(r.seal_no)}</td><th>Material</th><td>${esc(r.material)}</td></tr>
       <tr><th>Mound</th><td>${esc(r.mound)}</td><th>Field no.</th><td>${esc(r.field_no)}</td></tr>
       <tr><th>Colour</th><td>${esc(r.colour)}</td><th>Type</th><td>${esc(r.type_raw)}</td></tr>
