@@ -3,8 +3,8 @@
     {
       "geometry": {
         "coordinates": [
-          72.8739,
-          30.6357
+          72.86444,
+          30.62919
         ],
         "type": "Point"
       },
@@ -13,7 +13,7 @@
         "excavation_status": "excavated",
         "harappan_connection": null,
         "name": "Harappa",
-        "notes": "Type site. Detailed mound gazetteer in mound_areas.geojson.",
+        "notes": "Eponymous type site of the Harappan civilization; on the Ravi. Excavated 1920-21 to 1933-34 (Vats) and 1986-2001 (HARP).",
         "periods": [
           "early",
           "mature",
@@ -22,11 +22,15 @@
         "site_id": "harappa",
         "size_class": "major_city",
         "sources": [
-          "Vats 1940"
+          "Vats, M.S. 1940. Excavations at Harappa, Vol. I (text), Vol. II (139 plates). Govt. of India Press. \u2014 title page (site name); Plate I (site plan; georeferenced for coordinates and mound polygons)",
+          "IGNOU eGyankosh BHIC-101E Unit 5 (Dr. Avantika Sharma): 'Harappa was excavated in 1920 by Daya Ram Sahni'; 'following the archaeological convention of naming a culture where it was first discovered'; chronology table lists Harappa under Early (3300-2600 BCE), Mature (2600-1800 BCE), Late ('Cemetery H at Harappa')",
+          "Harappa Archaeological Research Project (HARP), harappa.com/indus4/e1.html: Period 1 Ravi/Hakra (>3500-2800 BC), Period 2 Kot Diji (2800-2600 BC), Period 3 Harappa phase (2600-1900 BC), Period 5 Late Harappa (c.1800-<1300 BC)",
+          "Kenoyer 2008 (Sackler Colloquium, harappa.com PDF): city grew to 150 ha in the Harappa phase; Dales & Kenoyer 1990: areal extent ~150 ha; Vats 1940:3: site ~3.5 miles 'in circuit'"
         ],
-        "uncertainty_m": 500,
-        "review_status": "unverified",
-        "authority_note": "Coordinates and description are provisional, drawn from general knowledge; not yet traced to an authoritative source. Do not cite."
+        "uncertainty_m": 1500,
+        "review_status": "verified",
+        "authority_note": "All fields traced to excavation report, excavation project, or national university course material.",
+        "coordinate_provenance": "Derived: Vats 1940 Plate I georeferenced (1000-ft grid scale + north-arrow rotation 2.96 deg + OSM Harappa Museum anchor); site centroid = mean of mound-area centroids. Method documented in mound_areas.geojson properties."
       },
       "type": "Feature"
     },

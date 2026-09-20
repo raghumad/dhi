@@ -27,7 +27,7 @@ Every feature carries `review_status`:
 
 | site_id | status | authoritative source | verified |
 |---|---|---|---|
-| harappa | unverified | — | — |
+| harappa | verified | Vats 1940; HARP; Kenoyer 2008; IGNOU Unit 5 | 2026-09-20 |
 | mohenjo-daro | unverified | — | — |
 | rakhigarhi | unverified | — | — |
 | kalibangan | unverified | — | — |
