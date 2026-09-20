@@ -111,6 +111,11 @@ def load() -> None:
 
 load()
 
+if not RECORDS:
+    raise RuntimeError(
+        "no records found under data/records/. The dataset is not committed "
+        "to git; build it first with: python ingest/build.py")
+
 
 def apply_filters(material, colour, mound, type_, site) -> list[str]:
     sets = []

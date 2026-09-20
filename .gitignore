@@ -4,3 +4,15 @@ __pycache__/
 .venv/
 .pytest_cache/
 vats1940_djvu.xml
+
+# ---- Ingestion outputs: never committed. Rebuild with: python ingest/build.py
+# Fetched source artifacts (declared in ingest/sources.yaml, hash-verified).
+data/artifacts/vats1940_djvu.txt
+data/artifacts/plates-source.pdf
+data/artifacts/plates/
+# Derived: figure crops, review sheets, detection manifest.
+data/figures/
+# Derived: parsed catalog records.
+data/records/
+# Partial downloads.
+*.part
