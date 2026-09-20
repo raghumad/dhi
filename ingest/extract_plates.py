@@ -13,7 +13,10 @@ source id:
 
 Renders each page with pdftoppm and saves it as a grayscale JPEG.
 Deterministic: re-running over an unchanged PDF reproduces identical
-plates. Idempotent: existing outputs are skipped.
+plates. Idempotent: existing outputs are skipped, UNLESS the source
+artifact changed (tracked via output_dir/.source_sha256) -- then stale
+outputs are wiped and re-extracted so a source switch can never
+silently reuse plates from the previous artifact.
 
 Requires: pdftoppm (poppler-utils), Pillow.
 
@@ -56,6 +59,23 @@ def main() -> None:
         raise SystemExit(f"{source_id}: no plate_extraction in sources.yaml")
     out_dir = ROOT / ex["output_dir"]
     out_dir.mkdir(parents=True, exist_ok=True)
+
+    # Cache invalidation: if the source artifact changed (e.g. Vats 1940
+    # scan -> 1999 reprint), old plates must not be reused. The stamp file
+    # records which artifact hash produced the current outputs.
+    artifact = plates_artifact(cfg)
+    want_hash = artifact["sha256"].lower()
+    stamp = out_dir / ".source_sha256"
+    if stamp.is_file() and stamp.read_text().strip().lower() == want_hash:
+        source_changed = False
+    else:
+        source_changed = True
+        if any(out_dir.iterdir()):
+            print(f"  source artifact changed; clearing {out_dir}")
+            for p in out_dir.iterdir():
+                if p.is_file():
+                    p.unlink()
+        stamp.write_text(want_hash + "\n")
 
     if "scans" in ex:
         scans = ex["scans"]
