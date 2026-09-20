@@ -31,7 +31,7 @@ Every feature carries `review_status`:
 | mohenjo-daro | unverified | — | — |
 | rakhigarhi | unverified | — | — |
 | kalibangan | unverified | — | — |
-| dholavira | unverified | — | — |
+| dholavira | verified | UNESCO 2021 dossier; Bisht 2015 (ASI); IGNOU Unit 5 | 2026-09-20 |
 | lothal | unverified | — | — |
 | shortugai | unverified | — | — |
 | gonur-tepe | unverified | — | — |

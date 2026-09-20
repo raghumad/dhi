@@ -125,8 +125,8 @@
     {
       "geometry": {
         "coordinates": [
-          70.2137,
-          23.8862
+          70.2133,
+          23.8884
         ],
         "type": "Point"
       },
@@ -135,7 +135,7 @@
         "excavation_status": "excavated",
         "harappan_connection": null,
         "name": "Dholavira",
-        "notes": "Kachchh; famous water management systems and signboard inscription.",
+        "notes": "Tripartite fortified Harappan city (citadel, middle town, lower town) with elaborate reservoir-based water harvesting; ten large Indus-script gypsum inlays (\"signboard\") at the North Gate. Excavated 1989-90 to 2004-05 (ASI, R.S. Bisht).",
         "periods": [
           "early",
           "mature",
@@ -144,11 +144,16 @@
         "site_id": "dholavira",
         "size_class": "major_city",
         "sources": [
-          "Bisht, ASI"
+          "UNESCO World Heritage Centre: 'Dholavira: A Harappan City', inscribed 2021, 44COM 8B.35, ref. 1645 \u2014 official property name",
+          "UNESCO nomination table, doc 187795 (properties examined 2021): centre point N23 53 18.27 E70 12 47.89 (= 23.8884, 70.2133); inscribed area 103 ha",
+          "Bisht, R.S. 2015. Excavations at Dholavira (1989-2005). ASI \u2014 reservoirs (\u00a7pp.148,164 per public copy); signboard (\u00a78.1.1, pp.228-231 per public copy); seven cultural stages, occupation through 3rd millennium into mid-2nd millennium BCE",
+          "Bisht lecture, IIT Gandhinagar, 18 Oct 2013 ('Dholavira: A Unique Harappan City'): 13 field seasons 1989-90 to 2004-05; 'one amongst five largest urban centers of Harappan civilization' (with Mohenjodaro, Harappa, Ganweriwala, Rakhigarhi)",
+          "IGNOU eGyankosh BHIC-101E Unit 5: Dholavira among Gujarat Harappan sites; listed under Mature Harappan and in Transitional Phase row"
         ],
         "uncertainty_m": 500,
-        "review_status": "unverified",
-        "authority_note": "Coordinates and description are provisional, drawn from general knowledge; not yet traced to an authoritative source. Do not cite."
+        "review_status": "verified",
+        "authority_note": "All fields traced to UNESCO listing/dossier, ASI excavation report, or excavator's lecture. Discovery (1968, J.P. Joshi) unverified \u2014 omitted.",
+        "coordinate_provenance": "Centre point of the inscribed UNESCO property as filed in India's January 2020 nomination dossier (table doc 187795); not a surveyed city centre but property-scale, adequate for a site dot."
       },
       "type": "Feature"
     },
