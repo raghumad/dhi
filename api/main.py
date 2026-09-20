@@ -153,6 +153,18 @@ def ui():
     return FileResponse(UI_DIR / "index.html")
 
 
+@app.get("/map", include_in_schema=False)
+def map_view():
+    """Interactive map: Vats 1940 Plate I mound polygons overlaid on modern
+    satellite/OSM, with the georeferenced 1940 plan as a toggleable layer."""
+    return FileResponse(UI_DIR / "map" / "index.html")
+
+
+@app.get("/map/plate-i.jpg", include_in_schema=False)
+def map_plate():
+    return FileResponse(UI_DIR / "map" / "plate-i.jpg", media_type="image/jpeg")
+
+
 @app.get("/images/figures/{filename}")
 def figure_image(filename: str):
     """Individual seal crop, e.g. /images/figures/vats1940-fig1.jpg."""
