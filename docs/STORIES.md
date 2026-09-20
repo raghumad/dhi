@@ -21,10 +21,16 @@ and prioritized.
   (one file per site), `ingest/build_sites.py` compiles to `sites.geojson` with
   derived review_status (Kalibangan = partial), `tests/test_sites_schema.py`
   (7 tests; 67 green total). Map/API keys preserved.
-- **SITE-2 — Source registry with pinned artifacts** · P0 · proposed
+- **SITE-2 — Source registry with pinned artifacts** · P0 · done 2026-09-20
   Every site citation points to a content-addressed artifact (scan/PDF, SHA-256)
   in the sources registry, so "verified" stays falsifiable when URLs rot.
   Extends the agreed seal-ingestion design to sites.
+  Implemented: `ingest/fetch_site_artifacts.py` (fetch + hash-verify, same
+  contract as `ingest/fetch.py`); 10 artifacts pinned across 6/31 sources
+  (3 UNESCO docs, Shinde 2018, 2× Pleiades; Vats 1940 and Marshall 1931 Vol. III
+  reference the seal pipeline's already-pinned files); `tests/test_site_artifacts.py`
+  enforces the entry contract and re-hashes local artifacts. Remaining 25
+  sources tracked for SITE-5 (IGNCA/IA inventory) and follow-up pinning.
 - **SITE-3 — Corpus scoping** · P2 · proposed
   A bounded target site list seeded from authoritative lists (ASI records,
   Possehl's gazetteer, UNESCO listings), ordered excavated-first, so ingestion
