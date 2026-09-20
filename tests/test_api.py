@@ -65,7 +65,7 @@ def test_get_seal_includes_provenance():
     assert r.status_code == 200
     body = r.json()
     assert body["id"] == "vats1940-251"
-    assert body["seal_no"] == 251
+    assert body["figure_no"] == 251
     assert "artifact_sha256" in body["provenance"]
 
 
@@ -109,6 +109,6 @@ def test_export_csv_has_header():
     assert r.status_code == 200
     assert "text/csv" in r.headers["content-type"]
     header = r.text.splitlines()[0]
-    assert header.startswith("id,seal_no,site,")
+    assert header.startswith("id,figure_no,plate,site,")
     # R-A2: full source citation per record, not truncated
     assert "Public domain." in r.text
