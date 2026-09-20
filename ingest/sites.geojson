@@ -37,8 +37,8 @@
     {
       "geometry": {
         "coordinates": [
-          67.1386,
-          27.3292
+          68.139,
+          27.329
         ],
         "type": "Point"
       },
@@ -47,19 +47,21 @@
         "excavation_status": "excavated",
         "harappan_connection": null,
         "name": "Mohenjo-daro",
-        "notes": "Largest known Indus city. Seal tabulation parser pending.",
+        "notes": "UNESCO World Heritage Site no. 138 (inscribed 1980; State Party Pakistan). Western citadel sector with eastern lower city on the Indus; streets at right angles with sanitation and drainage. Located in Larkana district, Sindh. Spelling follows the excavation report; UNESCO renders \"Moenjodaro\".",
         "periods": [
-          "mature",
-          "late"
+          "mature"
         ],
         "site_id": "mohenjo-daro",
         "size_class": "major_city",
         "sources": [
-          "Marshall 1931"
+          "Marshall, John (ed.) 1931. Mohenjo-daro and the Indus Civilization, Vol. III (plates). Arthur Probsthain, London \u2014 title page: 'official account of Archaeological Excavations at Mohenjo-daro carried out by the Government of India between the years 1922 and 1927' (artifact in hand: data/artifacts/marshall1931_djvu.txt)",
+          "UNESCO World Heritage Centre periodic-reporting document, Geographic Information Table for property 138 (whc.unesco.org/document/164707): coordinates 27.329N 68.139E; property 240 ha; UNESCO International Safeguarding Campaign 1974-1997",
+          "IGNOU eGyankosh BHIC-101E Unit 5: 'Mohenjodaro [excavated] by Rakhaldas Banerjee in 1921'; chronology table lists Mohenjodaro under Mature Harappan (2600-1800 BCE) only; Larkana district, Sindh"
         ],
-        "uncertainty_m": 500,
-        "review_status": "unverified",
-        "authority_note": "Coordinates and description are provisional, drawn from general knowledge; not yet traced to an authoritative source. Do not cite."
+        "uncertainty_m": 1000,
+        "review_status": "verified",
+        "authority_note": "All fields traced to the excavation report, UNESCO listing, or national university course material. Early/late occupation unverified (Marshall's scheme predates the modern framework); \"largest city\" claim dropped as uncited; 240 ha is the WH property boundary, not the archaeological footprint.",
+        "coordinate_provenance": "Official UNESCO property coordinates (periodic-reporting Geographic Information Table, property 138); property-centroid, not a field-survey pin."
       },
       "type": "Feature"
     },
