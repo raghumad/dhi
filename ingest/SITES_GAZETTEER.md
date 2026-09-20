@@ -34,6 +34,6 @@ Every feature carries `review_status`:
 | dholavira | verified | UNESCO 2021 dossier; Bisht 2015 (ASI); IGNOU Unit 5 | 2026-09-20 |
 | lothal | unverified | — | — |
 | shortugai | unverified | — | — |
-| gonur-tepe | unverified | — | — |
-| ur | unverified | — | — |
-| dilmun-bahrain | unverified | — | — |
+| gonur-tepe | verified | Kufterin & Dubova 2013; CISI 3.3; Parpola 2018; Pleiades | 2026-09-20 |
+| ur | verified | CDLI; Gadd 1932; Legrain 1951 (UE 10) | 2026-09-20 |
+| dilmun-bahrain (Qal'at al-Bahrain) | verified | UNESCO WH 1192ter dossier; Laursen & Steinkeller 2017 | 2026-09-20 |
