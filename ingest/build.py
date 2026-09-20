@@ -33,7 +33,7 @@ sys.path.insert(0, str(INGEST))
 # e.g. "extract_plates:marshall1931" runs that source's extraction).
 # Modules live under ingest/ and are run as __main__.
 SOURCE_STEPS: dict[str, list[str]] = {
-    "vats1940": ["extract_plates:vats1940", "crop_figures", "parse_vats"],
+    "vats1940": ["extract_plates:vats1940", "crop_figures", "georef", "parse_vats"],
     "marshall1931": ["extract_plates:marshall1931", "crop_marshall"],
     "met": ["fetch_met", "parse_met"],
 }

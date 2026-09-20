@@ -4,6 +4,7 @@
 Endpoints (per docs/requirements.md R-A1..R-A4):
   GET /seals            paginated listing + filters (material, colour, mound, type, site)
   GET /seals/{id}      single record, with provenance
+  GET /seals/nearby    seals within radius_km of (lat, lon), sorted by distance
   GET /search?q=...    full-text search over record fields
   GET /export          bulk export, format=json (default) or csv
   GET /stats           facet counts per dimension
@@ -15,6 +16,7 @@ dimension + one full-text token index. Raw records are never modified.
 import csv
 import io
 import json
+import math
 import re
 from pathlib import Path
 
@@ -151,6 +153,18 @@ def ui():
     return FileResponse(UI_DIR / "index.html")
 
 
+@app.get("/map", include_in_schema=False)
+def map_view():
+    """Interactive map: Vats 1940 Plate I mound polygons overlaid on modern
+    satellite/OSM, with the georeferenced 1940 plan as a toggleable layer."""
+    return FileResponse(UI_DIR / "map" / "index.html")
+
+
+@app.get("/map/plate-i.jpg", include_in_schema=False)
+def map_plate():
+    return FileResponse(UI_DIR / "map" / "plate-i.jpg", media_type="image/jpeg")
+
+
 @app.get("/images/figures/{filename}")
 def figure_image(filename: str):
     """Individual seal crop, e.g. /images/figures/vats1940-fig1.jpg."""
@@ -206,6 +220,49 @@ def list_seals(
     page = ids[offset:offset + limit]
     return {"total": len(ids), "limit": limit, "offset": offset,
             "records": [RECORDS[i] for i in page]}
+
+
+def haversine_km(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
+    """Great-circle distance in km."""
+    rlat1, rlat2 = math.radians(lat1), math.radians(lat2)
+    dlat, dlon = rlat2 - rlat1, math.radians(lon2 - lon1)
+    a = math.sin(dlat / 2) ** 2 + math.cos(rlat1) * math.cos(rlat2) * math.sin(dlon / 2) ** 2
+    return 2 * 6371.0 * math.asin(math.sqrt(a))
+
+
+@app.get("/seals/nearby")
+def seals_nearby(
+    lat: float = Query(..., ge=-90, le=90),
+    lon: float = Query(..., ge=-180, le=180),
+    radius_km: float = Query(1.0, gt=0, le=50),
+    limit: int = Query(100, ge=1, le=1000),
+):
+    """Seals whose recorded location falls within radius_km of (lat, lon).
+
+    Locations follow the standard archaeological provenience hierarchy
+    (site > area > square > locus > point).  Each record's location is the
+    finest place actually known from the source: "area" means the seal was
+    found somewhere within that mound/area (see uncertainty_m), "site"
+    means only the settlement is known.  Results are sorted by distance;
+    each record carries distance_km.
+    """
+    hits = []
+    for r in RECORDS.values():
+        loc = r.get("location") or {}
+        rlat, rlon = loc.get("latitude"), loc.get("longitude")
+        if rlat is None or rlon is None:
+            continue
+        d = haversine_km(lat, lon, rlat, rlon)
+        if d <= radius_km:
+            hits.append((d, r))
+    hits.sort(key=lambda t: t[0])
+    records = []
+    for d, r in hits[:limit]:
+        rc = dict(r)
+        rc["distance_km"] = round(d, 3)
+        records.append(rc)
+    return {"lat": lat, "lon": lon, "radius_km": radius_km,
+            "total": len(hits), "records": records}
 
 
 @app.get("/seals/{seal_id}")
