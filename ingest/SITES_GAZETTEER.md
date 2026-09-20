@@ -1,41 +1,39 @@
-# Indus World Site Gazetteer
+# Site Gazetteer — source policy
 
-Citable site-level gazetteer for the dhi map and API. Two tiers:
+## Authoritative-source rule (standing)
 
-- **affiliation `harappan`**: settlements of the Indus Civilization proper
-  (the dots behind the Saraswati/Ghaggar-Hakra distribution argument).
-- **affiliation `related`**: sites outside the Indus cultural zone with
-  documented Harappan artifacts, trade contacts, or inscriptions
-  (Gonur Tepe, Mesopotamian cities, Dilmun...). The "Indus world" scope.
+Site coordinates, periods, sizes, excavation status, and claimed Harappan
+connections must be traceable to **authoritative sources**:
 
-## Schema
+- Excavation reports and their published plans/tables
+- National archaeological surveys (e.g. ASI reports)
+- UNESCO World Heritage listings and nomination dossiers
+- National heritage registries
+- Peer-reviewed site gazetteers and survey publications
 
-```json
-{
-  "site_id": "harappa",
-  "name": "Harappa",
-  "affiliation": "harappan",
-  "latitude": 30.6357,
-  "longitude": 72.8739,
-  "uncertainty_m": 500,
-  "size_class": "major_city",
-  "periods": ["early", "mature", "late"],
-  "excavation_status": "excavated",
-  "harappan_connection": null,
-  "sources": ["Vats 1940, Pl. I", "..."]
-}
-```
+The following do **not** qualify: Wikipedia, journalism/magazines, general
+reference works without citations, and model training-data memory.
 
-- `size_class`: `major_city` | `town` | `village` | `camp` | `unknown`
-- `periods`: subset of `early` | `mature` | `late` (Harappan phases)
-- `excavation_status`: `excavated` | `surveyed` | `unknown`
-- `harappan_connection` (related sites only): free text, e.g.
-  "Indus seals and carnelian beads excavated (Sarianidi)".
-- Coordinates are representative site centers; `uncertainty_m` reflects
-  how well the site location is pinned, not excavation precision.
+## Review status
 
-## Sources
+Every feature carries `review_status`:
 
-Site coordinates compiled from published archaeological literature.
-Each entry cites its source. Corrections welcome — every coordinate is
-falsifiable.
+- `unverified` — provisional data, drawn from general knowledge. Do not cite.
+  Shown on the map as a hollow dashed marker with an UNVERIFIED banner.
+- `verified` — every field traces to an authoritative source listed in
+  `sources`, with page/plate/table numbers where applicable. Shown solid.
+
+## Verification log
+
+| site_id | status | authoritative source | verified |
+|---|---|---|---|
+| harappa | unverified | — | — |
+| mohenjo-daro | unverified | — | — |
+| rakhigarhi | unverified | — | — |
+| kalibangan | unverified | — | — |
+| dholavira | unverified | — | — |
+| lothal | unverified | — | — |
+| shortugai | unverified | — | — |
+| gonur-tepe | unverified | — | — |
+| ur | unverified | — | — |
+| dilmun-bahrain | unverified | — | — |

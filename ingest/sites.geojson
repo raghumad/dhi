@@ -24,7 +24,9 @@
         "sources": [
           "Vats 1940"
         ],
-        "uncertainty_m": 500
+        "uncertainty_m": 500,
+        "review_status": "unverified",
+        "authority_note": "Coordinates and description are provisional, drawn from general knowledge; not yet traced to an authoritative source. Do not cite."
       },
       "type": "Feature"
     },
@@ -51,7 +53,9 @@
         "sources": [
           "Marshall 1931"
         ],
-        "uncertainty_m": 500
+        "uncertainty_m": 500,
+        "review_status": "unverified",
+        "authority_note": "Coordinates and description are provisional, drawn from general knowledge; not yet traced to an authoritative source. Do not cite."
       },
       "type": "Feature"
     },
@@ -79,7 +83,9 @@
         "sources": [
           "ASI reports"
         ],
-        "uncertainty_m": 1000
+        "uncertainty_m": 1000,
+        "review_status": "unverified",
+        "authority_note": "Coordinates and description are provisional, drawn from general knowledge; not yet traced to an authoritative source. Do not cite."
       },
       "type": "Feature"
     },
@@ -106,7 +112,9 @@
         "sources": [
           "Lal & Thapar"
         ],
-        "uncertainty_m": 500
+        "uncertainty_m": 500,
+        "review_status": "unverified",
+        "authority_note": "Coordinates and description are provisional, drawn from general knowledge; not yet traced to an authoritative source. Do not cite."
       },
       "type": "Feature"
     },
@@ -134,7 +142,9 @@
         "sources": [
           "Bisht, ASI"
         ],
-        "uncertainty_m": 500
+        "uncertainty_m": 500,
+        "review_status": "unverified",
+        "authority_note": "Coordinates and description are provisional, drawn from general knowledge; not yet traced to an authoritative source. Do not cite."
       },
       "type": "Feature"
     },
@@ -161,7 +171,9 @@
         "sources": [
           "Rao, ASI"
         ],
-        "uncertainty_m": 500
+        "uncertainty_m": 500,
+        "review_status": "unverified",
+        "authority_note": "Coordinates and description are provisional, drawn from general knowledge; not yet traced to an authoritative source. Do not cite."
       },
       "type": "Feature"
     },
@@ -189,7 +201,9 @@
           "Penn Museum Expedition Magazine, 'The Middle Asian Interaction Sphere': 'one very fine Indus stamp seal with an elephant... probably made in the Indus region and brought or traded to Gonur' (Sarianidi excavations)",
           "Discover Magazine: Indus Valley stamp with etched elephant found at Gonur"
         ],
-        "uncertainty_m": 1000
+        "uncertainty_m": 1000,
+        "review_status": "unverified",
+        "authority_note": "Coordinates and description are provisional, drawn from general knowledge; not yet traced to an authoritative source. Do not cite."
       },
       "type": "Feature"
     },
@@ -215,7 +229,9 @@
         "sources": [
           "Woolley"
         ],
-        "uncertainty_m": 1000
+        "uncertainty_m": 1000,
+        "review_status": "unverified",
+        "authority_note": "Coordinates and description are provisional, drawn from general knowledge; not yet traced to an authoritative source. Do not cite."
       },
       "type": "Feature"
     },
@@ -241,7 +257,9 @@
         "sources": [
           "Bibby; Hojlund"
         ],
-        "uncertainty_m": 5000
+        "uncertainty_m": 5000,
+        "review_status": "unverified",
+        "authority_note": "Coordinates and description are provisional, drawn from general knowledge; not yet traced to an authoritative source. Do not cite."
       },
       "type": "Feature"
     },
@@ -267,7 +285,9 @@
         "sources": [
           "Francfort"
         ],
-        "uncertainty_m": 2000
+        "uncertainty_m": 2000,
+        "review_status": "unverified",
+        "authority_note": "Coordinates and description are provisional, drawn from general knowledge; not yet traced to an authoritative source. Do not cite."
       },
       "type": "Feature"
     }
@@ -276,7 +296,8 @@
     "coordinate_note": "Representative site centers; uncertainty_m reflects location pinning quality.",
     "description": "Site-level places: Harappan settlements and related sites with documented Harappan contacts.",
     "sources": "See ingest/SITES_GAZETTEER.md",
-    "title": "Indus World Site Gazetteer"
+    "title": "Indus World Site Gazetteer",
+    "verification_policy": "Authoritative sources only: excavation reports, national archaeological surveys, UNESCO listings, national heritage registries, peer-reviewed gazetteers. Wikipedia, journalism, and model training data do not qualify. Entries are 'unverified' until every field traces to such a source."
   },
   "type": "FeatureCollection"
 }

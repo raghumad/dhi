@@ -37,15 +37,22 @@ const siteLayer = L.geoJSON(SITES, {
   pointToLayer: (f, latlng) => {
     const harappan = f.properties.affiliation === 'harappan';
     const major = f.properties.size_class === 'major_city';
+    const verified = f.properties.review_status === 'verified';
     return L.circleMarker(latlng, {
       radius: major ? 9 : 6,
       color: harappan ? '#1a5fb4' : '#813d9c', weight: 2,
-      fillColor: harappan ? '#1a5fb4' : '#813d9c', fillOpacity: 0.7
+      fillColor: harappan ? '#1a5fb4' : '#813d9c',
+      fillOpacity: verified ? 0.7 : 0.0,
+      dashArray: verified ? null : '4 3'
     });
   },
   onEachFeature: (f, l) => {
     const p = f.properties;
     let h = '<div class="info"><h3>' + p.name + '</h3>' +
+      (p.review_status === 'verified'
+        ? ''
+        : '<p style="color:#a00"><b>UNVERIFIED:</b> location and details provisional, '
+          + 'not yet traced to an authoritative source.</p>') +
       '<p><b>Affiliation:</b> ' + p.affiliation + '</p>' +
       '<p><b>Size:</b> ' + p.size_class + ' | <b>Status:</b> ' + p.excavation_status + '</p>' +
       '<p><b>Periods:</b> ' + (p.periods||[]).join(', ') + '</p>';
@@ -111,6 +118,7 @@ legend.onAdd = () => {
   d.innerHTML = '<b>Sites</b><br>' +
     '<span style="color:#1a5fb4">&#9679;</span> Harappan settlement<br>' +
     '<span style="color:#813d9c">&#9679;</span> Related site (Harappan contact)<br>' +
+    '<span style="color:#a00">&#9678;</span> Unverified (provisional data)<br>' +
     '<span style="font-size:10px">Zoom in for mound detail</span>';
   return d;
 };
