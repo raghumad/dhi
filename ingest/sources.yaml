@@ -137,3 +137,32 @@ sources:
     api_query: "indus seal"
     search_url: https://collectionapi.metmuseum.org/public/collection/v1/search?q=indus%20seal
     artifacts: []
+
+  - id: cisi1
+    citation: >-
+      Joshi, Jagat Pati & Parpola, Asko (eds.). 1987. Corpus of Indus
+      Seals and Inscriptions. Vol. 1: Collections in India. Helsinki:
+      Suomalainen Tiedeakatemia. (Annales Academiae Scientiarum Fennicae,
+      Series B 239; Memoirs of the Archaeological Survey of India No. 86.)
+      ISBN 951-41-0555-9. Title-page-verified 2026-09-21 from the IGNCA
+      scan below (PDF pp. 1, 5-6).
+    # Copyrighted work: the volume is (c) 1987 Academia Scientiarum
+    # Fennica, and the photographs are (c) the owners of the original
+    # objects (copyright page, PDF p. 6). Per the project data policy,
+    # book images may be used from sources older than a decade *unless
+    # explicitly restricted* -- this volume is explicitly restricted, so
+    # it is cited, not copied: no plate extraction, no image crops, no
+    # parser until rights are established.
+    license: copyrighted
+    parser: null
+    artifacts:
+      - name: corpus-scan
+        description: >-
+          IGNCA scan of the ASI Central Archaeological Library copy
+          (accession no. 76884, stamped on the bookplate and title page --
+          the URL filename is the library accession number, not a page
+          reference). 862 PDF pages, 31.5 MB, scanned page images with no
+          embedded text/OCR layer.
+        url: https://ignca.gov.in/Asi_data/76884.pdf
+        sha256: 47a4da4227cfb7baa56d6a561e25797225499d0ec54f5a702a82c67ab4746d4d
+        path: data/artifacts/cisi1_collections_india.pdf

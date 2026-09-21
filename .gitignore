@@ -16,6 +16,7 @@ data/artifacts/plates-marshall/
 data/artifacts/met_objects.json
 data/artifacts/met_manifest.json
 data/artifacts/images-met/
+data/artifacts/cisi1_collections_india.pdf
 # Derived: figure crops, review sheets, detection manifest.
 data/figures/
 # Derived: parsed catalog records.
